@@ -78,12 +78,12 @@ CREATE TABLE `j17_user` (
 --
 -- *****MUDAR DADOS AQUI*****
 -- ADMIN_TESTE para seu nome, 012.345.678-90 para seu CPF e teste@teste.com para seu email
--- Ou utilizar dados padrão
+-- Ou utilizar dados padrão, MENOS O CPF
 -- Senha: 123456
 --
 
-INSERT INTO `j17_user` (`id`, `nome`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `visualizacao_candidatos`, `visualizacao_candidatos_finalizados`, `visualizacao_cartas_respondidas`, `administrador`, `coordenador`, `secretaria`, `professor`, `aluno`, `siape`, `dataIngresso`, `endereco`, `telcelular`, `telresidencial`, `unidade`, `titulacao`, `classe`, `nivel`, `regime`, `turno`, `idLattes`, `formacao`, `resumo`, `alias`, `ultimaAtualizacao`, `idRH`, `cargo`) VALUES
-(68, 'ADMIN_TESTE', '012.345.678-90', 'JsHPm23fX1lCpVMrFD9wLZnRztGemGqF', '$2y$13$q2Wg3LKKplx4scKbUNKFqu/.FoHDIGc8hkV81RktklS77Rr9AzPJG', NULL, 'teste@teste.com', 0, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `j17_user` (`nome`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `visualizacao_candidatos`, `visualizacao_candidatos_finalizados`, `visualizacao_cartas_respondidas`, `administrador`, `coordenador`, `secretaria`, `professor`, `aluno`, `siape`, `dataIngresso`, `endereco`, `telcelular`, `telresidencial`, `unidade`, `titulacao`, `classe`, `nivel`, `regime`, `turno`, `idLattes`, `formacao`, `resumo`, `alias`, `ultimaAtualizacao`, `idRH`, `cargo`) VALUES
+('admin teste', '999.999.999-99', 'JsHPm23fX1lCpVMrFD9wLZnRztGemGqF', '$2y$13$q2Wg3LKKplx4scKbUNKFqu/.FoHDIGc8hkV81RktklS77Rr9AzPJG', NULL, 'teste@icomp.ufam.edu.br', 10, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 /*
 --
