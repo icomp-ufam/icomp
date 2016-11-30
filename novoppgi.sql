@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 30-Nov-2016 às 16:36
+-- Generation Time: 30-Nov-2016 às 17:21
 -- Versão do servidor: 5.5.53-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -646,7 +646,7 @@ CREATE TABLE `j17_aluno` (
   `egressograd` int(11) DEFAULT NULL,
   `dataformaturagrad` varchar(10) DEFAULT NULL,
   `idUser` int(11) NOT NULL,
-  `orientador` smallint(6) NOT NULL,
+  `orientador` int(11) NOT NULL,
   `anoconclusao` date NOT NULL,
   `sede` varchar(2) NOT NULL DEFAULT 'AM'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -4356,7 +4356,6 @@ INSERT INTO `j17_projetos` (`id`, `idProfessor`, `titulo`, `descricao`, `inicio`
 CREATE TABLE `j17_prorrogacoes` (
   `id` int(11) NOT NULL,
   `idAluno` int(11) NOT NULL,
-  `idOrientador` int(11) NOT NULL,
   `justificativa` text NOT NULL,
   `previa` text NOT NULL,
   `dataSolicitacao` date NOT NULL,
@@ -5903,7 +5902,6 @@ INSERT INTO `j17_reservas_salas` (`id`, `nome`, `numero`, `localizacao`) VALUES
 CREATE TABLE `j17_trancamentos` (
   `id` int(11) NOT NULL,
   `idAluno` int(11) NOT NULL,
-  `idOrientador` int(11) NOT NULL,
   `dataSolicitacao` date NOT NULL,
   `dataAprovOrientador` date NOT NULL,
   `dataInicio` date NOT NULL,
@@ -5959,6 +5957,13 @@ CREATE TABLE `j17_user` (
   `cargo` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Extraindo dados da tabela `j17_user`
+--
+
+INSERT INTO `j17_user` (`id`, `nome`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `visualizacao_candidatos`, `visualizacao_candidatos_finalizados`, `visualizacao_cartas_respondidas`, `administrador`, `coordenador`, `secretaria`, `professor`, `aluno`, `siape`, `dataIngresso`, `endereco`, `telcelular`, `telresidencial`, `unidade`, `titulacao`, `classe`, `nivel`, `regime`, `turno`, `idLattes`, `formacao`, `resumo`, `alias`, `ultimaAtualizacao`, `idRH`, `cargo`) VALUES
+(66, 'Pedro Vitor Mesquita da Frota', '030.115.652-28', 'JsHPm23fX1lCpVMrFD9wLZnRztGemGqF', '$2y$13$q2Wg3LKKplx4scKbUNKFqu/.FoHDIGc8hkV81RktklS77Rr9AzPJG', NULL, 'pvmf@icomp.ufam.edu.br', 10, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -5991,7 +5996,8 @@ ALTER TABLE `j17_afastamentos`
 -- Indexes for table `j17_aluno`
 --
 ALTER TABLE `j17_aluno`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `orientador` (`orientador`);
 
 --
 -- Indexes for table `j17_banca_has_membrosbanca`
@@ -6152,8 +6158,7 @@ ALTER TABLE `j17_premios`
 --
 ALTER TABLE `j17_prorrogacoes`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `idAluno` (`idAluno`),
-  ADD KEY `idOrientador` (`idOrientador`);
+  ADD KEY `idAluno` (`idAluno`);
 
 --
 -- Indexes for table `j17_publicacoes`
@@ -6186,8 +6191,7 @@ ALTER TABLE `j17_reservas_salas`
 --
 ALTER TABLE `j17_trancamentos`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `idAluno` (`idAluno`),
-  ADD KEY `idOrientador` (`idOrientador`);
+  ADD KEY `idAluno` (`idAluno`);
 
 --
 -- Indexes for table `j17_user`
@@ -6347,12 +6351,12 @@ ALTER TABLE `j17_reservas_salas`
 -- AUTO_INCREMENT for table `j17_trancamentos`
 --
 ALTER TABLE `j17_trancamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 --
 -- AUTO_INCREMENT for table `j17_user`
 --
 ALTER TABLE `j17_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 --
 -- Constraints for dumped tables
 --
@@ -6398,8 +6402,7 @@ ALTER TABLE `j17_membrosbanca`
 -- Limitadores para a tabela `j17_prorrogacoes`
 --
 ALTER TABLE `j17_prorrogacoes`
-  ADD CONSTRAINT `fk_prorrogacao_aluno` FOREIGN KEY (`idAluno`) REFERENCES `j17_aluno` (`id`),
-  ADD CONSTRAINT `fk_prorrogacao_orientador` FOREIGN KEY (`idOrientador`) REFERENCES `j17_user` (`id`);
+  ADD CONSTRAINT `fk_prorrogacao_aluno` FOREIGN KEY (`idAluno`) REFERENCES `j17_aluno` (`id`);
 
 --
 -- Limitadores para a tabela `j17_recomendacoes`
@@ -6412,8 +6415,7 @@ ALTER TABLE `j17_recomendacoes`
 -- Limitadores para a tabela `j17_trancamentos`
 --
 ALTER TABLE `j17_trancamentos`
-  ADD CONSTRAINT `fk_trancamento_aluno` FOREIGN KEY (`idAluno`) REFERENCES `j17_aluno` (`id`),
-  ADD CONSTRAINT `fk_trancamento_orientador` FOREIGN KEY (`idOrientador`) REFERENCES `j17_user` (`id`);
+  ADD CONSTRAINT `fk_trancamento_aluno` FOREIGN KEY (`idAluno`) REFERENCES `j17_aluno` (`id`);
 
 DELIMITER $$
 --
