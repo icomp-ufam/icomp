@@ -142,6 +142,16 @@
 
                     ],
                 ],
+
+                [
+                    'label' => 'Controle de Equipamentos',
+                    'icon' => 'fa fa-list',
+                    'url' => '#',
+                    'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),
+                    'items' => [
+                        ['label' => 'Gerenciar Equipamentos', 'icon' => 'fa fa-sun-o', 'url' => ['equipamento/index'],],
+                        
+                ],
                 
 				//['label' => 'despesas', 'icon' => 'fa fa-calendar', 'url' => ['cont-proj-despesas/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
 				
