@@ -15,7 +15,6 @@ use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\db\IntegrityException;
 use yii\base\Exception;
-use yii\web\UploadedFile;
 
 /**
  * AlunoController implements the CRUD actions for Aluno model.
@@ -308,38 +307,6 @@ class AlunoController extends Controller
 
         header('Content-Disposition: attachment; filename="Orientandos.docx"');
         $templateProcessor->saveAs('php://output');
-		
-    }
-	
-	public function actionTrancamento($id){
-        
-        $model = new Trancamento();
-		
-		$model->idAluno = $id;
-		$model->dataSolicitacao = date("Y-m-d");
-		
-		$orientador = Aluno::findOne($id);
-		$model->idOrientador = $orientador->orientador;
-		
-		if ($model->load(Yii::$app->request->post())) {
-			
-			// get the uploaded file instance. for multiple file uploads
-            // the following data will return an array
-            $comprovante = UploadedFile::getInstance($model, 'documento');
-
-            // the path to save file, you can set an uploadPath
-            // in Yii::$app->params (as used in example below)
-            $path = 'uploads/trancamento-'.Yii::$app->security->generateRandomString().'.pdf.';
-			
-            if($model->save()){
-                $comprovante->saveAs($path);
-                $this->mensagens('success', 'Sucesso', 'Registro realizado com sucesso.');
-				return $this->redirect(['view', 'id'=>$model->idAluno]);
-            }
-        }
-        return $this->render('createTrancamento', [
-            'model'=>$model,
-        ]);
 		
     }
 

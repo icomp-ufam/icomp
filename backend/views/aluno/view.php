@@ -29,7 +29,7 @@ $exameProficienciaAluno = array(null => "Não Avaliado", 0 => 'Reprovado',1 => '
         ]) ?>
         <?= Html::a('<span class="fa fa-graduation-cap"></span> Pedir Banca', ['defesa/create', 'aluno_id' => $model->id], ['class' => 'btn btn-success']) ?>
         <?= Html::a('<span class="fa fa-comments"></span> Exame de Proeficiência', ['aluno/exame', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
-		<?= Html::a('<span class="fa fa-lock"></span> Registrar Trancamento', ['aluno/trancamento', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
+		<?= Html::a('<span class="fa fa-lock"></span> Registrar Trancamento', ['trancamento/create', 'idAluno' => $model->id], ['class' => 'btn btn-danger']) ?>
 		<?= Html::a('<span class="glyphicon glyphicon-time"></span> Registrar Prorrogação', ['aluno/prorrogacao', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
     </p>
 

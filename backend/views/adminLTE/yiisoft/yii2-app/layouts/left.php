@@ -86,6 +86,12 @@
                 ['label' => 'Secretaria', 'options' => ['class' => 'header'], 'visible' => Yii::$app->user->identity->checarAcesso('secretaria')],
                 ['label' => 'Alunos', 'icon' => 'fa fa-users', 'url' => ['aluno/index'], 'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),],
                 [
+                    'label' => 'Gerenciar Trancamentos',
+                    'icon' => 'fa fa-lock',
+                    'url' => ['trancamento/index'],
+                    'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),
+                ],
+                [
                     'label' => 'Gerenciar Férias',
                     'icon' => 'fa fa-umbrella',
                     'url' => '#',
