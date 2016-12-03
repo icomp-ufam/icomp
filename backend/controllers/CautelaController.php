@@ -46,7 +46,7 @@ class CautelaController extends Controller
 
     /**
      * Displays a single Cautela model.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionView($id)
@@ -66,7 +66,7 @@ class CautelaController extends Controller
         $model = new Cautela();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->IdCautela]);
+            return $this->redirect(['view', 'id' => $model->idCautela]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -77,7 +77,7 @@ class CautelaController extends Controller
     /**
      * Updates an existing Cautela model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
@@ -85,7 +85,7 @@ class CautelaController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->IdCautela]);
+            return $this->redirect(['view', 'id' => $model->idCautela]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -96,7 +96,7 @@ class CautelaController extends Controller
     /**
      * Deletes an existing Cautela model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -109,7 +109,7 @@ class CautelaController extends Controller
     /**
      * Finds the Cautela model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
+     * @param integer $id
      * @return Cautela the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

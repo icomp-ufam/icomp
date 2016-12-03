@@ -8,18 +8,9 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class='equipamento-form'>
-    <?= $form->field($model, 'OrigemEquipamento', ['options' => ['class' => 'col-md-6']])->dropDownList(['Projeto' => 'Projeto', 'Patrimonio' => 'Patrimonio', ['prompt' => 'Selecione o tipo...']) ?>
-
-</div>
-
 <div class="equipamento-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'OrigemEquipamento')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'IdEquipamento')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'NomeEquipamento')->textInput(['maxlength' => true]) ?>
 
@@ -33,7 +24,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'OrigemEquipamento')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'ImagemEquipamento')->textInput() ?>
+    <?= $form->field($model, 'ImagemEquipamento')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

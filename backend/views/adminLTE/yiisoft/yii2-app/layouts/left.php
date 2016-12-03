@@ -140,11 +140,10 @@
 						['label' => 'Projetos', 'icon' => 'fa fa-signal', 'url' => ['cont-proj-projetos/index'],],
                         ['label' => 'Saldo Rubricas', 'icon' => 'fa fa-clone', 'url' => ['cont-proj-rubricasde-projetos/consultar'],],
 
-
                     ],
                 ],
 
-                [
+		[
                     'label' => 'Controle de Equipamentos',
                     'icon' => 'fa fa-list',
                     'url' => '#',
@@ -154,7 +153,6 @@
                         
                     ],
                 ],
-               
                 
 				//['label' => 'despesas', 'icon' => 'fa fa-calendar', 'url' => ['cont-proj-despesas/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
 				

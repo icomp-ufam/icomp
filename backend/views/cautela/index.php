@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Gerar Cautela', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Cautela', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,14 +24,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'IdCautela',
+            'idCautela',
             'NomeResponsavel',
             'OrigemCautela',
             'DataDevolucao',
-            'ImagemCautela',
-            // 'Email:email',
+            'Email:email',
             // 'ValidadeCautela',
             // 'TelefoneResponsavel',
+            // 'ImagemCautela',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -7,14 +7,14 @@ use Yii;
 /**
  * This is the model class for table "j17_cautela".
  *
- * @property string $IdCautela
+ * @property integer $idCautela
  * @property string $NomeResponsavel
  * @property string $OrigemCautela
  * @property string $DataDevolucao
- * @property resource $ImagemCautela
  * @property string $Email
  * @property string $ValidadeCautela
- * @property integer $TelefoneResponsavel
+ * @property string $TelefoneResponsavel
+ * @property string $ImagemCautela
  */
 class Cautela extends \yii\db\ActiveRecord
 {
@@ -32,12 +32,9 @@ class Cautela extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['IdCautela', 'NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'ImagemCautela', 'Email', 'TelefoneResponsavel'], 'required'],
-            [['DataDevolucao'], 'safe'],
-            [['ImagemCautela'], 'string'],
-            [['TelefoneResponsavel'], 'integer'],
-            [['IdCautela'], 'string', 'max' => 20],
-            [['NomeResponsavel', 'OrigemCautela', 'Email', 'ValidadeCautela'], 'string', 'max' => 50],
+            [['NomeResponsavel', 'OrigemCautela', 'Email', 'TelefoneResponsavel'], 'required'],
+            [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel'], 'string', 'max' => 50],
+            [['ImagemCautela'], 'string', 'max' => 100],
         ];
     }
 
@@ -47,14 +44,14 @@ class Cautela extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'IdCautela' => 'Id Cautela',
+            'idCautela' => 'Id Cautela',
             'NomeResponsavel' => 'Nome Responsavel',
             'OrigemCautela' => 'Origem Cautela',
             'DataDevolucao' => 'Data Devolucao',
-            'ImagemCautela' => 'Imagem Cautela',
             'Email' => 'Email',
             'ValidadeCautela' => 'Validade Cautela',
             'TelefoneResponsavel' => 'Telefone Responsavel',
+            'ImagemCautela' => 'Imagem Cautela',
         ];
     }
 }

@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\EquipamentoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Gerenciar Equipamentos';
+$this->title = 'Equipamentos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="equipamento-index">
@@ -17,17 +17,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Cadastrar Equipamento', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Gerenciar Cautela  ', ['create'], ['class' => 'btn btn-success']) ?>
+	<?= Html::a('Gerar Cautela', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'IdEquipamento',
+            'idEquipamento',
             'NomeEquipamento',
             'Nserie',
             'NotaFiscal',

@@ -18,8 +18,8 @@ class CautelaSearch extends Cautela
     public function rules()
     {
         return [
-            [['IdCautela', 'NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'ImagemCautela', 'Email', 'ValidadeCautela'], 'safe'],
-            [['TelefoneResponsavel'], 'integer'],
+            [['idCautela'], 'integer'],
+            [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel', 'ImagemCautela'], 'safe'],
         ];
     }
 
@@ -59,16 +59,16 @@ class CautelaSearch extends Cautela
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'DataDevolucao' => $this->DataDevolucao,
-            'TelefoneResponsavel' => $this->TelefoneResponsavel,
+            'idCautela' => $this->idCautela,
         ]);
 
-        $query->andFilterWhere(['like', 'IdCautela', $this->IdCautela])
-            ->andFilterWhere(['like', 'NomeResponsavel', $this->NomeResponsavel])
+        $query->andFilterWhere(['like', 'NomeResponsavel', $this->NomeResponsavel])
             ->andFilterWhere(['like', 'OrigemCautela', $this->OrigemCautela])
-            ->andFilterWhere(['like', 'ImagemCautela', $this->ImagemCautela])
+            ->andFilterWhere(['like', 'DataDevolucao', $this->DataDevolucao])
             ->andFilterWhere(['like', 'Email', $this->Email])
-            ->andFilterWhere(['like', 'ValidadeCautela', $this->ValidadeCautela]);
+            ->andFilterWhere(['like', 'ValidadeCautela', $this->ValidadeCautela])
+            ->andFilterWhere(['like', 'TelefoneResponsavel', $this->TelefoneResponsavel])
+            ->andFilterWhere(['like', 'ImagemCautela', $this->ImagemCautela]);
 
         return $dataProvider;
     }

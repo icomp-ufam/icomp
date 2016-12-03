@@ -18,7 +18,8 @@ class EquipamentoSearch extends Equipamento
     public function rules()
     {
         return [
-            [['IdEquipamento', 'NomeEquipamento', 'Nserie', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento', 'ImagemEquipamento'], 'safe'],
+            [['idEquipamento'], 'integer'],
+            [['NomeEquipamento', 'Nserie', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento', 'ImagemEquipamento'], 'safe'],
         ];
     }
 
@@ -57,8 +58,11 @@ class EquipamentoSearch extends Equipamento
         }
 
         // grid filtering conditions
-        $query->andFilterWhere(['like', 'IdEquipamento', $this->IdEquipamento])
-            ->andFilterWhere(['like', 'NomeEquipamento', $this->NomeEquipamento])
+        $query->andFilterWhere([
+            'idEquipamento' => $this->idEquipamento,
+        ]);
+
+        $query->andFilterWhere(['like', 'NomeEquipamento', $this->NomeEquipamento])
             ->andFilterWhere(['like', 'Nserie', $this->Nserie])
             ->andFilterWhere(['like', 'NotaFiscal', $this->NotaFiscal])
             ->andFilterWhere(['like', 'Localizacao', $this->Localizacao])
