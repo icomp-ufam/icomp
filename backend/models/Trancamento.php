@@ -41,9 +41,9 @@ class Trancamento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idAluno', 'dataSolicitacao', /*'dataAprovOrientador',*/ 'dataInicio', 'prevTermino', /*'dataTermino',*/ 'justificativa', 'documento' /*, 'status'*/], 'required'],
-            [['idAluno', 'status'], 'integer'],
-            [['dataSolicitacao', 'dataAprovOrientador', 'dataInicio', 'prevTermino', 'dataTermino'], 'safe'],
+            [['idAluno', 'dataSolicitacao', 'dataInicio', 'prevTermino', /*'dataTermino',*/ 'justificativa', 'documento' /*, 'status'*/], 'required'],
+            [['idAluno', 'status', 'qtdDias'], 'integer'],
+            [['dataSolicitacao', 'dataAprovOrientador', 'dataInicio', 'dataTermino'], 'safe'],
             [['documento'], 'string'],
             [['documento0'], 'file', 'extensions' => 'pdf'],
             [['justificativa'], 'string', 'max' => 250],
@@ -58,11 +58,10 @@ class Trancamento extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'idAluno' => 'Aluno',
+            'idAluno' => 'Nome',
             'dataSolicitacao' => 'Data Solicitação',
-            'dataAprovOrientador' => 'Data Aprov. Orientador',
             'dataInicio' => 'Início',
-            'prevTermino' => 'Quantidade de dias',
+            'qtdDias' => 'Quantidade de dias',
             'dataTermino' => 'Data Término',
             'justificativa' => 'Justificativa',
             'documento' => 'Documento',

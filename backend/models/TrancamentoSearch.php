@@ -18,8 +18,8 @@ class TrancamentoSearch extends Trancamento
     public function rules()
     {
         return [
-            [['id', 'status'], 'integer'],
-            [['idAluno', 'dataSolicitacao', 'dataAprovOrientador', 'dataInicio', 'prevTermino', 'dataTermino', 'justificativa', 'documento'], 'safe'],
+            [['id', 'qtdDias', 'status'], 'integer'],
+            [['idAluno', 'dataSolicitacao', 'dataInicio', 'dataTermino', 'justificativa', 'documento'], 'safe'],
         ];
     }
 
@@ -62,13 +62,11 @@ class TrancamentoSearch extends Trancamento
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            //'idAluno' => $this->idAluno,
             'dataSolicitacao' => $this->dataSolicitacao,
-            'dataAprovOrientador' => $this->dataAprovOrientador,
             'dataInicio' => $this->dataInicio,
-            'prevTermino' => $this->prevTermino,
+            'qtdDias' => $this->qtdDias,
             'dataTermino' => $this->dataTermino,
-            'status' => $this->status,
+            'j17_trancamentos.status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'j17_aluno.nome', $this->idAluno])
