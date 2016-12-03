@@ -49,7 +49,7 @@ else {
 
     <?php } ?>
 
-    <?php else if ($tipodefesa != 2){ ?>
+    <?php else { ?>
 
     
     <?= $form->field($model, 'horario')->widget(DateControl::classname(), [
