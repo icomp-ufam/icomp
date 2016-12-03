@@ -43,7 +43,7 @@ class Trancamento extends \yii\db\ActiveRecord
         return [
             [['idAluno', 'dataSolicitacao', 'dataInicio', 'prevTermino', /*'dataTermino',*/ 'justificativa', 'documento' /*, 'status'*/], 'required'],
             [['idAluno', 'status', 'qtdDias'], 'integer'],
-            [['dataSolicitacao', 'dataAprovOrientador', 'dataInicio', 'dataTermino'], 'safe'],
+            [['dataSolicitacao', 'orientador', 'dataAprovOrientador', 'dataInicio', 'dataTermino'], 'safe'],
             [['documento'], 'string'],
             [['documento0'], 'file', 'extensions' => 'pdf'],
             [['justificativa'], 'string', 'max' => 250],
@@ -61,6 +61,7 @@ class Trancamento extends \yii\db\ActiveRecord
             'idAluno' => 'Nome',
             'dataSolicitacao' => 'Data Solicitação',
             'dataInicio' => 'Início',
+            'orientador' => 'Orientador',
             'qtdDias' => 'Quantidade de dias',
             'dataTermino' => 'Data Término',
             'justificativa' => 'Justificativa',
@@ -85,6 +86,6 @@ class Trancamento extends \yii\db\ActiveRecord
      * @author Pedro Frota <pvmf@icomp.ufam.edu.br>
      */
     public function getOrientador() {
-        return $this->aluno->orientador1;
+        return $this->hasOne(Aluno::className(), ['id' => 'idAluno']);
     }
 }

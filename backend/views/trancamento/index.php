@@ -34,6 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
+                'attribute' => 'orientador',
+                'value' => function($model) {
+                    return $model->aluno->orientador;
+                }
+            ],
+            [
                 'attribute' => 'dataSolicitacao',
                 'value' => function($model) {
                     return date('d/m/Y', strtotime($model->dataSolicitacao));

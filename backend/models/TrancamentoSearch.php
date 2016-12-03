@@ -19,7 +19,7 @@ class TrancamentoSearch extends Trancamento
     {
         return [
             [['id', 'qtdDias', 'status'], 'integer'],
-            [['idAluno', 'dataSolicitacao', 'dataInicio', 'dataTermino', 'justificativa', 'documento'], 'safe'],
+            [['idAluno', 'orientador', 'dataSolicitacao', 'dataInicio', 'dataTermino', 'justificativa', 'documento'], 'safe'],
         ];
     }
 
