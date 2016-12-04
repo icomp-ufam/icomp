@@ -104,6 +104,7 @@ class TrancamentoSearch extends Trancamento
             'dataInicio' => $searchedDataInicio,
             'prevTermino' => $this->prevTermino,
             'dataTermino' => $this->dataTermino,
+            'tipo' => $this->tipo,
             'j17_trancamentos.status' => $this->status,
         ]);
 

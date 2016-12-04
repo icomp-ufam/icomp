@@ -79,6 +79,20 @@ $this->params['breadcrumbs'][] = $this->title;
             //'justificativa',
             // 'documento:ntext',
             [
+                'attribute' => 'tipo',
+                'filter'=>array (1 => 'Suspensao', 0 => 'Trancamento'),
+                'contentOptions' => function ($model){
+                    return [
+                            'style' => 'background-color: '.($model->tipo == 0 ? '#9999e6' : '#f0b3ff')
+                           ];
+                },
+                'format' => 'html',
+                'value' => function($model) {
+                    if ($model->tipo == 0) return '<span class="glyphicon glyphicon-lock"></span> Trancamento';
+                    return '<span class="glyphicon glyphicon-time"></span> Suspensao';
+                },
+            ],
+            [
                 'attribute' => 'status',
                 'filter'=>array (1 => 'Ativo', 0 => 'Encerrado'),
                 'contentOptions' => function ($model){

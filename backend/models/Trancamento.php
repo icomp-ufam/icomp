@@ -81,6 +81,7 @@ class Trancamento extends \yii\db\ActiveRecord
             'dataTermino' => 'Data Término',
             'justificativa' => 'Justificativa',
             'documento' => 'Documento',
+            'tipo' => 'Tipo',
             'status' => 'Status',
         ];
     }
