@@ -28,6 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             //'idAluno',
             [
+                'attribute' => 'matricula',
+                'value' => function($model) {
+                    return $model->aluno->matricula;
+                }
+            ],
+            [
                 'attribute' => 'idAluno',
                 'value' => function($model) {
                     return $model->aluno->nome;
@@ -36,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'orientador',
                 'value' => function($model) {
-                    return $model->aluno->orientador;
+                    return $model->orientador0->nome;
                 }
             ],
             [
@@ -53,9 +59,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'attribute' => 'qtdDias',
+                'attribute' => 'prevTermino',
                 'value' => function($model) {
-                    return $model->qtdDias . ' dias';
+                    return date('d/m/Y', strtotime($model->prevTermino));
                 },
             ],
             [
@@ -68,10 +74,10 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'documento:ntext',
             [
                 'attribute' => 'status',
-                'filter'=>array (0 => 'Terminado', 1 => 'Trancado'),
+                'filter'=>array (1 => 'Ativo', 0 => 'Encerrado'),
                 'value' => function($model) {
-                    if ($model->status == 0) return 'Terminado';
-                    return 'Trancado';
+                    if ($model->status == 0) return 'Encerrado';
+                    return 'Ativo';
                 },
             ],
 
