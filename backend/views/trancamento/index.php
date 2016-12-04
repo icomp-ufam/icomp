@@ -95,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'dataInicio0',
                 'value' => function($model) {
                     return date('d/m/Y', strtotime($model->dataInicio));
-                }
+                },
             ],
             /*
             [
@@ -145,9 +145,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             ['class' => 'yii\grid\ActionColumn',
-              'template'=> '{view} {update} {delete} {ativar} {encerrar}',
+              'template'=> '{download} {view} {update} {delete} {ativar} {encerrar}',
                 'buttons'=>
                 [
+                  'download' => function ($url, $model) { 
+                    return Html::a('<span class="glyphicon glyphicon-download"></span>', $model->documento, [
+                            'target' => '_blank',
+                            'title' => Yii::t('yii', 'Download do Documento'),
+                            'data-pjax'=> "0"
+                        ]);
+                  },
                   'ativar' => function ($url, $model) { 
                               if ($model->status == 1) return false; //Disables button if status is active
                               return Html::a('<span class="glyphicon glyphicon-ok"></span>', ['ativar', 'id' => $model->id], [

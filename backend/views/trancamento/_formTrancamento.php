@@ -22,7 +22,7 @@ $divFechar = "</div>";
                 'language' => Yii::$app->language,
                 'options' => ['placeholder' => 'Selecione a Data de Início ...',],
                 'pluginOptions' => [
-                    'format' => 'dd-mm-yyyy',
+                    'format' => 'dd/mm/yyyy',
                     'todayHighlight' => true
                 ]
             ])->label("<font color='#FF0000'>*</font> <b>Data de Início:</b>")

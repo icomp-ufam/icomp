@@ -87,8 +87,11 @@ class TrancamentoController extends Controller
             $model->documento = $path;
             if($model->save()){
                 $model->documento0->saveAs($path);
-                $this->mensagens('success', 'Sucesso', 'Registro realizado com sucesso.');
+                $this->mensagens('success', 'Sucesso', 'Trancamento criado com sucesso.');
                 return $this->redirect(['aluno/view', 'id'=>$model->idAluno]);
+            }
+            else {
+                $this->mensagens('erro', 'Erro', 'Houve uma falha ao criar o trancamento.');
             }
         }
         return $this->render('create', [
