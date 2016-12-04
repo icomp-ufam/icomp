@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'idAluno',
             'dataSolicitacao',
-            //'dataAprovOrientador',
+            'dataAprovOrientador',
             'dataInicio',
             'prevTermino',
             'dataTermino',

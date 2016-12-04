@@ -19,8 +19,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idAluno') ?>
 
-    <?= $form->field($model, 'tipo') ?>
-
     <?= $form->field($model, 'dataSolicitacao') ?>
 
     <?= $form->field($model, 'dataInicio') ?>

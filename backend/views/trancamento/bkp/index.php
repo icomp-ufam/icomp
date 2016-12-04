@@ -94,14 +94,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             ['class' => 'yii\grid\ActionColumn',
-              'template'=> '{view} {update} {delete} {ativar} {encerrar}',
+              'template'=> '{view} {update} {delete} {encerrar}',
                 'buttons'=>
                 [
+                  //Not used button, maintained only for future needs
                   'ativar' => function ($url, $model) { 
                               if ($model->status == 1) return false; //Disables button if status is active
-                              return Html::a('<span class="glyphicon glyphicon-ok"></span>', ['ativar', 'id' => $model->id], [
+                              return Html::a('<span class="glyphicon glyphicon-ok"></span>', ['ativar'], [
                                         'data' => [
-                                            'confirm' => 'Ativar o trancamento? Essa ação apagará a data de encerramento atual!',
+                                            'confirm' => 'Ativar Trancamento',
                                             'method' => 'post',
                                         ],
                                         'title' => Yii::t('yii', 'Ativar Trancamento'),
@@ -111,7 +112,7 @@ $this->params['breadcrumbs'][] = $this->title;
                               if ($model->status == 0) return false; //Disables button if status is closed
                               return Html::a('<span class="glyphicon glyphicon-remove"></span>', ['encerrar', 'id' => $model->id], [
                                         'data' => [
-                                            'confirm' => 'Encerrar o trancamento?',
+                                            'confirm' => 'Encerrar Trancamento?',
                                             'method' => 'post',
                                         ],
                                         'title' => Yii::t('yii', 'Encerrar Trancamento'),

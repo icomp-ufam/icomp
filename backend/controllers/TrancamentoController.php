@@ -1,7 +1,5 @@
 <?php
-
 namespace backend\controllers;
-
 use Yii;
 use app\models\Aluno;
 use app\models\Trancamento;
@@ -10,7 +8,6 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
-
 /**
  * TrancamentoController implements the CRUD actions for Trancamento model.
  */
@@ -30,7 +27,6 @@ class TrancamentoController extends Controller
             ],
         ];
     }
-
     protected function mensagens($tipo, $titulo, $mensagem){
         Yii::$app->session->setFlash($tipo, [
             'type' => $tipo,
@@ -43,7 +39,6 @@ class TrancamentoController extends Controller
             'showProgressbar' => true,
         ]);
     }
-
     /**
      * Lists all Trancamento models.
      * @return mixed
@@ -52,13 +47,11 @@ class TrancamentoController extends Controller
     {
         $searchModel = new TrancamentoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
-
     /**
      * Displays a single Trancamento model.
      * @param integer $id
@@ -70,7 +63,6 @@ class TrancamentoController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
-
     /**
      * Creates a new Trancamento model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -78,7 +70,6 @@ class TrancamentoController extends Controller
      */
     public function actionCreate($idAluno)
     {
-
         $model = new Trancamento();
         
         $model->idAluno = $idAluno;
@@ -89,10 +80,8 @@ class TrancamentoController extends Controller
             // get the uploaded file instance. for multiple file uploads
             // the following data will return an array
             $model->documento0 = UploadedFile::getInstance($model, 'documento');
-
             // the path to save file, you can set an uploadPath
             // in Yii::$app->params (as used in example below)
-
             $path = 'uploads/trancamento-'.Yii::$app->security->generateRandomString().'.'.$model->documento0->extension;
             
             $model->documento = $path;
@@ -106,7 +95,6 @@ class TrancamentoController extends Controller
             'model'=>$model,
         ]);
     }
-
     /**
      * Updates an existing Trancamento model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -116,7 +104,6 @@ class TrancamentoController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -124,6 +111,40 @@ class TrancamentoController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionEncerrar($id) {
+        $model = $this->findModel($id);
+
+        $model->dataInicio = date('d/m/Y', strtotime($model->dataInicio));
+        $model->dataTermino = date("Y-m-d");
+        $model->status = 0;
+
+        if ($model->save()) {
+            $this->mensagens('success', 'Sucesso', 'Trancamento encerrado com sucesso.');
+        }
+        else {
+             $this->mensagens('error', 'Erro', 'Falha ao encerrar trancamento');
+        }
+
+        return $this->redirect(['index']);
+    }
+
+    public function actionAtivar($id) {
+        $model = $this->findModel($id);
+
+        $model->dataInicio = date('d/m/Y', strtotime($model->dataInicio));
+        $model->dataTermino = null;
+        $model->status = 1;
+
+        if ($model->save()) {
+            $this->mensagens('success', 'Sucesso', 'Trancamento ativado com sucesso.');
+        }
+        else {
+             $this->mensagens('error', 'Erro', 'Falha ao ativar trancamento');
+        }
+
+        return $this->redirect(['index']);
     }
 
     /**
@@ -135,10 +156,8 @@ class TrancamentoController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
-
     /**
      * Finds the Trancamento model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

@@ -18,7 +18,7 @@ class TrancamentoSearch extends Trancamento
     public function rules()
     {
         return [
-            [['id', 'status'], 'integer'],
+            [['id', 'tipo', 'status'], 'integer'],
             [['matricula', 'orientador', 'idAluno', 'dataSolicitacao', 'dataInicio', 'prevTermino', 'dataTermino', 'justificativa', 'documento'], 'safe'],
         ];
     }
@@ -72,6 +72,7 @@ class TrancamentoSearch extends Trancamento
                     'dataInicio',
                     'prevTermino',
                     'dataTermino',
+                    'tipo',
                     'status'
                 )
             ),
@@ -90,11 +91,17 @@ class TrancamentoSearch extends Trancamento
         $query->joinWith('aluno');
         $query->joinWith('orientador0');
 
+        $searchedDataInicio = explode("/", $this->dataInicio);
+        if (sizeof($searchedDataInicio) == 3) {
+            $searchedDataInicio = $searchedDataInicio[2]."-".$searchedDataInicio[1]."-".$searchedDataInicio[0];
+        }
+        else $searchedDataInicio = '';
+        
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'dataSolicitacao' => $this->dataSolicitacao,
-            'dataInicio' => $this->dataInicio,
+            'dataInicio' => $searchedDataInicio,
             'prevTermino' => $this->prevTermino,
             'dataTermino' => $this->dataTermino,
             'j17_trancamentos.status' => $this->status,

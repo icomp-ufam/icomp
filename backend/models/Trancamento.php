@@ -13,7 +13,6 @@ use Yii;
  * @property integer $id
  * @property integer $idAluno
  * @property string $dataSolicitacao
- * @property string $dataAprovOrientador
  * @property string $dataInicio
  * @property string $prevTermino
  * @property string $dataTermino
@@ -28,7 +27,7 @@ use Yii;
  * 
  * Symbolic, responsible for business rules and search:
  * 
- * @property UploadedFile documento0
+ * @property yii\web\UploadedFile documento0
  * @property string orientador
  * @property string matricula
  */
@@ -52,9 +51,10 @@ class Trancamento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idAluno', 'dataSolicitacao', 'dataInicio', 'prevTermino', /*'dataTermino',*/ 'justificativa', 'documento' /*, 'status'*/], 'required'],
-            [['idAluno', 'status'], 'integer'],
-            [['matricula', 'orientador','dataSolicitacao', 'dataAprovOrientador', 'dataInicio', 'prevTermino', 'dataTermino'], 'safe'],
+            [['idAluno', /*'dataSolicitacao',*/ 'dataInicio', /*'prevTermino,*/ /*'dataTermino',*/ 'justificativa', 'documento' /*, 'status'*/], 'required'],
+            [['idAluno', 'tipo', 'status'], 'integer'],
+            [['matricula', 'orientador','dataSolicitacao', 'dataInicio', 'prevTermino', 'dataTermino'], 'safe'],
+            [['dataInicio'], 'date', 'format' => 'php:d/m/Y'],
             [['documento'], 'string'],
             [['documento0'], 'file', 'extensions' => 'pdf'],
             [['justificativa'], 'string', 'max' => 250],

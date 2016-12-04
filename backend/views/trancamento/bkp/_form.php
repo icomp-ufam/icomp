@@ -14,8 +14,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idAluno')->textInput() ?>
 
-    <?= $form->field($model, 'tipo')->textInput() ?>
-
     <?= $form->field($model, 'dataSolicitacao')->textInput() ?>
 
     <?= $form->field($model, 'dataInicio')->textInput() ?>
