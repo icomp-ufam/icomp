@@ -31,6 +31,7 @@ use Yii;
  * @property string orientador
  * @property string matricula
  * @property string dataInicio0
+ * @property string prevTermino0
  */
 class Trancamento extends \yii\db\ActiveRecord
 {
@@ -38,6 +39,7 @@ class Trancamento extends \yii\db\ActiveRecord
     public $orientador;
     public $matricula;
     public $dataInicio0;
+    public $prevTermino0;
 
     /**
      * @inheritdoc
@@ -53,10 +55,10 @@ class Trancamento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idAluno', /*'dataSolicitacao',*/ 'dataInicio', /*'prevTermino,*/ /*'dataTermino',*/ 'justificativa', 'documento' /*, 'status'*/], 'required'],
+            [['idAluno', /*'dataSolicitacao',*/ 'dataInicio', 'prevTermino', /*'dataTermino',*/ 'justificativa', 'documento' /*, 'status'*/], 'required'],
             [['idAluno', 'tipo', 'status'], 'integer'],
             [['matricula', 'orientador','dataSolicitacao', 'dataInicio', 'prevTermino', 'dataTermino'], 'safe'],
-            [['dataInicio0'], 'date', 'format' => 'php:d/m/Y'],
+            [['dataInicio0', 'prevTermino0'], 'date', 'format' => 'php:d/m/Y'],
             [['documento'], 'string'],
             [['documento0'], 'file', 'extensions' => 'pdf'],
             [['justificativa'], 'string', 'max' => 250],

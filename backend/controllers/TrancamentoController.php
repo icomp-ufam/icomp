@@ -78,11 +78,17 @@ class TrancamentoController extends Controller
         
         if ($model->load(Yii::$app->request->post())) {
 
-            $model->dataInicio = explode("/", $model->dataInicio);
+            $model->dataInicio = explode("/", $model->dataInicio0);
             if (sizeof($model->dataInicio) == 3) {
                 $model->dataInicio = $model->dataInicio[2]."-".$model->dataInicio[1]."-".$model->dataInicio[0];
             }
             else $model->dataInicio = '';
+
+            $model->prevTermino = explode("/", $model->prevTermino0);
+            if (sizeof($model->prevTermino) == 3) {
+                $model->prevTermino = $model->prevTermino[2]."-".$model->prevTermino[1]."-".$model->prevTermino[0];
+            }
+            else $model->prevTermino = '';
             
             // get the uploaded file instance. for multiple file uploads
             // the following data will return an array
@@ -99,7 +105,7 @@ class TrancamentoController extends Controller
                 return $this->redirect(['aluno/view', 'id'=>$model->idAluno]);
             }
             else {
-                $this->mensagens('erro', 'Erro', 'Houve uma falha ao criar o trancamento.');
+                $this->mensagens('error', 'Erro', 'Houve uma falha ao criar o trancamento.');
             }
         }
         return $this->render('create', [
