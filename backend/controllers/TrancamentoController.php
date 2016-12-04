@@ -116,7 +116,7 @@ class TrancamentoController extends Controller
     public function actionEncerrar($id) {
         $model = $this->findModel($id);
 
-        $model->dataInicio = date('d/m/Y', strtotime($model->dataInicio));
+        $model->dataInicio = $model->dataInicio;
         $model->dataTermino = date("Y-m-d");
         $model->status = 0;
 
@@ -133,7 +133,7 @@ class TrancamentoController extends Controller
     public function actionAtivar($id) {
         $model = $this->findModel($id);
 
-        $model->dataInicio = date('d/m/Y', strtotime($model->dataInicio));
+        $model->dataInicio = $model->dataInicio;
         $model->dataTermino = null;
         $model->status = 1;
 

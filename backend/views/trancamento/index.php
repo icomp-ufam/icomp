@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             */
             [
-                'attribute' => 'dataInicio',
+                'attribute' => 'dataInicio0',
                 'value' => function($model) {
                     return date('d/m/Y', strtotime($model->dataInicio));
                 }

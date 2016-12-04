@@ -30,12 +30,14 @@ use Yii;
  * @property yii\web\UploadedFile documento0
  * @property string orientador
  * @property string matricula
+ * @property string dataInicio0
  */
 class Trancamento extends \yii\db\ActiveRecord
 {
     public $documento0;
     public $orientador;
     public $matricula;
+    public $dataInicio0;
 
     /**
      * @inheritdoc
@@ -54,7 +56,7 @@ class Trancamento extends \yii\db\ActiveRecord
             [['idAluno', /*'dataSolicitacao',*/ 'dataInicio', /*'prevTermino,*/ /*'dataTermino',*/ 'justificativa', 'documento' /*, 'status'*/], 'required'],
             [['idAluno', 'tipo', 'status'], 'integer'],
             [['matricula', 'orientador','dataSolicitacao', 'dataInicio', 'prevTermino', 'dataTermino'], 'safe'],
-            [['dataInicio'], 'date', 'format' => 'php:d/m/Y'],
+            [['dataInicio0'], 'date', 'format' => 'php:d/m/Y'],
             [['documento'], 'string'],
             [['documento0'], 'file', 'extensions' => 'pdf'],
             [['justificativa'], 'string', 'max' => 250],
@@ -73,6 +75,7 @@ class Trancamento extends \yii\db\ActiveRecord
             'matricula' => 'Matrícula',
             'dataSolicitacao' => 'Data Solicitação',
             'dataInicio' => 'Início',
+            'dataInicio0' => 'Início',
             'orientador' => 'Orientador',
             'prevTermino' => 'Prev. Término',
             'dataTermino' => 'Data Término',
