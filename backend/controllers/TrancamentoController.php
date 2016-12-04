@@ -74,8 +74,15 @@ class TrancamentoController extends Controller
         
         $model->idAluno = $idAluno;
         $model->dataSolicitacao = date("Y-m-d");
+        $model->status=1; //Defines status as active
         
         if ($model->load(Yii::$app->request->post())) {
+
+            $model->dataInicio = explode("/", $model->dataInicio);
+            if (sizeof($model->dataInicio) == 3) {
+                $model->dataInicio = $model->dataInicio[2]."-".$model->dataInicio[1]."-".$model->dataInicio[0];
+            }
+            else $model->dataInicio = '';
             
             // get the uploaded file instance. for multiple file uploads
             // the following data will return an array
@@ -85,6 +92,7 @@ class TrancamentoController extends Controller
             $path = 'uploads/trancamento-'.Yii::$app->security->generateRandomString().'.'.$model->documento0->extension;
             
             $model->documento = $path;
+
             if($model->save()){
                 $model->documento0->saveAs($path);
                 $this->mensagens('success', 'Sucesso', 'Trancamento criado com sucesso.');
@@ -119,7 +127,6 @@ class TrancamentoController extends Controller
     public function actionEncerrar($id) {
         $model = $this->findModel($id);
 
-        $model->dataInicio = $model->dataInicio;
         $model->dataTermino = date("Y-m-d");
         $model->status = 0;
 
@@ -136,7 +143,6 @@ class TrancamentoController extends Controller
     public function actionAtivar($id) {
         $model = $this->findModel($id);
 
-        $model->dataInicio = $model->dataInicio;
         $model->dataTermino = null;
         $model->status = 1;
 
