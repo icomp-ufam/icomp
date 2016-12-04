@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * This is the view 'index' for 'Trancamento'
+ * 
+ * @author Pedro Frota <pvmf@icomp.ufam.edu.br>
+ * 
+ */
+
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -33,12 +40,42 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->aluno->matricula;
                 }
             ],
+            /*
+            Uncomment the following lines to create a link to the view 'view' of the student
+            [
+                'attribute' => 'idAluno',
+                'format' => 'html',
+                'value' => function($model) {
+                    return Html::a($model->aluno->nome, ['aluno/view', 
+                                        'id' => $model->aluno->id], 
+                                        [
+                                            'title' => Yii::t('yii', 'Visualizar dados do aluno '.$model->aluno->nome),
+                                        ]
+                    );   
+                }
+            ],
+            */
             [
                 'attribute' => 'idAluno',
                 'value' => function($model) {
                     return $model->aluno->nome;
                 }
             ],
+            /*
+            Uncomment the following lines to create a link to the view 'view' of the advisor
+            [
+                'attribute' => 'orientador',
+                'format' => 'html',
+                'value' => function($model) {
+                    return Html::a($model->orientador0->nome, ['user/view', 
+                                        'id' => $model->orientador0->id], 
+                                        [
+                                            'title' => Yii::t('yii', 'Visualizar dados do orientador '.$model->orientador0->nome),
+                                        ]
+                    );   
+                }
+            ],
+            */
             [
                 'attribute' => 'orientador',
                 'value' => function($model) {
@@ -80,7 +117,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'documento:ntext',
             [
                 'attribute' => 'tipo',
-                'filter'=>array (1 => 'Suspensao', 0 => 'Trancamento'),
+                'filter'=>array (1 => 'Suspensão', 0 => 'Trancamento'),
                 'contentOptions' => function ($model){
                     return [
                             'style' => 'background-color: '.($model->tipo == 0 ? '#9999e6' : '#f0b3ff')
@@ -89,7 +126,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html',
                 'value' => function($model) {
                     if ($model->tipo == 0) return '<span class="glyphicon glyphicon-lock"></span> Trancamento';
-                    return '<span class="glyphicon glyphicon-time"></span> Suspensao';
+                    return '<span class="glyphicon glyphicon-time"></span> Suspensão';
                 },
             ],
             [
