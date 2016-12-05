@@ -77,20 +77,30 @@ class TrancamentoController extends Controller
      */
     public function actionCreate($idAluno)
     {
+        if (!$this->canDoOneStopOut($idAluno)) {
+            $this->mensagens('error', 'Limite de trancamentos atingido', 'Não é possível criar um trancamento. O Aluno atingiu o limite de trancamentos');
+            return $this->redirect(['aluno/view', 'id'=>$idAluno]);
+        }
+
+
         $model = new Trancamento();
         
         $model->idAluno = $idAluno;
         $model->dataSolicitacao = date("Y-m-d");
+        $model->tipo=0; //Defines 'type' as 'Trancamento'
         $model->status=1; //Defines status as active
         
         if ($model->load(Yii::$app->request->post())) {
 
+
+            //Required to adapt the date inserted in the view to the format that will be inserted into the database
             $model->dataInicio = explode("/", $model->dataInicio0);
             if (sizeof($model->dataInicio) == 3) {
                 $model->dataInicio = $model->dataInicio[2]."-".$model->dataInicio[1]."-".$model->dataInicio[0];
             }
             else $model->dataInicio = '';
 
+            //Required to adapt the date inserted in the view to the format that will be inserted into the database
             $model->prevTermino = explode("/", $model->prevTermino0);
             if (sizeof($model->prevTermino) == 3) {
                 $model->prevTermino = $model->prevTermino[2]."-".$model->prevTermino[1]."-".$model->prevTermino[0];
@@ -128,6 +138,20 @@ class TrancamentoController extends Controller
             'model'=>$model,
         ]);
     }
+
+    /**
+     * Checks if student can still perform a stop out
+     * 
+     * @author Pedro Frota <pvmf@icomp.ufam.edu.br>
+     * 
+     * @return boolean 'true' if student can still perform a stop out, 'false' if not
+     */
+
+    private function canDoOneStopOut($idAluno) {
+        return true; //Not implemented Yet
+    }
+
+
     /**
      * Updates an existing Trancamento model.
      * If update is successful, the browser will be redirected to the 'view' page.

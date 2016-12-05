@@ -126,4 +126,17 @@ class Aluno extends \yii\db\ActiveRecord
        return $alunos;
     }
 
+    /**
+     * Gets the stop out's related to the student
+     * Returns an array with all student-related stop out's
+     * 
+     * @author Pedro Frota <pvmf@icomp.ufam.edu.br>
+     * 
+     * @return \yii\db\ActiveQuery
+     */
+
+    public function getTrancamentos() {
+        return $this->hasMany(Trancamentos::className(), ['idAluno' => 'id']);
+    }
+
 }

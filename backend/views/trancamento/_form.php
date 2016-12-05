@@ -45,6 +45,23 @@ $divFechar = "</div>";
         <div class="row">
 			<?= $form->field($model, 'documento', ['options' => ['class' => 'col-md-3'], ] )->fileInput()->label("<font color='#FF0000'>*</font> <b>Documento (PDF):</b>"); ?>
         </div>
+        <div class="row">
+        <?= $form->field($model, 'status', ['options' => ['class' => 'col-md-3']])
+                    ->widget(SwitchInput::classname(), [
+                        'pluginOptions' => [
+                            'onText' => 'Ativo',
+                            'offText' => 'Encerrado'
+                    ]]) 
+        ?>
+
+        <?= $form->field($model, 'tipo', ['options' => ['class' => 'col-md-3']])
+                    ->widget(SwitchInput::classname(), [
+                        'pluginOptions' => [
+                            'onText' => 'Sim',
+                            'offText' => 'Não'
+                    ]])->label('Suspensão') 
+        ?>
+        </div>
 
     <div class="form-group">
         <?= Html::submitButton('Salvar', ['class' => 'btn btn-primary']); ?>

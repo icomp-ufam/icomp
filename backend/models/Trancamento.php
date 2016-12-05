@@ -55,7 +55,7 @@ class Trancamento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idAluno', /*'dataSolicitacao',*/ 'dataInicio', 'prevTermino', /*'dataTermino',*/ 'justificativa', 'documento' /*, 'status'*/], 'required'],
+            [['idAluno', /*'dataSolicitacao',*/ 'dataInicio', 'prevTermino', /*'dataTermino',*/ 'justificativa', 'documento', /*'tipo', 'status'*/], 'required'],
             [['idAluno', 'tipo', 'status'], 'integer'],
             [['matricula', 'orientador','dataSolicitacao', 'dataInicio', 'prevTermino', 'dataTermino'], 'safe'],
             [['dataInicio0', 'prevTermino0'], 'date', 'format' => 'php:d/m/Y'],
