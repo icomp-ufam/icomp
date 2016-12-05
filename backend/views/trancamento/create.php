@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="aluno-create">
 
-    <?= $this->render('_formTrancamento', [
+    <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
 
