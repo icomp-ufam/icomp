@@ -18,22 +18,33 @@ $divFechar = "</div>";
         'options' => [ 'enctype' => 'multipart/form-data']
     ]); ?>
         <div class="row">
-            <?= $form->field($model, 'dataInicio', ['options' => ['class' => 'col-md-3']])->widget(DatePicker::classname(), [
+            <?= $form->field($model, 'dataSolicitacao0', ['options' => ['class' => 'col-md-3']])->widget(DatePicker::classname(), [
                 'language' => Yii::$app->language,
                 'options' => ['placeholder' => 'Selecione a Data de Início ...',],
                 'pluginOptions' => [
-                    'format' => 'dd-mm-yyyy',
+                    'format' => 'dd/mm/yyyy',
+                    'todayHighlight' => true
+                ]
+            ])->label("<font color='#FF0000'>*</font> <b>Data de Início:</b>")
+            ?>
+        </div>
+        <div class="row">
+            <?= $form->field($model, 'dataInicio0', ['options' => ['class' => 'col-md-3']])->widget(DatePicker::classname(), [
+                'language' => Yii::$app->language,
+                'options' => ['placeholder' => 'Selecione a Data de Início ...',],
+                'pluginOptions' => [
+                    'format' => 'dd/mm/yyyy',
                     'todayHighlight' => true
                 ]
             ])->label("<font color='#FF0000'>*</font> <b>Data de Início:</b>")
             ?>
         </div>
 		<div class="row">
-            <?= $form->field($model, 'prevTermino', ['options' => ['class' => 'col-md-3']])->widget(DatePicker::classname(), [
+            <?= $form->field($model, 'prevTermino0', ['options' => ['class' => 'col-md-3']])->widget(DatePicker::classname(), [
                 'language' => Yii::$app->language,
                 'options' => ['placeholder' => 'Selecione a Data de Retorno ...',],
                 'pluginOptions' => [
-                    'format' => 'dd-mm-yyyy',
+                    'format' => 'dd/mm/yyyy',
                     'todayHighlight' => true
                 ]
             ])->label("<font color='#FF0000'>*</font> <b>Previsão de Término:</b>")
@@ -42,8 +53,25 @@ $divFechar = "</div>";
 		<div class="row">
             <?= $form->field($model, 'justificativa' , ['options' => ['class' => 'col-md-3']] )->textArea(['rows' => '6'])->label("<font color='#FF0000'>*</font> <b>Justificativa:</b>") ?>
         </div>		
-        <div class="row">
+        <!--div class="row">
 			<?= $form->field($model, 'documento', ['options' => ['class' => 'col-md-3'], ] )->fileInput()->label("<font color='#FF0000'>*</font> <b>Documento (PDF):</b>"); ?>
+        </div-->
+        <div class="row">
+        <?= $form->field($model, 'status', ['options' => ['class' => 'col-md-3']])
+                    ->widget(SwitchInput::classname(), [
+                        'pluginOptions' => [
+                            'onText' => 'Ativo',
+                            'offText' => 'Encerrado'
+                    ]]) 
+        ?>
+
+        <?= $form->field($model, 'tipo', ['options' => ['class' => 'col-md-3']])
+                    ->widget(SwitchInput::classname(), [
+                        'pluginOptions' => [
+                            'onText' => 'Sim',
+                            'offText' => 'Não'
+                    ]])->label('Suspensão') 
+        ?>
         </div>
 
     <div class="form-group">

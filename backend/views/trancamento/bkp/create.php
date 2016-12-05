@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 
 
-$this->title = 'Registrar Trancamento - Aluno: '.$model->aluno->nome;
+$this->title = 'Trancamento de Curso';
 $this->params['breadcrumbs'][] = ['label' => 'Trancamento de Curso', 'url' => ['/trancamento']];
 //$this->params['breadcrumbs'][] = ['label' => 'Número: '.Yii::$app->request->get('idEdital'), 
 //    'url' => ['edital/view','id' => Yii::$app->request->get('idEdital') ]];
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="aluno-create">
 
-    <?= $this->render('_form', [
+    <?= $this->render('_formTrancamento', [
         'model' => $model,
     ]) ?>
 

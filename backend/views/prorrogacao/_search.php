@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\TrancamentoSearch */
+/* @var $model app\models\ProrrogacaoSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="trancamento-search">
+<div class="prorrogacao-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -19,19 +19,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idAluno') ?>
 
-    <?= $form->field($model, 'tipo') ?>
-
     <?= $form->field($model, 'dataSolicitacao') ?>
 
-    <?= $form->field($model, 'dataInicio') ?>
+    <?= $form->field($model, 'qtdDias') ?>
 
-    <?php // echo $form->field($model, 'prevTermino') ?>
+    <?= $form->field($model, 'justificativa') ?>
 
-    <?php // echo $form->field($model, 'dataTermino') ?>
-
-    <?php // echo $form->field($model, 'justificativa') ?>
-
-    <?php // echo $form->field($model, 'documento') ?>
+    <?php // echo $form->field($model, 'previa') ?>
 
     <?php // echo $form->field($model, 'status') ?>
 

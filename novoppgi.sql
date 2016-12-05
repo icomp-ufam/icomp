@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 30-Nov-2016 às 17:21
+-- Generation Time: 03-Dez-2016 às 18:25
 -- Versão do servidor: 5.5.53-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -650,8 +650,6 @@ CREATE TABLE `j17_aluno` (
   `anoconclusao` date NOT NULL,
   `sede` varchar(2) NOT NULL DEFAULT 'AM'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `j17_banca_has_membrosbanca`
@@ -5902,15 +5900,24 @@ INSERT INTO `j17_reservas_salas` (`id`, `nome`, `numero`, `localizacao`) VALUES
 CREATE TABLE `j17_trancamentos` (
   `id` int(11) NOT NULL,
   `idAluno` int(11) NOT NULL,
+  `tipo` tinyint(1) NOT NULL,
   `dataSolicitacao` date NOT NULL,
-  `dataAprovOrientador` date NOT NULL,
   `dataInicio` date NOT NULL,
   `prevTermino` date NOT NULL,
   `dataTermino` date NOT NULL,
   `justificativa` varchar(250) NOT NULL,
   `documento` text NOT NULL,
-  `status` int(2) NOT NULL
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `j17_trancamentos`
+--
+
+INSERT INTO `j17_trancamentos` (`id`, `idAluno`, `tipo`, `dataSolicitacao`, `dataInicio`, `prevTermino`, `dataTermino`, `justificativa`, `documento`, `status`) VALUES
+(1, 713, 0, '2016-12-01', '2016-12-16', '0000-00-00', '0000-00-00', 'oijni', 'uploads/trancamento-W7htRcwLzBNOBR9AaWfv-KHExWI_PcoB.pdf', 1),
+(2, 713, 0, '2016-12-03', '2016-12-17', '0000-00-00', '0000-00-00', 'xdvdfd', 'uploads/trancamento-8vUxxZa7VdTw8FNFXpeLVX0lWzB28Z4z.pdf', 0),
+(3, 714, 0, '2016-12-02', '2016-12-18', '0000-00-00', '0000-00-00', 'aaaasa', 'uploads/trancamento-6s25dUbcV9Y-KVqqb0dlduD2hAPXHDAJ.pdf', 0);
 
 -- --------------------------------------------------------
 
@@ -5956,15 +5963,6 @@ CREATE TABLE `j17_user` (
   `idRH` int(11) DEFAULT NULL,
   `cargo` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Extraindo dados da tabela `j17_user`
---
-
-INSERT INTO `j17_user` (`id`, `nome`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `visualizacao_candidatos`, `visualizacao_candidatos_finalizados`, `visualizacao_cartas_respondidas`, `administrador`, `coordenador`, `secretaria`, `professor`, `aluno`, `siape`, `dataIngresso`, `endereco`, `telcelular`, `telresidencial`, `unidade`, `titulacao`, `classe`, `nivel`, `regime`, `turno`, `idLattes`, `formacao`, `resumo`, `alias`, `ultimaAtualizacao`, `idRH`, `cargo`) VALUES
-(66, 'Pedro Vitor Mesquita da Frota', '030.115.652-28', 'JsHPm23fX1lCpVMrFD9wLZnRztGemGqF', '$2y$13$q2Wg3LKKplx4scKbUNKFqu/.FoHDIGc8hkV81RktklS77Rr9AzPJG', NULL, 'pvmf@icomp.ufam.edu.br', 10, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
--- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `migration`
@@ -6221,12 +6219,12 @@ ALTER TABLE `j17_afastamentos`
 -- AUTO_INCREMENT for table `j17_aluno`
 --
 ALTER TABLE `j17_aluno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=713;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=715;
 --
 -- AUTO_INCREMENT for table `j17_banca_has_membrosbanca`
 --
 ALTER TABLE `j17_banca_has_membrosbanca`
-  MODIFY `banca_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=767;
+  MODIFY `banca_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `j17_candidatos`
 --
@@ -6296,7 +6294,7 @@ ALTER TABLE `j17_contproj_transferenciassaldorubricas`
 -- AUTO_INCREMENT for table `j17_defesa`
 --
 ALTER TABLE `j17_defesa`
-  MODIFY `idDefesa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=583;
+  MODIFY `idDefesa` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `j17_ferias`
 --
@@ -6311,7 +6309,7 @@ ALTER TABLE `j17_linhaspesquisa`
 -- AUTO_INCREMENT for table `j17_membrosbanca`
 --
 ALTER TABLE `j17_membrosbanca`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `j17_oferta_disciplinas`
 --
@@ -6331,7 +6329,7 @@ ALTER TABLE `j17_premios`
 -- AUTO_INCREMENT for table `j17_publicacoes`
 --
 ALTER TABLE `j17_publicacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6125;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `j17_recomendacoes`
 --
@@ -6351,7 +6349,7 @@ ALTER TABLE `j17_reservas_salas`
 -- AUTO_INCREMENT for table `j17_trancamentos`
 --
 ALTER TABLE `j17_trancamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `j17_user`
 --
@@ -6360,6 +6358,12 @@ ALTER TABLE `j17_user`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Limitadores para a tabela `j17_aluno`
+--
+ALTER TABLE `j17_aluno`
+  ADD CONSTRAINT `fk_aluno_orientador` FOREIGN KEY (`orientador`) REFERENCES `j17_user` (`id`);
 
 --
 -- Limitadores para a tabela `j17_banca_has_membrosbanca`
