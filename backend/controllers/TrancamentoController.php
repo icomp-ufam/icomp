@@ -23,6 +23,8 @@ class TrancamentoController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'ativar' => ['POST'],
+                    'encerrar' => ['POST'],
                 ],
             ],
         ];
@@ -65,7 +67,12 @@ class TrancamentoController extends Controller
     }
     /**
      * Creates a new Trancamento model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * If creation is successful, the browser will be redirected to the 'view' page for model 'Aluno'.
+     * 
+     * @author Pedro Frota <pvmf@icomp.ufam.edu.br>
+     * 
+     * @param integer $idAluno The student ID
+     * 
      * @return mixed
      */
     public function actionCreate($idAluno)
@@ -95,11 +102,20 @@ class TrancamentoController extends Controller
             $model->documento0 = UploadedFile::getInstance($model, 'documento');
             // the path to save file, you can set an uploadPath
             // in Yii::$app->params (as used in example below)
-            $path = 'uploads/trancamento-'.Yii::$app->security->generateRandomString().'.'.$model->documento0->extension;
+            
+            $pre_path = 'uploads/trancamento/';
+            $filename = 'trancamento-'.Yii::$app->security->generateRandomString().'.'.$model->documento0->extension;
+
+            $path = $pre_path.$filename;
             
             $model->documento = $path;
 
             if($model->save()){
+
+                if (!is_dir($pre_path)) {
+                    mkdir($pre_path);
+                }
+
                 $model->documento0->saveAs($path);
                 $this->mensagens('success', 'Sucesso', 'Trancamento criado com sucesso.');
                 return $this->redirect(['aluno/view', 'id'=>$model->idAluno]);
@@ -130,22 +146,6 @@ class TrancamentoController extends Controller
         }
     }
 
-    public function actionEncerrar($id) {
-        $model = $this->findModel($id);
-
-        $model->dataTermino = date("Y-m-d");
-        $model->status = 0;
-
-        if ($model->save()) {
-            $this->mensagens('success', 'Sucesso', 'Trancamento encerrado com sucesso.');
-        }
-        else {
-             $this->mensagens('error', 'Erro', 'Falha ao encerrar trancamento');
-        }
-
-        return $this->redirect(['index']);
-    }
-
     public function actionAtivar($id) {
         $model = $this->findModel($id);
 
@@ -162,15 +162,46 @@ class TrancamentoController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionEncerrar($id) {
+        $model = $this->findModel($id);
+
+        $model->dataTermino = date("Y-m-d");
+        $model->status = 0;
+
+        if ($model->save()) {
+            $this->mensagens('success', 'Sucesso', 'Trancamento encerrado com sucesso.');
+        }
+        else {
+             $this->mensagens('error', 'Erro', 'Falha ao encerrar trancamento.');
+        }
+
+        return $this->redirect(['index']);
+    }
+
     /**
      * Deletes an existing Trancamento model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     * 
+     * @author Pedro Frota <pvmf@icomp.ufam.edu.br>
+     * 
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        $documento = $model->documento;
+
+        if ($model->delete()) {
+            //Delete the document related to the stop out
+            //getcwd() is used to get the current working directory (cwd)
+            unlink(getcwd().'/'.$documento);
+            $this->mensagens('success', 'Sucesso', 'Trancamento deletado com sucesso.');
+        }
+        else {
+            $this->mensagens('error', 'Erro', 'Falha ao deletar trancamento.');
+        }
         return $this->redirect(['index']);
     }
     /**
