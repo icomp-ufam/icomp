@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 03-Dez-2016 às 18:25
+-- Generation Time: 05-Dez-2016 às 04:23
 -- Versão do servidor: 5.5.53-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -650,6 +650,16 @@ CREATE TABLE `j17_aluno` (
   `anoconclusao` date NOT NULL,
   `sede` varchar(2) NOT NULL DEFAULT 'AM'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `j17_aluno`
+--
+
+INSERT INTO `j17_aluno` (`id`, `nome`, `email`, `senha`, `matricula`, `area`, `curso`, `endereco`, `bairro`, `cidade`, `uf`, `cep`, `datanascimento`, `sexo`, `nacionalidade`, `estadocivil`, `cpf`, `rg`, `orgaoexpeditor`, `dataexpedicao`, `telresidencial`, `telcomercial`, `telcelular`, `nomepai`, `nomemae`, `regime`, `bolsista`, `financiadorbolsa`, `dataimplementacaobolsa`, `agencia`, `pais`, `status`, `dataingresso`, `idiomaExameProf`, `conceitoExameProf`, `dataExameProf`, `tituloQual2`, `dataQual2`, `conceitoQual2`, `tituloTese`, `dataTese`, `conceitoTese`, `horarioQual2`, `localQual2`, `resumoQual2`, `horarioTese`, `localTese`, `resumoTese`, `tituloQual1`, `numDefesa`, `dataQual1`, `examinadorQual1`, `conceitoQual1`, `cursograd`, `instituicaograd`, `crgrad`, `egressograd`, `dataformaturagrad`, `idUser`, `orientador`, `anoconclusao`, `sede`) VALUES
+(713, 'HAHAHU', 'haha@gmail.com', '', '2100000', 1, 1, 'uhauha', 'uhauhauh', 'uauha', 'AM', '69000-000', '1990-11-13', 'M', NULL, '', '030.115.652-28', '', '', NULL, '(92) 91111-1111', NULL, '', NULL, NULL, 1, '0', '', NULL, '', '', 0, '2016-11-25', 'AUHA', 'Aprovado', '2016-11-29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, 'UHAUH', 'UHAUHA', NULL, 2010, NULL, 66, 66, '0000-00-00', 'AM'),
+(714, 'HAHAHA', 'haha@gmail.com', '', '2100001', 1, 1, 'uhauha', 'uhauhauh', 'uauha', 'AM', '69000-000', '1990-11-13', 'M', NULL, '', '030.115.652-28', '', '', NULL, '(92) 91111-1111', NULL, '', NULL, NULL, 1, '0', '', NULL, '', '', 0, '2016-11-25', 'AUHA', 'Aprovado', '2016-11-29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, 'UHAUH', 'UHAUHA', NULL, 2010, NULL, 66, 68, '0000-00-00', 'AM');
+
+-- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `j17_banca_has_membrosbanca`
@@ -2070,7 +2080,8 @@ INSERT INTO `j17_contproj_projetos` (`id`, `nomeprojeto`, `orcamento`, `saldo`, 
 (76, 'Melhorando a Qualidade no Desenvolvimento de Software - PROTI PESQUISA', 240882.51, 108709.24, '2014-03-01', '2014-09-30', '0000-00-00', 30, 1, 48, '5786-X', '285-2', '', 'components/com_controleprojetos/docprojetos/proposta/PPGI-Proposta.pdf', 'Encerrado'),
 (83, 'eVox-Mobilidade - PROTI MOBILIDADE', 50092, 20937.47, '2013-09-30', '2015-03-29', '0000-00-00', 10, 1, 48, '5786-X', '277-1', '', '', 'Encerrado'),
 (84, 'ACAMPAR - PROTI - MOBILIDADE', 109263, 22604.33, '2014-09-30', '2015-10-30', '0000-00-00', 46, 1, 48, '5786-x', '296-8', 'components/com_controleprojetos/docprojetos/edital/PPGI-Edital-de19dc7cd360579612010bb4605fe87b.pdf', 'components/com_controleprojetos/docprojetos/proposta/PPGI-Proposta-de19dc7cd360579612010bb4605fe87b.pdf', 'Encerrado'),
-(85, 'Monitoramento e Controle de Redes - PROTI MOBILIDADE', 75252, 31696.13, '2014-09-30', '2015-11-30', '0000-00-00', 15, 1, 48, '5786-X', '273-9', 'components/com_controleprojetos/docprojetos/edital/PPGI-Edital-fac97008713a3bcd93358ea2f19618a2.pdf', '', 'Encerrado');
+(85, 'Monitoramento e Controle de Redes - PROTI MOBILIDADE', 75252, 31696.13, '2014-09-30', '2015-11-30', '0000-00-00', 15, 1, 48, '5786-X', '273-9', 'components/com_controleprojetos/docprojetos/edital/PPGI-Edital-fac97008713a3bcd93358ea2f19618a2.pdf', '', 'Encerrado'),
+(86, '1111', 11.11, 0, '2016-12-28', '2016-12-29', '2016-12-29', 68, 6, 8, 'asdas', 'aasas', '', '', 'Cadastrado');
 
 -- --------------------------------------------------------
 
@@ -4354,12 +4365,11 @@ INSERT INTO `j17_projetos` (`id`, `idProfessor`, `titulo`, `descricao`, `inicio`
 CREATE TABLE `j17_prorrogacoes` (
   `id` int(11) NOT NULL,
   `idAluno` int(11) NOT NULL,
+  `dataSolicitacao` date NOT NULL,
+  `qtdDias` int(11) NOT NULL,
   `justificativa` text NOT NULL,
   `previa` text NOT NULL,
-  `dataSolicitacao` date NOT NULL,
-  `dataAprovOrientador` date NOT NULL,
-  `dataAprovColegiado` date NOT NULL,
-  `status` smallint(6) NOT NULL
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -5904,7 +5914,7 @@ CREATE TABLE `j17_trancamentos` (
   `dataSolicitacao` date NOT NULL,
   `dataInicio` date NOT NULL,
   `prevTermino` date NOT NULL,
-  `dataTermino` date NOT NULL,
+  `dataTermino` date DEFAULT NULL,
   `justificativa` varchar(250) NOT NULL,
   `documento` text NOT NULL,
   `status` tinyint(1) NOT NULL
@@ -5915,9 +5925,7 @@ CREATE TABLE `j17_trancamentos` (
 --
 
 INSERT INTO `j17_trancamentos` (`id`, `idAluno`, `tipo`, `dataSolicitacao`, `dataInicio`, `prevTermino`, `dataTermino`, `justificativa`, `documento`, `status`) VALUES
-(1, 713, 0, '2016-12-01', '2016-12-16', '0000-00-00', '0000-00-00', 'oijni', 'uploads/trancamento-W7htRcwLzBNOBR9AaWfv-KHExWI_PcoB.pdf', 1),
-(2, 713, 0, '2016-12-03', '2016-12-17', '0000-00-00', '0000-00-00', 'xdvdfd', 'uploads/trancamento-8vUxxZa7VdTw8FNFXpeLVX0lWzB28Z4z.pdf', 0),
-(3, 714, 0, '2016-12-02', '2016-12-18', '0000-00-00', '0000-00-00', 'aaaasa', 'uploads/trancamento-6s25dUbcV9Y-KVqqb0dlduD2hAPXHDAJ.pdf', 0);
+(51, 714, 1, '2016-12-05', '2016-12-09', '2016-12-24', NULL, 'ASDAS', 'uploads/trancamento/trancamento-q88cHZkBmfOf5CHbH87XPXDfWU7Cea36.pdf', 1);
 
 -- --------------------------------------------------------
 
@@ -5963,6 +5971,16 @@ CREATE TABLE `j17_user` (
   `idRH` int(11) DEFAULT NULL,
   `cargo` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `j17_user`
+--
+
+INSERT INTO `j17_user` (`id`, `nome`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `visualizacao_candidatos`, `visualizacao_candidatos_finalizados`, `visualizacao_cartas_respondidas`, `administrador`, `coordenador`, `secretaria`, `professor`, `aluno`, `siape`, `dataIngresso`, `endereco`, `telcelular`, `telresidencial`, `unidade`, `titulacao`, `classe`, `nivel`, `regime`, `turno`, `idLattes`, `formacao`, `resumo`, `alias`, `ultimaAtualizacao`, `idRH`, `cargo`) VALUES
+(66, 'Pedro Vitor Mesquita da Frota', '030.115.652-28', 'JsHPm23fX1lCpVMrFD9wLZnRztGemGqF', '$2y$13$q2Wg3LKKplx4scKbUNKFqu/.FoHDIGc8hkV81RktklS77Rr9AzPJG', NULL, 'pvmf@icomp.ufam.edu.br', 10, '', '2016-11-30', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', NULL, NULL, '1', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(68, 'Jureg', 'asdas', 'JsHPm23fX1lCpVMrFD9wLZnRztGemGqF', '$2y$13$q2Wg3LKKplx4scKbUNKFqu/.FoHDIGc8hkV81RktklS77Rr9AzPJG', NULL, 'jureg', 10, '', '2016-11-30', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', NULL, NULL, '1', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `migration`
@@ -6259,7 +6277,7 @@ ALTER TABLE `j17_contproj_despesas`
 -- AUTO_INCREMENT for table `j17_contproj_projetos`
 --
 ALTER TABLE `j17_contproj_projetos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 --
 -- AUTO_INCREMENT for table `j17_contproj_prorrogacoes`
 --
@@ -6349,12 +6367,12 @@ ALTER TABLE `j17_reservas_salas`
 -- AUTO_INCREMENT for table `j17_trancamentos`
 --
 ALTER TABLE `j17_trancamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `j17_user`
 --
 ALTER TABLE `j17_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 --
 -- Constraints for dumped tables
 --
