@@ -5911,15 +5911,6 @@ CREATE TABLE `j17_trancamentos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `j17_trancamentos`
---
-
-INSERT INTO `j17_trancamentos` (`id`, `idAluno`, `tipo`, `dataSolicitacao`, `dataInicio`, `prevTermino`, `dataTermino`, `justificativa`, `documento`, `status`) VALUES
-(51, 714, 1, '2016-12-05', '2016-12-09', '2016-12-24', NULL, 'ASDAS', 'uploads/trancamento/trancamento-q88cHZkBmfOf5CHbH87XPXDfWU7Cea36.pdf', 1);
-
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `j17_user`
 --
 
