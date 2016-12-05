@@ -652,16 +652,6 @@ CREATE TABLE `j17_aluno` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `j17_aluno`
---
-
-INSERT INTO `j17_aluno` (`id`, `nome`, `email`, `senha`, `matricula`, `area`, `curso`, `endereco`, `bairro`, `cidade`, `uf`, `cep`, `datanascimento`, `sexo`, `nacionalidade`, `estadocivil`, `cpf`, `rg`, `orgaoexpeditor`, `dataexpedicao`, `telresidencial`, `telcomercial`, `telcelular`, `nomepai`, `nomemae`, `regime`, `bolsista`, `financiadorbolsa`, `dataimplementacaobolsa`, `agencia`, `pais`, `status`, `dataingresso`, `idiomaExameProf`, `conceitoExameProf`, `dataExameProf`, `tituloQual2`, `dataQual2`, `conceitoQual2`, `tituloTese`, `dataTese`, `conceitoTese`, `horarioQual2`, `localQual2`, `resumoQual2`, `horarioTese`, `localTese`, `resumoTese`, `tituloQual1`, `numDefesa`, `dataQual1`, `examinadorQual1`, `conceitoQual1`, `cursograd`, `instituicaograd`, `crgrad`, `egressograd`, `dataformaturagrad`, `idUser`, `orientador`, `anoconclusao`, `sede`) VALUES
-(713, 'HAHAHU', 'haha@gmail.com', '', '2100000', 1, 1, 'uhauha', 'uhauhauh', 'uauha', 'AM', '69000-000', '1990-11-13', 'M', NULL, '', '030.115.652-28', '', '', NULL, '(92) 91111-1111', NULL, '', NULL, NULL, 1, '0', '', NULL, '', '', 0, '2016-11-25', 'AUHA', 'Aprovado', '2016-11-29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, 'UHAUH', 'UHAUHA', NULL, 2010, NULL, 66, 66, '0000-00-00', 'AM'),
-(714, 'HAHAHA', 'haha@gmail.com', '', '2100001', 1, 1, 'uhauha', 'uhauhauh', 'uauha', 'AM', '69000-000', '1990-11-13', 'M', NULL, '', '030.115.652-28', '', '', NULL, '(92) 91111-1111', NULL, '', NULL, NULL, 1, '0', '', NULL, '', '', 0, '2016-11-25', 'AUHA', 'Aprovado', '2016-11-29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, 'UHAUH', 'UHAUHA', NULL, 2010, NULL, 66, 68, '0000-00-00', 'AM');
-
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `j17_banca_has_membrosbanca`
 --
 
@@ -5971,14 +5961,6 @@ CREATE TABLE `j17_user` (
   `idRH` int(11) DEFAULT NULL,
   `cargo` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Extraindo dados da tabela `j17_user`
---
-
-INSERT INTO `j17_user` (`id`, `nome`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `visualizacao_candidatos`, `visualizacao_candidatos_finalizados`, `visualizacao_cartas_respondidas`, `administrador`, `coordenador`, `secretaria`, `professor`, `aluno`, `siape`, `dataIngresso`, `endereco`, `telcelular`, `telresidencial`, `unidade`, `titulacao`, `classe`, `nivel`, `regime`, `turno`, `idLattes`, `formacao`, `resumo`, `alias`, `ultimaAtualizacao`, `idRH`, `cargo`) VALUES
-(66, 'Pedro Vitor Mesquita da Frota', '030.115.652-28', 'JsHPm23fX1lCpVMrFD9wLZnRztGemGqF', '$2y$13$q2Wg3LKKplx4scKbUNKFqu/.FoHDIGc8hkV81RktklS77Rr9AzPJG', NULL, 'pvmf@icomp.ufam.edu.br', 10, '', '2016-11-30', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', NULL, NULL, '1', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(68, 'Jureg', 'asdas', 'JsHPm23fX1lCpVMrFD9wLZnRztGemGqF', '$2y$13$q2Wg3LKKplx4scKbUNKFqu/.FoHDIGc8hkV81RktklS77Rr9AzPJG', NULL, 'jureg', 10, '', '2016-11-30', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', NULL, NULL, '1', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
