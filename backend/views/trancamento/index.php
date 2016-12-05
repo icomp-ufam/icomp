@@ -14,7 +14,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\TrancamentoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Trancamentos';
+$this->title = 'Gerenciar Trancamentos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="trancamento-index">
@@ -126,7 +126,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html',
                 'value' => function($model) {
                     if ($model->tipo == 0) return '<span class="glyphicon glyphicon-lock"></span> Trancamento';
-                    return '<span class="glyphicon glyphicon-time"></span> Suspensão';
+                    return '<span class="glyphicon glyphicon-hourglass"></span> Suspensão';
                 },
             ],
             [

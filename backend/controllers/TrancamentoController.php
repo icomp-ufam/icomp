@@ -84,13 +84,23 @@ class TrancamentoController extends Controller
 
 
         $model = new Trancamento();
+
+        $model->scenario = 'create';
         
         $model->idAluno = $idAluno;
         $model->dataSolicitacao = date("Y-m-d");
+        $model->dataSolicitacao0 = date('d/m/Y', strtotime($model->dataSolicitacao));
         $model->tipo=0; //Defines 'type' as 'Trancamento'
         $model->status=1; //Defines status as active
         
         if ($model->load(Yii::$app->request->post())) {
+
+            //Required to adapt the date inserted in the view to the format that will be inserted into the database
+            $model->dataSolicitacao = explode("/", $model->dataSolicitacao0);
+            if (sizeof($model->dataSolicitacao) == 3) {
+                $model->dataSolicitacao = $model->dataSolicitacao[2]."-".$model->dataSolicitacao[1]."-".$model->dataSolicitacao[0];
+            }
+            else $model->dataSolicitacao = '';
 
 
             //Required to adapt the date inserted in the view to the format that will be inserted into the database
@@ -128,7 +138,7 @@ class TrancamentoController extends Controller
 
                 $model->documento0->saveAs($path);
                 $this->mensagens('success', 'Sucesso', 'Trancamento criado com sucesso.');
-                return $this->redirect(['aluno/view', 'id'=>$model->idAluno]);
+                return $this->redirect(['trancamento/view', 'id'=>$model->id]);
             }
             else {
                 $this->mensagens('error', 'Erro', 'Houve uma falha ao criar o trancamento.');
@@ -161,13 +171,44 @@ class TrancamentoController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+
+        $model->dataSolicitacao0 = date('d/m/Y', strtotime($model->dataSolicitacao));
+        $model->dataInicio0 = date('d/m/Y', strtotime($model->dataInicio));
+        $model->prevTermino0 = date('d/m/Y', strtotime($model->prevTermino));
+
+        if ($model->load(Yii::$app->request->post())) {
+            
+            //Required to adapt the date inserted in the view to the format that will be inserted into the database
+            $model->dataSolicitacao = explode("/", $model->dataSolicitacao0);
+            if (sizeof($model->dataSolicitacao) == 3) {
+                $model->dataSolicitacao = $model->dataSolicitacao[2]."-".$model->dataSolicitacao[1]."-".$model->dataSolicitacao[0];
+            }
+            else $model->dataSolicitacao = '';
+
+
+            //Required to adapt the date inserted in the view to the format that will be inserted into the database
+            $model->dataInicio = explode("/", $model->dataInicio0);
+            if (sizeof($model->dataInicio) == 3) {
+                $model->dataInicio = $model->dataInicio[2]."-".$model->dataInicio[1]."-".$model->dataInicio[0];
+            }
+            else $model->dataInicio = '';
+
+            //Required to adapt the date inserted in the view to the format that will be inserted into the database
+            $model->prevTermino = explode("/", $model->prevTermino0);
+            if (sizeof($model->prevTermino) == 3) {
+                $model->prevTermino = $model->prevTermino[2]."-".$model->prevTermino[1]."-".$model->prevTermino[0];
+            }
+            else $model->prevTermino = '';
+
+
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+
+        return $this->render('update', [
+                'model' => $model,
+        ]);
     }
 
     public function actionAtivar($id) {

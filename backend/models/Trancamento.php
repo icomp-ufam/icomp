@@ -30,6 +30,8 @@ use Yii;
  * @property yii\web\UploadedFile documento0
  * @property string orientador
  * @property string matricula
+ * @property string linhaPesquisa
+ * @property string dataSolicitacao0
  * @property string dataInicio0
  * @property string prevTermino0
  */
@@ -38,6 +40,8 @@ class Trancamento extends \yii\db\ActiveRecord
     public $documento0;
     public $orientador;
     public $matricula;
+    public $linhaPesquisa;
+    public $dataSolicitacao0;
     public $dataInicio0;
     public $prevTermino0;
 
@@ -55,12 +59,13 @@ class Trancamento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idAluno', /*'dataSolicitacao',*/ 'dataInicio', 'prevTermino', /*'dataTermino',*/ 'justificativa', 'documento', /*'tipo', 'status'*/], 'required'],
+            [['idAluno', 'dataSolicitacao', 'dataInicio', 'prevTermino', /*'dataTermino',*/ 'justificativa', /*'tipo', 'status'*/], 'required'],
+            [['documento', 'dataSolicitacao0'], 'required', 'on' => 'create'],
             [['idAluno', 'tipo', 'status'], 'integer'],
             [['matricula', 'orientador','dataSolicitacao', 'dataInicio', 'prevTermino', 'dataTermino'], 'safe'],
-            [['dataInicio0', 'prevTermino0'], 'date', 'format' => 'php:d/m/Y'],
+            [['dataInicio0', 'prevTermino0', 'dataSolicitacao0'], 'date', 'format' => 'php:d/m/Y'],
             [['documento'], 'string'],
-            [['documento0'], 'file', 'extensions' => 'pdf'],
+            [['documento0'], 'file', 'extensions' => 'pdf', 'on' => 'insert'],
             [['justificativa'], 'string', 'max' => 250],
             [['idAluno'], 'exist', 'skipOnError' => true, 'targetClass' => Aluno::className(), 'targetAttribute' => ['idAluno' => 'id']],
         ];
@@ -72,9 +77,10 @@ class Trancamento extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'idAluno' => 'Nome',
+            'id' => 'ID do Trancamento',
+            'idAluno' => 'Aluno',
             'matricula' => 'Matrícula',
+            'linhaPesquisa' => 'Linha de Pesquisa',
             'dataSolicitacao' => 'Data Solicitação',
             'dataInicio' => 'Início',
             'dataInicio0' => 'Início',

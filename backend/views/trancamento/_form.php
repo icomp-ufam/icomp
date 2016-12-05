@@ -18,6 +18,17 @@ $divFechar = "</div>";
         'options' => [ 'enctype' => 'multipart/form-data']
     ]); ?>
         <div class="row">
+            <?= $form->field($model, 'dataSolicitacao0', ['options' => ['class' => 'col-md-3']])->widget(DatePicker::classname(), [
+                'language' => Yii::$app->language,
+                'options' => ['placeholder' => 'Selecione a Data de Início ...',],
+                'pluginOptions' => [
+                    'format' => 'dd/mm/yyyy',
+                    'todayHighlight' => true
+                ]
+            ])->label("<font color='#FF0000'>*</font> <b>Data de Início:</b>")
+            ?>
+        </div>
+        <div class="row">
             <?= $form->field($model, 'dataInicio0', ['options' => ['class' => 'col-md-3']])->widget(DatePicker::classname(), [
                 'language' => Yii::$app->language,
                 'options' => ['placeholder' => 'Selecione a Data de Início ...',],

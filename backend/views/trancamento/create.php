@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 
 
-$this->title = 'Trancamento de Curso';
+$this->title = 'Registrar Trancamento - Aluno: '.$model->aluno->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Trancamento de Curso', 'url' => ['/trancamento']];
 //$this->params['breadcrumbs'][] = ['label' => 'Número: '.Yii::$app->request->get('idEdital'), 
 //    'url' => ['edital/view','id' => Yii::$app->request->get('idEdital') ]];
