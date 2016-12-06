@@ -84,7 +84,16 @@
 				['label' => 'Gerar RIT', 'icon' => 'fa fa-refresh', 'url' => ['user/rit'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
 
                 ['label' => 'Secretaria', 'options' => ['class' => 'header'], 'visible' => Yii::$app->user->identity->checarAcesso('secretaria')],
-                ['label' => 'Alunos', 'icon' => 'fa fa-users', 'url' => ['aluno/index'], 'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),],
+                [
+                    'label' => 'Alunos',
+                    'icon' => 'fa fa-users',
+                    'url' => '#',
+                    'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),
+                    'items' => [
+                        ['label' => 'Listar Alunos', 'icon' => 'fa fa-list', 'url' => ['aluno/index'],],
+                        ['label' => 'Alunos com prazo vencido', 'icon' => 'fa fa-list', 'url' => ['aluno/prazo_vencido'],],
+                    ],
+                ],
                 [
                     'label' => 'Gerenciar Prorrogações',
                     'icon' => 'fa fa-clock-o',
