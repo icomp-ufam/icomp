@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $model app\models\Prorrogacao */
 
 $this->title = 'Editar - Prorrogacao #'.$model->id.' - Aluno: '.$model->aluno->nome;
-$this->params['breadcrumbs'][] = ['label' => 'Gerenciar Trancamentos', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => 'Trancamento #'.$model->id.' - Aluno: '/*.$model->aluno->nome*/, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => 'Gerenciar Prorrogações', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Prorrogação #'.$model->id.' - Aluno: '.$model->aluno->nome, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Editar';
 ?>
 <div class="prorrogacao-update">
