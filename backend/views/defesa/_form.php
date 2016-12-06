@@ -43,13 +43,13 @@ else {
 
     <?php if ($tipodefesa == 2){ ?>
 
-    <?= $form->field($model, 'examinador')->textInput(['maxlength' => true,]) ?>
+		<?= $form->field($model, 'examinador')->textInput(['maxlength' => true,]) ?>
 
-    <?= $form->field($model, 'emailExaminador')->textInput(['maxlength' => true]) ?>
+		<?= $form->field($model, 'emailExaminador')->textInput(['maxlength' => true]) ?>
 
-    <?php } ?>
-
-    <?php else if ($tipodefesa != 2){ ?>
+    <?php } 
+	
+	else { ?>
 
     
     <?= $form->field($model, 'horario')->widget(DateControl::classname(), [
