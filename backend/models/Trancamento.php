@@ -62,7 +62,7 @@ class Trancamento extends \yii\db\ActiveRecord
             [['idAluno', 'dataSolicitacao', 'dataInicio', 'prevTermino', /*'dataTermino',*/ 'justificativa', /*'tipo', 'status'*/], 'required'],
             [['documento', 'dataSolicitacao0'], 'required', 'on' => 'create'],
             [['idAluno', 'tipo', 'status'], 'integer'],
-            [['matricula', 'orientador','dataSolicitacao', 'dataInicio', 'prevTermino', 'dataTermino'], 'safe'],
+            [['matricula', 'orientador','dataSolicitacao', 'dataInicio', 'prevTermino', 'dataTermino', 'dataInicio0', 'dataSolicitacao0'], 'safe'],
             [['dataInicio0', 'prevTermino0', 'dataSolicitacao0'], 'date', 'format' => 'php:d/m/Y'],
             [['documento'], 'string'],
             [['documento0'], 'file', 'extensions' => 'pdf', 'on' => 'insert'],

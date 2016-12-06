@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php  //Html::a('Create Trancamento', ['create'], ['class' => 'btn btn-success']) ?>
+        <?=  Html::a('Criar Trancamento', ['/aluno'], ['class' => 'btn btn-success']) ?>
     </p>
     <?php Pjax::begin(); ?>
     <?= GridView::widget([
@@ -145,7 +145,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             ['class' => 'yii\grid\ActionColumn',
-              'template'=> '{download} {view} {update} {delete} {ativar} {encerrar}',
+              'template'=> '{download} {ativar} {encerrar} {view} {update} {delete}',
                 'buttons'=>
                 [
                   'download' => function ($url, $model) { 

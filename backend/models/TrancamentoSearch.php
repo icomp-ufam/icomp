@@ -68,10 +68,10 @@ class TrancamentoSearch extends Trancamento
                         'asc' => array('j17_user.nome' => SORT_ASC),
                         'desc'=> array('j17_user.nome' => SORT_DESC)
                     ),
-                    'dataSolicitacao',
+                    //'dataSolicitacao',
                     'dataInicio0',
-                    'prevTermino',
-                    'dataTermino',
+                    //'prevTermino',
+                    //'dataTermino',
                     'tipo',
                     'status'
                 )
@@ -100,10 +100,10 @@ class TrancamentoSearch extends Trancamento
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'dataSolicitacao' => $this->dataSolicitacao,
+            //'dataSolicitacao' => $this->dataSolicitacao,
             'dataInicio' => $searchedDataInicio,
-            'prevTermino' => $this->prevTermino,
-            'dataTermino' => $this->dataTermino,
+            //'prevTermino' => $this->prevTermino,
+            //'dataTermino' => $this->dataTermino,
             'tipo' => $this->tipo,
             'j17_trancamentos.status' => $this->status,
         ]);
@@ -111,8 +111,9 @@ class TrancamentoSearch extends Trancamento
         $query->andFilterWhere(['like', 'j17_aluno.matricula', $this->matricula])
             ->andFilterWhere(['like', 'j17_aluno.nome', $this->idAluno])
             ->andFilterWhere(['like', 'j17_user.nome', $this->orientador])
-            ->andFilterWhere(['like', 'justificativa', $this->justificativa])
-            ->andFilterWhere(['like', 'documento', $this->documento]);
+            //->andFilterWhere(['like', 'justificativa', $this->justificativa])
+            //->andFilterWhere(['like', 'documento', $this->documento])
+            ;
 
         return $dataProvider;
     }
