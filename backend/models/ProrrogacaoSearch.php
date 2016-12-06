@@ -18,8 +18,8 @@ class ProrrogacaoSearch extends Prorrogacao
     public function rules()
     {
         return [
-            [['id', 'idAluno', 'qtdDias', 'status'], 'integer'],
-            [['dataSolicitacao', 'justificativa', 'previa'], 'safe'],
+            [['id', 'qtdDias', 'status'], 'integer'],
+            [['matricula', 'idAluno','orientador', 'dataSolicitacao', 'dataInicio', 'dataInicio0', 'justificativa', 'previa'], 'safe'],
         ];
     }
 
@@ -47,6 +47,32 @@ class ProrrogacaoSearch extends Prorrogacao
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+
+            //Specifies the criteria for sorting
+            'sort' => array(
+                'attributes' => array(
+                    'matricula' => array(
+                        //Specifies the ordering criteria in ascending order, the others have similar operation
+                        'asc' => array('j17_aluno.matricula' => SORT_ASC),
+                        //Specifies the ordering criteria in descending order, the others have similar operation
+                        'desc'=> array('j17_aluno.matricula' => SORT_DESC)
+                    ),
+                    'idAluno' => array(
+                        'asc' => array('j17_aluno.nome' => SORT_ASC),
+                        'desc'=> array('j17_aluno.nome' => SORT_DESC)
+                    ),
+                    'orientador' => array(
+                        'asc' => array('j17_user.nome' => SORT_ASC),
+                        'desc'=> array('j17_user.nome' => SORT_DESC)
+                    ),
+                    'dataInicio0' => array(
+                        'asc' => array('dataInicio' => SORT_ASC),
+                        'desc'=> array('dataInicio' => SORT_DESC)
+                    ),
+                    'qtdDias',
+                    'status'
+                )
+            ),
         ]);
 
         $this->load($params);
@@ -57,17 +83,31 @@ class ProrrogacaoSearch extends Prorrogacao
             return $dataProvider;
         }
 
+        //Joins with tables for students and advisors
+        //See 'aluno' and 'orientador0' in the 'Trancamento' model for more information
+        $query->joinWith('aluno');
+        $query->joinWith('orientador0');
+
+        $searchedDataInicio = explode("/", $this->dataInicio0);
+        if (sizeof($searchedDataInicio) == 3) {
+            $searchedDataInicio = $searchedDataInicio[2]."-".$searchedDataInicio[1]."-".$searchedDataInicio[0];
+        }
+        else $searchedDataInicio = '';
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'idAluno' => $this->idAluno,
-            'dataSolicitacao' => $this->dataSolicitacao,
+            //'dataSolicitacao' => $this->dataSolicitacao,
+            'dataInicio' => $searchedDataInicio,
             'qtdDias' => $this->qtdDias,
-            'status' => $this->status,
+            'j17_prorrogacoes.status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'justificativa', $this->justificativa])
-            ->andFilterWhere(['like', 'previa', $this->previa]);
+        $query->andFilterWhere(['like', 'j17_aluno.matricula', $this->matricula])
+            ->andFilterWhere(['like', 'j17_aluno.nome', $this->idAluno])
+            ->andFilterWhere(['like', 'j17_user.nome', $this->orientador]);
+            //->andFilterWhere(['like', 'justificativa', $this->justificativa])
+            //->andFilterWhere(['like', 'previa', $this->previa]);
 
         return $dataProvider;
     }

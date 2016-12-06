@@ -29,6 +29,7 @@ class TrancamentoController extends Controller
             ],
         ];
     }
+
     protected function mensagens($tipo, $titulo, $mensagem){
         Yii::$app->session->setFlash($tipo, [
             'type' => $tipo,
@@ -41,6 +42,7 @@ class TrancamentoController extends Controller
             'showProgressbar' => true,
         ]);
     }
+    
     /**
      * Lists all Trancamento models.
      * @return mixed

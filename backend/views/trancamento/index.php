@@ -19,11 +19,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="trancamento-index">
 
-    <h1><?php /*Html::encode($this->title) */?></h1>
+    <!--h1><?php /*Html::encode($this->title) */?></h1-->
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php  //Html::a('Create Trancamento', ['create'], ['class' => 'btn btn-success']) ?>
+        <?=  Html::a('Novo Trancamento', ['/aluno/trancamento'], ['class' => 'btn btn-success']) ?>
     </p>
     <?php Pjax::begin(); ?>
     <?= GridView::widget([
@@ -145,7 +145,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             ['class' => 'yii\grid\ActionColumn',
-              'template'=> '{download} {view} {update} {delete} {ativar} {encerrar}',
+              'template'=> '{download} {ativar} {encerrar} {view} {update} {delete}',
                 'buttons'=>
                 [
                   'download' => function ($url, $model) { 

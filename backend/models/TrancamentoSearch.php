@@ -68,11 +68,18 @@ class TrancamentoSearch extends Trancamento
                         'asc' => array('j17_user.nome' => SORT_ASC),
                         'desc'=> array('j17_user.nome' => SORT_DESC)
                     ),
-                    'dataSolicitacao',
-                    'dataInicio0',
-                    'prevTermino',
-                    'dataTermino',
-                    'tipo',
+                    //'dataSolicitacao',
+                    'dataInicio0' => array(
+                        'asc' => array('dataInicio' => SORT_ASC),
+                        'desc'=> array('dataInicio' => SORT_DESC)
+                    ),
+                    //'prevTermino',
+                    //'dataTermino',
+                    'tipo' => array(
+                        //Inversion required, because 'Trancamento' is represented by 0, which comes before 1, which represents 'Suspensão'. However, the letter 'S' comes before the letter 'T'.
+                        'asc' => array('dataInicio' => SORT_DESC),
+                        'desc'=> array('dataInicio' => SORT_ASC)
+                    ),
                     'status'
                 )
             ),
@@ -100,19 +107,19 @@ class TrancamentoSearch extends Trancamento
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'dataSolicitacao' => $this->dataSolicitacao,
+            //'dataSolicitacao' => $this->dataSolicitacao,
             'dataInicio' => $searchedDataInicio,
-            'prevTermino' => $this->prevTermino,
-            'dataTermino' => $this->dataTermino,
+            //'prevTermino' => $this->prevTermino,
+            //'dataTermino' => $this->dataTermino,
             'tipo' => $this->tipo,
             'j17_trancamentos.status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'j17_aluno.matricula', $this->matricula])
             ->andFilterWhere(['like', 'j17_aluno.nome', $this->idAluno])
-            ->andFilterWhere(['like', 'j17_user.nome', $this->orientador])
-            ->andFilterWhere(['like', 'justificativa', $this->justificativa])
-            ->andFilterWhere(['like', 'documento', $this->documento]);
+            ->andFilterWhere(['like', 'j17_user.nome', $this->orientador]);
+            //->andFilterWhere(['like', 'justificativa', $this->justificativa])
+            //->andFilterWhere(['like', 'documento', $this->documento]);
 
         return $dataProvider;
     }

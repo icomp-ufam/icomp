@@ -17,21 +17,21 @@ $divFechar = "</div>";
     <?php $form = ActiveForm::begin([
         'options' => [ 'enctype' => 'multipart/form-data']
     ]); ?>
-        <div class="row">
+       <div class="row">
             <?= $form->field($model, 'dataSolicitacao0', ['options' => ['class' => 'col-md-3']])->widget(DatePicker::classname(), [
                 'language' => Yii::$app->language,
-                'options' => ['placeholder' => 'Selecione a Data de Início ...',],
+                'options' => ['placeholder' => 'Selecione uma data',],
                 'pluginOptions' => [
                     'format' => 'dd/mm/yyyy',
                     'todayHighlight' => true
                 ]
-            ])->label("<font color='#FF0000'>*</font> <b>Data de Início:</b>")
+            ])->label("<font color='#FF0000'>*</font> <b>Data de Solicitação:</b>")
             ?>
         </div>
         <div class="row">
             <?= $form->field($model, 'dataInicio0', ['options' => ['class' => 'col-md-3']])->widget(DatePicker::classname(), [
                 'language' => Yii::$app->language,
-                'options' => ['placeholder' => 'Selecione a Data de Início ...',],
+                'options' => ['placeholder' => 'Selecione uma data',],
                 'pluginOptions' => [
                     'format' => 'dd/mm/yyyy',
                     'todayHighlight' => true
@@ -39,10 +39,10 @@ $divFechar = "</div>";
             ])->label("<font color='#FF0000'>*</font> <b>Data de Início:</b>")
             ?>
         </div>
-		<div class="row">
+        <div class="row">
             <?= $form->field($model, 'prevTermino0', ['options' => ['class' => 'col-md-3']])->widget(DatePicker::classname(), [
                 'language' => Yii::$app->language,
-                'options' => ['placeholder' => 'Selecione a Data de Retorno ...',],
+                'options' => ['placeholder' => 'Selecione uma data',],
                 'pluginOptions' => [
                     'format' => 'dd/mm/yyyy',
                     'todayHighlight' => true

@@ -29,6 +29,19 @@ class ProrrogacaoController extends Controller
         ];
     }
 
+    protected function mensagens($tipo, $titulo, $mensagem){
+        Yii::$app->session->setFlash($tipo, [
+            'type' => $tipo,
+            'icon' => 'home',
+            'duration' => 5000,
+            'message' => $mensagem,
+            'title' => $titulo,
+            'positonY' => 'top',
+            'positonX' => 'center',
+            'showProgressbar' => true,
+        ]);
+    }
+
     /**
      * Lists all Prorrogacao models.
      * @return mixed
@@ -61,17 +74,47 @@ class ProrrogacaoController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($idAluno)
     {
+
         $model = new Prorrogacao();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        $model->scenario = 'create';
+        
+        $model->idAluno = $idAluno;
+        $model->dataSolicitacao = date("Y-m-d");
+        $model->dataSolicitacao0 = date('d/m/Y', strtotime($model->dataSolicitacao));
+        $model->qtdDias=180;
+        $model->status=1; //Defines status as active
+        
+        if ($model->load(Yii::$app->request->post())) {
+
+            //Required to adapt the date inserted in the view to the format that will be inserted into the database
+            $model->dataSolicitacao = explode("/", $model->dataSolicitacao0);
+            if (sizeof($model->dataSolicitacao) == 3) {
+                $model->dataSolicitacao = $model->dataSolicitacao[2]."-".$model->dataSolicitacao[1]."-".$model->dataSolicitacao[0];
+            }
+            else $model->dataSolicitacao = '';
+
+
+            //Required to adapt the date inserted in the view to the format that will be inserted into the database
+            $model->dataInicio = explode("/", $model->dataInicio0);
+            if (sizeof($model->dataInicio) == 3) {
+                $model->dataInicio = $model->dataInicio[2]."-".$model->dataInicio[1]."-".$model->dataInicio[0];
+            }
+            else $model->dataInicio = '';
+
+            if($model->save()){
+                $this->mensagens('success', 'Sucesso', 'Prorrogação criada com sucesso.');
+                return $this->redirect(['prorrogacao/view', 'id'=>$model->id]);
+            }
+            else {
+                $this->mensagens('error', 'Erro', 'Houve uma falha ao criar a prorrogação.');
+            }
         }
+        return $this->render('create', [
+            'model'=>$model,
+        ]);
     }
 
     /**

@@ -61,6 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
         //'prevTermino',
         [
             'attribute' => 'prevTermino',
+            'label' => 'Previsão de Término',
             'value' => date('d/m/Y', strtotime($model->prevTermino))
         ],
         //'dataTermino',
@@ -69,7 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'visible' => $model->dataTermino != null ? true : false,
             'value' => date('d/m/Y', strtotime($model->dataTermino))
         ],
-        'justificativa',
+        'justificativa:ntext',
         //'documento:ntext',
         [
             'attribute' => 'documento',

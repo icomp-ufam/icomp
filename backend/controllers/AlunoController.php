@@ -35,7 +35,7 @@ class AlunoController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'exame', 'create', 'view_orientado', 'update', 'delete', 'trancamento'],
+                        'actions' => ['index', 'view', 'exame', 'create', 'view_orientado', 'update', 'delete', 'trancamento', 'prorrogacao'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -69,6 +69,42 @@ class AlunoController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Lists all Aluno models (for stop out).
+     * 
+     * @author Pedro Frota <pvmf@icomp.ufam.edu.br>
+     * 
+     * @return mixed
+     */
+    public function actionTrancamento()
+    {
+        $searchModel = new AlunoSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('trancamento', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Lists all Aluno models.
+     * 
+     * @author Pedro Frota <pvmf@icomp.ufam.edu.br>
+     * 
+     * @return mixed
+     */
+    public function actionProrrogacao()
+    {
+        $searchModel = new AlunoSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('prorrogacao', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
