@@ -6,20 +6,21 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Prorrogacao */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Prorrogacaos', 'url' => ['index']];
+$this->title = 'Prorrogação #'.$model->id.' - Aluno: '.$model->aluno->nome;
+$this->params['breadcrumbs'][] = ['label' => 'Gerenciar Prorrogações', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="prorrogacao-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <!--h1><?= Html::encode($this->title) ?></h1-->
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['index'], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-edit"></span> Editar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('<span class="fa fa-trash-o"></span> Excluir', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Você tem certeza que deseja excluir esta prorrogação?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -29,12 +30,44 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'idAluno',
-            'dataSolicitacao',
-            'qtdDias',
+            [
+                'attribute' => 'matricula',
+                'value' => $model->aluno->matricula
+            ],
+                //'idAluno',
+            [
+                'attribute' => 'idAluno',
+                'value' => $model->aluno->nome
+            ],
+            [
+                'attribute' => 'orientador',
+                'value' => $model->orientador0->nome
+            ],
+            [
+                'attribute' => 'linhaPesquisa',
+                'value' => $model->aluno->linhaPesquisa->nome
+            ],
+            //'dataSolicitacao',
+            [
+                'attribute' => 'dataSolicitacao',
+                'value' => date('d/m/Y', strtotime($model->dataSolicitacao))
+            ],
+            //'dataInicio',
+            [
+                'attribute' => 'dataInicio',
+                'value' => date('d/m/Y', strtotime($model->dataInicio))
+            ],
+            //'qtdDias',
+            [
+                'attribute' => 'qtdDias',
+                'label' => 'Quantidade de Dias'
+            ],
             'justificativa:ntext',
             'previa:ntext',
-            'status',
+            [
+            'attribute' => 'status',
+            'value' => $model->status == 0 ? 'Encerrado' : 'Ativo'
+            ], 
         ],
     ]) ?>
 
