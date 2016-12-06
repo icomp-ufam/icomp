@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Trancamento de Curso', 'url' => ['
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<p> <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['aluno/view', 'id' => $model->idAluno], ['class' => 'btn btn-warning']) ?> </p>
+<p> <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['/trancamento/index', 'id' => $model->idAluno], ['class' => 'btn btn-warning']) ?> </p>
 
 <div class="aluno-create">
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 05-Dez-2016 às 04:23
+-- Generation Time: 06-Dez-2016 às 04:25
 -- Versão do servidor: 5.5.53-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -650,6 +650,8 @@ CREATE TABLE `j17_aluno` (
   `anoconclusao` date NOT NULL,
   `sede` varchar(2) NOT NULL DEFAULT 'AM'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `j17_banca_has_membrosbanca`
@@ -4356,6 +4358,7 @@ CREATE TABLE `j17_prorrogacoes` (
   `id` int(11) NOT NULL,
   `idAluno` int(11) NOT NULL,
   `dataSolicitacao` date NOT NULL,
+  `dataInicio` date NOT NULL,
   `qtdDias` int(11) NOT NULL,
   `justificativa` text NOT NULL,
   `previa` text NOT NULL,
@@ -5910,6 +5913,8 @@ CREATE TABLE `j17_trancamentos` (
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
 -- Estrutura da tabela `j17_user`
 --
@@ -5986,7 +5991,8 @@ ALTER TABLE `j17_afastamentos`
 --
 ALTER TABLE `j17_aluno`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `orientador` (`orientador`);
+  ADD KEY `orientador` (`orientador`),
+  ADD KEY `idUser` (`idUser`);
 
 --
 -- Indexes for table `j17_banca_has_membrosbanca`
@@ -6210,7 +6216,7 @@ ALTER TABLE `j17_afastamentos`
 -- AUTO_INCREMENT for table `j17_aluno`
 --
 ALTER TABLE `j17_aluno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=715;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=717;
 --
 -- AUTO_INCREMENT for table `j17_banca_has_membrosbanca`
 --
@@ -6317,6 +6323,11 @@ ALTER TABLE `j17_orientacoes`
 ALTER TABLE `j17_premios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=952;
 --
+-- AUTO_INCREMENT for table `j17_prorrogacoes`
+--
+ALTER TABLE `j17_prorrogacoes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `j17_publicacoes`
 --
 ALTER TABLE `j17_publicacoes`
@@ -6340,12 +6351,12 @@ ALTER TABLE `j17_reservas_salas`
 -- AUTO_INCREMENT for table `j17_trancamentos`
 --
 ALTER TABLE `j17_trancamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 --
 -- AUTO_INCREMENT for table `j17_user`
 --
 ALTER TABLE `j17_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 --
 -- Constraints for dumped tables
 --
@@ -6354,6 +6365,7 @@ ALTER TABLE `j17_user`
 -- Limitadores para a tabela `j17_aluno`
 --
 ALTER TABLE `j17_aluno`
+  ADD CONSTRAINT `fk_aluno_iduser` FOREIGN KEY (`idUser`) REFERENCES `j17_user` (`id`),
   ADD CONSTRAINT `fk_aluno_orientador` FOREIGN KEY (`orientador`) REFERENCES `j17_user` (`id`);
 
 --

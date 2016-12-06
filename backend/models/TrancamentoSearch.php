@@ -110,10 +110,9 @@ class TrancamentoSearch extends Trancamento
 
         $query->andFilterWhere(['like', 'j17_aluno.matricula', $this->matricula])
             ->andFilterWhere(['like', 'j17_aluno.nome', $this->idAluno])
-            ->andFilterWhere(['like', 'j17_user.nome', $this->orientador])
+            ->andFilterWhere(['like', 'j17_user.nome', $this->orientador]);
             //->andFilterWhere(['like', 'justificativa', $this->justificativa])
-            //->andFilterWhere(['like', 'documento', $this->documento])
-            ;
+            //->andFilterWhere(['like', 'documento', $this->documento]);
 
         return $dataProvider;
     }

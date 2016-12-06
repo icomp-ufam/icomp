@@ -94,9 +94,10 @@ class ProrrogacaoSearch extends Prorrogacao
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'dataSolicitacao' => $this->dataSolicitacao,
+            //'dataSolicitacao' => $this->dataSolicitacao,
+            'dataInicio' => $searchedDataInicio,
             'qtdDias' => $this->qtdDias,
-            'status' => $this->status,
+            'j17_prorrogacoes.status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'j17_aluno.matricula', $this->matricula])

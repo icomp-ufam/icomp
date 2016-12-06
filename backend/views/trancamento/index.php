@@ -19,11 +19,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="trancamento-index">
 
-    <h1><?php /*Html::encode($this->title) */?></h1>
+    <!--h1><?php /*Html::encode($this->title) */?></h1-->
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?=  Html::a('Criar Trancamento', ['/aluno'], ['class' => 'btn btn-success']) ?>
+        <?=  Html::a('Novo Trancamento', ['/aluno/trancamento'], ['class' => 'btn btn-success']) ?>
     </p>
     <?php Pjax::begin(); ?>
     <?= GridView::widget([
