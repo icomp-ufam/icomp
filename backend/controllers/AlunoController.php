@@ -35,7 +35,7 @@ class AlunoController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'exame', 'create', 'view_orientado', 'update', 'delete', 'trancamento', 'prorrogacao'],
+                        'actions' => ['index', 'view', 'exame', 'create', 'view_orientado', 'update', 'delete', 'trancamento', 'prorrogacao', 'prazo_vencido'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -384,5 +384,9 @@ class AlunoController extends Controller
 		
     }
 >>>>>>> f087f7b8ffac37b41ce76ed3c9f50df435797f80
+
+    public function actionPrazo_vencido() {
+        return $this->render('prazoVencido'); 
+    }
 
 }
