@@ -75,7 +75,11 @@ class TrancamentoSearch extends Trancamento
                     ),
                     //'prevTermino',
                     //'dataTermino',
-                    'tipo',
+                    'tipo' => array(
+                        //Inversion required, because 'Trancamento' is represented by 0, which comes before 1, which represents 'Suspensão'. However, the letter 'S' comes before the letter 'T'.
+                        'asc' => array('dataInicio' => SORT_DESC),
+                        'desc'=> array('dataInicio' => SORT_ASC)
+                    ),
                     'status'
                 )
             ),
