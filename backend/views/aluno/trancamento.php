@@ -19,7 +19,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="aluno-index">
 
-    </p>
+	
+	<p>
+	<?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['/trancamento/index'], ['class' => 'btn btn-warning']) ?>
+	</p>
+
       <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,

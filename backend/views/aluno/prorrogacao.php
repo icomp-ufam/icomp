@@ -19,6 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="aluno-index">
 
+    <p>
+    <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['/prorrogacao/index'], ['class' => 'btn btn-warning']) ?>
     </p>
       <?= GridView::widget([
         'dataProvider' => $dataProvider,
