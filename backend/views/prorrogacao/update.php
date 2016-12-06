@@ -5,14 +5,14 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Prorrogacao */
 
-$this->title = 'Update Prorrogacao: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Prorrogacaos', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Editar - Prorrogacao #'.$model->id.' - Aluno: '.$model->aluno->nome;
+$this->params['breadcrumbs'][] = ['label' => 'Gerenciar Trancamentos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Trancamento #'.$model->id.' - Aluno: '/*.$model->aluno->nome*/, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Editar';
 ?>
 <div class="prorrogacao-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <!--h1><?= Html::encode($this->title) ?></h1-->
 
     <?= $this->render('_form', [
         'model' => $model,

@@ -7,12 +7,13 @@ use kartik\widgets\DatePicker;
 use yii\widgets\MaskedInput;
 use kartik\widgets\Select2;
 
-$divRow = "<div class='row'>";
-$divFechar = "</div>";
+/* @var $this yii\web\View */
+/* @var $model app\models\Trancamento */
+/* @var $form yii\widgets\ActiveForm */
 
 ?>
 
-<div class="aluno-form">
+<div class="trancamento-form">
 
     <?php $form = ActiveForm::begin([
         'options' => [ 'enctype' => 'multipart/form-data']
@@ -20,18 +21,18 @@ $divFechar = "</div>";
         <div class="row">
             <?= $form->field($model, 'dataSolicitacao0', ['options' => ['class' => 'col-md-3']])->widget(DatePicker::classname(), [
                 'language' => Yii::$app->language,
-                'options' => ['placeholder' => 'Selecione a Data de Início ...',],
+                'options' => ['placeholder' => 'Selecione uma data',],
                 'pluginOptions' => [
                     'format' => 'dd/mm/yyyy',
                     'todayHighlight' => true
                 ]
-            ])->label("<font color='#FF0000'>*</font> <b>Data de Início:</b>")
+            ])->label("<font color='#FF0000'>*</font> <b>Data de Solicitação:</b>")
             ?>
         </div>
         <div class="row">
             <?= $form->field($model, 'dataInicio0', ['options' => ['class' => 'col-md-3']])->widget(DatePicker::classname(), [
                 'language' => Yii::$app->language,
-                'options' => ['placeholder' => 'Selecione a Data de Início ...',],
+                'options' => ['placeholder' => 'Selecione uma data',],
                 'pluginOptions' => [
                     'format' => 'dd/mm/yyyy',
                     'todayHighlight' => true
@@ -42,7 +43,7 @@ $divFechar = "</div>";
 		<div class="row">
             <?= $form->field($model, 'prevTermino0', ['options' => ['class' => 'col-md-3']])->widget(DatePicker::classname(), [
                 'language' => Yii::$app->language,
-                'options' => ['placeholder' => 'Selecione a Data de Retorno ...',],
+                'options' => ['placeholder' => 'Selecione uma data',],
                 'pluginOptions' => [
                     'format' => 'dd/mm/yyyy',
                     'todayHighlight' => true

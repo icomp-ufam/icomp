@@ -54,7 +54,8 @@ class Prorrogacao extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'idAluno', 'dataSolicitacao', 'qtdDias', 'justificativa', 'previa', 'status'], 'required'],
+            [['idAluno', 'dataSolicitacao', 'dataInicio', 'qtdDias', 'justificativa', 'previa', 'status'], 'required'],
+            [['dataSolicitacao0'], 'required', 'on' => 'create'],
             [['id', 'idAluno', 'qtdDias', 'status'], 'integer'],
             [['matricula', 'orientador', 'dataSolicitacao', 'dataInicio', 'dataInicio0', 'dataSolicitacao0'], 'safe'],
             [['dataInicio0', 'dataSolicitacao0'], 'date', 'format' => 'php:d/m/Y'],

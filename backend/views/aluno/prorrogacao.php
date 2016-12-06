@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'format' => 'html',
                 'value' => function ($model){
-                  return Html::a('<span class="fa fa-clock-o"></span> Registrar Prorrogação', ['prorrogacao/create', 'id' => $model->id], ['class' => 'btn btn-warning']);
+                  return Html::a('<span class="fa fa-clock-o"></span> Registrar Prorrogação', ['prorrogacao/create', 'idAluno' => $model->id], ['class' => 'btn btn-warning']);
                 }
             ],
 
