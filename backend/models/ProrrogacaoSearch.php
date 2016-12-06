@@ -65,7 +65,10 @@ class ProrrogacaoSearch extends Prorrogacao
                         'asc' => array('j17_user.nome' => SORT_ASC),
                         'desc'=> array('j17_user.nome' => SORT_DESC)
                     ),
-                    'dataInicio0',
+                    'dataInicio0' => array(
+                        'asc' => array('dataInicio' => SORT_ASC),
+                        'desc'=> array('dataInicio' => SORT_DESC)
+                    ),
                     'qtdDias',
                     'status'
                 )

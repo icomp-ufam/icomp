@@ -69,7 +69,10 @@ class TrancamentoSearch extends Trancamento
                         'desc'=> array('j17_user.nome' => SORT_DESC)
                     ),
                     //'dataSolicitacao',
-                    'dataInicio0',
+                    'dataInicio0' => array(
+                        'asc' => array('dataInicio' => SORT_ASC),
+                        'desc'=> array('dataInicio' => SORT_DESC)
+                    ),
                     //'prevTermino',
                     //'dataTermino',
                     'tipo',
