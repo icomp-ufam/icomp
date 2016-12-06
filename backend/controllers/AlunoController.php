@@ -15,7 +15,10 @@ use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\db\IntegrityException;
 use yii\base\Exception;
+<<<<<<< HEAD
+=======
 use yii\web\UploadedFile;
+>>>>>>> f087f7b8ffac37b41ce76ed3c9f50df435797f80
 
 /**
  * AlunoController implements the CRUD actions for Aluno model.
@@ -310,6 +313,8 @@ class AlunoController extends Controller
         $templateProcessor->saveAs('php://output');
 		
     }
+<<<<<<< HEAD
+=======
 	
 	public function actionTrancamento($id){
         
@@ -342,5 +347,6 @@ class AlunoController extends Controller
         ]);
 		
     }
+>>>>>>> f087f7b8ffac37b41ce76ed3c9f50df435797f80
 
 }

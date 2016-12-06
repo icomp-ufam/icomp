@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 30-Nov-2016 às 17:21
+-- Generation Time: 05-Dez-2016 às 04:23
 -- Versão do servidor: 5.5.53-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -650,8 +650,6 @@ CREATE TABLE `j17_aluno` (
   `anoconclusao` date NOT NULL,
   `sede` varchar(2) NOT NULL DEFAULT 'AM'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `j17_banca_has_membrosbanca`
@@ -2072,7 +2070,8 @@ INSERT INTO `j17_contproj_projetos` (`id`, `nomeprojeto`, `orcamento`, `saldo`, 
 (76, 'Melhorando a Qualidade no Desenvolvimento de Software - PROTI PESQUISA', 240882.51, 108709.24, '2014-03-01', '2014-09-30', '0000-00-00', 30, 1, 48, '5786-X', '285-2', '', 'components/com_controleprojetos/docprojetos/proposta/PPGI-Proposta.pdf', 'Encerrado'),
 (83, 'eVox-Mobilidade - PROTI MOBILIDADE', 50092, 20937.47, '2013-09-30', '2015-03-29', '0000-00-00', 10, 1, 48, '5786-X', '277-1', '', '', 'Encerrado'),
 (84, 'ACAMPAR - PROTI - MOBILIDADE', 109263, 22604.33, '2014-09-30', '2015-10-30', '0000-00-00', 46, 1, 48, '5786-x', '296-8', 'components/com_controleprojetos/docprojetos/edital/PPGI-Edital-de19dc7cd360579612010bb4605fe87b.pdf', 'components/com_controleprojetos/docprojetos/proposta/PPGI-Proposta-de19dc7cd360579612010bb4605fe87b.pdf', 'Encerrado'),
-(85, 'Monitoramento e Controle de Redes - PROTI MOBILIDADE', 75252, 31696.13, '2014-09-30', '2015-11-30', '0000-00-00', 15, 1, 48, '5786-X', '273-9', 'components/com_controleprojetos/docprojetos/edital/PPGI-Edital-fac97008713a3bcd93358ea2f19618a2.pdf', '', 'Encerrado');
+(85, 'Monitoramento e Controle de Redes - PROTI MOBILIDADE', 75252, 31696.13, '2014-09-30', '2015-11-30', '0000-00-00', 15, 1, 48, '5786-X', '273-9', 'components/com_controleprojetos/docprojetos/edital/PPGI-Edital-fac97008713a3bcd93358ea2f19618a2.pdf', '', 'Encerrado'),
+(86, '1111', 11.11, 0, '2016-12-28', '2016-12-29', '2016-12-29', 68, 6, 8, 'asdas', 'aasas', '', '', 'Cadastrado');
 
 -- --------------------------------------------------------
 
@@ -4356,12 +4355,11 @@ INSERT INTO `j17_projetos` (`id`, `idProfessor`, `titulo`, `descricao`, `inicio`
 CREATE TABLE `j17_prorrogacoes` (
   `id` int(11) NOT NULL,
   `idAluno` int(11) NOT NULL,
+  `dataSolicitacao` date NOT NULL,
+  `qtdDias` int(11) NOT NULL,
   `justificativa` text NOT NULL,
   `previa` text NOT NULL,
-  `dataSolicitacao` date NOT NULL,
-  `dataAprovOrientador` date NOT NULL,
-  `dataAprovColegiado` date NOT NULL,
-  `status` smallint(6) NOT NULL
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -5902,17 +5900,15 @@ INSERT INTO `j17_reservas_salas` (`id`, `nome`, `numero`, `localizacao`) VALUES
 CREATE TABLE `j17_trancamentos` (
   `id` int(11) NOT NULL,
   `idAluno` int(11) NOT NULL,
+  `tipo` tinyint(1) NOT NULL,
   `dataSolicitacao` date NOT NULL,
-  `dataAprovOrientador` date NOT NULL,
   `dataInicio` date NOT NULL,
   `prevTermino` date NOT NULL,
-  `dataTermino` date NOT NULL,
+  `dataTermino` date DEFAULT NULL,
   `justificativa` varchar(250) NOT NULL,
   `documento` text NOT NULL,
-  `status` int(2) NOT NULL
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `j17_user`
@@ -5956,13 +5952,6 @@ CREATE TABLE `j17_user` (
   `idRH` int(11) DEFAULT NULL,
   `cargo` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Extraindo dados da tabela `j17_user`
---
-
-INSERT INTO `j17_user` (`id`, `nome`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `visualizacao_candidatos`, `visualizacao_candidatos_finalizados`, `visualizacao_cartas_respondidas`, `administrador`, `coordenador`, `secretaria`, `professor`, `aluno`, `siape`, `dataIngresso`, `endereco`, `telcelular`, `telresidencial`, `unidade`, `titulacao`, `classe`, `nivel`, `regime`, `turno`, `idLattes`, `formacao`, `resumo`, `alias`, `ultimaAtualizacao`, `idRH`, `cargo`) VALUES
-(66, 'Pedro Vitor Mesquita da Frota', '030.115.652-28', 'JsHPm23fX1lCpVMrFD9wLZnRztGemGqF', '$2y$13$q2Wg3LKKplx4scKbUNKFqu/.FoHDIGc8hkV81RktklS77Rr9AzPJG', NULL, 'pvmf@icomp.ufam.edu.br', 10, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -6221,12 +6210,12 @@ ALTER TABLE `j17_afastamentos`
 -- AUTO_INCREMENT for table `j17_aluno`
 --
 ALTER TABLE `j17_aluno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=713;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=715;
 --
 -- AUTO_INCREMENT for table `j17_banca_has_membrosbanca`
 --
 ALTER TABLE `j17_banca_has_membrosbanca`
-  MODIFY `banca_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=767;
+  MODIFY `banca_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `j17_candidatos`
 --
@@ -6261,7 +6250,7 @@ ALTER TABLE `j17_contproj_despesas`
 -- AUTO_INCREMENT for table `j17_contproj_projetos`
 --
 ALTER TABLE `j17_contproj_projetos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 --
 -- AUTO_INCREMENT for table `j17_contproj_prorrogacoes`
 --
@@ -6296,7 +6285,7 @@ ALTER TABLE `j17_contproj_transferenciassaldorubricas`
 -- AUTO_INCREMENT for table `j17_defesa`
 --
 ALTER TABLE `j17_defesa`
-  MODIFY `idDefesa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=583;
+  MODIFY `idDefesa` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `j17_ferias`
 --
@@ -6311,7 +6300,7 @@ ALTER TABLE `j17_linhaspesquisa`
 -- AUTO_INCREMENT for table `j17_membrosbanca`
 --
 ALTER TABLE `j17_membrosbanca`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `j17_oferta_disciplinas`
 --
@@ -6331,7 +6320,7 @@ ALTER TABLE `j17_premios`
 -- AUTO_INCREMENT for table `j17_publicacoes`
 --
 ALTER TABLE `j17_publicacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6125;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `j17_recomendacoes`
 --
@@ -6351,15 +6340,21 @@ ALTER TABLE `j17_reservas_salas`
 -- AUTO_INCREMENT for table `j17_trancamentos`
 --
 ALTER TABLE `j17_trancamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `j17_user`
 --
 ALTER TABLE `j17_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Limitadores para a tabela `j17_aluno`
+--
+ALTER TABLE `j17_aluno`
+  ADD CONSTRAINT `fk_aluno_orientador` FOREIGN KEY (`orientador`) REFERENCES `j17_user` (`id`);
 
 --
 -- Limitadores para a tabela `j17_banca_has_membrosbanca`

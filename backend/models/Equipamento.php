@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "j17_equipamento".
  *
- * @property string $IdEquipamento
+ * @property integer $idEquipamento
  * @property string $NomeEquipamento
  * @property string $Nserie
  * @property string $NotaFiscal
@@ -32,10 +32,8 @@ class Equipamento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['IdEquipamento', 'NomeEquipamento', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento'], 'required'],
-            [['ImagemEquipamento'], 'string'],
-            [['IdEquipamento'], 'string', 'max' => 20],
-            [['NomeEquipamento', 'Nserie', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento'], 'string', 'max' => 50],
+            [['NomeEquipamento', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento'], 'required'],
+            [['NomeEquipamento', 'Nserie', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento', 'ImagemEquipamento'], 'string', 'max' => 50],
         ];
     }
 
@@ -45,7 +43,7 @@ class Equipamento extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'IdEquipamento' => 'Id Equipamento',
+            'idEquipamento' => 'Id Equipamento',
             'NomeEquipamento' => 'Nome Equipamento',
             'Nserie' => 'Nserie',
             'NotaFiscal' => 'Nota Fiscal',

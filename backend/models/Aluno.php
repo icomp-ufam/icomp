@@ -106,6 +106,14 @@ class Aluno extends \yii\db\ActiveRecord
         return true;
     }
 
+<<<<<<< HEAD
+    public function getId()
+    {
+        return $this->getPrimaryKey();
+    }
+
+=======
+>>>>>>> f087f7b8ffac37b41ce76ed3c9f50df435797f80
     public function getlinhaPesquisa()
     {
         return $this->hasOne(LinhaPesquisa::className(), ['id' => 'area']);
@@ -119,6 +127,19 @@ class Aluno extends \yii\db\ActiveRecord
     public function orientados($idusuario){
        $alunos = Aluno::find()->where(["orientador" => $idusuario])->all();
        return $alunos;
+    }
+
+    /**
+     * Gets the stop out's related to the student
+     * Returns an array with all student-related stop out's
+     * 
+     * @author Pedro Frota <pvmf@icomp.ufam.edu.br>
+     * 
+     * @return \yii\db\ActiveQuery
+     */
+
+    public function getTrancamentos() {
+        return $this->hasMany(Trancamentos::className(), ['idAluno' => 'id']);
     }
 
 }
