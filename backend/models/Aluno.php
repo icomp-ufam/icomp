@@ -106,14 +106,11 @@ class Aluno extends \yii\db\ActiveRecord
         return true;
     }
 
-<<<<<<< HEAD
     public function getId()
     {
         return $this->getPrimaryKey();
     }
-
-=======
->>>>>>> f087f7b8ffac37b41ce76ed3c9f50df435797f80
+    
     public function getlinhaPesquisa()
     {
         return $this->hasOne(LinhaPesquisa::className(), ['id' => 'area']);
