@@ -28,7 +28,7 @@ class TrancamentoController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'ativar', 'encerrar'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'ativar', 'encerrar', 'pdf'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -137,14 +137,8 @@ class TrancamentoController extends Controller
             }
             else $model->prevTermino = '';
             
-            // get the uploaded file instance. for multiple file uploads
-            // the following data will return an array
-            $model->documento0 = UploadedFile::getInstance($model, 'documento');
-            // the path to save file, you can set an uploadPath
-            // in Yii::$app->params (as used in example below)
-            
             $pre_path = 'uploads/trancamento/';
-            $filename = 'trancamento-'.Yii::$app->security->generateRandomString().'.'.$model->documento0->extension;
+            $filename = 'trancamento-'.Yii::$app->security->generateRandomString().'.pdf';
 
             $path = $pre_path.$filename;
             
@@ -156,7 +150,7 @@ class TrancamentoController extends Controller
                     mkdir($pre_path);
                 }
 
-                $model->documento0->saveAs($path);
+                $this->generatePdf($path, 'It Works!');
                 $this->mensagens('success', 'Sucesso', 'Trancamento criado com sucesso.');
                 return $this->redirect(['trancamento/view', 'id'=>$model->id]);
             }
@@ -303,5 +297,36 @@ class TrancamentoController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    private function generatePdf($filename, $content) {
+        // setup kartik\mpdf\Pdf component
+        $pdf = new Pdf([
+            // set to use core fonts only
+            'mode' => Pdf::MODE_CORE, 
+            // A4 paper format
+            'format' => Pdf::FORMAT_A4, 
+            // portrait orientation
+            'orientation' => Pdf::ORIENT_PORTRAIT, 
+            // stream to browser inline
+            'destination' => Pdf::DEST_FILE,
+            'filename' => $filename,
+            // your html content input
+            'content' => $content,  
+            // format content from your own css file if needed or use the
+            // enhanced bootstrap css built by Krajee for mPDF formatting 
+            //'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+            // any css to be embedded if required
+            'cssInline' => '.kv-heading-1{font-size:18px}', 
+             // set mPDF properties on the fly
+            'options' => ['title' => 'Krajee Report Title'],
+             // call mPDF methods on the fly
+            'methods' => [ 
+                'SetHeader'=>['Krajee Report Header'], 
+                'SetFooter'=>['{PAGENO}'],
+            ]
+        ]);
+
+        return $pdf->render();
     }
 }

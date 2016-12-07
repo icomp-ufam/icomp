@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5051a0b1a07b598572188396bb27f09f",
-    "content-hash": "38dbd5b3397e3e7c82e665d50f60cc1c",
+    "hash": "536274ee8252cbb8ac299d4f3d8376ea",
+    "content-hash": "88fd769ec615b5a126d3c5dda7abc9c5",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -923,12 +923,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-mpdf.git",
-                "reference": "c9a888f5755d09bb10a9e5c0675e13565262a1bb"
+                "reference": "94de4fd901036bb086bf86e10509649345b462a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-mpdf/zipball/c9a888f5755d09bb10a9e5c0675e13565262a1bb",
-                "reference": "c9a888f5755d09bb10a9e5c0675e13565262a1bb",
+                "url": "https://api.github.com/repos/kartik-v/yii2-mpdf/zipball/94de4fd901036bb086bf86e10509649345b462a0",
+                "reference": "94de4fd901036bb086bf86e10509649345b462a0",
                 "shasum": ""
             },
             "require": {
@@ -967,7 +967,7 @@
                 "utf8",
                 "yii2"
             ],
-            "time": "2016-09-11 05:41:04"
+            "time": "2016-11-03 17:25:48"
         },
         {
             "name": "kartik-v/yii2-widget-activeform",
@@ -1943,6 +1943,54 @@
                 "yii2"
             ],
             "time": "2015-12-05 10:37:16"
+        },
+        {
+            "name": "marqu3s/yii2-behaviors",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/marqu3s/yii2-behaviors.git",
+                "reference": "a58a3622a08cac70c5a264281335aa57e9749a44"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/marqu3s/yii2-behaviors/zipball/a58a3622a08cac70c5a264281335aa57e9749a44",
+                "reference": "a58a3622a08cac70c5a264281335aa57e9749a44",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2"
+            },
+            "type": "yii2-behavior",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "marqu3s\\behaviors\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joao Marques",
+                    "email": "joao@jjmf.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Colletion of Yii2 behaviors",
+            "homepage": "https://github.com/marqu3s/yii2-behaviors",
+            "keywords": [
+                "Behavior",
+                "yii2"
+            ],
+            "time": "2016-05-31 17:09:36"
         },
         {
             "name": "moonlandsoft/yii2-phpexcel",
@@ -3348,7 +3396,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "kartik-v/yii2-widget-datepicker": 20,
-        "kartik-v/yii2-mpdf": 20,
         "kartik-v/yii2-datecontrol": 20
     },
     "prefer-stable": false,

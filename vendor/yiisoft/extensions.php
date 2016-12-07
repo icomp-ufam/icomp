@@ -246,15 +246,6 @@ return array (
       '@kartik/form' => $vendorDir . '/kartik-v/yii2-widget-activeform',
     ),
   ),
-  'kartik-v/yii2-mpdf' => 
-  array (
-    'name' => 'kartik-v/yii2-mpdf',
-    'version' => '9999999-dev',
-    'alias' => 
-    array (
-      '@kartik/mpdf' => $vendorDir . '/kartik-v/yii2-mpdf',
-    ),
-  ),
   'kartik-v/yii2-widget-fileinput' => 
   array (
     'name' => 'kartik-v/yii2-widget-fileinput',
@@ -325,6 +316,15 @@ return array (
     'alias' => 
     array (
       '@yii2fullcalendar' => $vendorDir . '/philippfrenzel/yii2fullcalendar',
+    ),
+  ),
+  'kartik-v/yii2-mpdf' => 
+  array (
+    'name' => 'kartik-v/yii2-mpdf',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@kartik/mpdf' => $vendorDir . '/kartik-v/yii2-mpdf',
     ),
   ),
 );
