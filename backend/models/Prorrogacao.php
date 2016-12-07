@@ -107,4 +107,26 @@ class Prorrogacao extends \yii\db\ActiveRecord
     public function getOrientador0() {
         return $this->hasOne(User::className(), ['id' => 'orientador'])->via('aluno');
     }
+
+    public function canDoProrogation() {
+        //Limit in Days
+        $limitMestrado =  360;
+        $limitDoutorado = 720;
+
+        $prorogations = $this->find()->where('idAluno = '.$this->idAluno)->all();
+        $sum = 0;
+
+        foreach ($prorogations as $prorogation) {
+            $sum = $sum + $prorogation->qtdDias;
+        }
+
+        if ($prorogation->aluno->curso == 1) { //Mestrado
+            if ($sum >= $limitMestrado) return false;
+        }
+        else { //Doutorado
+            if ($sum >= $limitDoutorado) return false;
+
+        }
+        return true;
+    }
 }

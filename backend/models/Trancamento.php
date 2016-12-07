@@ -114,4 +114,45 @@ class Trancamento extends \yii\db\ActiveRecord
     public function getOrientador0() {
         return $this->hasOne(User::className(), ['id' => 'orientador'])->via('aluno');
     }
+
+    /**
+     * Checks if student can still perform a stop out
+     * 
+     * @author Pedro Frota <pvmf@icomp.ufam.edu.br>
+     * 
+     * @return boolean 'true' if student can still perform a stop out, 'false' if not
+     */
+    public function canDoStopOut() {
+        //Limit in Days
+        $limitMestrado =  365;
+        $limitDoutorado = 365;
+
+        $stopOuts = $this->find()->where('idAluno = '.$this->idAluno)->all();
+        $sum = 0;
+
+        foreach ($stopOuts as $stopOut) {
+            $initialDate = strtotime($stopOut->dataInicio);
+
+            if ($this->dataTermino != null) {
+                $finalDate = strtotime($stopOut->dataTermino);
+            }
+            else {
+                $finalDate = strtotime($stopOut->prevTermino);
+            }
+
+            $days = (int)floor( ($finalDate - $initialDate) / (60 * 60 * 24));
+            Yii::trace('Dias' . $days);
+
+            $sum = $sum + $days;
+        }
+
+        if ($stopOut->aluno->curso == 1) { //Mestrado
+            if ($sum >= $limitMestrado) return false;
+        }
+        else { //Doutorado
+            if ($sum >= $limitDoutorado) return false;
+
+        }
+        return true;
+    }
 }

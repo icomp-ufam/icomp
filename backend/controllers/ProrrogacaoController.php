@@ -94,6 +94,11 @@ class ProrrogacaoController extends Controller
         $model->scenario = 'create';
         
         $model->idAluno = $idAluno;
+
+        if (!$model->canDoProrogation()) {
+            $this->mensagens('warning', 'Limite de prorrogações atingido', 'Atenção! O Aluno atingiu o limite máximo de prorrogações disponíveis');
+        }
+
         $model->dataSolicitacao = date("Y-m-d");
         $model->dataSolicitacao0 = date('d/m/Y', strtotime($model->dataSolicitacao));
         $model->qtdDias=180;

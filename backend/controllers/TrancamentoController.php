@@ -97,16 +97,16 @@ class TrancamentoController extends Controller
      */
     public function actionCreate($idAluno)
     {
-        if (!$this->canDoOneStopOut($idAluno)) {
-            $this->mensagens('warning', 'Limite de trancamentos atingido', 'Atenção! O Aluno atingiu o limite máximo de trancamentos disponíveis');
-        }
-
-
         $model = new Trancamento();
 
         $model->scenario = 'create';
         
         $model->idAluno = $idAluno;
+
+        if (!$model->canDoStopOut()) {
+            $this->mensagens('warning', 'Limite de trancamentos atingido', 'Atenção! O Aluno atingiu o limite máximo de trancamentos disponíveis');
+        }
+
         $model->dataSolicitacao = date("Y-m-d");
         $model->dataSolicitacao0 = date('d/m/Y', strtotime($model->dataSolicitacao));
         $model->tipo=0; //Defines 'type' as 'Trancamento'
@@ -161,19 +161,6 @@ class TrancamentoController extends Controller
             'model'=>$model,
         ]);
     }
-
-    /**
-     * Checks if student can still perform a stop out
-     * 
-     * @author Pedro Frota <pvmf@icomp.ufam.edu.br>
-     * 
-     * @return boolean 'true' if student can still perform a stop out, 'false' if not
-     */
-
-    private function canDoOneStopOut($idAluno) {
-        return true; //Not implemented Yet
-    }
-
 
     /**
      * Updates an existing Trancamento model.

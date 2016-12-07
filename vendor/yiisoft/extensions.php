@@ -282,15 +282,6 @@ return array (
       '@kartik/date' => $vendorDir . '/kartik-v/yii2-widget-datepicker',
     ),
   ),
-  'yiisoft/yii2-debug' => 
-  array (
-    'name' => 'yiisoft/yii2-debug',
-    'version' => '9999999-dev',
-    'alias' => 
-    array (
-      '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug',
-    ),
-  ),
   'yiisoft/yii2-jui' => 
   array (
     'name' => 'yiisoft/yii2-jui',
@@ -325,6 +316,15 @@ return array (
     'alias' => 
     array (
       '@kartik/mpdf' => $vendorDir . '/kartik-v/yii2-mpdf',
+    ),
+  ),
+  'yiisoft/yii2-debug' => 
+  array (
+    'name' => 'yiisoft/yii2-debug',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug',
     ),
   ),
 );
