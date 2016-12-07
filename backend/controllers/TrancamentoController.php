@@ -213,14 +213,23 @@ class TrancamentoController extends Controller
             }
             else $model->prevTermino = '';
 
+            $pre_path = 'uploads/trancamento/';
+            $filename = 'trancamento-'.Yii::$app->security->generateRandomString().'.pdf';
+
+            $path = $pre_path.$filename;
+
             $docAntigo = $model->documento;
             $model->documento = $path;
 
             if ($model->save()) {
                 $this->generatePdf($model, $path);
                 unlink(getcwd().'/'.$docAntigo);
+                $this->mensagens('success', 'Sucesso', 'Trancamento editado com sucesso.');
 
                 return $this->redirect(['view', 'id' => $model->id]);
+            }
+            else {
+                $this->mensagens('error', 'Erro', 'Houve uma falha ao editar o trancamento.');
             }
         }
 

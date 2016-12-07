@@ -172,9 +172,22 @@ class ProrrogacaoController extends Controller
             }
             else $model->dataInicio = '';
 
+            $pre_path = 'uploads/prorrogacao/';
+            $filename = 'prorrogacao-'.Yii::$app->security->generateRandomString().'.pdf';
+
+            $path = $pre_path.$filename;
+
+            $docAntigo = $model->documento;
+            $model->documento = $path;
 
             if ($model->save()) {
+                $this->generatePdf($model, $path);
+                unlink(getcwd().'/'.$docAntigo);
+                $this->mensagens('success', 'Sucesso', 'Prorrogação editada com sucesso.');
                 return $this->redirect(['view', 'id' => $model->id]);
+            }
+            else {
+                $this->mensagens('error', 'Erro', 'Houve uma falha ao editar a prorrogação.');
             }
         }
 
@@ -261,7 +274,7 @@ class ProrrogacaoController extends Controller
                             <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;"><b>Matr&iacute;cula</b>: '.$model->aluno->matricula.'</span></span></p>
                             <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;"><b>Para</b>: Coordena&ccedil;&atilde;o do Programa de P&oacute;s-Gradua&ccedil;&atilde;o Em Inform&aacute;tica &ndash; PPGI/UFAM</span></span></p>
                             <p class="western">&nbsp;</p>
-                            <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;">Solicito a PRORROGA&Ccedil;&Atilde;O do prazo para minha '.($model->aluno->curso == 1 ? ' Defesa de Disserta&ccedil;&atilde;o ' : ' Tese de doutorado ').'</span><span style="font-family: Arial, sans-serif;">por <b>'.$model->qtdDias.' dias</span><span style="font-family: Arial, sans-serif;">.</span></span></p>
+                            <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;">Solicito a PRORROGA&Ccedil;&Atilde;O do prazo para minha '.($model->aluno->curso == 1 ? ' Defesa de Disserta&ccedil;&atilde;o ' : ' Tese de doutorado ').'</span><span style="font-family: Arial, sans-serif;">por <b>'.$model->qtdDias.'</b> dias à partir do dia <b>'.date('d/m/Y', strtotime($model->dataInicio)).'</b></span><span style="font-family: Arial, sans-serif;">.</span></span></p>
                             <p class="western">&nbsp;</p>
                             <p class="western"><span style="font-family: Arial, sans-serif;"><span style="font-size: small;"><b>Justificativa</b>:<br>'.$model->justificativa.'&nbsp;</span></span></p>
                             <p class="western">&nbsp;</p>
