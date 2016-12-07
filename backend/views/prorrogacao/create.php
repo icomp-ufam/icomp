@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Prorrogacao */
 
-$this->title = 'Registrar Prorrogacao - Aluno: '.$model->aluno->nome;
+$this->title = 'Registrar Prorrogação - Aluno: '.$model->aluno->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Gerenciar Prorrogações', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
