@@ -90,7 +90,7 @@
                     'url' => '#',
                     'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),
                     'items' => [
-                        ['label' => 'Listar Alunos', 'icon' => 'fa fa-list', 'url' => ['aluno/index'],],
+                        ['label' => 'Gerenciar Alunos', 'icon' => 'fa fa-list', 'url' => ['aluno/index'],],
                         ['label' => 'Alunos com prazo vencido', 'icon' => 'fa fa-list', 'url' => ['aluno/prazo_vencido'],],
                     ],
                 ],

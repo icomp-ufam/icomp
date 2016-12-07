@@ -19,7 +19,7 @@ class ProrrogacaoSearch extends Prorrogacao
     {
         return [
             [['id', 'qtdDias', 'status'], 'integer'],
-            [['matricula', 'idAluno','orientador', 'dataSolicitacao', 'dataInicio', 'dataInicio0', 'justificativa', 'previa'], 'safe'],
+            [['matricula', 'idAluno','orientador', 'dataSolicitacao', 'dataInicio', 'dataInicio0', 'justificativa'], 'safe'],
         ];
     }
 
@@ -107,7 +107,6 @@ class ProrrogacaoSearch extends Prorrogacao
             ->andFilterWhere(['like', 'j17_aluno.nome', $this->idAluno])
             ->andFilterWhere(['like', 'j17_user.nome', $this->orientador]);
             //->andFilterWhere(['like', 'justificativa', $this->justificativa])
-            //->andFilterWhere(['like', 'previa', $this->previa]);
 
         return $dataProvider;
     }

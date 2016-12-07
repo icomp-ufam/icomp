@@ -63,7 +63,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Quantidade de Dias'
             ],
             'justificativa:ntext',
-            'previa:ntext',
+            [
+            'attribute' => 'documento',
+            'format' => 'html',
+            'value' => '<span class="fa fa-file-pdf-o"></span>   '.
+                        Html::a(
+                                 explode('uploads/prorrogacao/', $model->documento)[1],
+                                 $model->documento,
+                                [
+                                    'target' => '_blank',
+                                    'title' => Yii::t('yii', 'Download do Documento'),
+                                    'data-pjax'=> "0",
+                                ]
+                        )
+            ], 
             [
             'attribute' => 'status',
             'value' => $model->status == 0 ? 'Encerrado' : 'Ativo'
