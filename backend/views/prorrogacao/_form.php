@@ -47,9 +47,6 @@ use kartik\widgets\Select2;
             <?= $form->field($model, 'justificativa' , ['options' => ['class' => 'col-md-3']] )->textArea(['rows' => '6'])->label("<font color='#FF0000'>*</font> <b>Justificativa:</b>") ?>
         </div>
         <div class="row">
-            <?= $form->field($model, 'previa' , ['options' => ['class' => 'col-md-3']] )->textArea(['rows' => '6'])->label("<font color='#FF0000'>*</font> <b>Prévia:</b>") ?>
-        </div>
-        <div class="row">
         <?= $form->field($model, 'status', ['options' => ['class' => 'col-md-3']])
                     ->widget(SwitchInput::classname(), [
                         'pluginOptions' => [

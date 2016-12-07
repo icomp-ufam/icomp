@@ -27,7 +27,6 @@ use Yii;
  * 
  * Symbolic, responsible for business rules and search:
  * 
- * @property yii\web\UploadedFile documento0
  * @property string orientador
  * @property string matricula
  * @property string linhaPesquisa
@@ -37,7 +36,6 @@ use Yii;
  */
 class Trancamento extends \yii\db\ActiveRecord
 {
-    public $documento0;
     public $orientador;
     public $matricula;
     public $linhaPesquisa;
@@ -65,7 +63,6 @@ class Trancamento extends \yii\db\ActiveRecord
             [['matricula', 'orientador','dataSolicitacao', 'dataInicio', 'prevTermino', 'dataTermino', 'dataInicio0', 'dataSolicitacao0'], 'safe'],
             [['dataInicio0', 'prevTermino0', 'dataSolicitacao0'], 'date', 'format' => 'php:d/m/Y'],
             [['documento'], 'string'],
-            //[['documento0'], 'file', 'extensions' => 'pdf', 'on' => 'insert'],
             [['justificativa'], 'string', 'max' => 250],
             [['idAluno'], 'exist', 'skipOnError' => true, 'targetClass' => Aluno::className(), 'targetAttribute' => ['idAluno' => 'id']],
         ];

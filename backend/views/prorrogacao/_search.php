@@ -25,8 +25,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'justificativa') ?>
 
-    <?php // echo $form->field($model, 'previa') ?>
-
     <?php // echo $form->field($model, 'status') ?>
 
     <div class="form-group">

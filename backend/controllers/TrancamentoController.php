@@ -9,7 +9,6 @@ use app\models\TrancamentoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
 use kartik\mpdf\Pdf;
 use yii\helpers\Html;
 
@@ -28,7 +27,7 @@ class TrancamentoController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'ativar', 'encerrar', 'pdf'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'ativar', 'encerrar'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -297,15 +296,6 @@ class TrancamentoController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    public function actionPdf() {
-        $pre_path = 'uploads/trancamento/';
-        $filename = 'trancamento-'.Yii::$app->security->generateRandomString().'.pdf';
-
-        $path = $pre_path.$filename;
-
-        $this->generatePdf($path);
     }
 
     private function generatePdf($model, $filename) {
