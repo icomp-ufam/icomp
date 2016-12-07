@@ -15,7 +15,6 @@ use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\db\IntegrityException;
 use yii\base\Exception;
-use yii\web\UploadedFile;
 
 /**
  * AlunoController implements the CRUD actions for Aluno model.
