@@ -1,13 +1,18 @@
 <?php
 namespace backend\controllers;
+
 use Yii;
 use app\models\Aluno;
+use yii\filters\AccessControl;
 use app\models\Trancamento;
 use app\models\TrancamentoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use kartik\mpdf\Pdf;
+use yii\helpers\Html;
+
 /**
  * TrancamentoController implements the CRUD actions for Trancamento model.
  */
@@ -18,7 +23,17 @@ class TrancamentoController extends Controller
      */
     public function behaviors()
     {
-        return [
+        return [   
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'ativar', 'encerrar'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -30,6 +45,10 @@ class TrancamentoController extends Controller
         ];
     }
 
+    /*
+     * Envio de mensagens para views
+     * Tipo: success, danger, warning, error
+     */
     protected function mensagens($tipo, $titulo, $mensagem){
         Yii::$app->session->setFlash($tipo, [
             'type' => $tipo,
@@ -80,8 +99,7 @@ class TrancamentoController extends Controller
     public function actionCreate($idAluno)
     {
         if (!$this->canDoOneStopOut($idAluno)) {
-            $this->mensagens('error', 'Limite de trancamentos atingido', 'Não é possível criar um trancamento. O Aluno atingiu o limite de trancamentos');
-            return $this->redirect(['aluno/view', 'id'=>$idAluno]);
+            $this->mensagens('warning', 'Limite de trancamentos atingido', 'Atenção! O Aluno atingiu o limite máximo de trancamentos disponíveis');
         }
 
 
