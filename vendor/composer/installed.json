@@ -169,12 +169,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/cebe/markdown.git",
-            "reference": "04bfcaa26356cf86c6c4a2420eb95857a86e03ab"
+            "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/cebe/markdown/zipball/04bfcaa26356cf86c6c4a2420eb95857a86e03ab",
-            "reference": "04bfcaa26356cf86c6c4a2420eb95857a86e03ab",
+            "url": "https://api.github.com/repos/cebe/markdown/zipball/c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
+            "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
             "shasum": ""
         },
         "require": {
@@ -186,7 +186,7 @@
             "facebook/xhprof": "*@dev",
             "phpunit/phpunit": "4.1.*"
         },
-        "time": "2016-06-20 21:09:53",
+        "time": "2016-09-14 20:40:20",
         "bin": [
             "bin/markdown"
         ],
@@ -231,12 +231,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/yiisoft/yii2-framework.git",
-            "reference": "17f7fc4d4faa907c3f5eb0fda5b7fa672fef0fd3"
+            "reference": "6a1c220cdf037784da5f0151e4a0e4877af74df6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/17f7fc4d4faa907c3f5eb0fda5b7fa672fef0fd3",
-            "reference": "17f7fc4d4faa907c3f5eb0fda5b7fa672fef0fd3",
+            "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/6a1c220cdf037784da5f0151e4a0e4877af74df6",
+            "reference": "6a1c220cdf037784da5f0151e4a0e4877af74df6",
             "shasum": ""
         },
         "require": {
@@ -252,7 +252,7 @@
             "php": ">=5.4.0",
             "yiisoft/yii2-composer": "~2.0.4"
         },
-        "time": "2016-09-12 15:23:29",
+        "time": "2016-09-13 19:11:52",
         "bin": [
             "yii"
         ],
@@ -1406,7 +1406,8 @@
         "keywords": [
             "codeception",
             "yii2"
-        ]
+        ],
+        "abandoned": "codeception/codeception"
     },
     {
         "name": "bower-asset/typeahead.js",
@@ -1484,12 +1485,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/fzaninotto/Faker.git",
-            "reference": "ccec426bfe420235bc5ceeefc7641e53204e1693"
+            "reference": "4e81236d14da84c86f3e96561d689845bcf559ef"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/ccec426bfe420235bc5ceeefc7641e53204e1693",
-            "reference": "ccec426bfe420235bc5ceeefc7641e53204e1693",
+            "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/4e81236d14da84c86f3e96561d689845bcf559ef",
+            "reference": "4e81236d14da84c86f3e96561d689845bcf559ef",
             "shasum": ""
         },
         "require": {
@@ -1500,7 +1501,7 @@
             "phpunit/phpunit": "~4.0",
             "squizlabs/php_codesniffer": "~1.5"
         },
-        "time": "2016-09-12 07:51:30",
+        "time": "2016-09-13 12:22:34",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2256,57 +2257,6 @@
             }
         ],
         "description": "yii2-bootbox-widget"
-    },
-    {
-        "name": "philippfrenzel/yii2fullcalendar",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/philippfrenzel/yii2fullcalendar.git",
-            "reference": "e979a9f6cf6f063435e025015251306e80ebc68b"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/philippfrenzel/yii2fullcalendar/zipball/e979a9f6cf6f063435e025015251306e80ebc68b",
-            "reference": "e979a9f6cf6f063435e025015251306e80ebc68b",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/fullcalendar": "3.*",
-            "php": ">=5.4.0",
-            "yiisoft/yii2": "*",
-            "yiisoft/yii2-jui": "*"
-        },
-        "require-dev": {
-            "codeception/codeception": "*"
-        },
-        "time": "2016-06-14 19:06:39",
-        "type": "yii2-extension",
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "yii2fullcalendar\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Philipp Frenzel",
-                "email": "philipp@frenzel.net",
-                "homepage": "http://www.frenzel.net/",
-                "role": "Developer"
-            }
-        ],
-        "description": "Yii2 fullcalendar Widgets",
-        "homepage": "http://www.frenzel.net/",
-        "keywords": [
-            "fullcalendar",
-            "yii2"
-        ]
     },
     {
         "name": "mpdf/mpdf",
@@ -3368,60 +3318,6 @@
         ]
     },
     {
-        "name": "kartik-v/yii2-mpdf",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/kartik-v/yii2-mpdf.git",
-            "reference": "c9a888f5755d09bb10a9e5c0675e13565262a1bb"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/kartik-v/yii2-mpdf/zipball/c9a888f5755d09bb10a9e5c0675e13565262a1bb",
-            "reference": "c9a888f5755d09bb10a9e5c0675e13565262a1bb",
-            "shasum": ""
-        },
-        "require": {
-            "mpdf/mpdf": "<7.0"
-        },
-        "time": "2016-09-11 05:41:04",
-        "type": "yii2-extension",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "kartik\\mpdf\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD 3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Kartik Visweswaran",
-                "email": "kartikv2@gmail.com",
-                "homepage": "http://www.krajee.com/"
-            }
-        ],
-        "description": "A Yii2 wrapper component for the mPDF library which generates PDF files from UTF-8 encoded HTML.",
-        "homepage": "https://github.com/kartik-v/yii2-mpdf",
-        "keywords": [
-            "component",
-            "extension",
-            "html",
-            "mpdf",
-            "pdf",
-            "utf8",
-            "yii2"
-        ]
-    },
-    {
         "name": "bower-asset/fullcalendar",
         "version": "v3.0.0",
         "version_normalized": "3.0.0.0",
@@ -3466,6 +3362,161 @@
             "event",
             "full-sized",
             "jquery-plugin"
+        ]
+    },
+    {
+        "name": "marqu3s/yii2-behaviors",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/marqu3s/yii2-behaviors.git",
+            "reference": "a58a3622a08cac70c5a264281335aa57e9749a44"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/marqu3s/yii2-behaviors/zipball/a58a3622a08cac70c5a264281335aa57e9749a44",
+            "reference": "a58a3622a08cac70c5a264281335aa57e9749a44",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": "~2"
+        },
+        "time": "2016-01-18 00:00:00",
+        "type": "yii2-behavior",
+        "extra": {
+            "asset-installer-paths": {
+                "npm-asset-library": "vendor/npm",
+                "bower-asset-library": "vendor/bower"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "marqu3s\\behaviors\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Joao Marques",
+                "email": "joao@jjmf.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "Colletion of Yii2 behaviors",
+        "homepage": "https://github.com/marqu3s/yii2-behaviors",
+        "keywords": [
+            "Behavior",
+            "yii2"
+        ]
+    },
+    {
+        "name": "philippfrenzel/yii2fullcalendar",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/philippfrenzel/yii2fullcalendar.git",
+            "reference": "5a5320d8f35ee838ee257a1c4aefa9a5c649f1fa"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/philippfrenzel/yii2fullcalendar/zipball/5a5320d8f35ee838ee257a1c4aefa9a5c649f1fa",
+            "reference": "5a5320d8f35ee838ee257a1c4aefa9a5c649f1fa",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/fullcalendar": "3.*",
+            "php": ">=5.4.0",
+            "yiisoft/yii2": "*",
+            "yiisoft/yii2-jui": "*"
+        },
+        "require-dev": {
+            "codeception/codeception": "*"
+        },
+        "time": "2016-09-14 19:04:36",
+        "type": "yii2-extension",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "yii2fullcalendar\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Philipp Frenzel",
+                "email": "philipp@frenzel.net",
+                "homepage": "http://www.frenzel.net/",
+                "role": "Developer"
+            }
+        ],
+        "description": "Yii2 fullcalendar Widgets",
+        "homepage": "http://www.frenzel.net/",
+        "keywords": [
+            "fullcalendar",
+            "yii2"
+        ]
+    },
+    {
+        "name": "kartik-v/yii2-mpdf",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kartik-v/yii2-mpdf.git",
+            "reference": "94de4fd901036bb086bf86e10509649345b462a0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kartik-v/yii2-mpdf/zipball/94de4fd901036bb086bf86e10509649345b462a0",
+            "reference": "94de4fd901036bb086bf86e10509649345b462a0",
+            "shasum": ""
+        },
+        "require": {
+            "mpdf/mpdf": "<7.0"
+        },
+        "time": "2016-11-03 17:25:48",
+        "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "kartik\\mpdf\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD 3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Kartik Visweswaran",
+                "email": "kartikv2@gmail.com",
+                "homepage": "http://www.krajee.com/"
+            }
+        ],
+        "description": "A Yii2 wrapper component for the mPDF library which generates PDF files from UTF-8 encoded HTML.",
+        "homepage": "https://github.com/kartik-v/yii2-mpdf",
+        "keywords": [
+            "component",
+            "extension",
+            "html",
+            "mpdf",
+            "pdf",
+            "utf8",
+            "yii2"
         ]
     }
 ]

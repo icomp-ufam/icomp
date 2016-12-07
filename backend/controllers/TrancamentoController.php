@@ -28,7 +28,7 @@ class TrancamentoController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'ativar', 'encerrar'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'ativar', 'encerrar', 'pdf'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -137,14 +137,8 @@ class TrancamentoController extends Controller
             }
             else $model->prevTermino = '';
             
-            // get the uploaded file instance. for multiple file uploads
-            // the following data will return an array
-            $model->documento0 = UploadedFile::getInstance($model, 'documento');
-            // the path to save file, you can set an uploadPath
-            // in Yii::$app->params (as used in example below)
-            
             $pre_path = 'uploads/trancamento/';
-            $filename = 'trancamento-'.Yii::$app->security->generateRandomString().'.'.$model->documento0->extension;
+            $filename = 'trancamento-'.Yii::$app->security->generateRandomString().'.pdf';
 
             $path = $pre_path.$filename;
             
@@ -156,7 +150,7 @@ class TrancamentoController extends Controller
                     mkdir($pre_path);
                 }
 
-                $model->documento0->saveAs($path);
+                $this->generatePdf($model, $path);
                 $this->mensagens('success', 'Sucesso', 'Trancamento criado com sucesso.');
                 return $this->redirect(['trancamento/view', 'id'=>$model->id]);
             }
@@ -303,5 +297,100 @@ class TrancamentoController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionPdf() {
+        $pre_path = 'uploads/trancamento/';
+        $filename = 'trancamento-'.Yii::$app->security->generateRandomString().'.pdf';
+
+        $path = $pre_path.$filename;
+
+        $this->generatePdf($path);
+    }
+
+    private function generatePdf($model, $filename) {
+        // setup kartik\mpdf\Pdf component
+        $pdf = new Pdf([
+            // set to use core fonts only
+            'mode' => Pdf::MODE_CORE, 
+            // A4 paper format
+            'format' => Pdf::FORMAT_A4, 
+            // portrait orientation
+            'orientation' => Pdf::ORIENT_PORTRAIT, 
+            // stream to browser inline
+            'destination' => Pdf::DEST_FILE,
+            'filename' => $filename,
+            // your html content input
+            'content' => '
+                            <table style="width: 647px;" cellspacing="1" cellpadding="5">
+                            <tbody>
+                            <tr>
+                            <td style="width: 104px;" valign="top" height="89">
+                            <p><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: large;"><strong><img src='.getcwd().'/img/ufam.jpg alt="" width="82" height="106" /></strong></span></span></p>
+                            </td>
+                            <td style="width: 542px;" valign="top" height="89">
+                            <p><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: large;"><strong>UNIVERSIDADE FEDERAL DO AMAZONAS</strong></span></span></p>
+                            <p><span style="font-size: small;"><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: large;">Instituto de Computa&ccedil;&atilde;o</span></span></span></p>
+                            <p><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: large;">Programa de P&oacute;s-Gradua&ccedil;&atilde;o em Inform&aacute;tica</span></span></p>
+                            </td>
+                            </tr>
+                            </tbody>
+                            </table>
+                            <p class="western" align="center">&nbsp;</p>
+                            <p class="western" align="center">&nbsp;</p>
+                            <p class="western" align="center"><span style="font-family: Arial, sans-serif;"><span style="font-size: small;"><strong>Solicita&ccedil;&atilde;o de Trancamento</strong></span></span></p>
+                            <p class="western">&nbsp;</p>
+                            <p class="western">&nbsp;</p>
+                            <p class="western">&nbsp;</p>
+                            <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;"><b>De</b>: '.$model->aluno->nome.'</span></span></p>
+                            <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;"><b>Matr&iacute;cula</b>: '.$model->aluno->matricula.'</span></span></p>
+                            <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;"><b>Para</b>: Coordena&ccedil;&atilde;o do Programa de P&oacute;s-Gradua&ccedil;&atilde;o Em Inform&aacute;tica &ndash; PPGI/UFAM</span></span></p>
+                            <p class="western">&nbsp;</p>
+                            <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;">Solicito ao colegiado o TRANCAMENTO DE CURSO </span><span style="font-family: Arial, sans-serif;">à partir do dia <b>'.date('d/m/Y', strtotime($model->dataInicio)).'</b> até o dia <b>'.date('d/m/Y', strtotime($model->prevTermino)).'</b></span><span style="font-family: Arial, sans-serif;">.</span></span></p>
+                            <p class="western">&nbsp;</p>
+                            <p class="western"><span style="font-family: Arial, sans-serif;"><span style="font-size: small;"><b>Justificativa</b>:<br>'.$model->justificativa.'&nbsp;</span></span></p>
+                            <p class="western">&nbsp;</p>
+                            <p class="western">Anexo (se houver):&nbsp;</p>
+                            <p class="western">&nbsp;</p>
+                            <p style="text-align: right;">&nbsp;</p>
+                            <p style="text-align: right;">&nbsp;</p>
+                            <p style="text-align: right;"><span style="font-family: Arial, sans-serif;"><span style="font-size: small;">Data: '.date('d/m/Y', strtotime($model->dataSolicitacao)).'</span></span></p>
+                            <p class="western">&nbsp;</p>
+                            <p class="western">&nbsp;</p>
+                            <p class="western">&nbsp;</p>
+                            <table style="margin-left: auto; margin-right: auto; width: 518.5px;">
+                            <tbody>
+                            <tr style="height: 21px;">
+                            <td style="height: 21px; width: 207px;">--------------------------------------------</td>
+                            <td style="height: 21px; width: 100px;">&nbsp;</td>
+                            <td style="height: 21px; width: 209.5px; text-align: right;">--------------------------------------------</td>
+                            </tr>
+                            <tr style="height: 21px;">
+                            <td style="height: 21px; width: 207px;">Orientador</td>
+                            <td style="height: 21px; width: 100px;">&nbsp;</td>
+                            <td style="text-align: right; height: 21px; width: 209.5px;">Discente</td>
+                            </tr>
+                            </tbody>
+                            </table>
+                            <p class="western" align="center">&nbsp;</p>
+                            <p class="western" align="center">&nbsp;</p>
+                         '
+            ,  
+            //'cssInline' => '', 
+             // set mPDF properties on the fly
+            'options' => ['title' => $filename],
+             // call mPDF methods on the fly
+            'methods' => [ 
+                'SetFooter'=>[
+                '
+                   <p align="center"><span style="font-family: Arial, sans-serif;"><span style="font-size: xx-small;">Av. Gal. Rodrigo Oct&aacute;vio Jord&atilde;o Ramos, 6200 CEP.:69077-000 Manaus &ndash;AM</span></span></p>
+                    <p align="center"><span style="font-family: Arial, sans-serif;"><span style="font-size: xx-small;"> Fone: 3305 2809 / 2808 / 1193 e-mail: secretariappgi@icomp.ufam.edu.br</span></span></p>
+                    <p align="center">&nbsp;</p>
+                '
+                ],
+            ]
+        ]);
+
+        return $pdf->render();
     }
 }
