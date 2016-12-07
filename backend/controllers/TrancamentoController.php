@@ -214,8 +214,13 @@ class TrancamentoController extends Controller
             }
             else $model->prevTermino = '';
 
+            $docAntigo = $model->documento;
+            $model->documento = $path;
 
             if ($model->save()) {
+                $this->generatePdf($model, $path);
+                unlink(getcwd().'/'.$docAntigo);
+
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
