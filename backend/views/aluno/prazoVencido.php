@@ -1,14 +1,14 @@
 <?php
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\AlunoSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
-$this->title = 'Prazo Vencido';
+use \yii\widgets\LinkPager;
+$this->title = 'Alunos com prazo vencido';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="aluno-index">
 
-    <p>
-        It works!
-    </p>
-</div>
+<ul>
+<?php foreach($aluno as $aluno):?>
+	<li>
+		<?=$aluno['nome']." ".$aluno['dias']." ".$aluno['curso']?>
+	</li>
+<?php endforeach?>
+</ul>
+
