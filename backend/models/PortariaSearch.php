@@ -19,7 +19,7 @@ class PortariaSearch extends Portaria
     {
         return [
             [['id'], 'integer'],
-            [['responsavel', 'descricao', 'data', 'documento'], 'safe'],
+            [['responsavel', 'descricao', 'data', 'data0', 'documento'], 'safe'],
         ];
     }
 
@@ -47,6 +47,16 @@ class PortariaSearch extends Portaria
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => array(
+                'attributes' => array(
+                    'id',
+                    'responsavel',
+                    'data0' => array(
+                        'asc' => array('data' => SORT_ASC),
+                        'desc'=> array('data' => SORT_DESC)
+                    )
+                )
+            ),
         ]);
 
         $this->load($params);
@@ -57,15 +67,21 @@ class PortariaSearch extends Portaria
             return $dataProvider;
         }
 
+        $searchedData = explode("/", $this->data0);
+        if (sizeof($searchedData) == 3) {
+            $searchedData = $searchedData[2]."-".$searchedData[1]."-".$searchedData[0];
+        }
+        else $searchedData = '';
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'data' => $this->data,
+            'data' => $searchedData,
         ]);
 
-        $query->andFilterWhere(['like', 'responsavel', $this->responsavel])
-            ->andFilterWhere(['like', 'descricao', $this->descricao])
-            ->andFilterWhere(['like', 'documento', $this->documento]);
+        $query->andFilterWhere(['like', 'responsavel', $this->responsavel]);
+            //->andFilterWhere(['like', 'descricao', $this->descricao])
+            //->andFilterWhere(['like', 'documento', $this->documento]);
 
         return $dataProvider;
     }

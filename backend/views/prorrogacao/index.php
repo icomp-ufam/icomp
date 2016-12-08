@@ -123,8 +123,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             ['class' => 'yii\grid\ActionColumn',
-                'template'=> ' {view} {update} {delete}',
-                /*'buttons'=>
+                'template'=> '{download} {view} {update} {delete}',
+                'buttons'=>
                 [
                   'download' => function ($url, $model) { 
                     return Html::a('<span class="glyphicon glyphicon-download"></span>', $model->documento, [
@@ -133,7 +133,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'data-pjax'=> "0"
                         ]);
                   },
-                ]   */                         
+                ]                         
             ],
         ],
     ]); ?>

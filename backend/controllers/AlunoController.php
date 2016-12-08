@@ -359,7 +359,7 @@ class AlunoController extends Controller
 
         $titulosColunas = ['Matrícula', 'Nome do Aluno', 'Curso', 'Status do Aluno', 'Data de Ingresso', 'Orientador', 'Linha de pesquisa', 'Título da pesquisa', 'Data de Defesa'];
 
-        $filename = 'ppgi_alunos_export.xlsx';
+        $filename = 'ppgi_alunos_export.xls';
 
         $html='
             <html>

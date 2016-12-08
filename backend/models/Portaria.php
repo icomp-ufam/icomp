@@ -31,10 +31,10 @@ class Portaria extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'responsavel', 'descricao', 'data', 'documento'], 'required'],
+            [['id', 'responsavel', 'descricao', 'data', 'data0', 'documento'], 'required'],
             [['id'], 'integer'],
             [['descricao', 'documento'], 'string'],
-            [['data'], 'safe'],
+            [['data', 'data0'], 'safe'],
             [['responsavel'], 'string', 'max' => 255],
         ];
     }
@@ -45,10 +45,11 @@ class Portaria extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'responsavel' => 'Responsavel',
-            'descricao' => 'Descricao',
+            'id' => 'Número',
+            'responsavel' => 'Responsável',
+            'descricao' => 'Descrição',
             'data' => 'Data',
+            'data0' => 'Data',
             'documento' => 'Documento',
         ];
     }

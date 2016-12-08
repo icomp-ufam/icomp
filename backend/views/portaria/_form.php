@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\widgets\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Portaria */
@@ -12,18 +13,32 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id')->textInput() ?>
+    <div class="row">
+    <?= $form->field($model, 'id', ['options' => ['class' => 'col-md-3']])->textInput() ?>
+    </div>
 
-    <?= $form->field($model, 'responsavel')->textInput(['maxlength' => true]) ?>
+    <div class="row">
+    <?= $form->field($model, 'responsavel', ['options' => ['class' => 'col-md-3']])->textInput(['maxlength' => true]) ?>
+    </div>
 
-    <?= $form->field($model, 'descricao')->textarea(['rows' => 6]) ?>
+    <div class="row">
+    <?= $form->field($model, 'descricao', ['options' => ['class' => 'col-md-3']])->textarea(['rows' => 6]) ?>
+    </div>
 
-    <?= $form->field($model, 'data')->textInput() ?>
-
-    <?= $form->field($model, 'documento')->textarea(['rows' => 6]) ?>
+    <div class="row">
+            <?= $form->field($model, 'data0', ['options' => ['class' => 'col-md-3']])->widget(DatePicker::classname(), [
+                'language' => Yii::$app->language,
+                'options' => ['placeholder' => 'Selecione uma data',],
+                'pluginOptions' => [
+                    'format' => 'dd/mm/yyyy',
+                    'todayHighlight' => true
+                ]
+            ])
+            ?>
+    </div>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton('Salvar', ['class' => 'btn btn-primary']); ?>
     </div>
 
     <?php ActiveForm::end(); ?>
