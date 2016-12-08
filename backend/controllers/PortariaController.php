@@ -3,18 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
-use app\models\Prorrogacao;
-use app\models\ProrrogacaoSearch;
+use app\models\Portaria;
+use app\models\PortariaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use kartik\mpdf\Pdf;
 
 /**
- * ProrrogacaoController implements the CRUD actions for Prorrogacao model.
+ * PortariaController implements the CRUD actions for Portaria model.
  */
-class ProrrogacaoController extends Controller
+class PortariaController extends Controller
 {
     /**
      * @inheritdoc
@@ -22,16 +21,6 @@ class ProrrogacaoController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -55,12 +44,12 @@ class ProrrogacaoController extends Controller
     }
 
     /**
-     * Lists all Prorrogacao models.
+     * Lists all Portaria models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ProrrogacaoSearch();
+        $searchModel = new PortariaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -70,7 +59,7 @@ class ProrrogacaoController extends Controller
     }
 
     /**
-     * Displays a single Prorrogacao model.
+     * Displays a single Portaria model.
      * @param integer $id
      * @return mixed
      */
@@ -82,49 +71,28 @@ class ProrrogacaoController extends Controller
     }
 
     /**
-     * Creates a new Prorrogacao model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate($idAluno, $ignoredWarning = false)
+    * Creates a new Portaria model.
+    * If creation is successful, the browser will be redirected to the 'view' page.
+    * @return mixed
+    */
+    public function actionCreate()
     {
+        $model = new Portaria();
 
-        $model = new Prorrogacao();
+        $model->data = date("Y-m-d");
+        $model->data0 = date('d/m/Y', strtotime($model->data));
 
-        $model->scenario = 'create';
-        
-        $model->idAluno = $idAluno;
-
-        if (!$model->canDoProrogation() && !$ignoredWarning) {
-            return $this->render('_limitWarn', [
-            'model'=>$model,
-            ]);
-        }
-
-        $model->dataSolicitacao = date("Y-m-d");
-        $model->dataSolicitacao0 = date('d/m/Y', strtotime($model->dataSolicitacao));
-        $model->qtdDias=180;
-        $model->status=1; //Defines status as active
-        
         if ($model->load(Yii::$app->request->post())) {
 
             //Required to adapt the date inserted in the view to the format that will be inserted into the database
-            $model->dataSolicitacao = explode("/", $model->dataSolicitacao0);
-            if (sizeof($model->dataSolicitacao) == 3) {
-                $model->dataSolicitacao = $model->dataSolicitacao[2]."-".$model->dataSolicitacao[1]."-".$model->dataSolicitacao[0];
+            $model->data = explode("/", $model->data0);
+            if (sizeof($model->data) == 3) {
+                $model->data = $model->data[2]."-".$model->data[1]."-".$model->data[0];
             }
-            else $model->dataSolicitacao = '';
+            else $model->data = '';
 
-
-            //Required to adapt the date inserted in the view to the format that will be inserted into the database
-            $model->dataInicio = explode("/", $model->dataInicio0);
-            if (sizeof($model->dataInicio) == 3) {
-                $model->dataInicio = $model->dataInicio[2]."-".$model->dataInicio[1]."-".$model->dataInicio[0];
-            }
-            else $model->dataInicio = '';
-
-            $pre_path = 'uploads/prorrogacao/';
-            $filename = 'prorrogacao-'.Yii::$app->security->generateRandomString().'.pdf';
+            $pre_path = 'uploads/portaria/';
+            $filename = 'portaria-'.Yii::$app->security->generateRandomString().'.pdf';
 
             $path = $pre_path.$filename;
             
@@ -137,17 +105,12 @@ class ProrrogacaoController extends Controller
                 }
 
                 $this->generatePdf($model, $path);
-                $this->mensagens('success', 'Sucesso', 'Prorrogação criada com sucesso.');
+                $this->mensagens('success', 'Sucesso', 'Portaria criada com sucesso.');
 
-                if (!$model->canDoProrogation() && !$ignoredWarning) {
-                    return $this->render('_limitReached', [
-                        'model'=>$model,
-                    ]);
-                }
-                return $this->redirect(['prorrogacao/view', 'id'=>$model->id]);
+                return $this->redirect(['portaria/view', 'id'=>$model->id]);
             }
             else {
-                $this->mensagens('error', 'Erro', 'Houve uma falha ao criar a prorrogação.');
+                $this->mensagens('error', 'Erro', 'Houve uma falha ao criar a portaria.');
             }
         }
         return $this->render('create', [
@@ -156,7 +119,7 @@ class ProrrogacaoController extends Controller
     }
 
     /**
-     * Updates an existing Prorrogacao model.
+     * Updates an existing Portaria model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -165,84 +128,38 @@ class ProrrogacaoController extends Controller
     {
         $model = $this->findModel($id);
 
-        $model->dataSolicitacao0 = date('d/m/Y', strtotime($model->dataSolicitacao));
-        $model->dataInicio0 = date('d/m/Y', strtotime($model->dataInicio));
-
-        if ($model->load(Yii::$app->request->post())) {
-            
-            //Required to adapt the date inserted in the view to the format that will be inserted into the database
-            $model->dataSolicitacao = explode("/", $model->dataSolicitacao0);
-            if (sizeof($model->dataSolicitacao) == 3) {
-                $model->dataSolicitacao = $model->dataSolicitacao[2]."-".$model->dataSolicitacao[1]."-".$model->dataSolicitacao[0];
-            }
-            else $model->dataSolicitacao = '';
-
-
-            //Required to adapt the date inserted in the view to the format that will be inserted into the database
-            $model->dataInicio = explode("/", $model->dataInicio0);
-            if (sizeof($model->dataInicio) == 3) {
-                $model->dataInicio = $model->dataInicio[2]."-".$model->dataInicio[1]."-".$model->dataInicio[0];
-            }
-            else $model->dataInicio = '';
-
-            $pre_path = 'uploads/prorrogacao/';
-            $filename = 'prorrogacao-'.Yii::$app->security->generateRandomString().'.pdf';
-
-            $path = $pre_path.$filename;
-
-            $docAntigo = $model->documento;
-            $model->documento = $path;
-
-            if ($model->save()) {
-                $this->generatePdf($model, $path);
-                unlink(getcwd().'/'.$docAntigo);
-                $this->mensagens('success', 'Sucesso', 'Prorrogação editada com sucesso.');
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-            else {
-                $this->mensagens('error', 'Erro', 'Houve uma falha ao editar a prorrogação.');
-            }
-        }
-
-        return $this->render('update', [
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('update', [
                 'model' => $model,
-        ]);
+            ]);
+        }
     }
 
     /**
-     * Deletes an existing Prorrogacao model.
+     * Deletes an existing Portaria model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
+        $this->findModel($id)->delete();
 
-        $documento = $model->documento;
-
-        if ($model->delete()) {
-            //Delete the document related to the stop out
-            //getcwd() is used to get the current working directory (cwd)
-            unlink(getcwd().'/'.$documento);
-            $this->mensagens('success', 'Sucesso', 'Prorrogação deletada com sucesso.');
-        }
-        else {
-            $this->mensagens('error', 'Erro', 'Falha ao deletar prorrogação.');
-        }
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Prorrogacao model based on its primary key value.
+     * Finds the Portaria model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Prorrogacao the loaded model
+     * @return Portaria the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Prorrogacao::findOne($id)) !== null) {
+        if (($model = Portaria::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -283,19 +200,19 @@ class ProrrogacaoController extends Controller
                             <p class="western">&nbsp;</p>
                             <p class="western">&nbsp;</p>
                             <p class="western">&nbsp;</p>
-                            <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;"><b>De</b>: '.$model->aluno->nome.'</span></span></p>
-                            <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;"><b>Matr&iacute;cula</b>: '.$model->aluno->matricula.'</span></span></p>
+                            <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;"><b>De</b>:</span></span></p>
+                            <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;"><b>Matr&iacute;cula</b>:</span></span></p>
                             <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;"><b>Para</b>: Coordena&ccedil;&atilde;o do Programa de P&oacute;s-Gradua&ccedil;&atilde;o Em Inform&aacute;tica &ndash; PPGI/UFAM</span></span></p>
                             <p class="western">&nbsp;</p>
-                            <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;">Solicito a PRORROGA&Ccedil;&Atilde;O do prazo para minha '.($model->aluno->curso == 1 ? ' Defesa de Disserta&ccedil;&atilde;o ' : ' Tese de doutorado ').'</span><span style="font-family: Arial, sans-serif;">por <b>'.$model->qtdDias.'</b> dias à partir do dia <b>'.date('d/m/Y', strtotime($model->dataInicio)).'</b></span><span style="font-family: Arial, sans-serif;">.</span></span></p>
+                            <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;">Solicito a PRORROGA&Ccedil;&Atilde;O do prazo para minhaDefesa de Disserta&ccedil;&atilde;o</span><span style="font-family: Arial, sans-serif;">por <b></b> dias à partir do dia <b></b></span><span style="font-family: Arial, sans-serif;">.</span></span></p>
                             <p class="western">&nbsp;</p>
-                            <p class="western"><span style="font-family: Arial, sans-serif;"><span style="font-size: small;"><b>Justificativa</b>:<br>'.$model->justificativa.'&nbsp;</span></span></p>
+                            <p class="western"><span style="font-family: Arial, sans-serif;"><span style="font-size: small;"><b>Justificativa</b>:<br>&nbsp;</span></span></p>
                             <p class="western">&nbsp;</p>
                             <p class="western">Anexo (Vers&atilde;o atual da Disserta&ccedil;&atilde;o/Tese/Artigos com o novo cronograma detalhado considerando o per&iacute;odo de prorroga&ccedil;&atilde;o ou trancamento):&nbsp;</p>
                             <p class="western">&nbsp;</p>
                             <p style="text-align: right;">&nbsp;</p>
                             <p style="text-align: right;">&nbsp;</p>
-                            <p style="text-align: right;"><span style="font-family: Arial, sans-serif;"><span style="font-size: small;">Data: '.date('d/m/Y', strtotime($model->dataSolicitacao)).'</span></span></p>
+                            <p style="text-align: right;"><span style="font-family: Arial, sans-serif;"><span style="font-size: small;">Data:</span></span></p>
                             <p class="western">&nbsp;</p>
                             <p class="western">&nbsp;</p>
                             <p class="western">&nbsp;</p>

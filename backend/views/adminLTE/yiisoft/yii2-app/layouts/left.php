@@ -86,7 +86,7 @@
                 ['label' => 'Secretaria', 'options' => ['class' => 'header'], 'visible' => Yii::$app->user->identity->checarAcesso('secretaria')],
                 [
                     'label' => 'Alunos',
-                    'icon' => 'fa fa-users',
+                    'icon' => 'fa fa-graduation-cap',
                     'url' => '#',
                     'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),
                     'items' => [
@@ -163,8 +163,7 @@
 
                     ],
                 ],
-
-		[
+		        [
                     'label' => 'Controle de Equipamentos',
                     'icon' => 'fa fa-list',
                     'url' => '#',
@@ -173,6 +172,12 @@
                         ['label' => 'Gerenciar Equipamentos', 'icon' => 'fa fa-sun-o', 'url' => ['equipamento/index'],],
                         
                     ],
+                ],
+                [
+                    'label' => 'Portarias',
+                    'icon' => 'fa fa-balance-scale',
+                    'url' => ['portaria/index'],
+                    'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),
                 ],
                 
 				//['label' => 'despesas', 'icon' => 'fa fa-calendar', 'url' => ['cont-proj-despesas/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],

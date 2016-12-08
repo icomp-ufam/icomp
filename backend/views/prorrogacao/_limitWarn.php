@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </p>
         <br>
         <p>
-            <?= Html::a('<span class="fa fa-exclamation-triangle"></span> Ignorar', ['create', 'idAluno' => $model->idAluno, 'ignoredWarning' => true], [
+            <?= Html::a('<span class="fa fa-exclamation-triangle"></span> Prosseguir mesmo assim', ['create', 'idAluno' => $model->idAluno, 'ignoredWarning' => true], [
                 'class' => 'btn btn-danger',
                 'data' => [
                     'confirm' => 'Ignorando o aviso, você estará registrando mais tempo de prorrogação que o permitido!',
