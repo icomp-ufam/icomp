@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Trancamento */
 
-$this->title = 'Trancamento #'.$model->id.' - Aluno: '.$model->aluno->nome;
+$this->title = 'Visualizar Trancamento';
 $this->params['breadcrumbs'][] = ['label' => 'Gerenciar Trancamentos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -95,7 +95,7 @@ class TrancamentoController extends Controller
      * 
      * @return mixed
      */
-    public function actionCreate($idAluno)
+    public function actionCreate($idAluno, $ignoredWarning = false)
     {
         $model = new Trancamento();
 
@@ -103,8 +103,10 @@ class TrancamentoController extends Controller
         
         $model->idAluno = $idAluno;
 
-        if (!$model->canDoStopOut()) {
-            $this->mensagens('warning', 'Limite de trancamentos atingido', 'Atenção! O Aluno atingiu o limite máximo de trancamentos disponíveis');
+        if (!$model->canDoStopOut() && !$ignoredWarning) {
+            return $this->render('_limitWarn', [
+                'model'=>$model,
+            ]);
         }
 
         $model->dataSolicitacao = date("Y-m-d");
@@ -151,6 +153,12 @@ class TrancamentoController extends Controller
 
                 $this->generatePdf($model, $path);
                 $this->mensagens('success', 'Sucesso', 'Trancamento criado com sucesso.');
+
+                if (!$model->canDoStopOut() && !$ignoredWarning) {
+                    return $this->render('_limitReached', [
+                        'model'=>$model,
+                    ]);
+                }
                 return $this->redirect(['trancamento/view', 'id'=>$model->id]);
             }
             else {
@@ -161,6 +169,7 @@ class TrancamentoController extends Controller
             'model'=>$model,
         ]);
     }
+
 
     /**
      * Updates an existing Trancamento model.

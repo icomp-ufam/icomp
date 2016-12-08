@@ -120,7 +120,7 @@ class Prorrogacao extends \yii\db\ActiveRecord
             $sum = $sum + $prorogation->qtdDias;
         }
 
-        if ($prorogation->aluno->curso == 1) { //Mestrado
+        if ($this->aluno->curso == 1) { //Mestrado
             if ($sum >= $limitMestrado) return false;
         }
         else { //Doutorado

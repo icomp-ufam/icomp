@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Prorrogacao */
 
-$this->title = 'Prorrogação #'.$model->id.' - Aluno: '.$model->aluno->nome;
+$this->title = 'Visualizar Prorrogação';
 $this->params['breadcrumbs'][] = ['label' => 'Gerenciar Prorrogações', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -86,7 +86,7 @@ class ProrrogacaoController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($idAluno)
+    public function actionCreate($idAluno, $ignoredWarning = false)
     {
 
         $model = new Prorrogacao();
@@ -95,8 +95,10 @@ class ProrrogacaoController extends Controller
         
         $model->idAluno = $idAluno;
 
-        if (!$model->canDoProrogation()) {
-            $this->mensagens('warning', 'Limite de prorrogações atingido', 'Atenção! O Aluno atingiu o limite máximo de prorrogações disponíveis');
+        if (!$model->canDoProrogation() && !$ignoredWarning) {
+            return $this->render('_limitWarn', [
+            'model'=>$model,
+            ]);
         }
 
         $model->dataSolicitacao = date("Y-m-d");
@@ -136,6 +138,12 @@ class ProrrogacaoController extends Controller
 
                 $this->generatePdf($model, $path);
                 $this->mensagens('success', 'Sucesso', 'Prorrogação criada com sucesso.');
+
+                if (!$model->canDoProrogation() && !$ignoredWarning) {
+                    return $this->render('_limitReached', [
+                        'model'=>$model,
+                    ]);
+                }
                 return $this->redirect(['prorrogacao/view', 'id'=>$model->id]);
             }
             else {

@@ -133,7 +133,7 @@ class Trancamento extends \yii\db\ActiveRecord
         foreach ($stopOuts as $stopOut) {
             $initialDate = strtotime($stopOut->dataInicio);
 
-            if ($this->dataTermino != null) {
+            if ($stopOut->dataTermino != null) {
                 $finalDate = strtotime($stopOut->dataTermino);
             }
             else {
@@ -146,7 +146,7 @@ class Trancamento extends \yii\db\ActiveRecord
             $sum = $sum + $days;
         }
 
-        if ($stopOut->aluno->curso == 1) { //Mestrado
+        if ($this->aluno->curso == 1) { //Mestrado
             if ($sum >= $limitMestrado) return false;
         }
         else { //Doutorado
