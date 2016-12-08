@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Nova Prorrogação', ['/aluno/prorrogacao'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<span class="fa fa-plus"></span> Nova Prorrogação', ['/aluno/prorrogacao'], ['class' => 'btn btn-success']) ?>
     </p>
     <?php Pjax::begin(); ?>
     <?= GridView::widget([

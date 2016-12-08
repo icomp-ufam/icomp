@@ -31,7 +31,7 @@ class AlunoController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'exame', 'create', 'view_orientado', 'update', 'delete', 'trancamento', 'prorrogacao', 'prazo_vencido'],
+                        'actions' => ['index', 'view', 'exame', 'create', 'view_orientado', 'update', 'delete', 'trancamento', 'prorrogacao', 'prazo_vencido', 'gerar_planilha'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -352,6 +352,59 @@ class AlunoController extends Controller
         $aluno= $sql->queryAll();
         
         return $this->render('prazoVencido', ['aluno'=>$aluno]); 
+    }
+
+    public function actionGerar_planilha() {
+        $alunos = Aluno::find()->all();
+
+        $titulosColunas = ['Matrícula', 'Nome do Aluno', 'Curso', 'Status do Aluno', 'Data de Ingresso', 'Orientador', 'Linha de pesquisa', 'Título da pesquisa', 'Data de Defesa'];
+
+        $filename = 'ppgi_alunos_export.xlsx';
+
+        $html='
+            <html>
+                <head>
+                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+                </head>
+                <body>
+                    <table>
+        ';
+                        $html.='<tr>';
+                            foreach ($titulosColunas as $tituloColuna) {
+                                $html.='<td><b>'.$tituloColuna.'</b></td>';
+                            }
+                        $html.='</tr>';
+
+                        foreach ($alunos as $aluno) {
+                            $html.='<tr>';
+                                $html.='<td><b>'.$aluno->matricula.'</b></td>';
+                                $html.='<td><b>'.$aluno->nome.'</b></td>';
+                                $html.='<td><b>'.($aluno->curso == 1 ? 'Mestrado' : 'Doutorado').'</b></td>';
+                                $html.='<td><b>'.($aluno->status == 0 ? 'Egresso' : 'Formado').'</b></td>';
+                                $html.='<td><b>'.date('d/m/Y', strtotime($aluno->dataingresso)).'</b></td>';
+                                $html.='<td><b>'.$aluno->orientador1->nome.'</b></td>';
+                                $html.='<td><b>'.$aluno->linhaPesquisa->nome.'</b></td>';
+                            $html.='</tr>';
+                        }
+
+        $html.='
+                    </table>
+                </body>
+            </html>
+        ';
+
+
+        // Forces the browser to download the table
+        header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+        header ("Cache-Control: no-cache, must-revalidate");
+        header ("Pragma: no-cache");
+        header ("Content-type: application/x-msexcel");
+        header ("Content-Disposition: attachment; filename=\"{$filename}\"" );
+        header ("Content-Description: Planilha de Alunos - Sistema PPGI UFAM" );
+        
+        // Sends file content to browser
+        echo $html;
     }
 
 }
