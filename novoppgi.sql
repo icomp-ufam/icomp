@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 07-Dez-2016 às 23:18
+-- Generation Time: 09-Dez-2016 às 23:46
 -- Versão do servidor: 5.5.53-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -403,6 +403,7 @@ CREATE TABLE `j17_defesa` (
   `examinador` text,
   `emailExaminador` text,
   `reservas_id` int(10) DEFAULT NULL,
+  `banca_id` int(11) NOT NULL,
   `aluno_id` int(11) NOT NULL,
   `previa` varchar(45) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
@@ -533,6 +534,20 @@ CREATE TABLE `j17_orientacoes` (
   `tipo` smallint(1) NOT NULL,
   `status` smallint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='- Tipo (1 - Graduação, 2 - Mestrado, 3 - Doutorado) - Status (1 - Em Andamento, ';
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `j17_portaria`
+--
+
+CREATE TABLE `j17_portaria` (
+  `id` int(11) NOT NULL,
+  `responsavel` varchar(255) NOT NULL,
+  `descricao` text NOT NULL,
+  `data` date NOT NULL,
+  `documento` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -872,8 +887,8 @@ ALTER TABLE `j17_contproj_transferenciassaldorubricas`
 -- Indexes for table `j17_defesa`
 --
 ALTER TABLE `j17_defesa`
-  ADD PRIMARY KEY (`idDefesa`,`aluno_id`),
-  ADD KEY `fk_defesa_aluno` (`aluno_id`);
+  ADD PRIMARY KEY (`idDefesa`),
+  ADD KEY `banca_id` (`banca_id`);
 
 --
 -- Indexes for table `j17_edital`
@@ -901,13 +916,6 @@ ALTER TABLE `j17_lista_alunos`
   ADD PRIMARY KEY (`matricula`);
 
 --
--- Indexes for table `j17_membrosbanca`
---
-ALTER TABLE `j17_membrosbanca`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idProfessor` (`idProfessor`);
-
---
 -- Indexes for table `j17_oferta_disciplinas`
 --
 ALTER TABLE `j17_oferta_disciplinas`
@@ -917,6 +925,12 @@ ALTER TABLE `j17_oferta_disciplinas`
 -- Indexes for table `j17_orientacoes`
 --
 ALTER TABLE `j17_orientacoes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `j17_portaria`
+--
+ALTER TABLE `j17_portaria`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -995,11 +1009,6 @@ ALTER TABLE `j17_afastamentos`
 ALTER TABLE `j17_aluno`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=717;
 --
--- AUTO_INCREMENT for table `j17_banca_has_membrosbanca`
---
-ALTER TABLE `j17_banca_has_membrosbanca`
-  MODIFY `banca_id` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `j17_candidatos`
 --
 ALTER TABLE `j17_candidatos`
@@ -1065,11 +1074,6 @@ ALTER TABLE `j17_contproj_rubricasdeprojetos`
 ALTER TABLE `j17_contproj_transferenciassaldorubricas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
--- AUTO_INCREMENT for table `j17_defesa`
---
-ALTER TABLE `j17_defesa`
-  MODIFY `idDefesa` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `j17_ferias`
 --
 ALTER TABLE `j17_ferias`
@@ -1079,11 +1083,6 @@ ALTER TABLE `j17_ferias`
 --
 ALTER TABLE `j17_linhaspesquisa`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `j17_membrosbanca`
---
-ALTER TABLE `j17_membrosbanca`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `j17_oferta_disciplinas`
 --
@@ -1103,7 +1102,7 @@ ALTER TABLE `j17_premios`
 -- AUTO_INCREMENT for table `j17_prorrogacoes`
 --
 ALTER TABLE `j17_prorrogacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `j17_publicacoes`
 --
@@ -1146,13 +1145,6 @@ ALTER TABLE `j17_aluno`
   ADD CONSTRAINT `fk_aluno_orientador` FOREIGN KEY (`orientador`) REFERENCES `j17_user` (`id`);
 
 --
--- Limitadores para a tabela `j17_banca_has_membrosbanca`
---
-ALTER TABLE `j17_banca_has_membrosbanca`
-  ADD CONSTRAINT `fk_banca_idbanca` FOREIGN KEY (`banca_id`) REFERENCES `j17_defesa` (`idDefesa`),
-  ADD CONSTRAINT `fk_banca_membrobanca` FOREIGN KEY (`membrosbanca_id`) REFERENCES `j17_membrosbanca` (`id`);
-
---
 -- Limitadores para a tabela `j17_candidatos`
 --
 ALTER TABLE `j17_candidatos`
@@ -1174,13 +1166,7 @@ ALTER TABLE `j17_candidato_publicacoes`
 -- Limitadores para a tabela `j17_defesa`
 --
 ALTER TABLE `j17_defesa`
-  ADD CONSTRAINT `fk_defesa_aluno` FOREIGN KEY (`aluno_id`) REFERENCES `j17_aluno` (`id`);
-
---
--- Limitadores para a tabela `j17_membrosbanca`
---
-ALTER TABLE `j17_membrosbanca`
-  ADD CONSTRAINT `fk_membrosbanca_professorppgi` FOREIGN KEY (`idProfessor`) REFERENCES `j17_user` (`id`);
+  ADD CONSTRAINT `fk_defesa_id_banca` FOREIGN KEY (`banca_id`) REFERENCES `j17_banca_has_membrosbanca` (`banca_id`);
 
 --
 -- Limitadores para a tabela `j17_prorrogacoes`
