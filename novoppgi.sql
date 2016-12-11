@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 10-Dez-2016 às 01:35
+-- Generation Time: 11-Dez-2016 às 02:35
 -- Versão do servidor: 5.5.53-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -650,6 +650,22 @@ CREATE TABLE `j17_aluno` (
   `anoconclusao` date NOT NULL,
   `sede` varchar(2) NOT NULL DEFAULT 'AM'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `j17_aproveitamento`
+--
+
+CREATE TABLE `j17_aproveitamento` (
+  `id` int(11) NOT NULL,
+  `codDisciplinaOrigemFK` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `codDisciplinaDestinoFK` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `nota` float NOT NULL,
+  `frequencia` float NOT NULL,
+  `situacao` varchar(10) NOT NULL,
+  `idAluno` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Aproveitamento de disciplina por aluno.';
 
 -- --------------------------------------------------------
 
@@ -2457,6 +2473,19 @@ CREATE TABLE `j17_defesa` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `j17_disciplina`
+--
+
+CREATE TABLE `j17_disciplina` (
+  `codDisciplina` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `nome` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `creditos` int(11) NOT NULL,
+  `cargaHoraria` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Lista de Disciplinas para Aproveitamento.';
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `j17_edital`
 --
 
@@ -3971,13 +4000,6 @@ CREATE TABLE `j17_portaria` (
   `data` date NOT NULL,
   `documento` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `j17_portaria`
---
-
-INSERT INTO `j17_portaria` (`id`, `responsavel`, `descricao`, `data`, `documento`) VALUES
-(122121, 'ASDAS', 'assasa', '2016-12-08', 'uploads/portaria/portaria-xvHQHBrjn0h-NMZu99qK2ffJLktjngdZ.pdf');
 
 -- --------------------------------------------------------
 
@@ -6017,6 +6039,14 @@ ALTER TABLE `j17_aluno`
   ADD KEY `idUser` (`idUser`);
 
 --
+-- Indexes for table `j17_aproveitamento`
+--
+ALTER TABLE `j17_aproveitamento`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `codDisciplinaOrigemFK` (`codDisciplinaOrigemFK`),
+  ADD KEY `codDisciplinaDestinoFK` (`codDisciplinaDestinoFK`);
+
+--
 -- Indexes for table `j17_banca_has_membrosbanca`
 --
 ALTER TABLE `j17_banca_has_membrosbanca`
@@ -6119,6 +6149,12 @@ ALTER TABLE `j17_contproj_transferenciassaldorubricas`
 ALTER TABLE `j17_defesa`
   ADD PRIMARY KEY (`idDefesa`),
   ADD KEY `banca_id` (`banca_id`);
+
+--
+-- Indexes for table `j17_disciplina`
+--
+ALTER TABLE `j17_disciplina`
+  ADD PRIMARY KEY (`codDisciplina`);
 
 --
 -- Indexes for table `j17_edital`
@@ -6238,6 +6274,11 @@ ALTER TABLE `j17_afastamentos`
 --
 ALTER TABLE `j17_aluno`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=717;
+--
+-- AUTO_INCREMENT for table `j17_aproveitamento`
+--
+ALTER TABLE `j17_aproveitamento`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `j17_candidatos`
 --
@@ -6373,6 +6414,13 @@ ALTER TABLE `j17_user`
 ALTER TABLE `j17_aluno`
   ADD CONSTRAINT `fk_aluno_iduser` FOREIGN KEY (`idUser`) REFERENCES `j17_user` (`id`),
   ADD CONSTRAINT `fk_aluno_orientador` FOREIGN KEY (`orientador`) REFERENCES `j17_user` (`id`);
+
+--
+-- Limitadores para a tabela `j17_aproveitamento`
+--
+ALTER TABLE `j17_aproveitamento`
+  ADD CONSTRAINT `fk_discDestino` FOREIGN KEY (`codDisciplinaDestinoFK`) REFERENCES `j17_disciplina` (`codDisciplina`),
+  ADD CONSTRAINT `fk_discOrigem` FOREIGN KEY (`codDisciplinaOrigemFK`) REFERENCES `j17_disciplina` (`codDisciplina`);
 
 --
 -- Limitadores para a tabela `j17_candidatos`
