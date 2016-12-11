@@ -52,6 +52,11 @@
                     'items' => [
                         ['label' => 'Defesas a serem avaliadas', 'icon' => 'fa fa-calendar-check-o', 'url' => ['banca-controle-defesas/index'],],
                         ['label' => 'Listar todas as defesas', 'icon' => 'fa fa-list', 'url' => ['defesa/index'],],
+                        [
+                            'label' => 'Portarias',
+                            'icon' => 'fa fa-balance-scale',
+                            'url' => ['portaria/index'],
+                        ],
                     ],
                 ],
                 [
@@ -134,6 +139,11 @@
                     'items' => [
                         ['label' => 'Visualizar Defesas', 'icon' => 'fa fa-list', 'url' => ['defesa/index'],],
                         ['label' => 'Membros de Banca', 'icon' => 'fa fa-users', 'url' => ['membros-banca/index'],],
+                        [
+                            'label' => 'Portarias',
+                            'icon' => 'fa fa-balance-scale',
+                            'url' => ['portaria/index'],
+                        ],
                     ],
                 ],
 
@@ -174,9 +184,15 @@
                     ],
                 ],
                 [
-                    'label' => 'Portarias',
-                    'icon' => 'fa fa-balance-scale',
-                    'url' => ['portaria/index'],
+                    'label' => 'Aproveitamento de Disciplinas',
+                    //'icon' => 'fa fa-lock',
+                    'url' => ['aproveitamento/index'],
+                    'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),
+                ],
+                [
+                    'label' => 'Disciplinas',
+                    //'icon' => 'fa fa-lock',
+                    'url' => ['disciplina/index'],
                     'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),
                 ],
                 
