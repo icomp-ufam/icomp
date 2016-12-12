@@ -17,6 +17,7 @@ use Yii;
  *
  * @property J17Disciplina $codDisciplinaDestinoFK0
  * @property J17Disciplina $codDisciplinaOrigemFK0
+ * @property J17Aluno $idAlunoFK0
  */
 class Aproveitamento extends \yii\db\ActiveRecord
 {
@@ -62,7 +63,7 @@ class Aproveitamento extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCodDisciplinaDestinoFK()
+    public function getCodDisciplinaDestinoFK0()
     {
         return $this->hasOne(Disciplina::className(), ['codDisciplina' => 'codDisciplinaDestinoFK']);
     }
@@ -70,8 +71,60 @@ class Aproveitamento extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCodDisciplinaOrigemFK()
+    public function getCodDisciplinaOrigemFK0()
     {
         return $this->hasOne(Disciplina::className(), ['codDisciplina' => 'codDisciplinaOrigemFK']);
     }
+    
+    public function getIdAlunoFK0(){
+    	return $this->hasOne(Aluno::className(), ['id' => 'idAluno']);
+    }
+    
+    /**
+     * Indicates whether a pair (DisciplinaOrigem, DisciplinaDestino) already exists for ID idAluno.
+     * Must be used before getAproveitamentoDisciplinaUsada(), becouse it has logical precedence for either one.  
+     *
+     * @author Marcelo Brasil <malbf@icomp.ufam.edu.br>
+     *
+     * @return Null or Integer: models\Aproveitamento->codAproveitamento
+     */
+    public function getAproveitamentoOrigemDestinoExiste($codOrigem, $codDestino, $idAluno)
+    {	
+    	$idAproveitamento = Aproveitamento::findOne(['codDisciplinaOrigemFK'=>strtolower($codOrigem),
+    			'codDisciplinaDestinoFK'=>strtolower($codDestino),
+    			'idAluno'=>$idAluno]);
+    	if($idAproveitamento !== Null)
+    			$idAproveitamento = $idAproveitamento->id; 
+    	return $idAproveitamento; 
+    }
+    
+    /**
+     * Indicates whether a codDisciplina is already used for ID idAluno in some pair (DisciplinaOrigem, DisciplinaDestino).
+     * Must be used after getAproveitamentoOrigemDestinoExiste(), becouse the last one has logical precedence over the first one.
+     *
+     * @author Marcelo Brasil <malbf@icomp.ufam.edu.br>
+     *
+     * @return Null or Integer: models\Aproveitamento->codAproveitamento
+     */
+    public function getAproveitamentoDisciplinaUsada($codDisciplina, $idAluno)
+    {
+    	$idAproveitamento = Aproveitamento::findOne(['codDisciplinaOrigemFK'=>strtolower($codDisciplina),
+    			'idAluno'=>$idAluno]);
+    	if($idAproveitamento === Null)
+	    	$idAproveitamento = Aproveitamento::findOne(['codDisciplinaDestinoFK'=>strtolower($codDisciplina),
+	    			'idAluno'=>$idAluno]);
+	    if($idAproveitamento !== Null)
+	    	$idAproveitamento = $idAproveitamento->id;
+    	
+    	return $idAproveitamento;
+    }
+    
+    public function beforeSave()
+    {
+    	$this->codDisciplinaDestinoFK = strtolower($this->codDisciplinaDestinoFK);
+    	$this->codDisciplinaOrigemFK = strtolower($this->codDisciplinaOrigemFK);
+
+    	return true;	
+    }
+ 
 }

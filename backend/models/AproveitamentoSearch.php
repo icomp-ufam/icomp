@@ -66,11 +66,32 @@ class AproveitamentoSearch extends Aproveitamento
             'idAluno' => $this->idAluno,
         ]);
 
-        $query->andFilterWhere(['like', 'codDisciplinaOrigemFK', $this->codDisciplinaOrigemFK])
-            ->andFilterWhere(['like', 'codDisciplinaDestinoFK', $this->codDisciplinaDestinoFK])
-            ->andFilterWhere(['like', 'situacao', $this->situacao]);
+        $query->andFilterWhere(['like', 'codDisciplinaOrigemFK', strtolower($this->codDisciplinaOrigemFK)])
+            ->andFilterWhere(['like', 'codDisciplinaDestinoFK', strtolower($this->codDisciplinaDestinoFK)])
+            ->andFilterWhere(['like', 'situacao', strtolower($this->situacao)]);
 
         return $dataProvider;
+    }
+
+    public function searchIds($ids)
+    {
+    	$query = Aproveitamento::find();
+    
+    
+    	$dataProvider = new ActiveDataProvider([
+    			'query' => $query,
+    	]);
+
+    	if(count($ids)==1)
+    		$query->orFilterWhere([ 'id'=> $ids[0]])
+    		->andFilterWhere(['idAluno'=>$this->idAluno]);
+    	else
+    	foreach($ids as $id){
+	    	$query->orFilterWhere([ 'id'=> $id])
+	    	->andFilterWhere(['idAluno'=>$this->idAluno]);
+    	}
+
+    	return $dataProvider;
     }
     
 }

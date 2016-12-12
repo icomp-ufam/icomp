@@ -6,20 +6,21 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Disciplina */
 
-$this->title = $model->codDisciplina;
+$this->title = 'Disciplina: '.strtoupper($model->codDisciplina).' - '.$model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Disciplinas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="disciplina-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <!-- <h1><?php //Html::encode($this->title); ?></h1> -->
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->codDisciplina], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->codDisciplina], [
+    	<?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['index'], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-edit"></span> Editar  ', ['update', 'id' => $model->codDisciplina], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('<span class="fa fa-trash-o"></span> Excluir', ['delete', 'id' => $model->codDisciplina], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Remover a Disciplina \''.$model->codDisciplina.'?',
                 'method' => 'post',
             ],
         ]) ?>

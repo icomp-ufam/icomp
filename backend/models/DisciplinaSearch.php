@@ -63,8 +63,8 @@ class DisciplinaSearch extends Disciplina
             'cargaHoraria' => $this->cargaHoraria,
         ]);
 
-        $query->andFilterWhere(['like', 'codDisciplina', $this->codDisciplina])
-            ->andFilterWhere(['like', 'nome', $this->nome]);
+        $query->andFilterWhere(['like', 'codDisciplina', strtolower($this->codDisciplina)])
+            ->andFilterWhere(['like', 'nome', strtolower($this->nome)]);
 
         return $dataProvider;
     }
