@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ProrrogacaoSearch */
+/* @var $model app\models\PortariaSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="prorrogacao-search">
+<div class="portaria-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,17 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'idAluno') ?>
+    <?= $form->field($model, 'responsavel') ?>
 
-    <?= $form->field($model, 'dataSolicitacao') ?>
+    <?= $form->field($model, 'descricao') ?>
 
-    <?= $form->field($model, 'qtdDias') ?>
+    <?= $form->field($model, 'data') ?>
 
-    <?= $form->field($model, 'justificativa') ?>
-
-    <?php // echo $form->field($model, 'previa') ?>
-
-    <?php // echo $form->field($model, 'status') ?>
+    <?= $form->field($model, 'documento') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

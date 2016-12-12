@@ -54,9 +54,9 @@ use kartik\widgets\Select2;
 		<div class="row">
             <?= $form->field($model, 'justificativa' , ['options' => ['class' => 'col-md-3']] )->textArea(['rows' => '6'])->label("<font color='#FF0000'>*</font> <b>Justificativa:</b>") ?>
         </div>		
-        <div class="row">
+        <!--div class="row">
 			<?= $form->field($model, 'documento', ['options' => ['class' => 'col-md-3'], ] )->fileInput()->label("<font color='#FF0000'>*</font> <b>Documento (PDF):</b>"); ?>
-        </div>
+        </div-->
         <div class="row">
         <?= $form->field($model, 'status', ['options' => ['class' => 'col-md-3']])
                     ->widget(SwitchInput::classname(), [

@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Prorrogacao */
 
-$this->title = 'Prorrogação #'.$model->id.' - Aluno: '.$model->aluno->nome;
+$this->title = 'Visualizar Prorrogação';
 $this->params['breadcrumbs'][] = ['label' => 'Gerenciar Prorrogações', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -63,7 +63,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Quantidade de Dias'
             ],
             'justificativa:ntext',
-            'previa:ntext',
+            [
+            'attribute' => 'documento',
+            'format' => 'html',
+            'value' => '<span class="fa fa-file-pdf-o"></span>   '.
+                        Html::a(
+                                 explode('uploads/prorrogacao/', $model->documento)[1],
+                                 $model->documento,
+                                [
+                                    'target' => '_blank',
+                                    'title' => Yii::t('yii', 'Download do Documento'),
+                                    'data-pjax'=> "0",
+                                ]
+                        )
+            ], 
             [
             'attribute' => 'status',
             'value' => $model->status == 0 ? 'Encerrado' : 'Ativo'

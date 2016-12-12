@@ -52,6 +52,11 @@
                     'items' => [
                         ['label' => 'Defesas a serem avaliadas', 'icon' => 'fa fa-calendar-check-o', 'url' => ['banca-controle-defesas/index'],],
                         ['label' => 'Listar todas as defesas', 'icon' => 'fa fa-list', 'url' => ['defesa/index'],],
+                        [
+                            'label' => 'Portarias',
+                            'icon' => 'fa fa-balance-scale',
+                            'url' => ['portaria/index'],
+                        ],
                     ],
                 ],
                 [
@@ -86,12 +91,12 @@
                 ['label' => 'Secretaria', 'options' => ['class' => 'header'], 'visible' => Yii::$app->user->identity->checarAcesso('secretaria')],
                 [
                     'label' => 'Alunos',
-                    'icon' => 'fa fa-users',
+                    'icon' => 'fa fa-graduation-cap',
                     'url' => '#',
                     'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),
                     'items' => [
-                        ['label' => 'Listar Alunos', 'icon' => 'fa fa-list', 'url' => ['aluno/index'],],
-                        ['label' => 'Alunos com prazo vencido', 'icon' => 'fa fa-list', 'url' => ['aluno/prazo_vencido'],],
+                        ['label' => 'Gerenciar Alunos', 'icon' => 'fa fa-list', 'url' => ['aluno/index'],],
+                        ['label' => 'Alunos com prazo vencido', 'icon' => 'fa fa-calendar-times-o', 'url' => ['aluno/prazo_vencido'],],
                     ],
                 ],
                 [
@@ -134,6 +139,11 @@
                     'items' => [
                         ['label' => 'Visualizar Defesas', 'icon' => 'fa fa-list', 'url' => ['defesa/index'],],
                         ['label' => 'Membros de Banca', 'icon' => 'fa fa-users', 'url' => ['membros-banca/index'],],
+                        [
+                            'label' => 'Portarias',
+                            'icon' => 'fa fa-balance-scale',
+                            'url' => ['portaria/index'],
+                        ],
                     ],
                 ],
 
@@ -163,8 +173,7 @@
 
                     ],
                 ],
-
-		[
+		        [
                     'label' => 'Controle de Equipamentos',
                     'icon' => 'fa fa-list',
                     'url' => '#',
@@ -176,6 +185,18 @@
                         ['label' => 'Descarte de Equipamentos', 'icon' => 'fa fa-trash', 'url' => ['descarte-equipamento/index'],],
                         
                     ],
+                ],
+                [
+                    'label' => 'Aproveitamento de Disciplinas',
+                    //'icon' => 'fa fa-lock',
+                    'url' => ['aproveitamento/index'],
+                    'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),
+                ],
+                [
+                    'label' => 'Disciplinas',
+                    //'icon' => 'fa fa-lock',
+                    'url' => ['disciplina/index'],
+                    'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),
                 ],
                 
 				//['label' => 'despesas', 'icon' => 'fa fa-calendar', 'url' => ['cont-proj-despesas/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
