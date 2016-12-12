@@ -171,6 +171,9 @@
                     'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),
                     'items' => [
                         ['label' => 'Gerenciar Equipamentos', 'icon' => 'fa fa-sun-o', 'url' => ['equipamento/index'],],
+			['label' => 'Gerar Cautela', 'icon' => 'fa fa-list', 'url' => ['cautela/index'],],
+                        ['label' => 'Gerar Cautela Avulsa', 'icon' => 'fa fa-refresh', 'url' => ['cautela-avulsa/index'],],
+                        ['label' => 'Descarte de Equipamentos', 'icon' => 'fa fa-trash', 'url' => ['descarte-equipamento/index'],],
                         
                     ],
                 ],
