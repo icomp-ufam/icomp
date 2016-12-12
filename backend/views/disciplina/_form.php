@@ -12,16 +12,16 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'codDisciplina')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'codDisciplina')->textInput(['maxlength' => true, 'style'=>['width'=>'250px']]) ?>
 
-    <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'nome')->textInput(['maxlength' => true, 'style'=>['width'=>'250px']]) ?>
+<div style="display:inline">
+    <?= $form->field($model, 'creditos')->textInput(['style'=>['width'=>'50px', 'display'=>'inline','margin-left'=>'32px']]) ?>
 
-    <?= $form->field($model, 'creditos')->textInput() ?>
-
-    <?= $form->field($model, 'cargaHoraria')->textInput() ?>
-
+    <?= $form->field($model, 'cargaHoraria')->textInput(['style'=>['width'=>'50px','display'=>'inline']]) ?>
+</div>
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Salvar' : 'Alterar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

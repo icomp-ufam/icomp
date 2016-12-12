@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php
 if(isset($fromAluno) && $fromAluno===true)
-	$voltar = Html::a('Voltar', ['aluno/view', 'id'=> $model->idAluno], ['class' => 'btn btn-warning']);
+	$voltar = Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['aproveitamento/indexbyaluno', 'idAluno'=> $model->idAluno], ['class' => 'btn btn-warning']);
 else
 	$voltar = Html::a('Voltar', ['aproveitamento/index'], ['class' => 'btn btn-warning']);
 	?>

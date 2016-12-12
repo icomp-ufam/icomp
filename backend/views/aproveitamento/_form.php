@@ -11,6 +11,21 @@ use yii\web\JsExpression;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+<?php
+	$dOrigemTxt = ['nome'=>'', 'cr'=>'', 'ch'=>''];
+	$dDestinoTxt = ['nome'=>'', 'cr'=>'', 'ch'=>''];
+	if(isset($dOrigem)){
+		$dOrigemTxt['nome'] = $dOrigem->nome;
+		$dOrigemTxt['cr'] = $dOrigem->creditos;
+		$dOrigemTxt['ch'] = $dOrigem->cargaHoraria;
+	}
+	if(isset($dDestino)){
+		$dDestinoTxt['nome'] = $dDestino->nome;
+		$dDestinoTxt['cr'] = $dDestino->creditos;
+		$dDestinoTxt['ch'] = $dDestino->cargaHoraria;
+	}
+?>
+
 <div class="aproveitamento-form">
 	
 
@@ -44,15 +59,15 @@ use yii\web\JsExpression;
 	</div>
 	<div class="row">
 	<span><font color='#FF0000'>*</font> <b>Nome Disciplina:</b></span><br/>
-	<?php	echo Html::textInput("disciplinaOrigemNome","",['maxlength'=>100, 'style'=>['width'=>'250px']]); ?>
+	<?php	echo Html::textInput("disciplinaOrigemNome",$dOrigemTxt['nome'],['maxlength'=>100, 'style'=>['width'=>'250px']]); ?>
 	</div>
 	<div class="row">
 	<span><font color='#FF0000'>*</font> <b>Créditos:</b></span><br/>
-	<?php	echo Html::textInput("disciplinaOrigemCreditos","",['style'=>['width'=>'50px']]); ?>
+	<?php	echo Html::textInput("disciplinaOrigemCreditos",$dOrigemTxt['cr'],['style'=>['width'=>'50px']]); ?>
 	</div>
 	<div class="row">
 	<span><font color='#FF0000'>*</font> <b>Carga Horária (H):</b></span><br/>
-	<?php	echo Html::textInput("disciplinaOrigemCargaHoraria","",['style'=>['width'=>'50px']]); ?>
+	<?php	echo Html::textInput("disciplinaOrigemCargaHoraria",$dOrigemTxt['ch'],['style'=>['width'=>'50px']]); ?>
 	</div>
    </div>
   </div>
@@ -85,15 +100,15 @@ use yii\web\JsExpression;
 	</div>
 	<div class="row">
 	<span><font color='#FF0000'>*</font> <b>Nome Disciplina:</b></span><br/>
-	<?php	echo Html::textInput("disciplinaDestinoNome","",['maxlength'=>100, 'style'=>['width'=>'250px']]); ?>
+	<?php	echo Html::textInput("disciplinaDestinoNome",$dDestinoTxt['nome'],['maxlength'=>100, 'style'=>['width'=>'250px']]); ?>
 	</div>
 	<div class="row">
 	<span><font color='#FF0000'>*</font> <b>Créditos:</b></span><br/>
-	<?php	echo Html::textInput("disciplinaDestinoCreditos","",['style'=>['width'=>'50px']]); ?>
+	<?php	echo Html::textInput("disciplinaDestinoCreditos",$dDestinoTxt['cr'],['style'=>['width'=>'50px']]); ?>
 	</div>
 	<div class="row">
 	<span><font color='#FF0000'>*</font> <b>Carga Horária (H):</b></span><br/>
-	<?php	echo Html::textInput("disciplinaDestinoCargaHoraria","",['style'=>['width'=>'50px']]); ?>
+	<?php	echo Html::textInput("disciplinaDestinoCargaHoraria",$dDestinoTxt['ch'],['style'=>['width'=>'50px']]); ?>
 	</div>
 	</div>
 	</div>
@@ -113,6 +128,9 @@ use yii\web\JsExpression;
 	</div>
 	<div class="row">
     <?= $form->field($model, 'idAluno')->hiddenInput(['value'=>$model->idAluno])->label(false) ?>
+	</div>
+	<div class="row">
+    <?= $form->field($model, 'id')->hiddenInput(['value'=>$model->id])->label(false) ?>
 	</div>
   </div>
   </div>

@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use app\models\Aluno;
 use app\models\Disciplina;
 use yii\base\Exception;
+use GuzzleHttp\Psr7\Request;
 
 /**
  * AproveitamentoController implements the CRUD actions for Aproveitamento model.
@@ -79,7 +80,15 @@ class AproveitamentoController extends Controller
      * @return mixed
      */
     public function actionView($id)
-    {
+    {	
+    	$dados = Yii::$app->request->get();
+    	
+    	if(isset($dados['idAluno']))
+    		return $this->render('view', [
+    				'model' => $this->findModel($id),
+    				'idAluno'=>$dados['idAluno']
+    		]);
+    
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -112,23 +121,44 @@ class AproveitamentoController extends Controller
     	if ($aproveitamento->load(Yii::$app->request->post()) ) {
     		
     		$dados = Yii::$app->request->post();
-    		
-    		if(Aproveitamento::findOne(['codDisciplinaOrigemFK'=>$aproveitamento->codDisciplinaOrigemFK,
-    									'codDisciplinaDestinoFK'=>$aproveitamento->codDisciplinaDestinoFK,
-    									'idAluno'=>$aproveitamento->idAluno]) !== Null)
-    		{
-    			$this->mensagens('warning', 'Aproveitamento Já Existente.', 'Este aluno já possui este aproveitamento.');
-    			$model->idAluno = $idAluno;
-    			return $this->render('create', [
-    					'model' => $model,
-    					'fromAluno'=>true,
-    			]);
+    		//Verifica se Aproveitamento(Origem, Destino) é válido.
+    		//Caso contrário, direciona para a actionView e apresenta o Aproveitamento existente.
+    		$codAproveitamentoExistente = Null;
+    		if(Aproveitamento::getAproveitamentoOrigemDestinoExiste($aproveitamento->codDisciplinaOrigemFK, $aproveitamento->codDisciplinaDestinoFK, $idAluno) !== Null){
+	    		$this->mensagens('warning', 'Aproveitamento Já Existente.', 'Este aluno já possui este aproveitamento.');
+	    		$codAproveitamentoExistente[] = Aproveitamento::getAproveitamentoOrigemDestinoExiste($aproveitamento->codDisciplinaOrigemFK, $aproveitamento->codDisciplinaDestinoFK, $idAluno);
+    		}else{
+    			$headMsg; $bodyMsg;
+	    		if(Aproveitamento::getAproveitamentoDisciplinaUsada($aproveitamento->codDisciplinaOrigemFK, $idAluno) !== Null){
+		    		$headMsg[] = 'Disciplina Origem';
+		    		$bodyMsgX[] = 'um aproveitamento com a disciplina origem';
+		    		$codAproveitamentoExistente[] = Aproveitamento::getAproveitamentoDisciplinaUsada($aproveitamento->codDisciplinaOrigemFK, $idAluno);
+	    		}
+	    		if(Aproveitamento::getAproveitamentoDisciplinaUsada($aproveitamento->codDisciplinaDestinoFK, $idAluno) !== Null){
+	    			$headMsg[] = 'Disciplina Destino';
+	    			$bodyMsgX[] = 'um aproveitamento com a disciplina destino.';
+	    			$codAproveitamentoExistente[] = Aproveitamento::getAproveitamentoDisciplinaUsada($aproveitamento->codDisciplinaDestinoFK, $idAluno);
+	    		}
+	    		if($codAproveitamentoExistente !== Null){
+		    		$head = implode(' & ',$headMsg); 
+		    		$msgX = 'Este Aluno já possui '.implode(' & ', $bodyMsgX).'.';
+		    		 
+		    		
+		    		$this->mensagens('warning', $head, $msgX);
+	    		}
+	    		
+    		}
+    		if($codAproveitamentoExistente !== Null)
+    		{	
+    			$queryParams=['AproveitamentoSearch'=>['idAluno'=>$idAluno]];
+    			//Redireciona para o GridView listando os Aproveitamentos em que as Disciplinas Impedidas Aparecem.
+    			return $this->goToIndexAndSearch($idAluno, $codAproveitamentoExistente);
     		}
     		
     		//Verifica Existencia da Disciplina Origem
-    		if(Disciplina::findOne($aproveitamento->codDisciplinaOrigemFK)===Null){
+    		if(Disciplina::findOne(strtolower($aproveitamento->codDisciplinaOrigemFK))===Null){
     			$mDisciplina = new Disciplina();
-    			$mDisciplina->codDisciplina = $aproveitamento->codDisciplinaOrigemFK;
+    			$mDisciplina->codDisciplina = strtolower($aproveitamento->codDisciplinaOrigemFK);
     			$mDisciplina->cargaHoraria = $dados["disciplinaOrigemCargaHoraria"];
     			$mDisciplina->creditos = $dados["disciplinaOrigemCreditos"];
     			$mDisciplina->nome = $dados["disciplinaOrigemNome"];
@@ -139,9 +169,9 @@ class AproveitamentoController extends Controller
     		}
     		
     		//Verifica Existencia da Disciplina Destino
-    		if(Disciplina::findOne($aproveitamento->codDisciplinaDestinoFK)===Null){
+    		if(Disciplina::findOne(strtolower($aproveitamento->codDisciplinaDestinoFK))===Null){
     			$mDisciplina = new Disciplina();
-    			$mDisciplina->codDisciplina = $aproveitamento->codDisciplinaDestinoFK;
+    			$mDisciplina->codDisciplina = strtolower($aproveitamento->codDisciplinaDestinoFK);
     			$mDisciplina->cargaHoraria = $dados["disciplinaDestinoCargaHoraria"];
     			$mDisciplina->creditos = $dados["disciplinaDestinoCreditos"];
     			$mDisciplina->nome = $dados["disciplinaDestinoNome"];
@@ -152,11 +182,12 @@ class AproveitamentoController extends Controller
     		}
     		
     		if($aproveitamento->save()){
-    			return $this->redirect(['view', 'id' => $model->id]);
+    			return $this->redirect(['view', 'id' => $aproveitamento->id, 'idAluno'=>$idAluno]);
     		} else {
-	            return $this->render('create', [
+	            /*return $this->render('create', [
 	                'model' => $model,
-	            ]);
+	            ]);*/
+    			throw new NotFoundHttpException('Erro ao registrar Aproveitamento. Contate o administrador do sistema.');
         	}    		
     		
     	}else    	
@@ -169,8 +200,6 @@ class AproveitamentoController extends Controller
 	    	}else{
 	    		throw new NotFoundHttpException('Aluno não existente.');
 	    	}
-    	
-    
     }
 
     /**
@@ -191,6 +220,107 @@ class AproveitamentoController extends Controller
             ]);
         }
     }
+    
+    public function actionUpdatebyaluno($id)
+    {
+
+    	//$model = new Aproveitamento();
+    	 
+    	$aproveitamento = new Aproveitamento();
+    	$idAluno;
+    	$aproveitamento = Aproveitamento::findOne($id); 
+    	if($aproveitamento !== Null){
+    		$idAluno = Aproveitamento::findOne($id)->idAluno;
+    	}else{
+    		throw new NotFoundHttpException('Aluno não existente.');
+    	}
+    	
+    	if ($aproveitamento->load(Yii::$app->request->post()) ) {
+    		$dados = Yii::$app->request->post();
+	
+    		$idAluno = $dados['Aproveitamento']['idAluno'];
+    		//$aproveitamento->id = $dados['Aproveitamento']['id'];
+    		//Verifica se Aproveitamento(Origem, Destino) é válido.
+    		//Caso contrário, direciona para a actionView e apresenta o Aproveitamento existente.
+    		$codAproveitamentoExistente = Null;
+    		$codAprov = Aproveitamento::getAproveitamentoOrigemDestinoExiste($aproveitamento->codDisciplinaOrigemFK, $aproveitamento->codDisciplinaDestinoFK, $idAluno);
+    		if($codAprov !== Null && $codAprov != $id){
+    			$this->mensagens('warning', 'Aproveitamento Já Existente.', 'Este aluno já possui este aproveitamento.'.$codAprov."---".$id);
+    			$codAproveitamentoExistente[] = Aproveitamento::getAproveitamentoOrigemDestinoExiste($aproveitamento->codDisciplinaOrigemFK, $aproveitamento->codDisciplinaDestinoFK, $idAluno);
+    		}else{
+    			$headMsg; $bodyMsg;
+    			$codAprov = Aproveitamento::getAproveitamentoDisciplinaUsada($aproveitamento->codDisciplinaOrigemFK, $idAluno);
+    			if($codAprov !== Null && $codAprov != $id){
+    				$headMsg[] = 'Disciplina Origem';
+    				$bodyMsgX[] = 'um aproveitamento com a disciplina origem';
+    				$codAproveitamentoExistente[] = $codAprov;
+    			}
+    			$codAprov = Aproveitamento::getAproveitamentoDisciplinaUsada($aproveitamento->codDisciplinaDestinoFK, $idAluno);
+    			if($codAprov !== Null && $codAprov != $id){
+    				$headMsg[] = 'Disciplina Destino';
+    				$bodyMsgX[] = 'um aproveitamento com a disciplina destino.';
+    				$codAproveitamentoExistente[] = $codAprov;
+    			}
+    			if($codAproveitamentoExistente !== Null){
+    				$head = implode(' & ',$headMsg);
+    				$msgX = 'Este Aluno já possui '.implode(' & ', $bodyMsgX).'.';
+    				 
+    	
+    				$this->mensagens('warning', $head, $msgX);
+    			}
+    			 
+    		}
+    		if($codAproveitamentoExistente !== Null)
+    		{
+    			$queryParams=['AproveitamentoSearch'=>['idAluno'=>$idAluno]];
+    			//Redireciona para o GridView listando os Aproveitamentos em que as Disciplinas Impedidas Aparecem.
+    			return $this->goToIndexAndSearch($idAluno, $codAproveitamentoExistente);
+    		}
+    	
+    		//Verifica Existencia da Disciplina Origem
+    		if(Disciplina::findOne($aproveitamento->codDisciplinaOrigemFK)===Null){
+    			$mDisciplina = new Disciplina();
+    			$mDisciplina->codDisciplina = strtolower($aproveitamento->codDisciplinaOrigemFK);
+    			$mDisciplina->cargaHoraria = $dados["disciplinaOrigemCargaHoraria"];
+    			$mDisciplina->creditos = $dados["disciplinaOrigemCreditos"];
+    			$mDisciplina->nome = $dados["disciplinaOrigemNome"];
+    			 
+    			if(!$mDisciplina->save()){
+    				throw new NotFoundHttpException("Erro ao cadastrar disciplina $mDisciplina->codDisciplina : $mDisciplina->nome.");
+    			}
+    		}
+    	
+    		//Verifica Existencia da Disciplina Destino
+    		if(Disciplina::findOne($aproveitamento->codDisciplinaDestinoFK)===Null){
+    			$mDisciplina = new Disciplina();
+    			$mDisciplina->codDisciplina = strtolower($aproveitamento->codDisciplinaDestinoFK);
+    			$mDisciplina->cargaHoraria = $dados["disciplinaDestinoCargaHoraria"];
+    			$mDisciplina->creditos = $dados["disciplinaDestinoCreditos"];
+    			$mDisciplina->nome = $dados["disciplinaDestinoNome"];
+    	
+    			if(!$mDisciplina->save()){
+    				throw new NotFoundHttpException("Erro ao cadastrar disciplina $mDisciplina->codDisciplina : $mDisciplina->nome.");
+    			}
+    		}
+    		//$aproveitamento->isNewRecord = false;
+    		if($aproveitamento->save()!==false){
+    			return $this->redirect(['view', 'id' => $id, 'idAluno'=>$idAluno]);
+    		} else {
+    			/*return $this->render('create', [
+    			 'model' => $model,
+    			 ]);*/
+    			throw new NotFoundHttpException('Erro ao atualizar Aproveitamento. Contate o administrador do sistema.');
+    		}
+    	
+    	}else{
+    			$aproveitamento = Aproveitamento::findOne($id);
+    			//$model->idAluno = $apro;
+    			return $this->render('update', [
+    					'model' => $aproveitamento,
+    					'fromAluno'=>true,
+    			]);
+    	}
+    }
 
     /**
      * Deletes an existing Aproveitamento model.
@@ -203,6 +333,12 @@ class AproveitamentoController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+    
+    public function actionDeletebyaluno($id, $idAluno){
+    	$this->findModel($id)->delete();
+    	
+    	return $this->redirect(['indexbyaluno','idAluno'=>$idAluno]);
     }
 
     /**
@@ -235,4 +371,18 @@ class AproveitamentoController extends Controller
     			'showProgressbar' => true,
     	]);
     }
+    
+    public function goToIndexAndSearch($idAluno, $ids){
+    	$searchModel = new AproveitamentoSearch();
+    	$searchModel->idAluno = $idAluno;
+    	
+    	$dataProvider = $searchModel->searchIds($ids);
+
+    	return $this->render('index', [
+    			'searchModel' => $searchModel,
+    			'dataProvider' => $dataProvider,
+    			'idAluno'=>$idAluno,
+    	]);
+    	
+    } 
 }
