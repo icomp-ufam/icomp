@@ -84,6 +84,11 @@ $models = $provider->getModels();
                 return date("m-Y", strtotime($model->dataingresso));
                 },
         ],
+        [
+            'label' => 'Dias Atrasado',
+            'attribute' => 'diasParaFormar',
+            'value' => 'diasParaFormar'
+        ],
         'nomeOrientador',
         [   'label' => 'Linha Pesquisa',
             'attribute' => 'siglaLinhaPesquisa',
@@ -114,5 +119,3 @@ $models = $provider->getModels();
         */
     ],
 ]); ?>
-
-<?php echo $aluno?>

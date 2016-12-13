@@ -147,30 +147,15 @@ class Aluno extends \yii\db\ActiveRecord
 
         if($this->curso == 1){//Mestrado
             $diasParaFormar= 720;
-        }else{
+        }else{ //Doutorado
             $diasParaFormar= 1440;
         }
-        $dataIngresso= date('Y-m-d',strtotime($this->dataingresso));
-        $dataAtual= date("Y-m-d");
-        $diasPassados= strtotime($dataingresso) - strtotime($dataAtual);
+        $dataIngresso= strtotime($this->dataingresso);
+        $dataAtual= strtotime(date("Y-m-d"));
+        $diasPassados= (int)floor( ($dataAtual - $dataIngresso) / (60 * 60 * 24));
         $diasParaFormar= $diasParaFormar - $diasPassados;
+        
         return $diasParaFormar;
-    }
-
-    public function getAlunosPrazoVencido(){
-        $prorrogacaoAluno= Prorrogacao::find()->where('idAluno =' . $this->id);
-        $trancamentoAluno= Trancamento::find()->where('idAluno =' . $this->id);
-
-        if($this->curso == 1){//Mestrado
-            $diasParaFormar= 720;
-        }else{
-            $diasParaFormar= 1440;
-        }
-        $dataIngresso= date("Y-m-d",strtotime($this->dataingresso));
-        $dataAtual= date("Y-m-d");
-        $diasPassados= $dataIngresso - $dataAtual;
-        $diasParaFormar= $diasParaFormar - $diasPassados;
-        return $dataIngresso;
     }
     
 }

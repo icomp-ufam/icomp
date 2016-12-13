@@ -13,6 +13,7 @@ use Yii;
  * @property integer $id
  * @property integer $idAluno
  * @property string $dataSolicitacao
+ * @property string $dataInicio
  * @property integer $qtdDias
  * @property string $justificativa
  * @property integer $status

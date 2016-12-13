@@ -377,8 +377,8 @@ class AlunoController extends Controller
 
         
 
-		$aluno= new Aluno();
-        $aluno= $aluno->getAlunosPrazoVencido();
+		//$aluno= new Aluno();
+        //$aluno= $aluno->getAlunosPrazoVencido();
         //return $this->render('prazo_vencido', ['aluno'=>$aluno]);
 
         $searchModel = new AlunoSearch();

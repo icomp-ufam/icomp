@@ -18,7 +18,7 @@ class AlunoSearch extends Aluno
     public function rules()
     {
         return [
-            [['id', 'area', 'curso',  'regime', 'status', 'egressograd', 'idUser', 'orientador'], 'integer'],
+            [['id', 'area', 'curso',  'regime', 'status', 'egressograd', 'idUser', 'orientador', 'diasParaFormar'], 'integer'],
             [['nome', 'email', 'senha', 'matricula', 'endereco', 'bairro', 'cidade', 'uf', 'cep', 'siglaLinhaPesquisa', 'nomeOrientador', 'datanascimento', 'sexo', 'cpf', 'telresidencial', 'telcelular', 'bolsista', 'dataingresso', 'idiomaExameProf', 'conceitoExameProf', 'dataExameProf', 'cursograd', 'instituicaograd', 'anoconclusao', 'sede'], 'safe'],
         ];
     }
