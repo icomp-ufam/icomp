@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'NotaFiscal') ?>
 
-    <?= $form->field($model, 'Localizacao') ?>
+    <?= $form->field($model, 'StatusEquipamento') ?>
 
     <?php // echo $form->field($model, 'StatusEquipamento') ?>
 

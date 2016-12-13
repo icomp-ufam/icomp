@@ -47,10 +47,10 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
     {
         return [
             'idCautelaAvulsa' => 'Id Cautela Avulsa',
-            'id' => 'ID do Responsável',
+            'id' => 'Id do Responsável',
             'NomeResponsavel' => 'Nome do Responsável',
             'Email' => 'Email',
-            'ValidadeCautela' => 'Validade da Cautela',
+            'ValidadeCautela' => 'Validade Cautela',
             'TelefoneResponsavel' => 'Telefone do Responsável',
             'ObservacoesDescarte' => 'Observações',
             'ImagemCautela' => 'Imagem Cautela',

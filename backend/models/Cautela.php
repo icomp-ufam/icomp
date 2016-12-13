@@ -45,12 +45,12 @@ class Cautela extends \yii\db\ActiveRecord
     {
         return [
             'idCautela' => 'Id Cautela',
-            'NomeResponsavel' => 'Nome do Responsável',
-            'OrigemCautela' => 'Origem',
-            'DataDevolucao' => 'Data de Devolucao',
+            'NomeResponsavel' => 'Nome Responsavel',
+            'OrigemCautela' => 'Origem Cautela',
+            'DataDevolucao' => 'Data Devolucao',
             'Email' => 'Email',
-            'ValidadeCautela' => 'Validade da Cautela',
-            'TelefoneResponsavel' => 'Telefone do Responsável',
+            'ValidadeCautela' => 'Validade Cautela',
+            'TelefoneResponsavel' => 'Telefone Responsavel',
             'ImagemCautela' => 'Imagem Cautela',
         ];
     }

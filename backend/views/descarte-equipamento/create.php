@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\DescarteEquipamento */
 
-$this->title = 'Create Descarte Equipamento';
-$this->params['breadcrumbs'][] = ['label' => 'Descarte Equipamentos', 'url' => ['index']];
+$this->title = 'Descartar Equipamento';
+$this->params['breadcrumbs'][] = ['label' => 'Descartar Equipamentos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="descarte-equipamento-create">

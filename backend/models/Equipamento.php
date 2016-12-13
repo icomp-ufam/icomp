@@ -3,6 +3,9 @@
 namespace app\models;
 
 use Yii;
+use yii\base\Model;
+use yii\web\UploadedFile;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "j17_equipamento".
@@ -18,6 +21,10 @@ use Yii;
  */
 class Equipamento extends \yii\db\ActiveRecord
 {
+
+    public $file;
+    public $imageFile;
+
     /**
      * @inheritdoc
      */
@@ -25,6 +32,8 @@ class Equipamento extends \yii\db\ActiveRecord
     {
         return 'j17_equipamento';
     }
+
+
 
     /**
      * @inheritdoc
@@ -34,6 +43,8 @@ class Equipamento extends \yii\db\ActiveRecord
         return [
             [['NomeEquipamento', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento'], 'required'],
             [['NomeEquipamento', 'Nserie', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento', 'ImagemEquipamento'], 'string', 'max' => 50],
+            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            
         ];
     }
 
@@ -44,13 +55,24 @@ class Equipamento extends \yii\db\ActiveRecord
     {
         return [
             'idEquipamento' => 'Id Equipamento',
-            'NomeEquipamento' => 'Nome Equipamento',
-            'Nserie' => 'Nserie',
+            'NomeEquipamento' => 'Nome do Equipamento',
+            'Nserie' => 'Nº de Série',
             'NotaFiscal' => 'Nota Fiscal',
-            'Localizacao' => 'Localizacao',
-            'StatusEquipamento' => 'Status Equipamento',
-            'OrigemEquipamento' => 'Origem Equipamento',
-            'ImagemEquipamento' => 'Imagem Equipamento',
+            'Localizacao' => 'Localização',
+            'StatusEquipamento' => 'Status',
+            'OrigemEquipamento' => 'Origem',
+            'file' => 'Imagem Equipamento',
         ];
+    }
+
+
+    public function upload()
+    {
+        if ($this->validate()) {
+            $this->file->saveAs('uploads/' . $this->file->baseName . '.' . $this->file->extension);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\models\CautelaAvulsa */
 
 $this->title = 'Gerar Cautela Avulsa';
-$this->params['breadcrumbs'][] = ['label' => 'Cautelas Avulsas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Cautela Avulsas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cautela-avulsa-create">

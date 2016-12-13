@@ -1,21 +1,46 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use yii\widgets\fileInput;
 
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Equipamento */
 
-$this->title = 'Create Equipamento';
+$this->title = 'Cadastrar Equipamento';
 $this->params['breadcrumbs'][] = ['label' => 'Equipamentos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
+
+
+
+
 <div class="equipamento-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
+
+    <?php
+        $form->field($model, 'file')->fileInput() ;
+        
+        if($model->ImagemEquipamento){
+            echo '<img src="'.\Yii::$app->request->BaseUrl.'/'.$model->ImagemEquipamento.' " width="90px" > &nbsp;&nbsp;&nbsp; ' ;
+            echo Html::a('Delete ImagemEquipamento',['equipamento/deleteImagemEquipamento', 'idEquipamento'=>$model->idEquipamento],['class'=>'btn btn-danger']).'<p>';
+            
+        }
+
+
+    ?>
+
+    <?php ActiveForm::end() ?>
+
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
 
 </div>
+

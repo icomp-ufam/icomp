@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\widgets\MaskedInput;
-
+use kartik\widgets\DatePicker;
+use kartik\mpdf\Pdf;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Cautela */
@@ -12,32 +12,54 @@ use yii\widgets\MaskedInput;
 
 <div class="cautela-form">
 
-<?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
-<?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar  ', ['index'], ['class' => 'btn btn-warning']) ?>    
-    <br><br>
-        
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><b>Dados da Cautela</b></h3>
-                    </div>
-                    <div class="panel-body">
-                        <?= $form->field($model, 'NomeResponsavel')->label("<font color='#FF0000'>*</font> <b>Nome Do Resposável:</b>") ?>
-                        <?= $form->field($model, 'Email')->label("<font color='#FF0000'>*</font> <b>E-mail:</b>") ?>
-                        <?= $form->field($model, 'TelefoneResponsavel')->widget(MaskedInput::className(), [
-                            'mask' => '(99) 99999-9999'])->label("<font color='#FF0000'>*</font> <b>Telefone do Responsável:</b>") ?>
-                        <?= $form->field($model, 'OrigemCautela')->label("<font color='#FF0000'>*</font> <b>Origem:</b>") ?>
-                        <?= $form->field($model, 'DataDevolucao')->label("<b>Data de Devolução:</b>") ?>
-                        <?= $form->field($model, 'ValidadeCautela')->label("<b>Validade da Cautela:</b>") ?>
-                        <?= $form->field($model, 'ImagemCautela')->textInput(['maxlength' => true]) ?>
+    <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'NomeResponsavel')->textInput(['maxlength' => true]) ?>
 
-                    </div>
+    <?= $form->field($model, 'OrigemCautela')->textInput(['maxlength' => true]) ?>
 
-                </div>
-          <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Gerar' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        <?= Html::a('Cancelar',['index'], ['class' => 'btn btn-danger']) ?>
+   
+
+    <div class="row">
+                <?= $form->field($model, 'DataDevolucao', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
+                    'language' => 'pt-BR',
+                    'options' => ['placeholder' => 'Selecione a Data de Devolução ...',],
+                    'pluginOptions' => [
+                        'format' => 'dd-mm-yyyy',
+                        'todayHighlight' => true
+                    ]
+                ])->label("<font color='#FF0000'>*</font> <b>Data de Devolução:</b>")
+                ?>
     </div>
-<?php ActiveForm::end(); ?>
+
+    <?= $form->field($model, 'Email')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'ValidadeCautela')->textInput(['maxlength' => true]) ?>
+
+    <div class="row">
+                <?= $form->field($model, 'ValidadeCautela', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
+                    'language' => 'pt-BR',
+                    'options' => ['placeholder' => 'Selecione a Validade ...',],
+                    'pluginOptions' => [
+                        'format' => 'dd-mm-yyyy',
+                        'todayHighlight' => true
+                    ]
+                ])->label("<font color='#FF0000'>*</font> <b>Data da Validade:</b>")
+                ?>
+    </div>
+
+    <?= $form->field($model, 'TelefoneResponsavel')->textInput(['maxlength' => true]) ?>
+
+    
+
+    <?= $form->field($model, 'ImagemCautela', ['options' => ['class' => 'col-md-6']])->fileInput(['accept' => '.pdf'])->label("Cautela: ") ?>
+
+    <div class="form-group">
+        <?= Html::submitButton($model->isNewRecord ? 'Gerar' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::a('Cancelar', ['index'], ['class' => 'btn btn-danger']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
 </div>

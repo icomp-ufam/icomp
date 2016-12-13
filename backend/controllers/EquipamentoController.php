@@ -8,6 +8,9 @@ use app\models\EquipamentoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\UploadForm;
+use yii\web\UploadedFile;
+
 
 /**
  * EquipamentoController implements the CRUD actions for Equipamento model.
@@ -66,12 +69,29 @@ class EquipamentoController extends Controller
         $model = new Equipamento();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idEquipamento]);
+           // Create Upload
+            $model->file = UploadedFile::getInstance($model, 'file');
+            if ($model->file) {
+                $imagepath = 'equipamento';
+                $model->ImagemEquipamento = $imagepath .rand(10,100).$model->file->name;
+            }
+
+            if ($model->save()) {
+
+                if($model->file){
+                    $model->file->saveAs($model->ImagemEquipamento);
+                    //return $this->redirect(['view', 'id' => $model->idEquipamento]);
+                }
+
+                return $this->redirect(['view', 'id' => $model->idEquipamento]);
+            }
+
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
+
     }
 
     /**
@@ -85,12 +105,43 @@ class EquipamentoController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idEquipamento]);
+
+            $model->file = UploadedFile::getInstance($model, 'file');
+            if ($model->file) {
+                $imagepath = 'equipamento';
+                
+                $model->ImagemEquipamento= $imagepath .rand(10,100).$model->file->name;
+            }
+
+            if ($model->save()) {
+                if($model->file){
+                    $model->file->saveAs($model->ImagemEquipamento);
+                    return $this->redirect(['view', 'id' => $model->idEquipamento]);
+                }
+            }
+            //return $this->redirect(['view', 'id' => $model->idEquipamento]);
+
         } else {
             return $this->render('update', [
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionDeletefoto($id){
+
+        $ImagemEquipamento= Pasien::find()->where(['id' => $id])->one()->ImagemEquipamento;
+        if($ImagemEquipamento) {
+            if (!unlink($ImagemEquipamento)) {
+                return false;
+            }
+        }
+
+        $pasien = Pasien::findOne($id);
+        $pasien->ImagemEquipamento = NULL;
+        $pasien->update();
+
+        return $this->redirect(['update', 'id' => $id]);
     }
 
     /**
@@ -121,4 +172,22 @@ class EquipamentoController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionUpload()
+    {
+        $model = new UploadForm();
+
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'ImagemEquipamento');
+            if ($model->upload()) {
+                // file is uploaded successfully
+                return;
+            }
+        }
+
+        return $this->render('upload', ['model' => $model]);
+    }
+
+
+
 }

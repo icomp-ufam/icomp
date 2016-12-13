@@ -2,13 +2,19 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\widgets\fileInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Equipamento */
 /* @var $form yii\widgets\ActiveForm */
+/*   <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
+
+    <?= $form->field($model, 'ImagemEquipamento')->fileInput() ?>*/
+
 ?>
 
 <div class="equipamento-form">
+    
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -26,8 +32,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ImagemEquipamento')->textInput(['maxlength' => true]) ?>
 
+  
+
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Cadastrar' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::a('Cancelar', ['index'], ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
