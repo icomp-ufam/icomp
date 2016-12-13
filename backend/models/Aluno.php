@@ -5,6 +5,8 @@ namespace app\models;
 use Yii;
 use yiibr\brvalidator\CpfValidator;
 
+use yii\db\Query;
+use yii\data\SqlDataProvider;
 
 class Aluno extends \yii\db\ActiveRecord
 {
@@ -139,4 +141,36 @@ class Aluno extends \yii\db\ActiveRecord
         return $this->hasMany(Trancamentos::className(), ['idAluno' => 'id']);
     }
 
+    public function getDiasParaFormar() {
+        $prorrogacaoAluno= Prorrogacao::find()->where('idAluno =' . $this->id);
+        $trancamentoAluno= Trancamento::find()->where('idAluno =' . $this->id);
+
+        if($this->curso == 1){//Mestrado
+            $diasParaFormar= 720;
+        }else{
+            $diasParaFormar= 1440;
+        }
+        $dataIngresso= date('Y-m-d',strtotime($this->dataingresso));
+        $dataAtual= date("Y-m-d");
+        $diasPassados= strtotime($dataingresso) - strtotime($dataAtual);
+        $diasParaFormar= $diasParaFormar - $diasPassados;
+        return $diasParaFormar;
+    }
+
+    public function getAlunosPrazoVencido(){
+        $prorrogacaoAluno= Prorrogacao::find()->where('idAluno =' . $this->id);
+        $trancamentoAluno= Trancamento::find()->where('idAluno =' . $this->id);
+
+        if($this->curso == 1){//Mestrado
+            $diasParaFormar= 720;
+        }else{
+            $diasParaFormar= 1440;
+        }
+        $dataIngresso= date("Y-m-d",strtotime($this->dataingresso));
+        $dataAtual= date("Y-m-d");
+        $diasPassados= $dataIngresso - $dataAtual;
+        $diasParaFormar= $diasParaFormar - $diasPassados;
+        return $dataIngresso;
+    }
+    
 }
