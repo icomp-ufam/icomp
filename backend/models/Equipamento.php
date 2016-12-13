@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\web\UploadedFile;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "j17_equipamento".
@@ -18,6 +20,10 @@ use Yii;
  */
 class Equipamento extends \yii\db\ActiveRecord
 {
+
+    public $file;
+    public $tipoEquipamento;
+
     /**
      * @inheritdoc
      */
@@ -25,6 +31,8 @@ class Equipamento extends \yii\db\ActiveRecord
     {
         return 'j17_equipamento';
     }
+
+
 
     /**
      * @inheritdoc
@@ -34,6 +42,7 @@ class Equipamento extends \yii\db\ActiveRecord
         return [
             [['NomeEquipamento', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento'], 'required'],
             [['NomeEquipamento', 'Nserie', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento', 'ImagemEquipamento'], 'string', 'max' => 50],
+
         ];
     }
 
@@ -44,13 +53,40 @@ class Equipamento extends \yii\db\ActiveRecord
     {
         return [
             'idEquipamento' => 'Id Equipamento',
-            'NomeEquipamento' => 'Nome Equipamento',
-            'Nserie' => 'Nserie',
+            'NomeEquipamento' => 'Nome do Equipamento',
+            'Nserie' => 'Nº de Série',
             'NotaFiscal' => 'Nota Fiscal',
-            'Localizacao' => 'Localizacao',
-            'StatusEquipamento' => 'Status Equipamento',
-            'OrigemEquipamento' => 'Origem Equipamento',
-            'ImagemEquipamento' => 'Imagem Equipamento',
+            'Localizacao' => 'Localização',
+            'StatusEquipamento' => 'Status',
+            'OrigemEquipamento' => 'Origem',
+            'file' => 'Imagem Equipamento',
         ];
+    }
+
+
+     public function getTipoEquipamento(){
+
+        if ($this->StatusEquipamento == "Disponível"){
+            $tipoEquipamento = "Disponível";
+        }
+        else if ($this->StatusEquipamento == "Em uso"){
+            $tipoEquipamento= "Em uso";
+        }
+        else if ($this->StatusEquipamento == "Descartado"){
+            $tipoEquipamento = "Descartado";
+        }
+
+        return $tipoEquipamento;
+    }
+
+
+   public function upload()
+    {
+        if ($this->validate()) {
+            $this->file->saveAs('uploads/' . $this->file->baseName . '.' . $this->file->extension);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

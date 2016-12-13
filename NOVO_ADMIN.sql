@@ -83,7 +83,7 @@ CREATE TABLE `j17_user` (
 --
 
 INSERT INTO `j17_user` (`nome`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `visualizacao_candidatos`, `visualizacao_candidatos_finalizados`, `visualizacao_cartas_respondidas`, `administrador`, `coordenador`, `secretaria`, `professor`, `aluno`, `siape`, `dataIngresso`, `endereco`, `telcelular`, `telresidencial`, `unidade`, `titulacao`, `classe`, `nivel`, `regime`, `turno`, `idLattes`, `formacao`, `resumo`, `alias`, `ultimaAtualizacao`, `idRH`, `cargo`) VALUES
-('admin teste', '999.999.999-99', 'JsHPm23fX1lCpVMrFD9wLZnRztGemGqF', '$2y$13$q2Wg3LKKplx4scKbUNKFqu/.FoHDIGc8hkV81RktklS77Rr9AzPJG', NULL, 'teste@icomp.ufam.edu.br', 10, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+('admin teste', '033.840.071-07', 'JsHPm23fX1lCpVMrFD9wLZnRztGemGqF', '$2y$13$q2Wg3LKKplx4scKbUNKFqu/.FoHDIGc8hkV81RktklS77Rr9AzPJG', NULL, 'mscs@icomp.ufam.edu.br', 10, '', '', '2016-12-06 22:00:00', '2016-12-06 22:00:00', '2016-12-06 22:00:00', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 /*
 --

@@ -20,14 +20,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Localizacao')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'StatusEquipamento')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'StatusEquipamento')->dropDownList(['Disponível' => 'Disponível','Em uso'=> 'Em uso','Descartado'=>'Descartado']) ?>
 
     <?= $form->field($model, 'OrigemEquipamento')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'ImagemEquipamento')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Cadastrar' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

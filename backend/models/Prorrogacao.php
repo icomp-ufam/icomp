@@ -15,7 +15,6 @@ use Yii;
  * @property string $dataSolicitacao
  * @property integer $qtdDias
  * @property string $justificativa
- * @property string $previa
  * @property integer $status
  * 
  * Obtained through relationships:
@@ -33,7 +32,7 @@ use Yii;
  * 
  */
 class Prorrogacao extends \yii\db\ActiveRecord
-{
+{   
     public $orientador;
     public $matricula;
     public $linhaPesquisa;
@@ -54,12 +53,12 @@ class Prorrogacao extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idAluno', 'dataSolicitacao', 'dataInicio', 'qtdDias', 'justificativa', 'previa', 'status'], 'required'],
+            [['idAluno', 'dataSolicitacao', 'dataInicio', 'qtdDias', 'justificativa', 'status'], 'required'],
             [['dataSolicitacao0'], 'required', 'on' => 'create'],
             [['id', 'idAluno', 'qtdDias', 'status'], 'integer'],
             [['matricula', 'orientador', 'dataSolicitacao', 'dataInicio', 'dataInicio0', 'dataSolicitacao0'], 'safe'],
             [['dataInicio0', 'dataSolicitacao0'], 'date', 'format' => 'php:d/m/Y'],
-            [['justificativa', 'previa'], 'string'],
+            [['justificativa', 'documento'], 'string'],
             [['idAluno'], 'exist', 'skipOnError' => true, 'targetClass' => Aluno::className(), 'targetAttribute' => ['idAluno' => 'id']],
         ];
     }
@@ -80,7 +79,7 @@ class Prorrogacao extends \yii\db\ActiveRecord
             'dataInicio0' => 'Início',
             'orientador' => 'Orientador',
             'justificativa' => 'Justificativa',
-            'previa' => 'Previa',
+            'documento' => 'Documento',
             'status' => 'Status',
         ];
     }
@@ -107,5 +106,27 @@ class Prorrogacao extends \yii\db\ActiveRecord
 
     public function getOrientador0() {
         return $this->hasOne(User::className(), ['id' => 'orientador'])->via('aluno');
+    }
+
+    public function canDoProrogation() {
+        //Limit in Days
+        $limitMestrado =  360;
+        $limitDoutorado = 720;
+
+        $prorogations = $this->find()->where('idAluno = '.$this->idAluno)->all();
+        $sum = 0;
+
+        foreach ($prorogations as $prorogation) {
+            $sum = $sum + $prorogation->qtdDias;
+        }
+
+        if ($this->aluno->curso == 1) { //Mestrado
+            if ($sum >= $limitMestrado) return false;
+        }
+        else { //Doutorado
+            if ($sum >= $limitDoutorado) return false;
+
+        }
+        return true;
     }
 }

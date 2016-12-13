@@ -19,9 +19,17 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Delete', ['delete', 'id' => $model->idEquipamento], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Você tem certeza que deseja deletar este item?',
                 'method' => 'post',
             ],
+        ]) ?>
+        <?= Html::a('Descartar Equipamento', ['descarte-equipamento/create', 'id' => $model->idEquipamento], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Você tem certeza que deseja dar baixa neste Equipamento?',
+                'method' => 'post',
+               // $this->redirect(array('descarte-equipamento/create', 'id' => $model->idEquipamento)),
+            ], 
         ]) ?>
     </p>
 

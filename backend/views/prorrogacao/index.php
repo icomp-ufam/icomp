@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Nova Prorrogação', ['/aluno/prorrogacao'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<span class="fa fa-plus"></span> Nova Prorrogação', ['/aluno/prorrogacao'], ['class' => 'btn btn-success']) ?>
     </p>
     <?php Pjax::begin(); ?>
     <?= GridView::widget([
@@ -123,8 +123,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             ['class' => 'yii\grid\ActionColumn',
-                'template'=> ' {view} {update} {delete}',
-                /*'buttons'=>
+                'template'=> '{download} {view} {update} {delete}',
+                'buttons'=>
                 [
                   'download' => function ($url, $model) { 
                     return Html::a('<span class="glyphicon glyphicon-download"></span>', $model->documento, [
@@ -133,7 +133,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'data-pjax'=> "0"
                         ]);
                   },
-                ]   */                         
+                ]                         
             ],
         ],
     ]); ?>

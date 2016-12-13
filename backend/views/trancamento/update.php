@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Trancamento */
 
-$this->title = 'Editar - Trancamento #'.$model->id.' - Aluno: '.$model->aluno->nome;
+$this->title = 'Editar Trancamento';
 $this->params['breadcrumbs'][] = ['label' => 'Gerenciar Trancamentos', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => 'Trancamento #'.$model->id.' - Aluno: '.$model->aluno->nome, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => 'Visualizar Trancamento', 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Editar';
 ?>
 <div class="trancamento-update">

@@ -19,7 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="aluno-index">
 
     <p>
-        <?= Html::a('<span class="glyphicon glyphicon-plus"></span> Novo Aluno', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<span class="fa fa-plus"></span> Novo Aluno', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<span class="fa fa-table"></span> Gerar Planilha do Excel', ['gerar_planilha'], ['class' => 'btn btn-primary']) ?>
     </p>
       <?= GridView::widget([
         'dataProvider' => $dataProvider,

@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Cadastrar Equipamento', ['create'], ['class' => 'btn btn-success']) ?>
-	<?= Html::a('Gerar Cautela', ['create'], ['class' => 'btn btn-success']) ?>
+
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -25,12 +25,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idEquipamento',
+            //'idEquipamento',
             'NomeEquipamento',
             'Nserie',
             'NotaFiscal',
             'Localizacao',
-            // 'StatusEquipamento',
+             [   'label' => 'Status do Equipamento',
+                'attribute' => 'StatusEquipamento',
+                'filter'=>array ("Disponível" => "Disponível", "Em uso" => "Em uso", "Descartado" => "Descartado"),
+                'value' => 'StatusEquipamento'
+
+
+            ],
+
+
+
             // 'OrigemEquipamento',
             // 'ImagemEquipamento',
 

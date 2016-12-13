@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 06-Dez-2016 às 04:25
+-- Generation Time: 11-Dez-2016 às 02:35
 -- Versão do servidor: 5.5.53-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -424,7 +424,7 @@ INSERT INTO `j17_afastamentos` (`id`, `idusuario`, `nomeusuario`, `emailusuario`
 (412, 94, 'Altigran Soares da Silva', 'alti@icomp.ufam.edu.br', 'Curitiba, Paraná / Belo Horizonte, MG', 1, '2015-07-08', '2015-06-10', 'Participar na avaliação interna do Programa de Pós-Graduação em Ciência da Computação da PUC Paraná no dia 08/05 em Curitiba e proferir uma palestra na cerimônia de abertura da Semana de Seminários do PPGCC da UFMG em Belo Horizonte.', '2015-06-03 20:14:43', 'Aula de PAA será ministrada pelo Prof. Edleno Silva de Moura.'),
 (413, 82, 'Eduardo Freire Nakamura', 'nakamura@icomp.ufam.edu.br', 'Fortaleza', 1, '2015-06-10', '2015-06-13', 'Palestrar no DCOSS 20015 no dia 11/06 e Coordenar o Workshop PWSN 2015, no DCOSS 2015, evento internacional que se realiza em Fortaleza neste ano.', '2015-06-09 01:15:37', 'Aulas serão repostas usando a folga existente e, caso necessário, aos sábados.'),
 (414, 443, 'Moisés Gomes de Carvalho', 'moises@icomp.ufam.edu.br', 'Rio Branco', 1, '0000-00-00', '0000-00-00', 'Ministrar o módulo de estrutura de dados do nivelamento para o mestrado do PPGI na cidade de Rio Branco', '2015-06-09 02:59:09', 'As aulas de IP-SI  08 e 10/06 já foram repostas nos 2 últimos tempos das ultimas 2 sextas feiras (29/05 e 05/06).\r\nA aula de GUBD-Biblio já foi reposta na manha do dia 02/06.'),
-(415, 77, 'Rosiane de Freitas', 'rosiane@icomp.ufam.edu.br', 'Seattle-WA, Pittsburg-PA (EUA)', 2, '2015-07-07', '2015-07-18', '\r\na) Intercâmbio e Missões\r\n(1)\r\n         Natureza do evento: Microsoft Research Faculty Summit 2015\r\n         Entidade: Microsoft Research..............................................................................\r\n         Cidade: Redmont - Washington, Estados Unidos................................................\r\n         Data de início: 07/07/2015 Data de término:09/07/2015\r\n         Apresentação de trabalho:  (  ) Sim    ( X  ) Não\r\n         (obs participação em reunião de grupo de pesquisa)\r\n(2)\r\n         Natureza do evento: visita ao instituto de pesquisa da empresa AMAZON\r\n         Entidade: Amazon\r\n         Cidade: Seattle-Washington, EUA\r\n         Data de início: 10/07/2015 Data de término: 10/07/2015.\r\n         Apresentação de trabalho:  ( ) Sim    (x ) Não\r\n         \r\n(3)\r\n         Natureza do evento: conferência científica (ISMP  2015 - the 22nd International Symposium on Mathematical Programming)\r\n         Entidade: MS.\r\n         Cidade: Pittsburgh - Pensilvânia, EUA\r\n         Data de início: 12/07/2015 Data de término: 17/07/2015.\r\n         Apresentação de trabalho:  (X) Sim    (   ) Não\r\n         Título do trabalho: “MIP formulations for parallel machine scheduling problems based on due date penalties”', '2015-06-17 21:25:04', 'Aulas dos dias 07, 09, 14 e 16 serão práticas de laboratório (todo o conteúdo teórico terá sido ministrado), referentes à realização do trabalho final da disciplina, conduzidas pelo doutorando em Estágio em Docência Bruno Raphael Dias.'),
+(415, 77, 'Rosiane de Freitas', 'rosiane@icomp.ufam.edu.br', 'Seattle-WA, Pittsburg-PA (EUA)', 2, '2015-07-07', '2015-07-18', '\r\na)	Intercâmbio e Missões\r\n(1)\r\n         Natureza do evento: Microsoft Research Faculty Summit 2015\r\n         Entidade: Microsoft Research..............................................................................\r\n         Cidade: Redmont - Washington, Estados Unidos................................................\r\n         Data de início: 07/07/2015 Data de término:09/07/2015\r\n         Apresentação de trabalho:  (  ) Sim    ( X  ) Não\r\n         (obs participação em reunião de grupo de pesquisa)\r\n(2)\r\n         Natureza do evento: visita ao instituto de pesquisa da empresa AMAZON\r\n         Entidade: Amazon\r\n         Cidade: Seattle-Washington, EUA\r\n         Data de início: 10/07/2015 Data de término: 10/07/2015.\r\n         Apresentação de trabalho:  ( ) Sim    (x ) Não\r\n         \r\n(3)\r\n         Natureza do evento: conferência científica (ISMP  2015 - the 22nd International Symposium on Mathematical Programming)\r\n         Entidade: MS.\r\n         Cidade: Pittsburgh - Pensilvânia, EUA\r\n         Data de início: 12/07/2015 Data de término: 17/07/2015.\r\n         Apresentação de trabalho:  (X) Sim    (   ) Não\r\n         Título do trabalho: “MIP formulations for parallel machine scheduling problems based on due date penalties”', '2015-06-17 21:25:04', 'Aulas dos dias 07, 09, 14 e 16 serão práticas de laboratório (todo o conteúdo teórico terá sido ministrado), referentes à realização do trabalho final da disciplina, conduzidas pelo doutorando em Estágio em Docência Bruno Raphael Dias.'),
 (416, 95, 'Edson Nascimento Silva Jr.', 'edson@icomp.ufam.edu.br', 'Rio de Janeiro, RJ', 1, '0000-00-00', '0000-00-00', 'Participação na Reunião Anual de Coordenadores dos PoPs da RNP', '2015-06-22 20:05:01', 'Serão feitas atividades práticas, para fixação do assunto'),
 (417, 72, 'Edleno Silva de Moura', 'edleno@icomp.ufam.edu.br', 'Porto Seguro', 1, '0000-00-00', '0000-00-00', 'Usufruto  de férias.', '2015-07-03 13:52:42', 'Aulas foram repostas previamente de modo a não haver prejuízo para os alunos.'),
 (418, 93, 'Tayana Uchoa Conte', 'tayana@icomp.ufam.edu.br', 'Pittsburgh', 2, '2015-07-04', '2015-07-10', 'Apresentação de 5 artigos no 27th International Conference on Software Engineering and Knowledge Engineering (SEKE 2015), no qual apresentarei cinco artigos: (1) “MoLVERIC: An Inspection Technique for MoLIC Diagrams”; (2) “Evaluating Software Engineers’ Acceptance of a Technique and Tool for Web Usability Inspection”; (3) “MAX: A Method for Evaluating the Post-use User eXperience through Cards and a Board”; (4) “Designing Personas with Empathy Map”; (5) “How do software engineers apply an early usability inspection technique? A qualitative study”.\r\nAs passagens foram financiadas pela FAPEAM, via PAPE – Edital N. 004/2015 – Chamada II.', '2015-07-03 20:13:34', 'Na disciplina Introdução à Engenharia de Software, o monitor doutorando Williamsom Silva irá ministrar exercícios práticos sobre Inspeção de Software em sala de aula. Na disciplina Engenharia de Software Experimental, os alunos utilizarão o tempo para executar as suas revisões sistemáticas da literatura.'),
@@ -654,6 +654,22 @@ CREATE TABLE `j17_aluno` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `j17_aproveitamento`
+--
+
+CREATE TABLE `j17_aproveitamento` (
+  `id` int(11) NOT NULL,
+  `codDisciplinaOrigemFK` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `codDisciplinaDestinoFK` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `nota` float NOT NULL,
+  `frequencia` float NOT NULL,
+  `situacao` varchar(10) NOT NULL,
+  `idAluno` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Aproveitamento de disciplina por aluno.';
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `j17_banca_has_membrosbanca`
 --
 
@@ -737,12 +753,12 @@ CREATE TABLE `j17_candidatos` (
 --
 
 INSERT INTO `j17_candidatos` (`id`, `posicaoEdital`, `idEdital`, `senha`, `inicio`, `fim`, `passoatual`, `nome`, `nomesocial`, `endereco`, `bairro`, `cidade`, `uf`, `cep`, `email`, `datanascimento`, `nacionalidade`, `pais`, `passaporte`, `cpf`, `sexo`, `telresidencial`, `telcelular`, `cursodesejado`, `regime`, `inscricaoposcomp`, `anoposcomp`, `notaposcomp`, `solicitabolsa`, `tituloproposta`, `cartaorientador`, `motivos`, `proposta`, `curriculum`, `comprovantepagamento`, `cursograd`, `instituicaograd`, `egressograd`, `dataformaturagrad`, `cursopos`, `instituicaopos`, `tipopos`, `egressopos`, `dataformaturapos`, `periodicosinternacionais`, `periodicosnacionais`, `conferenciasinternacionais`, `conferenciasnacionais`, `resultado`, `periodo`, `cotas`, `cotaTipo`, `deficiencia`, `deficienciaTipo`, `status`, `password_reset_token`, `auth_key`, `idLinhaPesquisa`, `declaracao`) VALUES
-(1, 1, '032-2016', '$2y$13$CuP91Say96/DfNnxDIDxjekQnlbCmAtOV8bxgVH9UeXbE363twY5m', '2016-06-01 20:47:31', NULL, 3, 'Eduardo Luzeiro Feitosa', ' ', 'Rua Francisco Loureiro, 185 Bloco 3 Apto 104', 'Ponta Negra ', 'Manaus', 'AM', '69037-043', 'efeitosa@icomp.ufam.edu.br', '20/05/1975', 1, 'Brasil', '', '562.859.492-04', 'M', '(92) 98145-0714', '(92) 33052-808', 2, 1, '', NULL, '', '1', 'Sei não também é ciência', 'CartaOrientador.pdf', 'Sei não', 'Proposta.pdf', 'Curriculum.pdf', 'Comprovante.pdf', 'Processamento de Dados', 'UFAM', 1998, NULL, 'Ciência da Computação ', 'UFRGS', 0, 2001, NULL, NULL, NULL, NULL, NULL, 1, '', '0', '', '0', '', 10, NULL, NULL, 5, NULL),
+(1, 1, '032-2016', '$2y$13$CuP91Say96/DfNnxDIDxjekQnlbCmAtOV8bxgVH9UeXbE363twY5m', '2016-06-01 20:47:31', NULL, 3, 'Eduardo Luzeiro Feitosa', ' ', 'Rua Francisco Loureiro, 185 Bloco 3 Apto 104', 'Ponta Negra ', 'Manaus', 'AM', '69037-043', 'efeitosa@icomp.ufam.edu.br', '20/05/1975', 1, 'Brasil', '', '562.859.492-04', 'M', '(92) 98145-0714', '(92) 33052-808', 2, 1, '', NULL, '', '1', 'Sei não também é ciência', 'CartaOrientador.pdf', 'Sei não', 'Proposta.pdf', 'Curriculum.pdf', 'Comprovante.pdf', 'Processamento de Dados', 'UFAM', 1998, NULL, 'Ciência da Computação ', 'UFRGS', 0, 2001, NULL, NULL, NULL, NULL, NULL, 1, '', '0', '', '0', '', 10, NULL, NULL, 5, NULL),
 (2, 2, '032-2016', '$2y$13$CuP91Say96/DfNnxDIDxjekQnlbCmAtOV8bxgVH9UeXbE363twY5m', '2016-06-01 20:55:28', NULL, 2, 'Arilo Claudio Dias-Neto', 'Arilo Claudio Dias-Neto', 'Avenida Rodrigo Otávio', 'Japiim', 'Manaus', 'AM', '69077-000', 'administrador@gmail.com', '13/09/1982', 1, 'Brasil', '', '704.574.332-72', 'M', '(92) 98121-1143', '(55) 92981-2111', 2, 1, '', NULL, '', '1', NULL, NULL, NULL, NULL, 'Curriculum.pdf', NULL, '', '', NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '1', 'Visual', 10, NULL, NULL, NULL, NULL),
 (3, 3, '017-2016', '$2y$13$ZXcMriILASgrEHaLnlyV.uvMQcTB1wAXhoxh4BBA8mf0ZdhpwNI4u', '2016-06-06 13:27:53', NULL, 2, 'isomar lima da silva', '', 'Rua São Francisco', 'cidade nova', 'manaus', 'AM', '69099-272', 'isomar.lima@msn.com', '08/01/1989', 1, 'Brasil', '', '006.004.242-78', 'M', '(92) 98138-4443', '', 2, 1, '', NULL, '', '1', NULL, NULL, NULL, NULL, 'Curriculum.pdf', NULL, 'sistemas de informação', 'faculdade la salle', 2013, NULL, 'mestrado em informatica', 'universidade federal do amazonas', 0, 2016, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '0', '', 10, NULL, NULL, NULL, NULL),
-(4, 4, '017-2016', '$2y$13$OPpEeGDTA/cr59BlH70fuepKvvc5jnTsj056oKE8aWFDcv1Ae9/KS', '2016-06-06 15:15:55', NULL, 2, 'BARTOLOMEU MIRANDA PEREIRA', '', 'Rua Jackson D. Rodrigues', 'Flores ', 'Manaus', 'AM', '69058-833', 'bartolomeupereira@ufam.edu.br', '02/06/1971', 1, 'Brasil', '', '405.898.702-20', 'M', '(92) 99320-7980', '', 2, 1, '', NULL, '', '1', NULL, NULL, NULL, NULL, 'Curriculum.pdf', NULL, 'PROCESSAMENTO DE DADOS', 'UNINORTE', 2000, NULL, 'CONTABILIDADE E CONTROLADORIA', 'UFAM', 1, 2014, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '0', '', 10, NULL, NULL, NULL, NULL),
+(4, 4, '017-2016', '$2y$13$OPpEeGDTA/cr59BlH70fuepKvvc5jnTsj056oKE8aWFDcv1Ae9/KS', '2016-06-06 15:15:55', NULL, 2, 'BARTOLOMEU MIRANDA PEREIRA', '', 'Rua Jackson D. Rodrigues', 'Flores ', 'Manaus', 'AM', '69058-833', 'bartolomeupereira@ufam.edu.br', '02/06/1971', 1, 'Brasil', '', '405.898.702-20', 'M', '(92) 99320-7980', '', 2, 1, '', NULL, '', '1', NULL, NULL, NULL, NULL, 'Curriculum.pdf', NULL, 'PROCESSAMENTO DE DADOS', 'UNINORTE', 2000, NULL, 'CONTABILIDADE E CONTROLADORIA', 'UFAM', 1, 2014, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '0', '', 10, NULL, NULL, NULL, NULL),
 (5, 5, '017-2016', '$2y$13$UrSYO18brCFPn.izcQR4JuvVqlJOzuGt9PDZDTODT9WA7NqJYy/Mm', '2016-06-06 18:14:54', NULL, 2, 'Marcela Sávia Picanço Pessoa Bastos', 'Marcela Pessoa', 'Rua 5', 'Redenção', 'Manaus', 'AM', '69049-210', 'marcelappessoa@gmail.com', '10/01/1976', 1, 'Brasil', '', '590.444.542-34', 'F', '(92) 99164-2848', '(92) 38772-047', 2, 2, '', NULL, '', '0', NULL, NULL, NULL, NULL, 'Curriculum.pdf', NULL, 'Bacharelado em Processamento de Dados', 'UFAM', 1994, NULL, 'Informática', 'UFAM', 0, 2008, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '0', '', 10, NULL, NULL, NULL, NULL),
-(6, 6, '017-2016', '$2y$13$blL9YEeSdTa.LNjM1IEGJuOlvH9W44kCZeHbjfgMkG1Jiyse5iCQC', '2016-06-07 15:17:40', NULL, 1, 'ROSIMARA CORSINO DA SILVA', '', 'Rua Antunes', 'Santo Antônio ', 'Itacoatiara', 'AM', '69103-040', 'mara.fje@gmail.com', '27/09/1985', 1, 'Brasil', '', '808.696.702-63', 'F', '(92) 99272-3701', '', 2, 2, '', NULL, '', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '0', '', 10, NULL, NULL, NULL, NULL),
+(6, 6, '017-2016', '$2y$13$blL9YEeSdTa.LNjM1IEGJuOlvH9W44kCZeHbjfgMkG1Jiyse5iCQC', '2016-06-07 15:17:40', NULL, 1, 'ROSIMARA CORSINO DA SILVA', '', 'Rua Antunes', 'Santo Antônio ', 'Itacoatiara', 'AM', '69103-040', 'mara.fje@gmail.com', '27/09/1985', 1, 'Brasil', '', '808.696.702-63', 'F', '(92) 99272-3701', '', 2, 2, '', NULL, '', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '0', '', 10, NULL, NULL, NULL, NULL),
 (7, 7, '017-2016', '$2y$13$IEPkanuv8QMwXr3PpcZEWu9SRsbfQdZd.fZIajMlEao4sJ5rCB/7K', '2016-06-09 01:23:48', NULL, 1, 'paulo henrique abreu da silva', '', 'Rua Sena', 'Jorge Teixeira', 'Manaus', 'AM', '69088-436', 'paulosilvaabreu@outlook.com', '03/08/1994', 1, 'Brasil', '', '019.896.122-70', 'M', '(92) 99433-5093', '(92) 98844-6696', 2, 2, '', NULL, '', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '1', 'Pardo', '0', '', 10, NULL, NULL, NULL, NULL),
 (8, 8, '017-2016', '$2y$13$OwGdDEFcCojrOLn1nP2uI.a69S40IZE5egppM8/P3qyt2CQd40KC6', '2016-06-10 04:23:59', NULL, 1, 'Jonilson de Castro Carril', 'Jonilson Carril', 'Rua Vinte e Cinco de Dezembro', 'Tancredo Neves', 'Manaus', 'AM', '69087-530', 'Jonilsoncarril_@hotmail.com', '15/09/1982', 1, 'Brasil', '', '525.195.972-91', 'M', '(92) 99329-3841', '(92) -', 2, 1, '', NULL, '', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '0', '', 10, NULL, NULL, NULL, NULL),
 (9, 9, '017-2016', '$2y$13$Z6T8Kgv80G09hhyIYEdJjuA.u66xPS8ceCpIYHXywssJGZUL1SbWS', '2016-06-10 11:54:57', NULL, 1, 'JANDERNEY GÓES SANTANA', '', 'Rua 19', 'Alfredo Nascimento', 'Manaus', 'AM', '69099-453', 'jandersantana9@gmail.com', '08/06/1984', 1, 'Brasil', '', '802.806.332-20', 'M', '(92) 99458-5924', '(92) 99276-7909', 2, 2, '', NULL, '', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '0', '', 10, NULL, NULL, NULL, NULL),
@@ -751,12 +767,12 @@ INSERT INTO `j17_candidatos` (`id`, `posicaoEdital`, `idEdital`, `senha`, `inici
 (12, 12, '017-2016', '$2y$13$Ec4IHkVUpdz39.GrddgzZeqYtqjOHrCNZt4iCIpWHRT0r75SL8jG2', '2016-06-13 03:16:11', NULL, 1, 'charleandra artins uchoa', 'charleandra', 'Rua Vivaldo Lima', 'Alvorada', 'Manaus', 'AM', '69043-660', 'charleandraspo@hotmail.com', '03/09/1989', 1, 'Brasil', '', '007.125.262-26', 'F', '(92) 99262-3443', '(92) 99190-1176', 2, 2, '', NULL, '', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '1', 'Pardo', '0', '', 10, NULL, NULL, NULL, NULL),
 (13, 13, '017-2016', '$2y$13$cUjS6PZcdEyJSk9Xzjwdvuqvcp5DsJcQPi0Wz3.BM3WNs9pu.UwUu', '2016-06-13 11:24:07', NULL, 0, '', NULL, '', '', '', '', '', 'isaiasabner@hotmail.com', NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, '', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', NULL, NULL, '', 10, NULL, NULL, NULL, NULL),
 (14, 14, '017-2016', '$2y$13$nWBX1K2opeNsLHkofNjxUeBl3SWfYpYgshsaAJhO/Cfd22tz7/X92', '2016-06-13 16:56:01', NULL, 1, 'Davi oliveira dos santos', 'Davi', 'Rua Amazonino Mendes', 'Santa Etelvina', 'Manaus', 'AM', '69059-160', 'chocolate.58ds@gmail.com', '09/01/1996', 1, 'Brasil', '', '018.825.142-11', 'M', '(92) 98179-0527', '', 2, 2, '', NULL, '', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '0', '', 10, NULL, NULL, NULL, NULL),
-(15, 15, '032-2016', '$2y$13$qbAjBIUcVYHlfiT3ENE2o.JlDRq4xa7Nm5iMuoLP1SMS9x2HMHUzG', '2016-06-13 17:42:26', '2016-08-04 17:14:56', 4, 'Eduardo Liebl', '', 'Rua Urban', 'Schramm ', 'São Bento do Sul', 'SC', '89280-816', 'eduardoliebl@msn.com', '02/02/1987', 1, 'Brasil', '', '060.198.719-59', 'M', '(47) 91725-935', '(47) 36331-343', 2, 1, '', NULL, '', '1', 'Avaliação e Simplificação de Infraestruturas de Chaves Públicas Através de SMR', 'CartaOrientador.pdf', 'O primeiro motivo que levou a me candidatar no Programa de Pós-graduação em Informática é o ótimo conceito que o curso possui, tenho certeza que vai contribuir grandemente com minha formação profissional e acadêmica. Além disso, o curso possui um corpo doscente muito capacitado. Fui muito bem tratado por todos os professores com quem entrei em contato, em especial pelo professor que escolhi como orientador. Durante o mestrado trabalhei com tolerância a falhas e acabei criando um grande interesse pelo proposta que estou submetendo e tenho certeza que posso contribuir para o reconhecimento do curso. A UFAM apresenta o ambiente ideal para desenvolver minha pesquisa, contando com os ótimos professores que podem contribuir para o projeto.', 'Proposta.pdf', 'Curriculum.pdf', 'Comprovante.pdf', 'Engenharia de Controle e Automação', 'Instituto Superior Tupy', 2011, NULL, 'Mestrado em Engenharia da Computação', 'Universidade Federal do Rio Grande', 0, 2016, NULL, NULL, NULL, NULL, NULL, 1, '', '0', '', '0', '', 10, NULL, NULL, 5, NULL),
+(15, 15, '032-2016', '$2y$13$qbAjBIUcVYHlfiT3ENE2o.JlDRq4xa7Nm5iMuoLP1SMS9x2HMHUzG', '2016-06-13 17:42:26', '2016-08-04 17:14:56', 4, 'Eduardo Liebl', '', 'Rua Urban', 'Schramm ', 'São Bento do Sul', 'SC', '89280-816', 'eduardoliebl@msn.com', '02/02/1987', 1, 'Brasil', '', '060.198.719-59', 'M', '(47) 91725-935', '(47) 36331-343', 2, 1, '', NULL, '', '1', 'Avaliação e Simplificação de Infraestruturas de Chaves Públicas Através de SMR', 'CartaOrientador.pdf', 'O primeiro motivo que levou a me candidatar no Programa de Pós-graduação em Informática é o ótimo conceito que o curso possui, tenho certeza que vai contribuir grandemente com minha formação profissional e acadêmica. Além disso, o curso possui um corpo doscente muito capacitado. Fui muito bem tratado por todos os professores com quem entrei em contato, em especial pelo professor que escolhi como orientador. Durante o mestrado trabalhei com tolerância a falhas e acabei criando um grande interesse pelo proposta que estou submetendo e tenho certeza que posso contribuir para o reconhecimento do curso. A UFAM apresenta o ambiente ideal para desenvolver minha pesquisa, contando com os ótimos professores que podem contribuir para o projeto.', 'Proposta.pdf', 'Curriculum.pdf', 'Comprovante.pdf', 'Engenharia de Controle e Automação', 'Instituto Superior Tupy', 2011, NULL, 'Mestrado em Engenharia da Computação', 'Universidade Federal do Rio Grande', 0, 2016, NULL, NULL, NULL, NULL, NULL, 1, '', '0', '', '0', '', 10, NULL, NULL, 5, NULL),
 (16, 16, '032-2016', '$2y$13$wBo2P1Z4J2QUVP5SJcKMx.eXfNiYdVUGmbJp3Ejitt8DGZBNuSQi.', '2016-06-13 18:00:38', '2016-08-04 17:14:56', 4, 'Vitor Padilha Gonçalves ', 'Vitor', 'Rua do Boto, 3', 'Galo da Serra', 'Presidente Figueiredo', 'AM', '69735-000', 'vitorpadilha@yahoo.com.br', '19/05/1984', 1, 'Brasil', '', '074.579.576-50', 'M', '(92) 99393-7969', '', 2, 2, '', NULL, '', '0', 'Explorando as Não-Linearidades do Problema da Próxima Release sob a Perspectiva da Análise de Pontos', 'CartaOrientador.pdf', '1) Como professor do IFAM, participar de um curso de doutorado me proporcionará qualificar para atuar como um profissional melhor.\r\n2) A escolha pela instituição se deve ao fato da distância e a avaliação pela CAPES do programa de pós-graduação em informática da UFAM.', 'Proposta.pdf', 'Curriculum.pdf', 'Comprovante.pdf', 'Bacharel em Ciência da Computação', 'Universidade Federal de Juiz de Fora', 2007, NULL, 'Mestrado em Informática', 'Universidade Federal do Estado do Rio de Janeiro', 0, 2014, NULL, NULL, NULL, NULL, NULL, 1, '', '0', '', '0', '', 10, NULL, NULL, 2, NULL),
 (17, 17, '017-2016', '$2y$13$NTiRViRnxj394GANEKKX5OpFLVotfyEvAmeJVLAoLgYyeKkxHAbpq', '2016-06-15 19:48:18', NULL, 1, 'Adriana Doroteu Dantas', 'Drica', 'Rua 114', 'Cidade Nova', 'Manaus', 'AM', '69096-450', 'dricadoroteu@gmail.com', '19/07/1981', 1, 'Brasil', '', '522.987.282-91', 'F', '(92) 99174-4565', '(92) 99183-3531', 2, 1, '', NULL, '', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '0', '', 10, NULL, NULL, NULL, NULL),
 (18, 18, '017-2016', '$2y$13$yN7i3RipZQbSV9wd1I5MVujIViWFMWDogL8C9D2rFjmoNqP4Qge72', '2016-06-15 20:52:08', NULL, 2, 'ELY SENA DE ALMEIDA', '', 'Rua A', 'São José Operário', 'Manaus', 'AM', '69086-411', 'elysenaa@ufam.edu.br', '17/02/1983', 1, 'Brasil', '', '706.056.702-00', 'F', '(92) 98124-6512', '', 2, 1, '', NULL, '', '0', NULL, NULL, NULL, NULL, 'Curriculum.pdf', NULL, 'TECNOLOGIA EM ELETRÔNICA', 'UTAM - INSTITUTO DE TECNOLOGIA DA AMAZÔNIA', 2004, NULL, 'ENGENHARIA DE PRODUÇÃO', 'UFAM - UNIVERSIDADE FEDERAL DO AMAZONAS', 0, 2009, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '0', '', 10, NULL, NULL, NULL, NULL),
 (19, 19, '032-2016', '$2y$13$2cFtss72rERGJLUtYyt/n.k3Ial0.r0y.bCnhR7mQghCKrE6SCHfW', '2016-08-05 21:27:22', '2016-08-10 21:27:22', 4, 'ISABEL KARINA VILLANES ROJAS', '', 'Avenida Visconde de Porto Alegre', 'Praça 14 de Janeiro', 'Manaus', 'AM', '69020-130', 'ik.villanes@gmail.com', '11/04/1984', 2, 'PERÚ', '5651267', '', 'F', '(92) 98146-2012', '(92) 98203-0049', 2, 1, '', NULL, '', '1', 'Abordagem para criação do modelo de múltiplos serviços de teste para aplicações móveis.', 'CartaOrientador.pdf', 'As experiências e conhecimentos adquiridos durante o mestrado, superaram minhas expectativas, a pesquisa é uma área que não tinha realizado antes e que agora chama muito meu interesse pelos resultados que é possível obter, acredito que o doutorado é um processo longo, mas os resultados que são possíveis obter são ainda maiores. Isso é uma motivação para me candidatar ao curso. Por outro lado, realizar o doutorado e um dos meus objetivos profissionais, e a experiência dos docentes da pós-graduação som exemplos dignos de seguir. Tenho consciência da dedicação e trabalho que é necessário para começar e terminar o doutorado com sucesso, e é nesse caminho que quero continuar. ', 'Proposta.pdf', 'Curriculum.pdf', 'Comprovante.pdf', 'Engenharia de Sistemas', 'Universidad Tecnológica del Perú', 2011, NULL, 'Mestrado em Informática', 'Universidade Federal do Amazonas', 0, NULL, NULL, NULL, NULL, NULL, NULL, 2, '', '0', '', '0', '', 10, NULL, NULL, 2, NULL),
-(20, 20, '017-2016', '$2y$13$EzVtgzV1vLMdCzSL6Xxz2eniTHyXz4DfbivrfHmKZeGDP9ZGEIm46', '2016-06-18 01:43:11', NULL, 1, 'jose pinto do nascimento junior', 'jose junior', 'Rua parneiras nº259, conj duque de caxias', 'Flores ', 'Manaus', 'AM', '69058-842', 'juniorpinto120@hotmail.com', '22/06/1988', 1, 'Brasil', '', '002.035.842-36', 'M', '(92) 36513-928', '(92) 99296-3057', 2, 2, '', NULL, '', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '0', '', 10, NULL, NULL, NULL, NULL),
+(20, 20, '017-2016', '$2y$13$EzVtgzV1vLMdCzSL6Xxz2eniTHyXz4DfbivrfHmKZeGDP9ZGEIm46', '2016-06-18 01:43:11', NULL, 1, 'jose pinto do nascimento junior', 'jose junior', 'Rua parneiras nº259, conj duque de caxias', 'Flores ', 'Manaus', 'AM', '69058-842', 'juniorpinto120@hotmail.com', '22/06/1988', 1, 'Brasil', '', '002.035.842-36', 'M', '(92) 36513-928', '(92) 99296-3057', 2, 2, '', NULL, '', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '0', '', 10, NULL, NULL, NULL, NULL),
 (21, 21, '032-2016', '$2y$13$cormhAkop1.qXDvBFc/u.u4CU1MJ8RAvbW7by155Acv5yNhZ27DYu', '2016-06-18 15:09:37', '2016-08-04 17:14:56', 4, 'Claudio Franklin Martins Pinheiro', '', 'Avenida Cosme Ferreira, 2214, bloco K, apto 404', 'Coroado', 'Manaus', 'AM', '69082-230', 'cldpinheiro@hotmail.com', '08/05/1980', 1, 'Brasil', '', '633.092.382-53', 'M', '(92) 98842-9850', '', 2, 2, '', NULL, '', '0', 'Detecção de Desmatamento Florestal com Redes Neurais Convolutivas aplicadas a Imagens de Satélite', 'CartaOrientador.pdf', 'Pensando em uma forma de ranquear as minhas motivações para entrar em um programa de doutorado posso destacar em primeiro lugar meu fascínio com a carreira acadêmica, o muda da pesquisa e o ambiente universitário. Em segundo lugar, em um quase empate, é meu interesse pelo desenvolvimento tecnológico, e as contribuições que posso dar para tal. Sempre tenho curiosidade em como posso criar alguma solução para um problema por via da ciência e da tecnologia.\r\nNa minha formação de engenheiro eletricista sempre fui voltado à interseção que esta área tem com a computação, começando quando fiz PIBIC, ao trabalhar com programação em microcontroladores. Na minha vida profissional, cujas atividades mais frequentes envolviam sistemas embarcados e firmware processamento digital de imagens, juntamente com meu trabalho no mestrado, voltado ao aprendizado de máquina e reconhecimento de padrões, meu interesse na área da informática que abrange esses temas me fez decidir ingressar no doutorado.           ', 'Proposta.pdf', 'Curriculum.pdf', 'Comprovante.pdf', 'Engenharia Elétrica', 'Universidade Federal do Amazonas', 2015, NULL, 'Mestrado em Engenharia Elétrica', 'Universidade Federal do Amazonas', 0, 2010, NULL, NULL, NULL, NULL, NULL, 2, '', '0', '', '0', '', 10, NULL, NULL, 3, NULL),
 (22, 22, '017-2016', '$2y$13$S0VV5n5Qg.g28EY/T6N1QeDDIPzl6MpafyQojt6Db7XdWlXT.XTGi', '2016-06-19 16:59:22', NULL, 1, 'Makinga Dessources', '', 'Port-au-prince', 'Petion-Ville', 'Haiti', 'MA', '6141_-___', 'makinga8@gmail.com', '12/02/1980', 2, 'Haiti', 'PP2098957', '', 'M', '(49) 03736-4', '', 2, 1, '', NULL, '', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '1', 'Negro', '1', 'no', 10, NULL, NULL, NULL, NULL),
 (23, 23, '032-2016', '$2y$13$aY89K8bPlglvWi4oo3ivd.eM2sCjT9Vm8pQd6j8af76CdW136LHjy', '2016-06-20 03:03:06', '2016-08-05 03:03:06', 4, 'Jonas Henrique Mendonça', '', 'Rua Alfredo Cruz, 1198, apto 8', 'Centro', 'Boa Vista', 'RR', '69301-140', 'jonas.henrique01@gmail.com', '13/05/1986', 1, 'Brasil', '', '077.336.266-50', 'M', '(95) 99126-0586', '(95) 32243-400', 2, 2, '', NULL, '', '0', 'Ferramenta para Recomendação de Conteúdo Baseada em Mineração de Dados Educacionais ', 'CartaOrientador.pdf', 'A vontade de continuar com meu processo de aprendizado visando aprimorar minha carreira de docente.\r\nA excelência do curso oferecido pela UFAM como acompanho com meus colegas de trabalho no Centro Universitário Estácio da Amazônia que são pós graduandos na instituição.\r\nOs dois itens acima aliados à localização geográfica já que moro na região norte e pretendo conciliar o curso com meu trabalho.', 'Proposta.pdf', 'Curriculum.pdf', 'Comprovante.pdf', 'Ciência da Computação', 'Universidade Federal de Itajubá', 2010, NULL, 'Computação Aplicada', 'Instituto Nacional de Pesquisas Espaciais', 0, 2013, NULL, NULL, NULL, NULL, NULL, 1, '', '0', '', '0', '', 10, NULL, NULL, 3, NULL),
@@ -769,8 +785,8 @@ INSERT INTO `j17_candidatos` (`id`, `posicaoEdital`, `idEdital`, `senha`, `inici
 (30, 30, '032-2016', '$2y$13$C1789r49NVKjhix2OAEnDeU5VP7W9zafwBdD7EgnIU6DG66bulnqC', '2016-06-22 21:57:16', '2016-08-04 17:14:56', 4, 'Irene Andrea Velásquez Alegre Carvalho', '', 'Avenida Urucará, 244', 'Cachoeirinha', 'Manaus', 'AM', '69065-180', 'irene.avac@gmail.com', '30/11/1962', 2, 'Peru', 'RNE: V065867-Y', '', 'F', '(92) 98113-8008', '(92) 98167-4550', 2, 1, '', NULL, '', '1', 'FUSÃO E ANÁLISE DE IMAGENS AÉREAS PARA DETECÇÃO AUTOMÁTICA DE MUDANÇAS TEMPORAIS SUAVES', 'CartaOrientador.pdf', 'Eu amo o trabalho na academia. Depois de ter finalizado os créditos de doutorado, interrompi a pesquisa em função de duas gestações (meus dois filhos). Desde então tenho me dedicado ao ensino de crianças, adolescentes e jovens no ensino fundamental e médio. Contudo, sempre tive como projeto de vida retornar para uma atuação plena de ensino e pesquisa. Estou pronta para retomar este projeto e o Instituto de Computação é o lugar propício para isso, por sua excelência.', 'Proposta.pdf', 'Curriculum.pdf', 'Comprovante.pdf', 'Engenharia Industrial', 'Universidade de Lima', 1985, NULL, 'Mestrado em Engenharia Elétrica', 'Faculdade de Eng Elétrica e de Computação/Unicamp', 0, 1994, NULL, NULL, NULL, NULL, NULL, 1, '', '0', '', '0', '', 10, NULL, NULL, 4, NULL),
 (31, 31, '017-2016', '$2y$13$P7tJq57q52Gf77qesoR5C.jnZWgmz7U0sR7V.SWMD98JjcHyd3U/6', '2016-06-23 03:57:52', NULL, 1, 'Joab Maquera Ramirez', '', 'Jr. Atahuallpa S/N', 'Atahuallpa', 'Puerto Maldonado', 'AL', '12122-___', 'joab.mr@hotmail.com', '29/04/1979', 2, 'Perú', '00000', '', 'M', '(51) 98270-7950', '', 2, 1, '', NULL, '', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '0', '', 10, NULL, NULL, NULL, NULL),
 (32, 11, '032-2016', '$2y$13$wQKc1yX05ZXuMmVZBMMe.O6LQSVPbxsqT8.QIA6wgI9tS8AeEGgOy', '2016-08-05 13:16:39', NULL, 2, 'Ewerton Gomes de Oliveira', '', 'Rua Santa Isabel', 'Vila da Prata', 'Manaus', 'AM', '69033-170', 'ewerton.gomes@live.com', '23/03/1982', 1, 'Brasil', '', '693.391.122-53', 'M', '(92) 99351-9800', '', 2, 2, '', NULL, '', '0', NULL, NULL, NULL, NULL, 'Curriculum.pdf', NULL, 'Engenharia Elétrica', 'UFAM', 2006, NULL, 'Engenharia Elétrica', 'UFAM', 0, 2016, NULL, NULL, NULL, NULL, NULL, NULL, '', '1', 'Pardo', '0', '', 10, NULL, NULL, NULL, NULL),
-(33, 12, '032-2016', '$2y$13$NqfFhaFsZlzfTwReTO/wneCYsWsqEVRqTuy8W7FkNw3/sJCeBrxQO', '2016-08-08 00:14:41', NULL, 2, 'SILVIO CESAR DE OLIVEIRA', '', 'Rua Unicórnio', 'Cidade Satélite ', 'Boa Vista', 'RR', '69317-568', 'silvio.cesar@trt11.jus.br', '21/06/1975', 1, 'Brasil', '', '562.651.402-30', 'M', '(95) 98100-8928', '', 2, 2, '', NULL, '', '0', NULL, NULL, NULL, NULL, 'Curriculum.pdf', NULL, 'TECNOLOGIA EM DESENVOLVIMENTO DE SOFTWARE', 'IFAM ', 2002, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '1', 'Indio', '0', '', 10, NULL, NULL, NULL, NULL),
-(34, 13, '032-2016', '$2y$13$33BSezMCVItiXyu6qN5vHeQ.JnP5vgp1Sv476RiNmn7yIlBnzt6Me', '2016-08-08 08:09:30', NULL, 1, 'Fabrício Martins Cardoso', '', 'Rua Veneza', 'Milão ', 'Ji-Paraná', 'RO', '76901-638', 'fmartins3102@gmail.com', '01/09/1995', 1, 'Brasil', '', '017.488.962-37', 'M', '(69) 91917-9341', '', 2, 1, '', NULL, '', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '0', '', 10, NULL, NULL, NULL, NULL),
+(33, 12, '032-2016', '$2y$13$NqfFhaFsZlzfTwReTO/wneCYsWsqEVRqTuy8W7FkNw3/sJCeBrxQO', '2016-08-08 00:14:41', NULL, 2, 'SILVIO CESAR DE OLIVEIRA', '', 'Rua Unicórnio', 'Cidade Satélite ', 'Boa Vista', 'RR', '69317-568', 'silvio.cesar@trt11.jus.br', '21/06/1975', 1, 'Brasil', '', '562.651.402-30', 'M', '(95) 98100-8928', '', 2, 2, '', NULL, '', '0', NULL, NULL, NULL, NULL, 'Curriculum.pdf', NULL, 'TECNOLOGIA EM DESENVOLVIMENTO DE SOFTWARE', 'IFAM ', 2002, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '1', 'Indio', '0', '', 10, NULL, NULL, NULL, NULL),
+(34, 13, '032-2016', '$2y$13$33BSezMCVItiXyu6qN5vHeQ.JnP5vgp1Sv476RiNmn7yIlBnzt6Me', '2016-08-08 08:09:30', NULL, 1, 'Fabrício Martins Cardoso', '', 'Rua Veneza', 'Milão ', 'Ji-Paraná', 'RO', '76901-638', 'fmartins3102@gmail.com', '01/09/1995', 1, 'Brasil', '', '017.488.962-37', 'M', '(69) 91917-9341', '', 2, 1, '', NULL, '', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '0', '', 10, NULL, NULL, NULL, NULL),
 (35, 14, '032-2016', '$2y$13$ez31VLUGVemdaBmvzBJyZufwENTbzuKvKQv0YXUNoqgB1mvcXzXGy', '2016-08-08 18:57:10', NULL, 2, 'Marcel Luis Silva Cunha', 'Marcel Cunha', 'Rua Felismino Cabral de Vasconcelos', 'Planalto', 'Manaus', 'AM', '69044-430', 'marcel.silva1991@gmail.com', '13/12/1991', 1, 'Brasil', '', '893.098.122-49', 'M', '(92) 99246-7753', '', 2, 2, '', NULL, '', '0', NULL, NULL, NULL, NULL, 'Curriculum.pdf', NULL, 'Engenharia da Computação', 'Universidade Federal do Amazonas', 2016, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '0', '', 10, NULL, NULL, NULL, NULL),
 (36, 15, '032-2016', '$2y$13$bww.KjppmLIRu.Gnx4Tzq.I9wX8ZOrAhtphmnPwSNEdnLnWZ.1VUG', '2016-08-08 20:03:07', NULL, 2, 'Fabiano Stingelin Cardoso', '', 'Alameda Cosme Ferreira', 'Aleixo', 'Manaus', 'AM', '69083-000', 'fabiano.stingelins@gmail.com', '26/10/1986', 1, 'Brasil', '', '055.100.689-73', 'M', '(92) 98415-3999', '', 2, 2, '1608', 2015, '60', '0', NULL, NULL, NULL, NULL, 'Curriculum.pdf', NULL, 'Bacharelado Em Sistemas de Informação', 'Sociedade Paranaense de Ensino e Informática', 2006, NULL, 'Mestrado Profissional em Automação e Controle', 'Universidade Federal do Pará', 1, 2016, NULL, NULL, NULL, NULL, NULL, NULL, '', '0', '', '0', '', 10, NULL, NULL, NULL, NULL),
 (37, 16, '032-2016', '$2y$13$.5RxURY0MbL3DdProN/tsOImahAKVCdH1nYq.VkQcv1CXNLd/XPgS', '2016-08-08 22:43:25', '2016-08-11 23:10:37', 4, 'ANA MARIA DOS SANTOS BARROS', 'ANA BARROS', 'Rua Três de Julho', 'Japiim I', 'Manaus', 'AM', '69078-120', 'anamsbarros2014@gmail.com', '15/01/1973', 1, 'Brasil', '', '406.162.072-04', 'F', '(92) 99256-3804', '(92) 99291-9571', 2, 1, '032-2016-016', 2016, '', '1', 'SELEÇÃO DA BIODIVERSIDADE AMAZÔNICA ATRAVÉS DAS TELECOMUNICAÇÕES PARA O ESTUDO DA VISÃO', 'CartaOrientador.pdf', '1 APRESENTAÇÃO/JUSTIFICATIVA\r\nConsidera-se imprescindível que todo brasileiro deve enriquecer e adquirir conhecimentos da Biodiversidade Amazônica a fim de explorar as riquezas naturais especificamente as plantas medicinais, as quais podem ter grandes utilidades. O uso de Algoritmos na Linguagem de Programação vem sendo aperfeiçoado por profissionais das diversas áreas do conhecimento, todos com finalidades de contribuir para o progresso da ciência. Observa-se que a Computação pode contribuir nas pesquisas científicas, necessita-se interagir com as diversas áreas do conhecimento, pois exige análise da Complexidade Computacional em todo processo de construção e discussão ideológica. Os diversos tipos de Funções são aplicados em pesquisas científicas ao longo de séculos, além da aplicação de matrizes. \r\nProcura-se explorar a Biodiversidade Amazônica para contribuir na cura das doenças do ser humano em diversas fases de vida. ', 'Proposta.pdf', 'Curriculum.pdf', 'Comprovante.pdf', 'CURSO DE MATEMÁTICA', 'UNIVERSIDADE DO AMAZONAS', 1996, NULL, 'MESTRADO ACADÊMICO EM EDUCAÇÃO DE CIÊNCIAS NA AMAZ', 'UNIVERSIDADE DO ESTADO DO AMAZONAS', 0, 2011, NULL, NULL, NULL, NULL, NULL, 1, '', '0', '', '0', '', 10, NULL, NULL, 5, NULL),
@@ -920,7 +936,7 @@ INSERT INTO `j17_candidato_publicacoes` (`id`, `idCandidato`, `titulo`, `ano`, `
 (63, 16, 'Um Algoritmo Guloso para Minimizar o Particionamento de Toras em Plantios de Pinus taeda L.', 2015, 'IV Encontro Regional de Computação e Sistemas de Informação', 1, 'Completo', 'Rodrigo Freitas Silva; Débora P. Montes; Vitor Padilha Gonçalves; '),
 (64, 18, 'LOGÍSTICA REVERSA COMO FERRAMENTA PARA REDUÇÃO DOS IMPACTOS AMBIENTAIS: UM EXEMPLO A SER SEGUIDO NO TOCANTE A RECICLAGEM QUÍMICA E O DESCARTE DE PILHAS NO ESTADO DO AMAZONAS', 2010, 'Revista TechnoEng', 2, 'Completo', 'Rejane Dantas Cavalcante; Ely Sena De Almeida; Enily Vieira Do Nascimento; Márcia Helena Veleda Moita; '),
 (65, 18, 'Detecção automática de falhas em produtos seriados utilizando filtro de novidades', 2013, 'Revista Produção Online', 2, 'Completo', 'Veleda Moita, MÁrcia Helena; Sena, Juliana Ferreguette; Ely Sena De Almeida; Postal, Rafael; '),
-(66, 18, 'Aplicação de simulação para obtenção de soluções ao tráfego em   rotatória da cidade de Manaus', 2012, 'Journal of Transport Literature', 2, 'Completo', 'Marcia Moita; Ely Sena De Almeida; '),
+(66, 18, 'Aplicação de simulação para obtenção de soluções ao tráfego em 	 rotatória da cidade de Manaus', 2012, 'Journal of Transport Literature', 2, 'Completo', 'Marcia Moita; Ely Sena De Almeida; '),
 (67, 18, 'SYSTEMS OF BUSINESS IN THE AMAZON AREA USING A SYSTEMIC VISION: A THEORETICAL PROPOSITION', 2009, 'POM 2009 - 20th Annual Conference of the Production and Operations Management Society', 1, 'Completo', 'Raimundo Kennedy Vieira; Ely Sena De Almeida; Silvana Dacol; Antônio Jorge Cunha Campos; '),
 (68, 18, 'A LÓGICA FUZZY COMO FERRAMENTA ESTRATÉGICA DE AUXÍLIO NA TOMADA DE DECISÃO NOS SERVIÇOS DE UM AEROPORTO DA REGIÃO NORTE', 2010, 'IX SITRAER ? Simpósio de Transporte Aéreo da SBTA', 1, 'Completo', 'Ely Sena De Almeida; Silvana Dacol; Luiza Maria Bessa Rebelo; '),
 (69, 18, 'Sustentabilidade X qualidade: como equilibrar esta relação no processo de fabricação de blocos cerâmicos no Amazonas', 2013, '57º. Congresso Brasileiro de Cerâmica &amp; 5º Congresso Iberoamericano de cerâmica', 1, 'Completo', 'Ely Sena De Almeida; Rejane Dantas Cavalcante; Raimundo Pereira Vasconcelos; '),
@@ -994,7 +1010,7 @@ INSERT INTO `j17_candidato_publicacoes` (`id`, `idCandidato`, `titulo`, `ano`, `
 (152, 2, 'A Framework for Selection of Software Technologies using Search-based Strategies', 2013, 'Workshop de Engenharia de Software Baseada em Busca', 1, 'Resumo', 'Aurélio Da Silva Grande; Rosiane De Freitas Rodrigues; Arilo Claudio Dias Neto; '),
 (153, 2, 'Elementos que Impactam o Planejamento de Testes em Ambientes de Desenvolvimento Distribuído no Contexto de Ecossistemas de Software', 2013, 'Workshop de Desenvolvimento Distribuído de Software', 1, 'Completo', 'Nayane Maia; Rodrigo Santos; Elisa Huzita; Arilo Claudio Dias Neto; Claudia Werner; '),
 (154, 2, 'Uma Investigação sobre a Relevância de Valores Organizacionais em Iniciativas de Melhoria de Processo de Software', 2013, 'IX Workshop Anual do MPS', 1, 'Completo', 'Odette Mestrinho Passos; Arilo Claudio Dias Neto; Raimundo Da Silva Barreto; '),
-(155, 2, 'MSECO Skill: Construção  de Competências de Desenvolvedores em Ecossistemas de Software Móvel', 2014, 'Ibero-American Conference on Software Engineering', 1, 'Completo', 'Awdren De Lima Fontão; Bruno Bonifácio; Arilo Claudio Dias Neto; Allan Bezerra; Rodrigo Santos; '),
+(155, 2, 'MSECO Skill: Construção	 de Competências de Desenvolvedores em Ecossistemas de Software Móvel', 2014, 'Ibero-American Conference on Software Engineering', 1, 'Completo', 'Awdren De Lima Fontão; Bruno Bonifácio; Arilo Claudio Dias Neto; Allan Bezerra; Rodrigo Santos; '),
 (156, 2, 'An Approach to Perform Automated Functional Testing in Database-Driven Applications', 2014, 'Ibero-American Conference on Software Engineering', 1, 'Completo', 'Andreza M. F. V. De Castro; Awdren De Lima Fontão; Arilo Claudio Dias Neto; '),
 (157, 2, 'Motivating by examples: An empirical study of teaching an introductory software engineering course in Brazil', 2014, 'IEEE Annual International Computer Software and Applications Conference', 1, 'Completo', 'Rasha Osman; Arilo Claudio Dias Neto; '),
 (158, 2, 'Contribuições à Qualidade de um Produto com Testadores de Diferentes Perfis: Um Relato de Experiência', 2014, 'Simpósio Brasileiro de Qualidade de Software', 1, 'Completo', 'Mirian Souza; Ellen Barroso; Andréia Vieira; Adriane Almeida; Lucas Gomes; Arilo Claudio Dias Neto; '),
@@ -2447,11 +2463,25 @@ CREATE TABLE `j17_defesa` (
   `examinador` text,
   `emailExaminador` text,
   `reservas_id` int(10) DEFAULT NULL,
+  `banca_id` int(11) NOT NULL,
   `aluno_id` int(11) NOT NULL,
   `previa` varchar(45) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `justificativa` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `j17_disciplina`
+--
+
+CREATE TABLE `j17_disciplina` (
+  `codDisciplina` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `nome` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `creditos` int(11) NOT NULL,
+  `cargaHoraria` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Lista de Disciplinas para Aproveitamento.';
 
 -- --------------------------------------------------------
 
@@ -3960,6 +3990,20 @@ INSERT INTO `j17_orientacoes` (`id`, `idProfessor`, `titulo`, `aluno`, `ano`, `n
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `j17_portaria`
+--
+
+CREATE TABLE `j17_portaria` (
+  `id` int(11) NOT NULL,
+  `responsavel` varchar(255) NOT NULL,
+  `descricao` text NOT NULL,
+  `data` date NOT NULL,
+  `documento` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `j17_premios`
 --
 
@@ -4302,7 +4346,7 @@ INSERT INTO `j17_projetos` (`id`, `idProfessor`, `titulo`, `descricao`, `inicio`
 (0, 24, 'GERINDO', 'O projeto GERINDO favorece as pesquisas na área de gerência e recuperação de informação em documentos criando um ambiente de cooperação entre os Departamentos de Ciência da Computação das Universidades Federais de Minas Gerais e Amazonas e o Instituto de Informática da Universidade Federal do Rio Grande do Sul. O grupo atua na formação de alunos através de orientação em trabalhos finais, dissertações de mestrado, teses de doutorado, e ministrando disciplinas relacionadas ao projeto tanto na graduação quanto na pós-graduação.', 2003, 2007, '(Participante)', 'Conselho Nacional de Desenvolvimento Científico e Tecnológico', 'Marco Antônio Pinheiro de Cristo; Nívio Ziviani; Pável Pereira Calado; Berthier Ribeiro de Araújo Neto; Edleno Silva de Moura; Anísio Mendes Lacerda; Thierson Couto; Adriano Veloso; Wagner Meira Jr; Marco Modesto; Alberto H F Laender; Altigran Soares da Silva; Carlos Alberto Reuser; Mara Abel; Renato Antonio Celso Ferreira'),
 (0, 24, 'InfoWeb- Métodos e Ferramentas para Tratamento de Informação Disponível na Web', 'A Web é hoje o maior repositório de informação digital produzida pelo ser humano, estando distribuído por milhões servidores conectados ao redor do mundo via Internet. O domínio de tecnologias capazes de tirar proveito desse repositório representa um diferencial de competitividade dentro da sociedade moderna, gerando oportunidades de desenvolvimento econômico e social. Este projeto visa desenvolver novos métodos e ferramentas para tratamento de informação existente em grandes repositórios de dados e coleções de documentos disponíveis na Web. O projeto pretende gerar soluções para diversos problemas relacionados ao tratamento de informação, tais como classificação de texto, mineração de dados a partir de fontes não estruturadas, integração de dados de fontes heterogêneas, enriquecimento semântico de dados, indexação e busca, dentre outros. .', 2008, 2009, '(Participante)', 'Conselho Nacional de Desenvolvimento Científico e Tecnológico', 'Marco Antônio Pinheiro de Cristo; Berthier Ribeiro Neto; Nívio Ziviani; Edleno Silva de Moura; Marcos André Gonçalves; Wagner Meira Jr; Alberto H F Laender; Altigran Soares da Silva; José Carlos Maldonado'),
 (0, 25, 'SSoft: Síntese de Software para Sistemas Embutidos Complexos', 'Síntese de software é definida como o processo de geração automática do código fonte, partindo de uma especificação usualmente composta por\nprocessos concorrentes e comunicantes. Esta geração de código considera tanto as funcionalidades especificadas, quanto o suporte operacional de tempo de execução para execução da funcionalidade. Em palavras mais simples, a síntese de software preocupa-se em gerar os programas e (parte de) o sistema operacional.\n\nA proposta deste projeto é o de buscar soluções para a construção de sistemas embutidos com garantia da corretude de projeto, que atendam requisitos de tempo-real, consumo mínimo de energia, acesso mutuamente exclusivo a recursos compartilhados, reconfiguráveis dinamicamente e tolerantes a falhas.', 2005, 2009, '(Coordenador)', 'Conselho Nacional de Desenvolvimento Científico e Tecnológico', 'Raimundo da Silva Barreto'),
-(0, 25, 'RESMA: REde de Sensores sem fio e o controle do Meio ambiente Amazônico', 'Este projeto tem como objetivo principal a proposta de uma metodologia, e ferramentas de apoio, para a síntese automática do software para nodos sensores. \nOs objetivos específicos são: (i) Introduzir um modelo de especificação que capture as informações de cada tarefa a ser executada em cada nodo sensor, assim como as relações entre tarefas; (ii) Modelar a especificação usando um modelo formal; (iii) Estudar os sistemas operacionais utilizados na implementação de redes de sensores e, se for o caso, alterar tais sistemas operacionais; (iv)  Desenvolver um método para a geração de código fonte de programas de tal forma que seja garantido que este atende a todas as restrições especificadas; (v) Propor um método para estimativas de consumo de energia em sistemas de nodos sensores sem fio.', 2006, 2010, '(Coordenador)', 'Conselho Nacional de Desenvolvimento Científico e Tecnológico', 'Raimundo da Silva Barreto; Herbert Oliveira Rocha'),
+(0, 25, 'RESMA: REde de Sensores sem fio e o controle do Meio ambiente Amazônico', 'Este projeto tem como objetivo principal a proposta de uma metodologia, e ferramentas de apoio, para a síntese automática do software para nodos sensores. \nOs objetivos específicos são: (i) Introduzir um modelo de especificação que capture as informações de cada tarefa a ser executada em cada nodo sensor, assim como as relações entre tarefas; (ii) Modelar a especificação usando um modelo formal; (iii) Estudar os sistemas operacionais utilizados na implementação de redes de sensores e, se for o caso, alterar tais sistemas operacionais; (iv)	Desenvolver um método para a geração de código fonte de programas de tal forma que seja garantido que este atende a todas as restrições especificadas; (v) Propor um método para estimativas de consumo de energia em sistemas de nodos sensores sem fio.', 2006, 2010, '(Coordenador)', 'Conselho Nacional de Desenvolvimento Científico e Tecnológico', 'Raimundo da Silva Barreto; Herbert Oliveira Rocha'),
 (0, 25, 'SEMPRE: Sistemas Embarcados Multimídia PoRtáteis com baixo consumo de Energia', 'Sistemas multimídia são muito usados em celulares, palm-tops, assistentes pessoais digitais (Personal Digital Assistants ? PDAs), internet tablets, etc. Estes equipamentos usualmente dependem de baterias para sua execução. Uma das principais preocupações dos projetistas de tais equipamentos está na sua autonomia, ou seja, o quanto pode ser usado sem a necessidade de recarga da bateria. Esta característica faz um grande diferencial de mercado. Multimídia pode ser executada em diversos tipos de equipamentos, inclusive os equipamentos portáteis que são dispositivos menores e mais restritos, por exemplo, PDAs, Internet Tablets, Smart Phones, dentre outros. O desenvolvimento de sistemas para esses equipamentos é mais desafiador do que para equipamentos convencionais. Isso porque os dispositivos portáteis possuem diversas restrições, como por exemplo, restrição de peso, tamanho, de consumo de energia, de consumo de memória e poder de processamento. A restrição a ser tratada neste projeto é a de desenvolver sistemas multimídia a com baixo consumo de energia. A proposta deste projeto é aplicar a técnica conhecida como escala dinâmica de voltagem e freqüência (dynamic voltage and frequency scaling - DVFS), onde a freqüência do clock, e a correspondente voltagem, podem ser controladas dinamicamente para o nível mínimo possível ao mesmo tempo em que as restrições temporais (deadline) da tarefa continuam sendo atingidas. Um problema que existe na utilização de DVFS é que a alteração da voltagem é de inteira responsabilidade do programador da aplicação. Por exemplo, não existem guias para selecionar os melhores locais onde colocar código de alteração de voltagem. Adicionalmente, programadores não são familiares com questões de baixo consumo de energia do software e técnicas de análise temporal. Na prática, é muito difícil usar DVFS em aplicações de tempo-real sem o suporte de uma metodologia de desenvolvimento sistemático, que é uma das propostas desse projeto.', 2008, 2011, '(Coordenador)', 'Conselho Nacional de Desenvolvimento Científico e Tecnológico, Conselho Nacional de Desenvolvimento Científico e Tecnológico', 'Raimundo da Silva Barreto; Ruiter Braga Caldas; Meuse Nogueira de Oliveira Júnior'),
 (0, 25, 'Núcleo de Excelência em Desenvolvimento de Sistemas Embarcados para Veículos Aéreos Não-Tripulados e Robôs Táticos Móveis.', 'Este Núcleo de Excelência visa a pesquisa e desenvolvimento de novos métodos, técnicas e ferramentas para a construção de sistemas embarcados críticos que usem veículos robóticos de aplicação crítica (VRACs) em situações onde aspectos de segurança e disponibilidade são fundamentais. A proposta é que os sistemas sejam construídos com máxima garantia de corretude. Exemplos de VRACs incluem Veículos Aéreos Não-Tripulados (VANTs), Robôs Táticos Móveis (RTMs) e Veículos Autônomos Submergíveis (VAS). Um maior nível de autonomia são atingidos quando for incorporado a eles a capacidade de percepção (sensores e sistemas que conseguem ?interpretar? o ambiente onde ele atua), capacidade de agir (atuadores, motores e sistemas de controle capazes de produzir ações, tais como o deslocamento do robô no ambiente), robustez e inteligência (capacidade de lidar com as mais diversas situações, de modo a resolver e executar tarefas por mais complexas que sejam). Os VRACs possuem as aplicações das mais variadas, desde aplicações ambientais (inspeção de reservas ambientais e gasodutos, desastres ecológicos, monitoramento de animais, pesquisas climáticas), quanto aplicações de segurança (reconhecimento e localização de alvos). Independente de suas especificidades com respeito à mobilidade (aéreo, terrestre aquático, etc), os VRACs possuem restrições críticas de segurança, disponibilidade e tolerância a falhas em todos os seus principais subsistemas: i) o veículo propriamente dito; ii) o subsistema de comando e supervisão; iii) o subsistema de comunicação, todos inseridos no domínio dos sistemas embarcados críticos.', 2011, 2015, '(Coordenador)', 'Fundação de Amparo a Pesquisa do Estado do Amazonas', 'Raimundo da Silva Barreto; Ruiter Braga Caldas; José Luiz de Souza Pio; Paulo Romero Martins Maciel; Horácio Antonio Braga Fernandes Oliveira; Tayana Uchôa Conte; José Carlos Maldonado; Arilo Cláudio Dias Neto; Eulanda Miranda Santos; Jordan Lima Caetano; Jó Oliveira Vidal; Marcos Paulo Siqueira Farias'),
 (0, 25, 'Computação Desplugada: Ensinando Computação sem o Uso de Computadores', 'Jean Piaget afirmava: "O pensamento se desenvolve através de ações e não de palavras.". O objetivo geral deste projeto é o de popularizar os fundamentos da ciência da computação, junto com crianças e adolescentes de escolas públicas, tanto de Manaus quanto de Itacoatiara, usando a técnica conhecida como "computação desplugada", que consiste em passar o conhecimento da computação sem usar o computador através de diversas atividades. Este tipo de aprendizagem possibilita promover a construção de conhecimentos de forma natural, divertida e agradável. Os jogos ajudam a criar um entusiasmo sobre o conteúdo a ser trabalhado a fim de que os estudantes se interessem e se motivem de forma que expressem, ajam e interajam nas atividades lúdicas. A execução deste projeto é relevante tanto para as crianças participantes quanto para os professores e bolsistas envolvidos. Muitas crianças e adolescentes ainda vêem o computador como algo distante e inalcançável. Em algumas escolas da periferia, muitas crianças nunca tiveram contato com um computador. Como resultado, as crianças vão adquirir compreensão sobre como funcionam os computadores, além de desenvolvem as suas habilidades de comunicação, resolução de problemas, criatividade e diversos outros elementos cognitivos. Para os professores e bolsistas do projeto, haverá a interação da academia com a sociedade, através da troca de informações, e a satisfação de passar conhecimentos importantes e que seria difícil para algumas crianças obterem.', 2012, 0, '(Coordenador)', 'Fundação de Amparo a Pesquisa do Estado do Amazonas', 'Raimundo da Silva Barreto; Odette Mestrinho Passos; Anacília Cavalcante Vieira'),
@@ -4360,8 +4404,8 @@ CREATE TABLE `j17_prorrogacoes` (
   `dataSolicitacao` date NOT NULL,
   `dataInicio` date NOT NULL,
   `qtdDias` int(11) NOT NULL,
+  `documento` text NOT NULL,
   `justificativa` text NOT NULL,
-  `previa` text NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -5995,6 +6039,14 @@ ALTER TABLE `j17_aluno`
   ADD KEY `idUser` (`idUser`);
 
 --
+-- Indexes for table `j17_aproveitamento`
+--
+ALTER TABLE `j17_aproveitamento`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `codDisciplinaOrigemFK` (`codDisciplinaOrigemFK`),
+  ADD KEY `codDisciplinaDestinoFK` (`codDisciplinaDestinoFK`);
+
+--
 -- Indexes for table `j17_banca_has_membrosbanca`
 --
 ALTER TABLE `j17_banca_has_membrosbanca`
@@ -6095,8 +6147,14 @@ ALTER TABLE `j17_contproj_transferenciassaldorubricas`
 -- Indexes for table `j17_defesa`
 --
 ALTER TABLE `j17_defesa`
-  ADD PRIMARY KEY (`idDefesa`,`aluno_id`),
-  ADD KEY `fk_defesa_aluno` (`aluno_id`);
+  ADD PRIMARY KEY (`idDefesa`),
+  ADD KEY `banca_id` (`banca_id`);
+
+--
+-- Indexes for table `j17_disciplina`
+--
+ALTER TABLE `j17_disciplina`
+  ADD PRIMARY KEY (`codDisciplina`);
 
 --
 -- Indexes for table `j17_edital`
@@ -6124,13 +6182,6 @@ ALTER TABLE `j17_lista_alunos`
   ADD PRIMARY KEY (`matricula`);
 
 --
--- Indexes for table `j17_membrosbanca`
---
-ALTER TABLE `j17_membrosbanca`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idProfessor` (`idProfessor`);
-
---
 -- Indexes for table `j17_oferta_disciplinas`
 --
 ALTER TABLE `j17_oferta_disciplinas`
@@ -6140,6 +6191,12 @@ ALTER TABLE `j17_oferta_disciplinas`
 -- Indexes for table `j17_orientacoes`
 --
 ALTER TABLE `j17_orientacoes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `j17_portaria`
+--
+ALTER TABLE `j17_portaria`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -6218,10 +6275,10 @@ ALTER TABLE `j17_afastamentos`
 ALTER TABLE `j17_aluno`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=717;
 --
--- AUTO_INCREMENT for table `j17_banca_has_membrosbanca`
+-- AUTO_INCREMENT for table `j17_aproveitamento`
 --
-ALTER TABLE `j17_banca_has_membrosbanca`
-  MODIFY `banca_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `j17_aproveitamento`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `j17_candidatos`
 --
@@ -6288,11 +6345,6 @@ ALTER TABLE `j17_contproj_rubricasdeprojetos`
 ALTER TABLE `j17_contproj_transferenciassaldorubricas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
--- AUTO_INCREMENT for table `j17_defesa`
---
-ALTER TABLE `j17_defesa`
-  MODIFY `idDefesa` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `j17_ferias`
 --
 ALTER TABLE `j17_ferias`
@@ -6302,11 +6354,6 @@ ALTER TABLE `j17_ferias`
 --
 ALTER TABLE `j17_linhaspesquisa`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `j17_membrosbanca`
---
-ALTER TABLE `j17_membrosbanca`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `j17_oferta_disciplinas`
 --
@@ -6326,7 +6373,7 @@ ALTER TABLE `j17_premios`
 -- AUTO_INCREMENT for table `j17_prorrogacoes`
 --
 ALTER TABLE `j17_prorrogacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `j17_publicacoes`
 --
@@ -6351,7 +6398,7 @@ ALTER TABLE `j17_reservas_salas`
 -- AUTO_INCREMENT for table `j17_trancamentos`
 --
 ALTER TABLE `j17_trancamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 --
 -- AUTO_INCREMENT for table `j17_user`
 --
@@ -6369,11 +6416,11 @@ ALTER TABLE `j17_aluno`
   ADD CONSTRAINT `fk_aluno_orientador` FOREIGN KEY (`orientador`) REFERENCES `j17_user` (`id`);
 
 --
--- Limitadores para a tabela `j17_banca_has_membrosbanca`
+-- Limitadores para a tabela `j17_aproveitamento`
 --
-ALTER TABLE `j17_banca_has_membrosbanca`
-  ADD CONSTRAINT `fk_banca_idbanca` FOREIGN KEY (`banca_id`) REFERENCES `j17_defesa` (`idDefesa`),
-  ADD CONSTRAINT `fk_banca_membrobanca` FOREIGN KEY (`membrosbanca_id`) REFERENCES `j17_membrosbanca` (`id`);
+ALTER TABLE `j17_aproveitamento`
+  ADD CONSTRAINT `fk_discDestino` FOREIGN KEY (`codDisciplinaDestinoFK`) REFERENCES `j17_disciplina` (`codDisciplina`),
+  ADD CONSTRAINT `fk_discOrigem` FOREIGN KEY (`codDisciplinaOrigemFK`) REFERENCES `j17_disciplina` (`codDisciplina`);
 
 --
 -- Limitadores para a tabela `j17_candidatos`
@@ -6397,13 +6444,7 @@ ALTER TABLE `j17_candidato_publicacoes`
 -- Limitadores para a tabela `j17_defesa`
 --
 ALTER TABLE `j17_defesa`
-  ADD CONSTRAINT `fk_defesa_aluno` FOREIGN KEY (`aluno_id`) REFERENCES `j17_aluno` (`id`);
-
---
--- Limitadores para a tabela `j17_membrosbanca`
---
-ALTER TABLE `j17_membrosbanca`
-  ADD CONSTRAINT `fk_membrosbanca_professorppgi` FOREIGN KEY (`idProfessor`) REFERENCES `j17_user` (`id`);
+  ADD CONSTRAINT `fk_defesa_id_banca` FOREIGN KEY (`banca_id`) REFERENCES `j17_banca_has_membrosbanca` (`banca_id`);
 
 --
 -- Limitadores para a tabela `j17_prorrogacoes`

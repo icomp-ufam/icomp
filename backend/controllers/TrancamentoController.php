@@ -9,7 +9,6 @@ use app\models\TrancamentoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
 use kartik\mpdf\Pdf;
 use yii\helpers\Html;
 
@@ -28,7 +27,7 @@ class TrancamentoController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'ativar', 'encerrar', 'pdf'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'ativar', 'encerrar'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -96,18 +95,20 @@ class TrancamentoController extends Controller
      * 
      * @return mixed
      */
-    public function actionCreate($idAluno)
+    public function actionCreate($idAluno, $ignoredWarning = false)
     {
-        if (!$this->canDoOneStopOut($idAluno)) {
-            $this->mensagens('warning', 'Limite de trancamentos atingido', 'Atenção! O Aluno atingiu o limite máximo de trancamentos disponíveis');
-        }
-
-
         $model = new Trancamento();
 
         $model->scenario = 'create';
         
         $model->idAluno = $idAluno;
+
+        if (!$model->canDoStopOut() && !$ignoredWarning) {
+            return $this->render('_limitWarn', [
+                'model'=>$model,
+            ]);
+        }
+
         $model->dataSolicitacao = date("Y-m-d");
         $model->dataSolicitacao0 = date('d/m/Y', strtotime($model->dataSolicitacao));
         $model->tipo=0; //Defines 'type' as 'Trancamento'
@@ -152,6 +153,12 @@ class TrancamentoController extends Controller
 
                 $this->generatePdf($model, $path);
                 $this->mensagens('success', 'Sucesso', 'Trancamento criado com sucesso.');
+
+                if (!$model->canDoStopOut() && !$ignoredWarning) {
+                    return $this->render('_limitReached', [
+                        'model'=>$model,
+                    ]);
+                }
                 return $this->redirect(['trancamento/view', 'id'=>$model->id]);
             }
             else {
@@ -161,18 +168,6 @@ class TrancamentoController extends Controller
         return $this->render('create', [
             'model'=>$model,
         ]);
-    }
-
-    /**
-     * Checks if student can still perform a stop out
-     * 
-     * @author Pedro Frota <pvmf@icomp.ufam.edu.br>
-     * 
-     * @return boolean 'true' if student can still perform a stop out, 'false' if not
-     */
-
-    private function canDoOneStopOut($idAluno) {
-        return true; //Not implemented Yet
     }
 
 
@@ -214,9 +209,23 @@ class TrancamentoController extends Controller
             }
             else $model->prevTermino = '';
 
+            $pre_path = 'uploads/trancamento/';
+            $filename = 'trancamento-'.Yii::$app->security->generateRandomString().'.pdf';
+
+            $path = $pre_path.$filename;
+
+            $docAntigo = $model->documento;
+            $model->documento = $path;
 
             if ($model->save()) {
+                $this->generatePdf($model, $path);
+                unlink(getcwd().'/'.$docAntigo);
+                $this->mensagens('success', 'Sucesso', 'Trancamento editado com sucesso.');
+
                 return $this->redirect(['view', 'id' => $model->id]);
+            }
+            else {
+                $this->mensagens('error', 'Erro', 'Houve uma falha ao editar o trancamento.');
             }
         }
 
@@ -297,15 +306,6 @@ class TrancamentoController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    public function actionPdf() {
-        $pre_path = 'uploads/trancamento/';
-        $filename = 'trancamento-'.Yii::$app->security->generateRandomString().'.pdf';
-
-        $path = $pre_path.$filename;
-
-        $this->generatePdf($path);
     }
 
     private function generatePdf($model, $filename) {

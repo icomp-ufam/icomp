@@ -2690,19 +2690,19 @@
         "source": {
             "type": "git",
             "url": "https://github.com/yiisoft/yii2-debug.git",
-            "reference": "17658ab8eb4981dad0891a9b09fda786d140be3b"
+            "reference": "983a042e4ccc05df4362295c407013834f10d5ae"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/17658ab8eb4981dad0891a9b09fda786d140be3b",
-            "reference": "17658ab8eb4981dad0891a9b09fda786d140be3b",
+            "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/983a042e4ccc05df4362295c407013834f10d5ae",
+            "reference": "983a042e4ccc05df4362295c407013834f10d5ae",
             "shasum": ""
         },
         "require": {
             "yiisoft/yii2": "~2.0.4",
             "yiisoft/yii2-bootstrap": "~2.0.0"
         },
-        "time": "2016-09-05 10:57:44",
+        "time": "2016-11-24 09:43:01",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {

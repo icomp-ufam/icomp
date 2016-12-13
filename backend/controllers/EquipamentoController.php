@@ -8,6 +8,9 @@ use app\models\EquipamentoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\UploadForm;
+use yii\web\UploadedFile;
+
 
 /**
  * EquipamentoController implements the CRUD actions for Equipamento model.
@@ -65,13 +68,43 @@ class EquipamentoController extends Controller
     {
         $model = new Equipamento();
 
+        //if($tipoEquipamento == "Disponível"){
+        if($model->StatusEquipamento == "Disponível"){
+            $StatusEquipamento = 1;
+        }
+        else if($model->StatusEquipamento= "Em uso"){
+            $StatusEquipamento = 2;
+        }
+        else if (  $model->StatusEquipamento = "Descartado"){
+            $StatusEquipamento = 3;
+        }
+
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idEquipamento]);
+           // Create Upload
+            $model->file = UploadedFile::getInstance($model, 'file');
+            if ($model->file) {
+                $imagepath = 'equipamento';
+                //echo "oi";
+                $model->ImagemEquipamento = $imagepath .rand(10,100).$model->file->name;
+            }
+
+            if ($model->save()) {
+
+                if($model->file){
+                    $model->file->saveAs($model->ImagemEquipamento);
+                    //return $this->redirect(['view', 'id' => $model->idEquipamento]);
+                }
+
+                return $this->redirect(['view', 'id' => $model->idEquipamento]);
+            }
+
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
+
     }
 
     /**
@@ -85,13 +118,29 @@ class EquipamentoController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idEquipamento]);
+
+            $model->file = UploadedFile::getInstance($model, 'file');
+            if ($model->file) {
+                $imagepath = 'equipamento';
+                echo "oi";
+                $model->ImagemEquipamento= $imagepath .rand(10,100).$model->file->name;
+            }
+
+            if ($model->save()) {
+                if($model->file){
+                    $model->file->saveAs($model->ImagemEquipamento);
+                    return $this->redirect(['view', 'id' => $model->idEquipamento]);
+                }
+            }
+            //return $this->redirect(['view', 'id' => $model->idEquipamento]);
+
         } else {
             return $this->render('update', [
                 'model' => $model,
             ]);
         }
     }
+
 
     /**
      * Deletes an existing Equipamento model.
@@ -121,4 +170,7 @@ class EquipamentoController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+
+
 }
