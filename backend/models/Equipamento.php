@@ -3,7 +3,6 @@
 namespace app\models;
 
 use Yii;
-use yii\base\Model;
 use yii\web\UploadedFile;
 use yii\db\Expression;
 
@@ -23,7 +22,7 @@ class Equipamento extends \yii\db\ActiveRecord
 {
 
     public $file;
-    public $imageFile;
+    public $tipoEquipamento;
 
     /**
      * @inheritdoc
@@ -43,8 +42,7 @@ class Equipamento extends \yii\db\ActiveRecord
         return [
             [['NomeEquipamento', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento'], 'required'],
             [['NomeEquipamento', 'Nserie', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento', 'ImagemEquipamento'], 'string', 'max' => 50],
-            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
-            
+
         ];
     }
 
@@ -66,7 +64,23 @@ class Equipamento extends \yii\db\ActiveRecord
     }
 
 
-    public function upload()
+     public function getTipoEquipamento(){
+
+        if ($this->StatusEquipamento == "Disponível"){
+            $tipoEquipamento = "Disponível";
+        }
+        else if ($this->StatusEquipamento == "Em uso"){
+            $tipoEquipamento= "Em uso";
+        }
+        else if ($this->StatusEquipamento == "Descartado"){
+            $tipoEquipamento = "Descartado";
+        }
+
+        return $tipoEquipamento;
+    }
+
+
+   public function upload()
     {
         if ($this->validate()) {
             $this->file->saveAs('uploads/' . $this->file->baseName . '.' . $this->file->extension);
