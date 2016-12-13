@@ -19,7 +19,7 @@ class EquipamentoSearch extends Equipamento
     {
         return [
             [['idEquipamento'], 'integer'],
-            [['NomeEquipamento', 'Nserie', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento', 'ImagemEquipamento','ImagemEquipamento'], 'safe'],
+            [['NomeEquipamento', 'Nserie', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento', 'ImagemEquipamento'], 'safe'],
         ];
     }
 

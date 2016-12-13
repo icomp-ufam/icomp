@@ -68,11 +68,24 @@ class EquipamentoController extends Controller
     {
         $model = new Equipamento();
 
+        //if($tipoEquipamento == "Disponível"){
+        if($model->StatusEquipamento == "Disponível"){
+            $StatusEquipamento = 1;
+        }
+        else if($model->StatusEquipamento= "Em uso"){
+            $StatusEquipamento = 2;
+        }
+        else if (  $model->StatusEquipamento = "Descartado"){
+            $StatusEquipamento = 3;
+        }
+
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
            // Create Upload
             $model->file = UploadedFile::getInstance($model, 'file');
             if ($model->file) {
                 $imagepath = 'equipamento';
+                //echo "oi";
                 $model->ImagemEquipamento = $imagepath .rand(10,100).$model->file->name;
             }
 
@@ -109,7 +122,7 @@ class EquipamentoController extends Controller
             $model->file = UploadedFile::getInstance($model, 'file');
             if ($model->file) {
                 $imagepath = 'equipamento';
-                
+                echo "oi";
                 $model->ImagemEquipamento= $imagepath .rand(10,100).$model->file->name;
             }
 
@@ -128,21 +141,6 @@ class EquipamentoController extends Controller
         }
     }
 
-    public function actionDeletefoto($id){
-
-        $ImagemEquipamento= Pasien::find()->where(['id' => $id])->one()->ImagemEquipamento;
-        if($ImagemEquipamento) {
-            if (!unlink($ImagemEquipamento)) {
-                return false;
-            }
-        }
-
-        $pasien = Pasien::findOne($id);
-        $pasien->ImagemEquipamento = NULL;
-        $pasien->update();
-
-        return $this->redirect(['update', 'id' => $id]);
-    }
 
     /**
      * Deletes an existing Equipamento model.
@@ -171,21 +169,6 @@ class EquipamentoController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    public function actionUpload()
-    {
-        $model = new UploadForm();
-
-        if (Yii::$app->request->isPost) {
-            $model->imageFile = UploadedFile::getInstance($model, 'ImagemEquipamento');
-            if ($model->upload()) {
-                // file is uploaded successfully
-                return;
-            }
-        }
-
-        return $this->render('upload', ['model' => $model]);
     }
 
 

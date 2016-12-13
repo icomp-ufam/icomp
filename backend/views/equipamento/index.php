@@ -9,20 +9,16 @@ use yii\grid\GridView;
 
 $this->title = 'Equipamentos';
 $this->params['breadcrumbs'][] = $this->title;
-
-
 ?>
 <div class="equipamento-index">
 
-    
+    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Cadastrar Equipamento', ['create'], ['class' => 'btn btn-success']) ?>
 
     </p>
-
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -33,13 +29,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'NomeEquipamento',
             'Nserie',
             'NotaFiscal',
-            
-            [   'label' => 'Status do Equipamento',
+            'Localizacao',
+             [   'label' => 'Status do Equipamento',
                 'attribute' => 'StatusEquipamento',
-                'filter'=>array ("S1" => "Disponível", "S2" => "Em uso", "D" => "Descartado"),
+                'filter'=>array ("Disponível" => "Disponível", "Em uso" => "Em uso", "Descartado" => "Descartado"),
                 'value' => 'StatusEquipamento'
+
+
             ],
-            // 'StatusEquipamento',
+
+
+
             // 'OrigemEquipamento',
             // 'ImagemEquipamento',
 
