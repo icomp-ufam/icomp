@@ -17,6 +17,7 @@ use yii\db\IntegrityException;
 use yii\base\Exception;
 use yii\db\Query;
 use yii\data\SqlDataProvider;
+use app\models\PrazoVencidoSearch;
 
 /**
  * AlunoController implements the CRUD actions for Aluno model.
@@ -349,47 +350,12 @@ class AlunoController extends Controller
     }
 
     public function actionPrazo_vencido(){
-        //$connection = \Yii::$app->db;
-
-        //$sql = $connection->createCommand("select a.nome, (DATEDIFF(CURDATE(),a.dataingresso)+DATEDIFF(t.dataTermino,t.dataInicio)+DATEDIFF(CURDATE(),p.dataInicio)) as dias,a.curso from j17_aluno as a join j17_prorrogacoes as p on p.idAluno=a.id join j17_trancamentos as t on t.idAluno=a.id where a.curso%2!=0 and (select (DATEDIFF(CURDATE(),a.dataingresso)+DATEDIFF(t.dataTermino,t.dataInicio)+DATEDIFF(CURDATE(),p.dataInicio)) as dias from j17_aluno as a join j17_prorrogacoes as p on p.idAluno=a.id join j17_trancamentos as t on t.idAluno=a.id) >= 730 or a.curso%2=0 and (select (DATEDIFF(CURDATE(),a.dataingresso)+DATEDIFF(t.dataTermino,t.dataInicio)+DATEDIFF(CURDATE(),p.dataInicio)) as dias from j17_aluno as a join j17_prorrogacoes as p on p.idAluno=a.id join j17_trancamentos as t on t.idAluno=a.id) >= 1460;");
-        //$aluno= $sql->queryAll();
-
-        $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM j17_aluno')->queryScalar();
-
-        $aluno = new SqlDataProvider([
-            'sql' => 'SELECT * FROM j17_aluno',
-            'params' => [':matricula' => 1],
-            'totalCount' => $count,
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-            'sort' => [
-                'attributes' => [
-                    'matricula',
-                    'nome',
-                    'dataingresso',
-                ],
-            ],
-        ]);
-
-        // returns an array of data rows
-        $models = $aluno->getModels();
-
-        
-
-		//$aluno= new Aluno();
-        //$aluno= $aluno->getAlunosPrazoVencido();
-        //return $this->render('prazo_vencido', ['aluno'=>$aluno]);
-
-        $searchModel = new AlunoSearch();
+        $searchModel = new PrazoVencidoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        //$dataProvider = $searchModel->search(Yii::$app->db);
-
 
         return $this->render('prazo_vencido', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'aluno' => $aluno,
         ]);
        
     }

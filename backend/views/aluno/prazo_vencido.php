@@ -1,59 +1,12 @@
 <?php
 use app\models\LinhaPesquisa;
 use xj\bootbox\BootboxAsset;
-use yii\widgets\DetailView;
 use yii\grid\GridView;
 use yii\helpers\Html;
 $this->title = 'Alunos com prazo vencido';
 $this->params['breadcrumbs'][] = $this->title;
 BootboxAsset::register($this);
 BootboxAsset::registerWithOverride($this);
-/*
-<ul>
-<?php foreach ($aluno as $aluno): ?>
-    <?= DetailView::widget([
-	'model' => $aluno,
-	'attributes' => [
-	'matricula',
-	'nome',
-	],
-	])?>
-
-	<?= GridView::widget([
-    'dataProvider' => $aluno,
-    'columns' => [
-        'matricula',
-        'nome',
-    ],
-]) ?>
-<?php endforeach; ?>
-</ul>
-*/
-use app\models\Aluno;
-
-use yii\data\SqlDataProvider;
-
-$count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM j17_aluno')->queryScalar();
-
-$provider = new SqlDataProvider([
-    'sql' => 'SELECT * FROM j17_aluno',
-    'params' => [':matricula' => 1],
-    'totalCount' => $count,
-    'pagination' => [
-        'pageSize' => 10,
-    ],
-    'sort' => [
-        'attributes' => [
-            'matricula',
-            'nome',
-            'dataingresso',
-        ],
-    ],
-]);
-
-// returns an array of data rows
-$models = $provider->getModels();
-
 ?>
 
 <?= GridView::widget([
@@ -84,11 +37,6 @@ $models = $provider->getModels();
                 return date("m-Y", strtotime($model->dataingresso));
                 },
         ],
-        [
-            'label' => 'Dias Atrasado',
-            'attribute' => 'diasParaFormar',
-            'value' => 'diasParaFormar'
-        ],
         'nomeOrientador',
         [   'label' => 'Linha Pesquisa',
             'attribute' => 'siglaLinhaPesquisa',
@@ -100,6 +48,11 @@ $models = $provider->getModels();
             'value' => function ($model){
               return "<span class='fa ". $model->linhaPesquisa->icone ." fa-lg'/> ". $model->siglaLinhaPesquisa;
             }
+        ],
+        [
+            'label' => 'Dias Atrasado',
+            'attribute' => 'diasParaFormar',
+            'value' => 'diasParaFormar'
         ],
         /*
         ['class' => 'yii\grid\ActionColumn',
