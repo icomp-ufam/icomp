@@ -31,6 +31,7 @@ $exameProficienciaAluno = array(null => "Não Avaliado", 0 => 'Reprovado',1 => '
         <?= Html::a('<span class="fa fa-comments"></span> Exame de Proeficiência', ['aluno/exame', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
 		<?= Html::a('<span class="fa fa-lock"></span> Registrar Trancamento', ['trancamento/create', 'idAluno' => $model->id], ['class' => 'btn btn-danger']) ?>
 		<?= Html::a('<span class="fa fa-clock-o"></span> Registrar Prorrogação', ['prorrogacao/create', 'idAluno' => $model->id], ['class' => 'btn btn-warning']) ?>
+		<?= Html::a('<span class="glyphicon glyphicon-duplicate"></span> Aproveitar Disciplina', ['aproveitamento/indexbyaluno', 'idAluno' => $model->id], ['class' => 'btn btn-info']) ?>
     </p>
 
     <div class="panel panel-default">
