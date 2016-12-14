@@ -18,6 +18,8 @@ use Yii;
  */
 class Cautela extends \yii\db\ActiveRecord
 {
+
+  public $file;
     /**
      * @inheritdoc
      */
@@ -33,6 +35,7 @@ class Cautela extends \yii\db\ActiveRecord
     {
         return [
             [['NomeResponsavel', 'OrigemCautela', 'Email', 'TelefoneResponsavel'], 'required'],
+            [['file'], 'file'],
             [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel'], 'string', 'max' => 50],
             [['ImagemCautela'], 'string', 'max' => 100],
         ];

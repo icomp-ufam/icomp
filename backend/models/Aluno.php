@@ -155,6 +155,7 @@ class Aluno extends \yii\db\ActiveRecord
         $diasPassados= (int)floor( ($dataAtual - $dataIngresso) / (60 * 60 * 24));
         $diasParaFormar= $diasParaFormar - $diasPassados;
         
+
         return $diasParaFormar;
     }
     

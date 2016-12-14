@@ -8,6 +8,7 @@ use kartik\mpdf\Pdf;
 /* @var $this yii\web\View */
 /* @var $model app\models\Cautela */
 /* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <div class="cautela-form">
@@ -19,7 +20,7 @@ use kartik\mpdf\Pdf;
 
     <?= $form->field($model, 'OrigemCautela')->textInput(['maxlength' => true]) ?>
 
-   
+
 
     <div class="row">
                 <?= $form->field($model, 'DataDevolucao', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
@@ -35,7 +36,7 @@ use kartik\mpdf\Pdf;
 
     <?= $form->field($model, 'Email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'ValidadeCautela')->textInput(['maxlength' => true]) ?>
+
 
     <div class="row">
                 <?= $form->field($model, 'ValidadeCautela', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
@@ -51,12 +52,10 @@ use kartik\mpdf\Pdf;
 
     <?= $form->field($model, 'TelefoneResponsavel')->textInput(['maxlength' => true]) ?>
 
-    
-
-    <?= $form->field($model, 'ImagemCautela', ['options' => ['class' => 'col-md-6']])->fileInput(['accept' => '.pdf'])->label("Cautela: ") ?>
+    <?= $form->field($model, 'ImagemCautela') ->fileInput()?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Gerar' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Gerar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         <?= Html::a('Cancelar', ['index'], ['class' => 'btn btn-danger']) ?>
     </div>
 

@@ -2,27 +2,28 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use backend\models\Disciplina;
+use app\models\Disciplina;
 use yii\jui\AutoComplete;
 use yii\helpers\Url;
 use yii\web\JsExpression;
+use yii\widgets\MaskedInput;
 /* @var $this yii\backend\View */
 /* @var $model backend\models\Aproveitamento */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<?php
-	$dOrigemTxt = ['nome'=>'', 'cr'=>'', 'ch'=>''];
-	$dDestinoTxt = ['nome'=>'', 'cr'=>'', 'ch'=>''];
+<?php	
+	$discOrigem = new Disciplina();
+	$discDestino = new Disciplina();	
 	if(isset($dOrigem)){
-		$dOrigemTxt['nome'] = $dOrigem->nome;
-		$dOrigemTxt['cr'] = $dOrigem->creditos;
-		$dOrigemTxt['ch'] = $dOrigem->cargaHoraria;
+		$discOrigem->nome = $dOrigem->nome;
+		$discOrigem->creditos = $dOrigem->creditos;
+		$discOrigem->cargaHoraria = $dOrigem->cargaHoraria;
 	}
 	if(isset($dDestino)){
-		$dDestinoTxt['nome'] = $dDestino->nome;
-		$dDestinoTxt['cr'] = $dDestino->creditos;
-		$dDestinoTxt['ch'] = $dDestino->cargaHoraria;
+		$discDestino->nome = $dDestino->nome;
+		$discDestino->creditos = $dDestino->creditos;
+		$discDestino->cargaHoraria = $dDestino->cargaHoraria;
 	}
 ?>
 
@@ -30,101 +31,94 @@ use yii\web\JsExpression;
 	
 
     <?php $form = ActiveForm::begin(); ?>
-	<div class="panel panel-default" style="width:50%">
+	<div class="panel panel-default" style="width:80%">
 	<div class="panel-heading">
                 <h3 class="panel-title"><b>Disciplina Origem:</b></h3>
             </div>
 	  <div class="panel-body">
+
 		<div class="row">
-		    <?php // $form->field($model, 'codDisciplinaOrigemFK')->textInput(['maxlength' => true]) ?>
 		    <?=     
-		    $form->field($model, 'codDisciplinaOrigemFK')->widget(AutoComplete::classname(), [
+		    $form->field($model, 'codDisciplinaOrigemFK',['options'=>['class'=>'col-md-3']])->widget(AutoComplete::classname(), [
 		    				'clientOptions' => [
 		    						'source' => URL::to(['disciplina/autocompletedisciplina']),
 		    						'minLength'=>3,
 		    						'select' => new JsExpression("function( event, ui ) {
 								        //console.log(ui);
-								        $('[name=disciplinaOrigemNome]').val(ui.item.nome);
-								        $('[name=disciplinaOrigemCreditos]').val(ui.item.creditos);
-		    							$('[name=disciplinaOrigemCargaHoraria]').val(ui.item.cargaHoraria);
+								        $('#disciplina-1-nome').val(ui.item.nome);
+								        $('#disciplina-1-creditos').val(ui.item.creditos);
+		    							$('#disciplina-1-cargahoraria').val(ui.item.cargaHoraria);
 								      }")
 		    				],
 		    				'options'=>[
 		    						'maxLength'=>10,
-		    						'style'=>['display'=>'block',
-		    								  'width'=>'100px',
+		    						'style'=>[
+		    								'width'=>'100px',
 								    ],
 		    				]
-		    		])->label("<font color='#FF0000'>*</font> <b>Cód. Disciplina Origem:</b>"); ?>
+		    		])->label("<font color='#FF0000'>*</font> <b>Cód. Disciplina:</b>"); ?>
 	</div>
 	<div class="row">
-	<span><font color='#FF0000'>*</font> <b>Nome Disciplina:</b></span><br/>
-	<?php	echo Html::textInput("disciplinaOrigemNome",$dOrigemTxt['nome'],['maxlength'=>100, 'style'=>['width'=>'250px']]); ?>
+	<?=	$form->field($discOrigem, '[1]nome',['options'=>['class'=>'col-md-5']])->textInput(['maxlenght'=>true])->label("<font color='#FF0000'>*</font> <b>Nome Disciplina:</b>"); ?>
 	</div>
+
 	<div class="row">
-	<span><font color='#FF0000'>*</font> <b>Créditos:</b></span><br/>
-	<?php	echo Html::textInput("disciplinaOrigemCreditos",$dOrigemTxt['cr'],['style'=>['width'=>'50px']]); ?>
-	</div>
-	<div class="row">
-	<span><font color='#FF0000'>*</font> <b>Carga Horária (H):</b></span><br/>
-	<?php	echo Html::textInput("disciplinaOrigemCargaHoraria",$dOrigemTxt['ch'],['style'=>['width'=>'50px']]); ?>
+	<?=	$form->field($discOrigem, '[1]creditos',['options'=>['class'=>'col-md-2']])->textInput(['maxlength'=>true])->widget(MaskedInput::className(), [
+                    'mask' => '99', 'clientOptions'=>['alias'=>'numeric']])->label("<font color='#FF0000'>*</font> <b>Créditos:</b>"); ?>
+	<?=	$form->field($discOrigem, '[1]cargaHoraria',['options'=>['class'=>'col-md-3']])->widget(MaskedInput::className(), [
+                    'mask' => '999', 'clientOptions'=>['alias'=>'numeric']])->textInput(['maxlength'=>true])->label("<font color='#FF0000'>*</font> <b>Carga Horária (H):</b>"); ?>
 	</div>
    </div>
   </div>
-  <div class="panel panel-default" style="width:50%">
+  <div class="panel panel-default" style="width:80%">
 	<div class="panel-heading">
                 <h3 class="panel-title"><b>Disciplina Destino:</b></h3>
             </div>
 	  <div class="panel-body">
 	<div class="row">
-    <?php //$form->field($model, 'codDisciplinaDestinoFK')->textInput(['maxlength' => true]) ?>
 	<?=     
-    $form->field($model, 'codDisciplinaDestinoFK')->widget(AutoComplete::classname(), [
+    $form->field($model, 'codDisciplinaDestinoFK',['options'=>['class'=>'col-md-4']])->widget(AutoComplete::classname(), [
     				'clientOptions' => [
     						'source' => URL::to(['disciplina/autocompletedisciplina']),
     						'minLength'=>3,
     						'select' => new JsExpression("function( event, ui ) {
 								        //console.log(ui);
-								        $('[name=disciplinaDestinoNome]').val(ui.item.nome);
-								        $('[name=disciplinaDestinoCreditos]').val(ui.item.creditos);
-		    							$('[name=disciplinaDestinoCargaHoraria]').val(ui.item.cargaHoraria);
+								        $('#disciplina-2-nome').val(ui.item.nome);
+								        $('#disciplina-2-creditos').val(ui.item.creditos);
+		    							$('#disciplina-2-cargahoraria').val(ui.item.cargaHoraria);
 								      }")
     				],
     				'options'=>[
     						'maxLength'=>10,
-    						'style'=>['display'=>'block',
-		    								  'width'=>'100px',
+    						'style'=>[
+		    						 'width'=>'100px',
 								    ],
     				]
     		])->label("<font color='#FF0000'>*</font> <b>Cód. Disciplina Destino:</b>"); ?>
 	</div>
 	<div class="row">
-	<span><font color='#FF0000'>*</font> <b>Nome Disciplina:</b></span><br/>
-	<?php	echo Html::textInput("disciplinaDestinoNome",$dDestinoTxt['nome'],['maxlength'=>100, 'style'=>['width'=>'250px']]); ?>
+	<?= $form->field($discDestino, '[2]nome', ['options'=>['class'=>'col-md-5']])->textInput(['maxlength'=>true])->label("<font color='#FF0000'>*</font> <b>Nome Disciplina:</b>")?>
 	</div>
 	<div class="row">
-	<span><font color='#FF0000'>*</font> <b>Créditos:</b></span><br/>
-	<?php	echo Html::textInput("disciplinaDestinoCreditos",$dDestinoTxt['cr'],['style'=>['width'=>'50px']]); ?>
-	</div>
-	<div class="row">
-	<span><font color='#FF0000'>*</font> <b>Carga Horária (H):</b></span><br/>
-	<?php	echo Html::textInput("disciplinaDestinoCargaHoraria",$dDestinoTxt['ch'],['style'=>['width'=>'50px']]); ?>
+	<?= $form->field($discDestino, '[2]creditos', ['options'=>['class'=>'col-md-2']])->textInput()->widget(MaskedInput::className(), [
+                    'mask' => '99', 'clientOptions'=>['alias'=>'numeric']])->label("<font color='#FF0000'>*</font> <b>Créditos:</b>") ?>
+	<?= $form->field($discDestino, '[2]cargaHoraria', ['options'=>['class'=>'col-md-3']])->textInput()->widget(MaskedInput::className(), [
+                    'mask' => '999', 'clientOptions'=>['alias'=>'numeric']])->label("<font color='#FF0000'>*</font> <b>Carga Horária (H):</b>") ?>
 	</div>
 	</div>
 	</div>
-	<div class="panel panel-default" style="width:50%">
+	<div class="panel panel-default" style="width:80%">
 		<div class="panel-heading">
                 <h3 class="panel-title"><b>Dados:</b></h3>
             </div>
 	  <div class="panel-body">
 	<div class="row">
-    <?= $form->field($model, 'nota')->textInput(['style'=>['width'=>'100px']])->label("<font color='#FF0000'>*</font> <b>Nota:</b>"); ?>
-	</div>
-	<div class="row">
-    <?= $form->field($model, 'frequencia')->textInput(['style'=>['width'=>'100px']])->label("<font color='#FF0000'>*</font> <b>Frequência (%)</b>"); ?>
-	</div>
-	<div class="row">
-    <?= $form->field($model, 'situacao')->textInput(['maxlength' => true, 'style'=>['width'=>'100px']])->label("<font color='#FF0000'>*</font> <b>Situação:</b>"); ?>
+    <?= $form->field($model, 'nota', ['inputOptions' => ['value' => Yii::$app->formatter->asDecimal($model->nota)],'options'=>['class'=>'col-md-2']])->textInput()->widget(MaskedInput::className(), [
+    		'mask' => '99.99', 'clientOptions'=>['alias'=>'numeric']])->label("<font color='#FF0000'>*</font> <b>Nota:</b>"); ?>
+    <?= $form->field($model, 'frequencia', ['options'=>['class'=>'col-md-2']])->textInput()->widget(MaskedInput::className(), [
+                    'mask' => '999.99', 'clientOptions'=>['alias'=>'numeric']])->label("<font color='#FF0000'>*</font> <b>Frequência (%)</b>"); ?>
+
+    <?= $form->field($model, 'situacao', ['options'=>['class'=>'col-md-4']])->textInput(['maxlength' => true])->label("<font color='#FF0000'>*</font> <b>Situação:</b>"); ?>
 	</div>
 	<div class="row">
     <?= $form->field($model, 'idAluno')->hiddenInput(['value'=>$model->idAluno])->label(false) ?>

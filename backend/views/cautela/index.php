@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cautela-index">
 
-    
+
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -29,9 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'OrigemCautela',
             'DataDevolucao',
             'Email:email',
-            // 'ValidadeCautela',
-            // 'TelefoneResponsavel',
-            // 'ImagemCautela',
+            'ValidadeCautela',
+            'TelefoneResponsavel',
+            //'ImagemCautela',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
