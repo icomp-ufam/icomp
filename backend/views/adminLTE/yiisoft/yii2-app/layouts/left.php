@@ -99,6 +99,12 @@
                         ['label' => 'Alunos com prazo vencido', 'icon' => 'fa fa-calendar-times-o', 'url' => ['aluno/prazo_vencido'],],
                     ],
                 ],
+            	[
+            		'label' => 'Gerenciar Disciplinas Aproveit.',
+	            	'icon' => 'glyphicon glyphicon-duplicate',
+            		'url' => ['disciplina/index'],
+            		'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),
+            		],
                 [
                     'label' => 'Gerenciar Prorrogações',
                     'icon' => 'fa fa-clock-o',
@@ -185,18 +191,6 @@
                         ['label' => 'Descarte de Equipamentos', 'icon' => 'fa fa-trash', 'url' => ['descarte-equipamento/index'],],
                         
                     ],
-                ],
-                [
-                    'label' => 'Aproveitamento de Disciplinas',
-                    //'icon' => 'fa fa-lock',
-                    'url' => ['aproveitamento/index'],
-                    'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),
-                ],
-                [
-                    'label' => 'Disciplinas',
-                    //'icon' => 'fa fa-lock',
-                    'url' => ['disciplina/index'],
-                    'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),
                 ],
                 
 				//['label' => 'despesas', 'icon' => 'fa fa-calendar', 'url' => ['cont-proj-despesas/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
