@@ -24,6 +24,7 @@ class AproveitamentoController extends Controller
     public function behaviors()
     {
         return [
+        	/*
         	'access' => [
         		'class' => \yii\filters\AccessControl::className(),
         		'rules' => [
@@ -36,6 +37,7 @@ class AproveitamentoController extends Controller
         			],
         		],
         	],
+        	*/
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
