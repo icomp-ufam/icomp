@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\mPDF;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CautelaAvulsaSearch */
@@ -12,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cautela-avulsa-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -29,11 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'NomeResponsavel',
             'Email:email',
             'ValidadeCautela',
-            // 'TelefoneResponsavel',
+            'TelefoneResponsavel',
             // 'ObservacoesDescarte',
-            'ImagemCautela',
+            //'ImagemCautela',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
+
 </div>

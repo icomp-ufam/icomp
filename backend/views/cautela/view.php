@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Cautela */
 
-$this->title = $model->idCautela;
+$this->title = $model->NomeResponsavel;
 $this->params['breadcrumbs'][] = ['label' => 'Cautelas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,8 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->idCautela], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->idCautela], [
+        <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar  ',
+            ['index'], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('Editar', ['update', 'id' => $model->idCautela], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Deletar', ['delete', 'id' => $model->idCautela], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',

@@ -7,12 +7,12 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\DescarteEquipamentoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Descarte de Equipamentos';
+$this->title = 'Descarte Equipamentos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="descarte-equipamento-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -24,11 +24,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+            'idEquipamento',
             'idDescarte',
             'NomeResponsavel',
-            'Email:email',
+            'email:email',
             'TelefoneResponsavel',
-            'ObservacoesDescarte',
+            // 'ObservacoesDescarte',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

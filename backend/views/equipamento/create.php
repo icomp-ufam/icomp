@@ -9,13 +9,13 @@ use yii\widgets\fileInput;
 /* @var $model app\models\Equipamento */
 
 if ($model->StatusEquipamento == 1){
-	$titulo = "Disponível";
+    $titulo = "Disponível";
 }
 else if ($model->StatusEquipamento == 2){
-	$titulo = "Em uso";
+    $titulo = "Em uso";
 }
 else if ($model->StatusEquipamento == 3){
-	$titulo = "Descartado";
+    $titulo = "Descartado";
 }
 
 $this->title = 'Cadastrar Equipamento';
