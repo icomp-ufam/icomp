@@ -119,10 +119,14 @@ class AproveitamentoController extends Controller
     	$model = new Aproveitamento();
     	
     	$aproveitamento = new Aproveitamento();
-    	
-    	if ($aproveitamento->load(Yii::$app->request->post()) ) {
+    	$discOrigem = new Disciplina();
+    	$discDestino = new Disciplina();
+    	 
+    	    	if ($aproveitamento->load(Yii::$app->request->post()) && 
+    		$discOrigem->load(['Disciplina'=>Yii::$app->request->post()['Disciplina'][1]]) &&
+    		$discDestino->load(['Disciplina'=>Yii::$app->request->post()['Disciplina'][2]])) {
     		
-    		$dados = Yii::$app->request->post();
+    		//$dados = Yii::$app->request->post();
     		//Verifica se Aproveitamento(Origem, Destino) é válido.
     		//Caso contrário, direciona para a actionView e apresenta o Aproveitamento existente.
     		$codAproveitamentoExistente = Null;
@@ -161,9 +165,9 @@ class AproveitamentoController extends Controller
     		if(Disciplina::findOne(strtolower($aproveitamento->codDisciplinaOrigemFK))===Null){
     			$mDisciplina = new Disciplina();
     			$mDisciplina->codDisciplina = strtolower($aproveitamento->codDisciplinaOrigemFK);
-    			$mDisciplina->cargaHoraria = $dados["disciplinaOrigemCargaHoraria"];
-    			$mDisciplina->creditos = $dados["disciplinaOrigemCreditos"];
-    			$mDisciplina->nome = $dados["disciplinaOrigemNome"];
+    			$mDisciplina->cargaHoraria = $discOrigem->cargaHoraria;//$dados["disciplinaOrigemCargaHoraria"];
+    			$mDisciplina->creditos = $discOrigem->creditos;//$dados["disciplinaOrigemCreditos"];
+    			$mDisciplina->nome = $discOrigem->nome;//$dados["disciplinaOrigemNome"];
     			
     			if(!$mDisciplina->save()){
     				throw new NotFoundHttpException("Erro ao cadastrar disciplina $mDisciplina->codDisciplina : $mDisciplina->nome.");
@@ -174,9 +178,9 @@ class AproveitamentoController extends Controller
     		if(Disciplina::findOne(strtolower($aproveitamento->codDisciplinaDestinoFK))===Null){
     			$mDisciplina = new Disciplina();
     			$mDisciplina->codDisciplina = strtolower($aproveitamento->codDisciplinaDestinoFK);
-    			$mDisciplina->cargaHoraria = $dados["disciplinaDestinoCargaHoraria"];
-    			$mDisciplina->creditos = $dados["disciplinaDestinoCreditos"];
-    			$mDisciplina->nome = $dados["disciplinaDestinoNome"];
+    			$mDisciplina->cargaHoraria = $discDestino->cargaHoraria;//$dados["disciplinaDestinoCargaHoraria"];
+    			$mDisciplina->creditos = $discDestino->creditos;//$dados["disciplinaDestinoCreditos"];
+    			$mDisciplina->nome = $discDestino->nome;//$dados["disciplinaDestinoNome"];
     			 
     			if(!$mDisciplina->save()){
     				throw new NotFoundHttpException("Erro ao cadastrar disciplina $mDisciplina->codDisciplina : $mDisciplina->nome.");
@@ -229,6 +233,9 @@ class AproveitamentoController extends Controller
     	//$model = new Aproveitamento();
     	 
     	$aproveitamento = new Aproveitamento();
+    	$discOrigem = new Disciplina();
+    	$discDestino = new Disciplina();
+    	 
     	$idAluno;
     	$aproveitamento = Aproveitamento::findOne($id); 
     	if($aproveitamento !== Null){
@@ -237,9 +244,11 @@ class AproveitamentoController extends Controller
     		throw new NotFoundHttpException('Aluno não existente.');
     	}
     	
-    	if ($aproveitamento->load(Yii::$app->request->post()) ) {
+if ($aproveitamento->load(Yii::$app->request->post()) && 
+    		$discOrigem->load(['Disciplina'=>Yii::$app->request->post()['Disciplina'][1]]) &&
+    		$discDestino->load(['Disciplina'=>Yii::$app->request->post()['Disciplina'][2]])) {
+    	
     		$dados = Yii::$app->request->post();
-	
     		$idAluno = $dados['Aproveitamento']['idAluno'];
     		//$aproveitamento->id = $dados['Aproveitamento']['id'];
     		//Verifica se Aproveitamento(Origem, Destino) é válido.
@@ -283,9 +292,9 @@ class AproveitamentoController extends Controller
     		if(Disciplina::findOne($aproveitamento->codDisciplinaOrigemFK)===Null){
     			$mDisciplina = new Disciplina();
     			$mDisciplina->codDisciplina = strtolower($aproveitamento->codDisciplinaOrigemFK);
-    			$mDisciplina->cargaHoraria = $dados["disciplinaOrigemCargaHoraria"];
-    			$mDisciplina->creditos = $dados["disciplinaOrigemCreditos"];
-    			$mDisciplina->nome = $dados["disciplinaOrigemNome"];
+    			$mDisciplina->cargaHoraria = $discOrigem->cargaHoraria;//$dados["disciplinaOrigemCargaHoraria"];
+    			$mDisciplina->creditos = $discOrigem->creditos;//$dados["disciplinaOrigemCreditos"];
+    			$mDisciplina->nome = $discOrigem->nome;//$dados["disciplinaOrigemNome"];
     			 
     			if(!$mDisciplina->save()){
     				throw new NotFoundHttpException("Erro ao cadastrar disciplina $mDisciplina->codDisciplina : $mDisciplina->nome.");
@@ -296,9 +305,9 @@ class AproveitamentoController extends Controller
     		if(Disciplina::findOne($aproveitamento->codDisciplinaDestinoFK)===Null){
     			$mDisciplina = new Disciplina();
     			$mDisciplina->codDisciplina = strtolower($aproveitamento->codDisciplinaDestinoFK);
-    			$mDisciplina->cargaHoraria = $dados["disciplinaDestinoCargaHoraria"];
-    			$mDisciplina->creditos = $dados["disciplinaDestinoCreditos"];
-    			$mDisciplina->nome = $dados["disciplinaDestinoNome"];
+    			$mDisciplina->cargaHoraria = $discDestino->cargaHoraria;//$dados["disciplinaDestinoCargaHoraria"];
+    			$mDisciplina->creditos = $discDestino->creditos;//$dados["disciplinaDestinoCreditos"];
+    			$mDisciplina->nome = $discDestino->nome;//$dados["disciplinaDestinoNome"];
     	
     			if(!$mDisciplina->save()){
     				throw new NotFoundHttpException("Erro ao cadastrar disciplina $mDisciplina->codDisciplina : $mDisciplina->nome.");
