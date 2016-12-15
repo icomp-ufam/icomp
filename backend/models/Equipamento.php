@@ -41,7 +41,6 @@ class Equipamento extends \yii\db\ActiveRecord
     {
         return [
             [['NomeEquipamento', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento'], 'required'],
-            [['file'], 'file'],
             [['NomeEquipamento', 'Nserie', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento', 'ImagemEquipamento'], 'string', 'max' => 50],
 
         ];
@@ -60,7 +59,7 @@ class Equipamento extends \yii\db\ActiveRecord
             'Localizacao' => 'Localização',
             'StatusEquipamento' => 'Status',
             'OrigemEquipamento' => 'Origem',
-            'file' => 'Arquivo',
+            'file' => 'Imagem Equipamento',
         ];
     }
 
