@@ -23,6 +23,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+
+        <?= Html::a('Dar Baixa Cautela', ['baixa-cautela/create', 'id' => $model->idCautela], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Você tem certeza que deseja dar baixa nesta Cautela?',
+                'method' => 'post',
+               // $this->redirect(array('descarte-equipamento/create', 'id' => $model->idEquipamento)),
+            ], 
+        ]) ?>
     </p>
 
     <?= DetailView::widget([

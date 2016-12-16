@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use app\models\BaixaCautela;
+use app\models\Cautela;
 use app\models\BaixaCautelaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -61,15 +62,21 @@ class BaixaCautelaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
+        $cautela = Cautela::findOne($id);
+
         $model = new BaixaCautela();
+        $model->idCautela = $id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $cautela->StatusCautela = "Concluída";
+            $cautela->save();
             return $this->redirect(['view', 'id' => $model->idBaixaCautela]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'item' => $cautela
             ]);
         }
     }
