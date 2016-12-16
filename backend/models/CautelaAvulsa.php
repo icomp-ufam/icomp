@@ -15,6 +15,7 @@ use Yii;
  * @property integer $TelefoneResponsavel
  * @property string $ObservacoesDescarte
  * @property string $ImagemCautela
+ * @property string $StatusCautelaAvulsa
  */
 class CautelaAvulsa extends \yii\db\ActiveRecord
 {
@@ -34,7 +35,7 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
         return [
             [['id', 'NomeResponsavel', 'Email', 'TelefoneResponsavel', 'ObservacoesDescarte'], 'required'],
             [['id', 'TelefoneResponsavel'], 'integer'],
-            [['NomeResponsavel', 'Email', 'ValidadeCautela', 'ObservacoesDescarte'], 'string', 'max' => 50],
+            [['NomeResponsavel', 'Email', 'ValidadeCautela', 'ObservacoesDescarte', 'StatusCautelaAvulsa'], 'string', 'max' => 50],
             [['ImagemCautela'], 'string', 'max' => 100],
             [['id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id' => 'id']],
         ];
@@ -47,13 +48,14 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
     {
         return [
             'idCautelaAvulsa' => 'Id Cautela Avulsa',
-            'id' => 'Id do Responsável',
-            'NomeResponsavel' => 'Nome do Responsável',
+            'id' => 'ID',
+            'NomeResponsavel' => 'Nome Responsavel',
             'Email' => 'Email',
             'ValidadeCautela' => 'Validade Cautela',
-            'TelefoneResponsavel' => 'Telefone do Responsável',
-            'ObservacoesDescarte' => 'Observações',
+            'TelefoneResponsavel' => 'Telefone Responsavel',
+            'ObservacoesDescarte' => 'Observacoes Descarte',
             'ImagemCautela' => 'Imagem Cautela',
+            'StatusCautelaAvulsa' => 'Status Cautela Avulsa',
         ];
     }
 }

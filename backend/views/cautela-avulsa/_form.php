@@ -2,16 +2,13 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\mPDF;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\CautelaAvulsa */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-
-  <div class="cautela-avulsa-form">
-
+<div class="cautela-avulsa-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -29,13 +26,12 @@ use yii\mPDF;
 
     <?= $form->field($model, 'ImagemCautela')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'ImagemCautela', ['options' => ['class' => 'col-md-0']])->fileInput(['accept' => '.pdf'])->label("Cautela: ") ?>
+    <?= $form->field($model, 'StatusCautelaAvulsa')->textInput(['maxlength' => true]) ?>
 
-        <div class="form-group">
-          <?= Html::submitButton($model->isNewRecord ? 'Gerar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-          <?= Html::a('Cancelar', ['index'], ['class' => 'btn btn-danger']) ?>
-        </div>
+    <div class="form-group">
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    </div>
 
     <?php ActiveForm::end(); ?>
 
-  </div>
+</div>

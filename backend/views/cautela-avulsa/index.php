@@ -2,22 +2,21 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\mPDF;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CautelaAvulsaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Cautelas Avulsas';
+$this->title = 'Cautela Avulsas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cautela-avulsa-index">
 
-
+    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Gerar Cautela Avulsa', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Cautela Avulsa', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -25,18 +24,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'idCautelaAvulsa',
+            'idCautelaAvulsa',
             'id',
             'NomeResponsavel',
             'Email:email',
             'ValidadeCautela',
-            'TelefoneResponsavel',
+            // 'TelefoneResponsavel',
             // 'ObservacoesDescarte',
-            //'ImagemCautela',
+            // 'ImagemCautela',
+            // 'StatusCautelaAvulsa',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
-
 </div>
