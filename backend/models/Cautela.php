@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "j17_cautela".
@@ -20,6 +21,9 @@ use Yii;
  */
 class Cautela extends \yii\db\ActiveRecord
 {
+
+     public $tipoCautela;
+
     /**
      * @inheritdoc
      */
@@ -55,7 +59,24 @@ class Cautela extends \yii\db\ActiveRecord
             'TelefoneResponsavel' => 'Telefone Responsavel',
             'ImagemCautela' => 'Imagem Cautela',
             'Equipamento' => 'Equipamento',
-            'StatusCautela' => 'Status Cautela',
+            'StatusCautela' => 'Status',
         ];
     }
+
+
+    public function getTipoEquipamento(){
+
+        if ($this->StatusCautela == "Em aberto"){
+            $tipoCautela = "Em aberto";
+        }
+        else if ($this->StatusCautela == "Concluída"){
+            $tipoCautela = "Concluída";
+        }
+        else if ($this->StatusCautela == "Em atraso"){
+            $tipoCautela = "Em atraso";
+        }
+
+        return $tipoCautela;
+    }
+
 }

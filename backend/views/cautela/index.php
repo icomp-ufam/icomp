@@ -33,7 +33,13 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'TelefoneResponsavel',
             // 'ImagemCautela',
             // 'Equipamento',
-             'StatusCautela',
+            [   'label' => 'Status da Cautela',
+                'attribute' => 'StatusCautela',
+                'filter'=>array ("Em aberto" => "Em aberto", "Concluída" => "Concluída", "Em atraso" => "Em atraso"),
+                'value' => 'StatusCautela'
+
+
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

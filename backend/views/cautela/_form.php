@@ -28,7 +28,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Equipamento')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'StatusCautela')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'StatusCautela')->dropDownList(['Em aberto' => 'Em aberto','Concluída'=> 'Concluída','Em atraso'=>'Em atraso']) ?>
+
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

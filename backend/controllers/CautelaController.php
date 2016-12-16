@@ -65,6 +65,17 @@ class CautelaController extends Controller
     {
         $model = new Cautela();
 
+        if($model->StatusCautela == "Em aberto"){
+            $StatusCautela = 1;
+        }
+        else if($model->StatusCautela= "Concluída"){
+            $StatusCautela = 2;
+        }
+        else if ($model->StatusCautela = "Em atraso"){
+            $StatusCautela = 3;
+        }
+
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->idCautela]);
         } else {
