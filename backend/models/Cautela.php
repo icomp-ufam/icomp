@@ -15,11 +15,11 @@ use Yii;
  * @property string $ValidadeCautela
  * @property string $TelefoneResponsavel
  * @property string $ImagemCautela
+ * @property string $Equipamento
+ * @property string $StatusCautela
  */
 class Cautela extends \yii\db\ActiveRecord
 {
-
-  public $file;
     /**
      * @inheritdoc
      */
@@ -34,9 +34,8 @@ class Cautela extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['NomeResponsavel', 'OrigemCautela', 'Email', 'TelefoneResponsavel'], 'required'],
-            [['file'], 'file'],
-            [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel'], 'string', 'max' => 50],
+            [['NomeResponsavel', 'OrigemCautela', 'Email', 'TelefoneResponsavel', 'StatusCautela'], 'required'],
+            [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel', 'Equipamento', 'StatusCautela'], 'string', 'max' => 50],
             [['ImagemCautela'], 'string', 'max' => 100],
         ];
     }
@@ -55,6 +54,8 @@ class Cautela extends \yii\db\ActiveRecord
             'ValidadeCautela' => 'Validade Cautela',
             'TelefoneResponsavel' => 'Telefone Responsavel',
             'ImagemCautela' => 'Imagem Cautela',
+            'Equipamento' => 'Equipamento',
+            'StatusCautela' => 'Status Cautela',
         ];
     }
 }

@@ -23,13 +23,17 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'DataDevolucao') ?>
 
-    <?= $form->field($model, 'Email') ?>
+    <?=// $form->field($model, 'Email') ?>
 
     <?php // echo $form->field($model, 'ValidadeCautela') ?>
 
     <?php // echo $form->field($model, 'TelefoneResponsavel') ?>
 
     <?php // echo $form->field($model, 'ImagemCautela') ?>
+
+    <?php // echo $form->field($model, 'Equipamento') ?>
+
+    <?php  echo $form->field($model, 'StatusCautela') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
