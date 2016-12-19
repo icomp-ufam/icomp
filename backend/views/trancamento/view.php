@@ -73,11 +73,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'justificativa:ntext',
         //'documento:ntext',
         [
+            'attribute' => 'tipo',
+            'format' => 'html',
+            'value' => $model->tipo == 0 ? 'Trancamento' : 'Suspensão'
+        ],
+        [
             'attribute' => 'documento',
             'format' => 'html',
             'value' => '<span class="fa fa-file-pdf-o"></span>   '.
                         Html::a(
-                                 explode('uploads/trancamento/', $model->documento)[1],
+                                 //explode('uploads/trancamento/', $model->documento)[1],
+                                 ' Download do documento',
                                  $model->documento,
                                 [
                                     'target' => '_blank',
@@ -85,7 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'data-pjax'=> "0",
                                 ]
                         )
-        ],   
+        ],
         //'status',
         [
             'attribute' => 'status',
