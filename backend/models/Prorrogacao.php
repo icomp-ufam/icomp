@@ -111,8 +111,8 @@ class Prorrogacao extends \yii\db\ActiveRecord
 
     public function canDoProrogation() {
         //Limit in Days
-        $limitMestrado =  360;
-        $limitDoutorado = 720;
+        $limitMestrado =  360; //2 times, 180 days each
+        $limitDoutorado = 720; //4 times, 180 days each
 
         $prorogations = $this->find()->where('idAluno = '.$this->idAluno)->all();
         $sum = 0;
