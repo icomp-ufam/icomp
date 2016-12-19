@@ -17,7 +17,7 @@ $this->title = 'Novo Aluno';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<p> <?= Html::a('Voltar', ['candidatos/index', 'id' => Yii::$app->request->get('idEdital')], ['class' => 'btn btn-warning']) ?> </p>
+<p> <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-warning']) ?> </p>
 
 
 <div class="aluno-create">
