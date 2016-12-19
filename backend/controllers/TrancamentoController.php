@@ -109,7 +109,7 @@ class TrancamentoController extends Controller
             ]);
         }
 
-        $model->dataSolicitacao = date("Y-m-d");
+        $model->dataSolicitacao = date("Y-m-d"); //Get the current date
         $model->dataSolicitacao0 = date('d/m/Y', strtotime($model->dataSolicitacao));
         $model->tipo=0; //Defines 'type' as 'Trancamento'
         $model->status=1; //Defines status as active
