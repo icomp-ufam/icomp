@@ -9,6 +9,9 @@ BootboxAsset::register($this);
 BootboxAsset::registerWithOverride($this);
 ?>
 
+<?=  Html::a('<span class="fa fa-cloud-download" aria-hidden="true">
+</span> Gerar PDF', ['/aluno/prazo_vencido_pdf.php'], ['class' => 'btn btn-success']) ?>
+
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
@@ -50,7 +53,7 @@ BootboxAsset::registerWithOverride($this);
             }
         ],
         [
-            'label' => 'Dias Atrasado',
+            'label' => 'Dias Passados',
             'attribute' => 'diasParaFormar',
             'value' => 'diasParaFormar'
         ],

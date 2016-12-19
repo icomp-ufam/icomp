@@ -7,6 +7,7 @@ use yiibr\brvalidator\CpfValidator;
 
 use yii\db\Query;
 use yii\data\SqlDataProvider;
+use app\models\Trancamento;
 
 class Aluno extends \yii\db\ActiveRecord
 {
@@ -146,15 +147,18 @@ class Aluno extends \yii\db\ActiveRecord
         $trancamentoAluno= Trancamento::find()->where('idAluno =' . $this->id);
 
         if($this->curso == 1){//Mestrado
-            $diasParaFormar= 720;
+            $diasParaFormar= 730.50;
         }else{ //Doutorado
-            $diasParaFormar= 1440;
+            $diasParaFormar= 1461.00;
         }
         $dataIngresso= strtotime($this->dataingresso);
         $dataAtual= strtotime(date("Y-m-d"));
         $diasPassados= (int)floor( ($dataAtual - $dataIngresso) / (60 * 60 * 24));
         $diasParaFormar= $diasParaFormar - $diasPassados;
-        
+
+        if($diasParaFormar < 0){
+            $diasParaFormar= $diasParaFormar*-1;
+        }
 
         return $diasParaFormar;
     }

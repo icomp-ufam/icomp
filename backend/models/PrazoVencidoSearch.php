@@ -6,6 +6,11 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Aluno;
+use app\models\Trancamento;
+use yii\db\Query;
+use yii\db\ActiveQuery;
+use yii\db\Connection;
+use yii\base\Component;
 
 /**
  * PrazoVencidoSearch represents the model behind the search form about `app\models\Aluno`.
@@ -42,31 +47,29 @@ class PrazoVencidoSearch extends Aluno
     
     public function search($params)
     {
-
         $idUsuario = Yii::$app->user->identity->id;
-        
-        $query = Aluno::find()
-        ->select("j17_linhaspesquisa.sigla as siglaLinhaPesquisa, j17_linhaspesquisa.icone as icone, j17_linhaspesquisa.cor as corLinhaPesquisa, j17_user.nome as nomeOrientador, j17_aluno.*")
-        ->leftJoin("j17_linhaspesquisa","j17_aluno.area = j17_linhaspesquisa.id")
-        ->leftJoin("j17_user","j17_aluno.orientador = j17_user.id");/*
-        ->leftJoin("j17_trancamentos","j17_aluno.id = j17_trancamentos.idAluno")
-        ->leftJoin("j17_prorrogacoes","j17_aluno.id = j17_prorrogacoes.idAluno")
-        ->where("DATEDIFF(j17_trancamentos.dataTermino,j17_trancamentos.dataInicio)")
-        ->where("DATEDIFF(CURDATE(),j17_prorrogacoes.dataInicio)")
-        ->where("(DATEDIFF(j17_trancamentos.dataTermino,j17_trancamentos.dataInicio)+j17_prorrogacoes.qtdDias+DATEDIFF(CURDATE(),j17_aluno.dataingresso) > 720 and j17_aluno.curso = 1) or (DATEDIFF(j17_trancamentos.dataTermino,j17_trancamentos.dataInicio)+j17_prorrogacoes.qtdDias+DATEDIFF(CURDATE(),j17_aluno.dataingresso) > 1440 and j17_aluno.curso = 2)");*/
 
-        //$query-> joinWith('diasParaFormar');
+        $sql1= "CALL prazoVencido()";
+        $connection = Yii::$app->db;
+		$command = $connection->createCommand($sql1);     
+		$command->execute();
+
+        $sql2= "select aluno.*,j17_linhaspesquisa.sigla as siglaLinhaPesquisa, 
+        j17_linhaspesquisa.icone as icone, j17_linhaspesquisa.cor as corLinhaPesquisa, j17_user.nome as nomeOrientador from j17_aluno as aluno,j17_linhaspesquisa,j17_user,pv where aluno.area = j17_linhaspesquisa.id and aluno.orientador = j17_user.id and aluno.id = pv.id and (pv.curso=1 and dNormal > 730.50 and qProrrogacao is NULL and qTrancamento is NULL) or (pv.curso=1 and dNormal > 730.50 and qProrrogacao is NULL and not(qTrancamento is NULL) and dTrancamento > 365.25) or (pv.curso=1 and dNormal > 730.50 and not(qProrrogacao is NULL) and qTrancamento is NULL and dProrrogacao > 365.25) or (pv.curso=1 and dNormal > 730.50 and not(qProrrogacao is NULL) and not(qTrancamento is NULL) and dProrrogacao > 365.25 and dTrancamento > 365.25) or (pv.curso=2 and dNormal > 1461 and qProrrogacao is NULL and qTrancamento is NULL) or (pv.curso=2 and dNormal > 1461 and qProrrogacao is NULL and not(qTrancamento is NULL) and dTrancamento > 730.50) or (pv.curso=2 and dNormal > 1461 and not(qProrrogacao is NULL) and qTrancamento is NULL and dProrrogacao > 730.50) or (pv.curso=2 and dNormal > 1461 and not(qProrrogacao is NULL) and not(qTrancamento is NULL) and dProrrogacao > 730.50 and dTrancamento > 730.50)";
+
+        $query = Aluno::findBySql($sql2);
 
 		if(!isset ($params['sort'])){
             $query = $query->orderBy('nome');
         }
 
         // add conditions that should always apply here
-        
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        //var_dump($dataProvider);
 
         $this->load($params);
 

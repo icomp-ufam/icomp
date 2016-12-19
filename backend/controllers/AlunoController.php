@@ -34,7 +34,7 @@ class AlunoController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'exame', 'create', 'view_orientado', 'update', 'delete', 'trancamento', 'prorrogacao', 'prazo_vencido', 'gerar_planilha'],
+                        'actions' => ['index', 'view', 'exame', 'create', 'view_orientado', 'update', 'delete', 'trancamento', 'prorrogacao', 'prazo_vencido', 'prazo_vencido_pdf', 'gerar_planilha'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
