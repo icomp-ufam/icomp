@@ -24,6 +24,27 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+
+        <?php
+            if ($model->status==1) {
+                echo Html::a('<span class="glyphicon glyphicon-remove"></span> Encerrar Trancamento', ['encerrar', 'id' => $model->id], [
+                        'class' => 'btn btn-danger',
+                        'data' => [
+                                    'confirm' => 'Encerrar o trancamento?',
+                                    'method' => 'post',
+                                  ],
+                        ]);
+            }
+            else {
+                echo Html::a('<span class="glyphicon glyphicon-ok"></span> Ativar Trancamento', ['ativar', 'id' => $model->id], [
+                        'class' => 'btn btn-success',
+                        'data' => [
+                                    'confirm' => 'Ativar o trancamento? Essa ação apagará a data de encerramento atual!',
+                                    'method' => 'post',
+                                  ],
+                        ]);
+            }
+        ?>
     </p>
 
 
