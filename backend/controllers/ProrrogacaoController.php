@@ -101,7 +101,7 @@ class ProrrogacaoController extends Controller
             ]);
         }
 
-        $model->dataSolicitacao = date("Y-m-d");
+        $model->dataSolicitacao = date("Y-m-d"); //Get the current date
         $model->dataSolicitacao0 = date('d/m/Y', strtotime($model->dataSolicitacao));
         $model->qtdDias=180;
         $model->status=1; //Defines status as active
