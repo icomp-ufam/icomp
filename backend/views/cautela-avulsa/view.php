@@ -19,8 +19,20 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Delete', ['delete', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Você tem certeza que deseja apagar este item?',
                 'method' => 'post',
+            ],
+        ]) ?>
+        <?= Html::a('Dar Baixa Cautela', ['baixa-cautela-avulsa/create', 'id' => $model->idCautelaAvulsa], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Você tem certeza que deseja dar baixa nesta Cautela?',
+                'method' => 'post',
+                //$flagCautelaAvulsa = 1,
+                
+                //return ('BaixaCautelaController', [ 'flag' => $flagCautelaAvulsa]),
+                
+               // $this->redirect(array('descarte-equipamento/create', 'id' => $model->idEquipamento)),
             ],
         ]) ?>
     </p>

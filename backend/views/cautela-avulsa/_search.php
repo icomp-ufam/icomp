@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idCautelaAvulsa') ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?= //$form->field($model, 'id') ?>
 
     <?= $form->field($model, 'NomeResponsavel') ?>
 
@@ -31,7 +31,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'ImagemCautela') ?>
 
-    <?php // echo $form->field($model, 'StatusCautelaAvulsa') ?>
+    <?php echo $form->field($model, 'StatusCautelaAvulsa') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

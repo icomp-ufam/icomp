@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'data' => [
                 'confirm' => 'Você tem certeza que deseja dar baixa nesta Cautela?',
                 'method' => 'post',
+                //$model->flagCautela = 1,
                // $this->redirect(array('descarte-equipamento/create', 'id' => $model->idEquipamento)),
             ], 
         ]) ?>
