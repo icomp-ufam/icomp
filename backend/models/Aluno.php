@@ -147,9 +147,9 @@ class Aluno extends \yii\db\ActiveRecord
         $trancamentoAluno= Trancamento::find()->where('idAluno =' . $this->id);
 
         if($this->curso == 1){//Mestrado
-            $diasParaFormar= 730.50;
+            $diasParaFormar= 720;
         }else{ //Doutorado
-            $diasParaFormar= 1461.00;
+            $diasParaFormar= 1440;
         }
         $dataIngresso= strtotime($this->dataingresso);
         $dataAtual= strtotime(date("Y-m-d"));
