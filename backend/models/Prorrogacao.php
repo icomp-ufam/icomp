@@ -161,10 +161,6 @@ class Prorrogacao extends \yii\db\ActiveRecord
         }
         else $dataInicio1 = '';
 
-        Yii::trace(date("Y-m-d", strtotime($dataInicio1)));
-        Yii::trace(date("Y-m-d", strtotime($dataSolicitacao1)));
-
-
         if (!$this->hasErrors()) {
             if (date("Y-m-d", strtotime($dataInicio1)) < date("Y-m-d", strtotime($dataSolicitacao1))) {
                 $this->addError($attribute, 'Por favor, informe uma data posterior ou igual à data de solicitação');

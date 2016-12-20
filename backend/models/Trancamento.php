@@ -144,7 +144,6 @@ class Trancamento extends \yii\db\ActiveRecord
             }
 
             $days = (int)floor( ($finalDate - $initialDate) / (60 * 60 * 24));
-            //Yii::trace('Dias' . $days);
 
             $sum = $sum + $days;
         }
@@ -187,10 +186,6 @@ class Trancamento extends \yii\db\ActiveRecord
             $dataInicio1 = $dataInicio1[2]."-".$dataInicio1[1]."-".$dataInicio1[0];
         }
         else $dataInicio1 = '';
-
-        Yii::trace(date("Y-m-d", strtotime($dataInicio1)));
-        Yii::trace(date("Y-m-d", strtotime($dataSolicitacao1)));
-
 
         if (!$this->hasErrors()) {
             if (date("Y-m-d", strtotime($dataInicio1)) < date("Y-m-d", strtotime($dataSolicitacao1))) {
