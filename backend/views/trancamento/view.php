@@ -16,18 +16,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['index'], ['class' => 'btn btn-warning']) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-edit"></span> Editar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('<span class="fa fa-trash-o"></span> Excluir', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Você tem certeza que deseja excluir este trancamento?',
-                'method' => 'post',
-            ],
-        ]) ?>
 
         <?php
             if ($model->status==1) {
-                echo Html::a('<span class="glyphicon glyphicon-remove"></span> Encerrar Trancamento', ['encerrar', 'id' => $model->id], [
+                echo Html::a('<span class="glyphicon glyphicon-remove"></span> Encerrar', ['encerrar', 'id' => $model->id], [
                         'class' => 'btn btn-danger',
                         'data' => [
                                     'confirm' => 'Encerrar o trancamento?',
@@ -36,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]);
             }
             else {
-                echo Html::a('<span class="glyphicon glyphicon-ok"></span> Ativar Trancamento', ['ativar', 'id' => $model->id], [
+                echo Html::a('<span class="glyphicon glyphicon-ok"></span> Ativar', ['ativar', 'id' => $model->id], [
                         'class' => 'btn btn-success',
                         'data' => [
                                     'confirm' => 'Ativar o trancamento? Essa ação apagará a data de encerramento atual!',
@@ -45,6 +37,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]);
             }
         ?>
+
+        <?= Html::a('<span class="glyphicon glyphicon-edit"></span> Editar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('<span class="fa fa-trash-o"></span> Excluir', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Você tem certeza que deseja excluir este trancamento?',
+                'method' => 'post',
+            ],
+        ]) ?>
     </p>
 
 
