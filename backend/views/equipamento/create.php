@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="equipamento-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 

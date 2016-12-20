@@ -124,10 +124,11 @@ class Trancamento extends \yii\db\ActiveRecord
      */
     public function canDoStopOut() {
         //Limit in Days
-        $limitMestrado =  365;
-        $limitDoutorado = 365;
+        $limitMestrado =  365; //1 Year
+        $limitDoutorado = 365; //1 Year
 
-        $stopOuts = $this->find()->where('idAluno = '.$this->idAluno)->all();
+        //Tipo: 0 - Trancamento | 1 - Suspensao
+        $stopOuts = $this->find()->where('`idAluno` = '.$this->idAluno.' AND `tipo` = 0')->all();
         $sum = 0;
 
         foreach ($stopOuts as $stopOut) {

@@ -68,7 +68,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'format' => 'html',
             'value' => '<span class="fa fa-file-pdf-o"></span>   '.
                         Html::a(
-                                 explode('uploads/prorrogacao/', $model->documento)[1],
+                                 //explode('uploads/prorrogacao/', $model->documento)[1],
+                                 ' Download do documento',
                                  $model->documento,
                                 [
                                     'target' => '_blank',
