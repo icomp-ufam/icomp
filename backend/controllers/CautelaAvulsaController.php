@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace backend\controllers;
 
 use Yii;
 use app\models\CautelaAvulsa;
@@ -65,6 +65,16 @@ class CautelaAvulsaController extends Controller
     public function actionCreate()
     {
         $model = new CautelaAvulsa();
+
+        if($model->StatusCautelaAvulsa == "Em aberto"){
+            $StatusCautelaAvulsa = 1;
+        }
+        else if($model->StatusCautelaAvulsa = "Concluída"){
+            $StatusCautelaAvulsa = 2;
+        }
+        else if ($model->StatusCautelaAvulsa = "Em atraso"){
+            $StatusCautelaAvulsa = 3;
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id]);

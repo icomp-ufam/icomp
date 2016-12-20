@@ -3,17 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use app\models\BaixaCautela;
-use app\models\Cautela;
-use app\models\BaixaCautelaSearch;
+use app\models\BaixaCautelaAvulsa;
+use app\models\CautelaAvulsa;
+use app\models\BaixaCautelaAvulsaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * BaixaCautelaController implements the CRUD actions for BaixaCautela model.
+ * BaixaCautelaAvulsaController implements the CRUD actions for BaixaCautelaAvulsa model.
  */
-class BaixaCautelaController extends Controller
+class BaixaCautelaAvulsaController extends Controller
 {
     /**
      * @inheritdoc
@@ -31,12 +31,12 @@ class BaixaCautelaController extends Controller
     }
 
     /**
-     * Lists all BaixaCautela models.
+     * Lists all BaixaCautelaAvulsa models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new BaixaCautelaSearch();
+        $searchModel = new BaixaCautelaAvulsaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +46,7 @@ class BaixaCautelaController extends Controller
     }
 
     /**
-     * Displays a single BaixaCautela model.
+     * Displays a single BaixaCautelaAvulsa model.
      * @param integer $id
      * @return mixed
      */
@@ -58,34 +58,34 @@ class BaixaCautelaController extends Controller
     }
 
     /**
-     * Creates a new BaixaCautela model.
+     * Creates a new BaixaCautelaAvulsa model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate($id)
     {
-        
-        $cautela = Cautela::findOne($id);
 
-        $model = new BaixaCautela();
+        $cautelaAvulsa = CautelaAvulsa::findOne($id);
         
-        $model->idCautela = $id;
-        
+        $model = new BaixaCautelaAvulsa();
+
+        $model->idCautelaAvulsa = $id;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $cautela->StatusCautela = "Concluída";
-            $cautela->save();
 
-            return $this->redirect(['view', 'id' => $model->idBaixaCautela]);
+            $cautelaAvulsa->StatusCautelaAvulsa = "Concluída";
+            $cautelaAvulsa->save();
+
+            return $this->redirect(['view', 'id' => $model->idBaixaCautelaAvulsa]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'item' => $cautela,
             ]);
         }
     }
 
     /**
-     * Updates an existing BaixaCautela model.
+     * Updates an existing BaixaCautelaAvulsa model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -95,7 +95,7 @@ class BaixaCautelaController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idBaixaCautela]);
+            return $this->redirect(['view', 'id' => $model->idBaixaCautelaAvulsa]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -104,7 +104,7 @@ class BaixaCautelaController extends Controller
     }
 
     /**
-     * Deletes an existing BaixaCautela model.
+     * Deletes an existing BaixaCautelaAvulsa model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -117,15 +117,15 @@ class BaixaCautelaController extends Controller
     }
 
     /**
-     * Finds the BaixaCautela model based on its primary key value.
+     * Finds the BaixaCautelaAvulsa model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return BaixaCautela the loaded model
+     * @return BaixaCautelaAvulsa the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = BaixaCautela::findOne($id)) !== null) {
+        if (($model = BaixaCautelaAvulsa::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

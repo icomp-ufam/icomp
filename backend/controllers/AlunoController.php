@@ -360,6 +360,17 @@ class AlunoController extends Controller
        
     }
 
+    public function actionPrazo_vencido_pdf()
+    {
+        $searchModel = new PrazoVencidoSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('prazo_vencido_pdf', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     public function actionGerar_planilha() {
         $alunos = Aluno::find()->all();
 

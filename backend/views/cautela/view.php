@@ -29,6 +29,18 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
         <?= Html::a('<span class="glyphicon glyphicon-file"></span> Gerar Pdf', ['backend/web/reportes/produtos.php', 'id' => $model->idCautela], ['class' => 'btn btn-success']) ?>
 
+<<<<<<< HEAD
+=======
+        <?= Html::a('Dar Baixa Cautela', ['baixa-cautela/create', 'id' => $model->idCautela], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Você tem certeza que deseja dar baixa nesta Cautela?',
+                'method' => 'post',
+                //$model->flagCautela = 1,
+               // $this->redirect(array('descarte-equipamento/create', 'id' => $model->idEquipamento)),
+            ], 
+        ]) ?>
+>>>>>>> 169d454f11048bd812fcddbcc4aff076c85af944
     </p>
 
     <?= DetailView::widget([

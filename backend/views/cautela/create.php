@@ -6,6 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Cautela */
 
+ 
+
 if ($model->StatusCautela == 1){
 	$titulo = "Em aberto";
 }
@@ -26,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+
     ]) ?>
 
 </div>

@@ -23,6 +23,7 @@ class Cautela extends \yii\db\ActiveRecord
 {
 
      public $tipoCautela;
+     public $flagCautela=0;
 
     /**
      * @inheritdoc
@@ -64,7 +65,7 @@ class Cautela extends \yii\db\ActiveRecord
     }
 
 
-    public function getTipoEquipamento(){
+    public function getTipoCautela(){
 
         if ($this->StatusCautela == "Em aberto"){
             $tipoCautela = "Em aberto";
