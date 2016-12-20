@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "j17_cautela_avulsa".
@@ -19,6 +20,10 @@ use Yii;
  */
 class CautelaAvulsa extends \yii\db\ActiveRecord
 {
+
+    public $tipoCautelaAvulsa;
+    public $flagCautelaAvulsa=0;
+
     /**
      * @inheritdoc
      */
@@ -57,5 +62,20 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
             'ImagemCautela' => 'Imagem Cautela',
             'StatusCautelaAvulsa' => 'Status Cautela Avulsa',
         ];
+    }
+
+    public function getTipoCautelaAvulsa(){
+
+        if ($this->StatusCautelaAvulsa == "Em aberto"){
+            $tipoCautelaAvulsa = "Em aberto";
+        }
+        else if ($this->StatusCautelaAvulsa == "Concluída"){
+            $tipoCautelaAvulsa = "Concluída";
+        }
+        else if ($this->StatusCautelaAvulsa == "Em atraso"){
+            $tipoCautelaAvulsa = "Em atraso";
+        }
+
+        return $tipoCautelaAvulsa;
     }
 }

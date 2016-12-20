@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id')->textInput() ?>
+    <?= //$form->field($model, 'id')->textInput() ?>
 
     <?= $form->field($model, 'NomeResponsavel')->textInput(['maxlength' => true]) ?>
 
@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ImagemCautela')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'StatusCautelaAvulsa')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'StatusCautelaAvulsa')->dropDownList(['Em aberto' => 'Em aberto','Concluída'=> 'Concluída','Em atraso'=>'Em atraso']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

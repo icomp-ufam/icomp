@@ -58,7 +58,8 @@ class Prorrogacao extends \yii\db\ActiveRecord
             [['dataSolicitacao0'], 'required', 'on' => 'create'],
             [['id', 'idAluno', 'qtdDias', 'status'], 'integer'],
             [['matricula', 'orientador', 'dataSolicitacao', 'dataInicio', 'dataInicio0', 'dataSolicitacao0'], 'safe'],
-            [['dataInicio0', 'dataSolicitacao0'], 'date', 'format' => 'php:d/m/Y'],
+            [['dataSolicitacao0', 'dataInicio0'], 'date', 'format' => 'php:d/m/Y'],
+            [['dataInicio0'], 'validateDataInicio0'],
             [['justificativa', 'documento'], 'string'],
             [['idAluno'], 'exist', 'skipOnError' => true, 'targetClass' => Aluno::className(), 'targetAttribute' => ['idAluno' => 'id']],
         ];
@@ -129,5 +130,41 @@ class Prorrogacao extends \yii\db\ActiveRecord
 
         }
         return true;
+    }
+
+    /**
+     * Validates the start date of a prorogation. This cannot be less or equal than the request date.
+     * 
+     * @author Pedro Frota <pvmf@icomp.ufam.edu.br>
+     */
+
+    public function validateDataInicio0($attribute, $params){
+        //Number 1 at the end is required to avoid conflicts between variable names
+        //I know I could reference class variables using 'this', but I think by doing so, the code 
+        //becomes more readable. (Or at least 'less worse' than the other way)
+
+        //Symbolic "declarations" of variables
+        //$dataSolicitacao1;
+        //$dataInicio1;
+
+        //Required to adapt the date inserted in the view to the format that will be used here
+        $dataSolicitacao1 = explode("/", $this->dataSolicitacao0);
+        if (sizeof($dataSolicitacao1) == 3) {
+            $dataSolicitacao1 = $dataSolicitacao1[2]."-".$dataSolicitacao1[1]."-".$dataSolicitacao1[0];
+        }
+        else $dataSolicitacao1 = '';
+        
+        //Required to adapt the date inserted in the view to the format that will be used here
+        $dataInicio1 = explode("/", $this->dataInicio0);
+        if (sizeof($dataInicio1) == 3) {
+            $dataInicio1 = $dataInicio1[2]."-".$dataInicio1[1]."-".$dataInicio1[0];
+        }
+        else $dataInicio1 = '';
+
+        if (!$this->hasErrors()) {
+            if (date("Y-m-d", strtotime($dataInicio1)) < date("Y-m-d", strtotime($dataSolicitacao1))) {
+                $this->addError($attribute, 'Por favor, informe uma data posterior ou igual à data de solicitação');
+            }
+        }
     }
 }

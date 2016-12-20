@@ -17,6 +17,12 @@ $tiposNF = ['Cupom Fiscal' => 'Cupom Fiscal',
     'Recibo'=> 'Recibo',
     'Tarifa Bancaria'=>'Tarifa Bancaria'];
 ?>
+
+    <p>
+        <td><?= Html::a('<span class="fa fa-sun-o"></span> Cadastrar equipamento', ['equipamento/create'], ['class' => 'btn btn-primary']) ?></td>
+        <td><?= Html::a('<span class="fa fa-file"></span> Gerar Cautela', ['cautela/create'], ['class' => 'btn btn-success']) ?></td>       
+    </p>
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title"><b>Dados</b></h3>
