@@ -29,6 +29,9 @@ class PortariaController extends Controller
                         'actions' => ['index', 'view', 'create', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                               return Yii::$app->user->identity->checarAcesso('administrador') || Yii::$app->user->identity->checarAcesso('secretaria');
+                        }
                     ],
                 ],
             ],
