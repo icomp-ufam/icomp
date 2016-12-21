@@ -11,6 +11,11 @@ use yii\grid\GridView;
 
 $this->title = 'Descarte Equipamentos';
 $this->params['breadcrumbs'][] = $this->title;
+
+if( Yii::$app->user->identity->checarAcesso('secretariar') == 1){
+  $action = " {view} {create} {update} {delete}";
+}
+
 ?>
 <div class="descarte-equipamento-index">
 

@@ -9,6 +9,13 @@ use yii\grid\GridView;
 
 $this->title = 'Cautelas';
 $this->params['breadcrumbs'][] = $this->title;
+
+if( Yii::$app->user->identity->checarAcesso('secretariar') == 1){
+  $action = " {view} {create} {update} {delete}";
+}
+else if ( Yii::$app->user->identity->checarAcesso('professor') == 1){
+  $action = "{view}";
+}
 ?>
 <div class="cautela-index">
 
