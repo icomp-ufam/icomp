@@ -1,3 +1,6 @@
+<?php
+use app\models\MembrosBanca;
+?>
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -87,6 +90,7 @@
                 ['label' => 'Upload Lattes', 'icon' => 'fa fa-upload', 'url' => ['user/lattes'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
 				['label' => 'Gerar PIT', 'icon' => 'fa fa-refresh', 'url' => ['user/pit'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
 				['label' => 'Gerar RIT', 'icon' => 'fa fa-refresh', 'url' => ['user/rit'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
+				['label' => 'Gerar Relatório Bancas', 'icon' => 'fa fa-refresh', 'url' => ['defesa/bancasbymembro', 'idProfessor'=>Membrosbanca::membroIdByUserId(Yii::$app->user->id)], 'visible' => Yii::$app->user->identity->checarAcesso('professor')||Yii::$app->user->identity->checarAcesso('administrador'),],
 
                 ['label' => 'Secretaria', 'options' => ['class' => 'header'], 'visible' => Yii::$app->user->identity->checarAcesso('secretaria')],
                 [
@@ -150,6 +154,7 @@
                             'icon' => 'fa fa-balance-scale',
                             'url' => ['portaria/index'],
                         ],
+                    	['label' => 'Gerar Relatório Bancas', 'icon' => 'fa fa-refresh', 'url' => ['defesa/bancasallmembro'], 'visible' => Yii::$app->user->identity->checarAcesso('secretaria')||Yii::$app->user->identity->checarAcesso('administrador'),],
                     ],
                 ],
 

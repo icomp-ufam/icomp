@@ -20,6 +20,7 @@ use yii\db\IntegrityException;
 use yii\base\Exception;
 use yii\web\UploadedFile;
 use mPDF;
+use kartik\mpdf\Pdf;
 
 /**
  * DefesaController implements the CRUD actions for Defesa model.
@@ -113,6 +114,113 @@ class DefesaController extends Controller
         $this->redirect(['defesa/view', 'idDefesa' => $idDefesa, 'aluno_id' => $aluno_id]);
     }
 
+    public function actionGerarrelatoriobanca()
+    {	
+    	try{
+			//print_r(Yii::$app->request->Post());
+			$idProfessor = Yii::$app->request->Post('idProfessor');
+			$mDefesa = new Defesa;
+			$mDefesa->load(Yii::$app->request->Post());
+			$mDefesa->anoPesq = trim($mDefesa->anoPesq); 
+			if($mDefesa->tipoRelat==1 && trim($mDefesa->anoPesq)==""){
+				$this->mensagens('warning', 'Preenchimento da busca', 'Preencha o Ano de Referência.');
+				if(Yii::$app->request->Post('listall') == 'listall')				
+					return $this->redirect(['defesa/bancasallmembro','idProfessor'=>$idProfessor]);
+				else
+					return $this->redirect(['defesa/bancasbymembro','idProfessor'=>$idProfessor]);
+			}
+			if($mDefesa->tipoRelat==0)
+				$mDefesa->anoPesq = null;
+			$mMembro = Membrosbanca::findOne($idProfessor);
+/*
+			echo "QueryParams: ".print_r(Yii::$app->request->queryParams);
+			echo "<br><br>";
+			echo "Post: ".print_r($idProfessor = Yii::$app->request->Post());
+			return $this->render('dummy');
+*/
+			if($mMembro === null){
+				$this->mensagens('warning', 'Para gerar relatório:','Use o menu lateral "Gerar Relatório Bancas".');
+				return $this->redirect(['site/index']);
+			}
+			
+			//Gera Relatório de Bancas de um Professor ou Todas de um Professor no Ano especificado
+			return $this->generatePdfRelatorioBancas($mMembro, $mDefesa->anoPesq);
+    	}catch (Exception $e){
+    		$this->mensagens('danger', 'Relatório de Bancas.','Houve algum problema ao gerar o relatório de bancas. Contate o Administrador.');
+    		return $this->redirect(['site/index']);
+    	}
+    }
+
+    public function actionBancasbymembro()
+    {	//echo "Professor: ".$idProfessor;
+
+    	//echo "-----".$idProfessor;/*Lembrar de colocar a expressao correta em left.php (User->idProfessor)*/
+    	$idProfessor = Yii::$app->request->Get('idProfessor');
+    	$mMembro = Membrosbanca::findOne($idProfessor);
+        if($mMembro === null){
+        	$this->mensagens('warning', 'Não foi possível gerar o relatório.','Professor não encontrado, Contate o Administrador".');
+            throw new NotFoundHttpException('Professor Não Encontrado.');
+        }
+        $bancasId = null;
+        if($mMembro!==null)
+		foreach ($mMembro->bancas as $banca){
+			$bancasId[] = $banca->banca_id;
+		}
+	
+		$searchModel = new DefesaSearch();
+		//echo print_r(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->searchByBancas(Yii::$app->request->queryParams, $bancasId);
+
+        return $this->render('indexrelatoriobancas', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        	'idProfessor' => $idProfessor,
+        ]);
+    }
+    
+    public function actionBancasallmembro()
+    {	//echo "Professor: ".$idProfessor;
+    
+    //echo "-----".$idProfessor;/*Lembrar de colocar a expressao correta em left.php (User->idProfessor)*/
+    //$mMembro = Membrosbanca::findOne($idProfessor);
+    //if($mMembro === null){
+    //	throw new NotFoundHttpException('Professor Não Encontrado.'.$idProfessor);
+    //}
+    /*
+    	echo "QueryParams: ".print_r(Yii::$app->request->queryParams);
+    	echo "<br><br>";
+    	echo "Post: ".print_r($idProfessor = Yii::$app->request->Post());
+    	return $this->render('dummy');
+    	*/
+    $bancasId = null;
+    //if($mMembro!==null)
+    //	foreach ($mMembro->bancas as $banca){
+    //		$bancasId[] = $banca->banca_id;
+    //}
+    
+    $searchModel = new DefesaSearch();
+    $dataProvider = $searchModel->searchByBancas(Yii::$app->request->queryParams, $bancasId);
+    
+    return $this->render('indexrelatorioallbancas', [
+    		'searchModel' => $searchModel,
+    		'dataProvider' => $dataProvider,
+    		'idProfessor' => "",
+    ]);
+    }
+    
+    public function actionAutocompletemembro($term){
+    	$listaMembros = Membrosbanca::find()->where(["like","upper(nome)",strtoupper($term)])->all();
+    	
+    	$codigos = [];
+    	
+    	foreach ($listaMembros as $membro)
+    	{	
+    		$codigos[] = ['label'=>$membro['nome'],'value'=>$membro['nome'], 'id'=>$membro['id']
+    		]; //build an array
+    	}
+    	
+    	echo json_encode($codigos);
+    }
     /**
      * Creates a new Defesa model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -1255,6 +1363,95 @@ class DefesaController extends Controller
         return true;
     }
 
+    private function generatePdfRelatorioBancas($model, $ano=null) {
+    	$mMembro = $model;
+    	$cont;
+    	$mesExt = [1=>'Janeiro',2=>'Fevereiro',3=>'Março',4=>'Abril',5=>'Maio',6=>'Junho',7=>'Julho',8=>'Agosto',9=>'Setembro',10=>'Outubro',11=>'Novembro',12=>'Dezembro'];
+    	// setup kartik\mpdf\Pdf component
+    	$pdf = new Pdf([
+    			// set to use core fonts only
+    			'mode' => Pdf::MODE_CORE,
+    			// A4 paper format
+    			'format' => Pdf::FORMAT_A4,
+    			// portrait orientation
+    			'orientation' => Pdf::ORIENT_PORTRAIT,
+    			// stream to browser inline
+    			'destination' => Pdf::DEST_BROWSER,
+    			'filename' => "relatorioBancas".( ($ano!=null)?$ano:"" ).explode(" ",$mMembro->nome)[1].explode(" ",$mMembro->nome)[count(explode(" ",$mMembro->nome))-1].".pdf",
+    			// your html content input
+    			'content' => '
+                            <p class="western" align="center">&nbsp;</p>
+    						<p class="western" align="center">&nbsp;</p>
+                            <p class="western" align="center" style="margin-top:6em; margin-bottom:4em;"><span style="font-family: Arial, sans-serif;"><span style="font-size: large;"><strong>DECLARA&Ccedil;&Atilde;O</strong></span></span></p>
+                            
+                            
+			    			<p class="western" style="padding-left:4em;"><span style="font-size: medium;"><span style="font-family: Arial, sans-serif;">DECLARAMOS para os devidos fins que '.((ereg ("^Profa", $mMembro->nome)?"a":"o")).' <b>'.$mMembro->nome.'</b> participou como membro'.(($ano!=null)?", no ano de ".$ano.",":"").' das seguintes bancas:</span></span></p>
+							'.
+			    			(($cont[]=count($mMembro->getBancasbytipo("Q1", "Mestrado", $ano))>0 )? "<p class=\"western\" align=\"center\"><b><br></br>Qualificação de Mestrado Q1</b></p>":"")
+			    			.
+			    			((count($mMembro->getBancasbytipo("Q1", "Mestrado", $ano))>0 )?($mMembro->getBancasbytipoEnum("Q1", "Mestrado", $ano)):"")
+			    			.
+			    			(($cont[]=count($mMembro->getBancasbytipo("D", "Mestrado", $ano))>0 )? "<p class=\"western\" align=\"center\"><b><br></br>Mestrado</b></p>":"")
+			    			.
+			    			((count($mMembro->getBancasbytipo("D", "Mestrado", $ano))>0 )?($mMembro->getBancasbytipoEnum("D", "Mestrado", $ano)):"")
+			    			.
+    						(($cont[]=count($mMembro->getBancasbytipo("Q1", "Doutorado", $ano))>0 )? "<p class=\"western\" align=\"center\"><b><br></br>Qualificação de Doutorado Q1</b></p>":"")
+							.
+    						((count($mMembro->getBancasbytipo("Q1", "Doutorado", $ano))>0 )?($mMembro->getBancasbytipoEnum("Q1", "Doutorado", $ano)):"")
+    						.
+    						(($cont[]=count($mMembro->getBancasbytipo("Q2", "Doutorado", $ano))>0 )? "<p class=\"western\" align=\"center\"><b><br></br>Qualificação de Doutorado Q2</b></p>":"")
+							.
+    						((count($mMembro->getBancasbytipo("Q2", "Doutorado", $ano))>0 )?($mMembro->getBancasbytipoEnum("Q2", "Doutorado", $ano)):"")
+			    			.
+			    			(($cont[]=count($mMembro->getBancasbytipo("T", "Doutorado", $ano))>0 )? "<p class=\"western\" align=\"center\"><b><br></br>Doutorado</b></p>":"")
+			    			.
+			    			((count($mMembro->getBancasbytipo("T", "Doutorado", $ano))>0 )?($mMembro->getBancasbytipoEnum("T", "Doutorado", $ano)):"")
+    						.
+    						((array_sum($cont) == 0)?"<p class=\"western\" align=\"center\"><b><br></br>NADA CONSTA.</b></p>":"")
+    						.'
+                            <p class="western">&nbsp;</p>
+                            <p class="western">&nbsp;</p>
+    						<p style="text-align: right;"><span style="font-family: Arial, sans-serif;"><span style="font-size: medium;">Manaus, '.date('d').' de '.$mesExt[intval(date('m'))].' de '.date('Y').'.</span></span></p>
+	                         '
+    			,
+    			//'cssInline' => '',
+    			// set mPDF properties on the fly
+    			'options' => ['title' => "Declação de Participação em Banca"],
+    			// call mPDF methods on the fly
+    			'methods' => [
+    					'SetFooter'=>[
+    							'
+                   <p align="center"><span style="font-family: Arial, sans-serif;"><span style="font-size: xx-small;">Av. Gal. Rodrigo Oct&aacute;vio Jord&atilde;o Ramos, 6200 CEP.:69077-000 Manaus &ndash;AM</span></span></p>
+                    <p align="center"><span style="font-family: Arial, sans-serif;"><span style="font-size: xx-small;"> Fone: 3305 2809 / 2808 / 1193 e-mail: secretariappgi@icomp.ufam.edu.br</span></span></p>
+                		'],
+    					'SetHeader'=>['
+    					<table style="width: 647px;" cellspacing="1" cellpadding="5">
+                            <tbody>
+                            <tr>
+                            <td style="width: 104px;" valign="top" height="89">
+    						<p><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: large;"><strong><img src='.getcwd().'/img/republica.png alt="" width="96" height="104" /></strong></span></span></p>
+                            </td>
+                            <td style="width: 542px;" valign="top" align="center" height="89">
+                            <p><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: large;"><strong>PODER EXECUTIVO</strong></span></span></p>
+    					<p><span style="font-size: small;"><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: medium;"><strong>MINIST&Eacute;RIO DA EDUCA&Ccedil;&Atilde;O</strong></span></span></span></p>
+    					<p><span style="font-size: small;"><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: medium;"><strong>UNIVERSIDADE FEDERAL DO AMAZONAS</strong></span></span></span></p>
+                            <p><span style="font-size: small;"><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: medium;"><strong>INSTITUTO DE COMPUTA&Ccedil;&Atilde;O</strong></span></span></span></p>
+    						<p class="western">&nbsp;</p>
+                            <p><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: large;"><strong>PROGRAMA DE P&Oacute;S-GRADUA&Ccedil;&Atilde;O EM INFORM&Aacute;TICA</strong></span></span></p>
+                            </td>
+    						<td style="width: 104px;" valign="top" height="89">
+    						<p><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: large;"><strong><img src='.getcwd().'/img/ufam.jpg alt="" width="82" height="106" /></strong></span></span></p>
+    						</td>
+                            </tr>
+                            </tbody>
+                            </table>		
+    					'],
+    			]
+    	]);
+    
+    	return $pdf->render();
+    }
+    
             /* Envio de mensagens para views
        Tipo: success, danger, warning*/
     protected function mensagens($tipo, $titulo, $mensagem){
