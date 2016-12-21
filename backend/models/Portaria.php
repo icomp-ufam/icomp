@@ -31,8 +31,7 @@ class Portaria extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'responsavel', 'descricao', 'data', 'data0', 'documento'], 'required'],
-            [['id'], 'integer'],
+            [['novoID','ano','descricao', 'data', 'data0', 'documento'], 'required'],
             [['descricao', 'documento'], 'string'],
             [['data', 'data0'], 'safe'],
             [['responsavel'], 'string', 'max' => 255],
@@ -52,5 +51,17 @@ class Portaria extends \yii\db\ActiveRecord
             'data0' => 'Data',
             'documento' => 'Documento',
         ];
+    }
+
+    public function getNovoID(){
+        $novoID= $this->id;
+        $ultima_portaria= $this->find()->select('id')->where('ano = '.date('Y'))->orderBy(['id' => SORT_DESC])->limit(1)->one();
+        
+        if($ultima_portaria == null){
+            return 1;
+        }
+        $novoID= $ultima_portaria->id + 1;
+
+        return $novoID;
     }
 }

@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return date('d/m/Y', strtotime($model->data));
                 }
             ],
+            
             //'documento:ntext',
 
             ['class' => 'yii\grid\ActionColumn',

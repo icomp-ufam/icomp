@@ -12,7 +12,7 @@ use kartik\widgets\DatePicker;
 <div class="portaria-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
+<!--
     <div class="row">
     <?= $form->field($model, 'id', ['options' => ['class' => 'col-md-3']])->textInput() ?>
     </div>
@@ -20,9 +20,9 @@ use kartik\widgets\DatePicker;
     <div class="row">
     <?= $form->field($model, 'responsavel', ['options' => ['class' => 'col-md-3']])->textInput(['maxlength' => true]) ?>
     </div>
-
+-->
     <div class="row">
-    <?= $form->field($model, 'descricao', ['options' => ['class' => 'col-md-3']])->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'descricao', ['options' => ['class' => 'col-md-8']])->textarea(['rows' => 10]) ?>
     </div>
 
     <div class="row">

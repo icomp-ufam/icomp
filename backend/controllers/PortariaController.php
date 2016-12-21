@@ -90,6 +90,11 @@ class PortariaController extends Controller
     {
         $model = new Portaria();
 
+        $model->id = $model->novoID;
+        $model->ano= date('Y');
+
+        $model->responsavel= '';
+
         $model->data = date("Y-m-d");
         $model->data0 = date('d/m/Y', strtotime($model->data));
 
@@ -206,7 +211,7 @@ class PortariaController extends Controller
                         </tr>
                         </tbody>
                         </table>
-                        <h3><p align="center">Portaria Nº '.$model->id.'</p></h3>
+                        <h3><p align="center">Portaria Nº '.$model->id.'/'.$model->ano.'</p></h3>
                         <br>
                         <br>
                         <br>
@@ -256,4 +261,5 @@ class PortariaController extends Controller
 
         return $pdf->render();
     }
+
 }
