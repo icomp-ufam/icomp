@@ -96,7 +96,7 @@
                     'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),
                     'items' => [
                         ['label' => 'Gerenciar Alunos', 'icon' => 'fa fa-list', 'url' => ['aluno/index'],],
-                        ['label' => 'Alunos com prazo vencido', 'icon' => 'fa fa-calendar-times-o', 'url' => ['aluno/prazo_vencido'], 'visible' => Yii::$app->user->identity->checarAcesso('coordenador'),],
+                        ['label' => 'Alunos com prazo vencido', 'icon' => 'fa fa-calendar-times-o', 'url' => ['aluno/prazo_vencido'], 'visible' => Yii::$app->user->identity->checarAcesso('coordenador'), 'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),],
                     ],
                 ],
             	[

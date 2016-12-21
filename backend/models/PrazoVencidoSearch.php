@@ -58,7 +58,7 @@ class PrazoVencidoSearch extends Aluno
         $dDoutorado= 1440;
         $dSem= 180;
 
-        $sql2= "select a.* from pv join j17_aluno as a on a.id = pv.id where pv.curso = 1 and pv.dNormal + if(pv.dProrrogacao is NULL,0,pv.dProrrogacao) + if(pv.dTrancamento is NULL,0,pv.dTrancamento) > ".$dMestrado."+if(pv.dProrrogacao is NULL,0,if(pv.qProrrogacao = 1,".$dSem.",2*".$dSem."))"." or pv.curso = 2 and pv.dNormal + if(pv.dProrrogacao is NULL,0,pv.dProrrogacao) + if(pv.dTrancamento is NULL,0,pv.dTrancamento) > ".$dDoutorado."+if(pv.dProrrogacao is NULL,0,if(pv.qProrrogacao = 1,".$dSem.",2*".$dSem."))";
+        $sql2= "select a.*,lp.sigla as siglaLinhaPesquisa,lp.icone as icone,lp.cor as corLinhaPesquisa, u.nome as nomeOrientador from pv join j17_aluno as a on a.id = pv.id left join j17_linhaspesquisa as lp on a.area = lp.id left join j17_user as u on a.orientador = u.id where pv.curso = 1 and pv.dNormal > 720 and (pv.dTrancamento > if(pv.qTrancamento = 1,180,360) or if(pv.qTrancamento is null,true,false)) and (pv.dProrrogacao > if(pv.qProrrogacao = 1,180,360) or if(pv.qProrrogacao is null,true,false)) or pv.curso = 2 and pv.dNormal > 1440 and (pv.dTrancamento > if(pv.qTrancamento = 1,180,360) or if(pv.qTrancamento is null,true,false)) and (pv.dProrrogacao > if(pv.qProrrogacao = 1,180,360) or if(pv.qProrrogacao is null,true,false))";
 
         $query = Aluno::findBySql($sql2);
 
