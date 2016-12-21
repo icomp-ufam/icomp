@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use \yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Cautela */
@@ -26,7 +27,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ImagemCautela')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Equipamento')->textInput(['maxlength' => true]) ?>
+    
+
+    <?= $form->field($model, 'Equipamento')->dropDownList([ArrayHelper::map(app\models\Equipamento::find()->all(),'idEquipamento','NomeEquipamento')]) ?>
 
     <?= $form->field($model, 'StatusCautela')->dropDownList(['Em aberto' => 'Em aberto','Concluída'=> 'Concluída','Em atraso'=>'Em atraso']) ?>
 
