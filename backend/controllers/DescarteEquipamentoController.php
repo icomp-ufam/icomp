@@ -68,13 +68,11 @@ class DescarteEquipamentoController extends Controller
     {
         $equipamento = Equipamento::findOne($id);
 
-
-
         $model = new DescarteEquipamento();
         $model->idEquipamento = $id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $equipamento->StatusEquipamento = "Descartado"; 
+            $equipamento->StatusEquipamento = "Descartado";
             $equipamento->save();
             return $this->redirect(['view', 'id' => $model->idDescarte]);
         } else {

@@ -18,8 +18,13 @@ class PortariaSearch extends Portaria
     public function rules()
     {
         return [
+<<<<<<< HEAD
             [['id','ano'], 'integer'],
             [['responsavel', 'descricao', 'data', 'data0', 'documento'], 'safe'],
+=======
+            //[['id'], 'integer'],
+            [['id', 'ano',/*'responsavel',*/ 'descricao', 'data', 'data0', 'documento'], 'safe'],
+>>>>>>> a1bd604b15dd09b592db7ceefdd6423e74079a1e
         ];
     }
 
@@ -81,7 +86,7 @@ class PortariaSearch extends Portaria
             'data' => $searchedData,
         ]);
 
-        $query->andFilterWhere(['like', 'responsavel', $this->responsavel]);
+        //$query->andFilterWhere(['like', 'responsavel', $this->responsavel]);
             //->andFilterWhere(['like', 'descricao', $this->descricao])
             //->andFilterWhere(['like', 'documento', $this->documento]);
 
