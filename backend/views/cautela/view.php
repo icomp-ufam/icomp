@@ -27,7 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-file"></span> Gerar Pdf', ['backend/web/reportes/produtos.php', 'id' => $model->idCautela], ['class' => 'btn btn-success']) ?>
+
+        <?= Html::a('<span class="glyphicon glyphicon-print"></span>  Convite', ['convitepdf', 'idDefesa' => $model->idDefesa, 'aluno_id' => $model->aluno_id], ['class' => 'btn btn-success', 'target' => '_blank']);?>
 
 <<<<<<< HEAD
 =======
