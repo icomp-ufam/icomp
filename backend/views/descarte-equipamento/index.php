@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+//teste
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\DescarteEquipamentoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -12,11 +14,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="descarte-equipamento-index">
 
-
+    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Descartar Equipamento', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Descarte Equipamento', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,12 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idEquipamento',
             'idDescarte',
             'NomeResponsavel',
-            'email:email',
+            'Email:email',
             'TelefoneResponsavel',
-            // 'ObservacoesDescarte',
+            'ObservacoesDescarte',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

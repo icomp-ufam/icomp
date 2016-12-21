@@ -57,7 +57,7 @@ class Trancamento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idAluno', 'dataSolicitacao', 'dataInicio', 'prevTermino', /*'dataTermino',*/ 'justificativa', /*'tipo', 'status'*/], 'required'],
+            [['idAluno', 'dataSolicitacao', 'dataInicio', 'dataInicio0', 'prevTermino', 'prevTermino0', /*'dataTermino',*/ 'justificativa', /*'tipo', 'status'*/], 'required'],
             [['documento', 'dataSolicitacao0'], 'required', 'on' => 'create'],
             [['idAluno', 'tipo', 'status'], 'integer'],
             [['matricula', 'orientador','dataSolicitacao', 'dataInicio', 'prevTermino', 'dataTermino', 'dataInicio0', 'dataSolicitacao0'], 'safe'],
@@ -80,12 +80,14 @@ class Trancamento extends \yii\db\ActiveRecord
             'idAluno' => 'Aluno',
             'matricula' => 'Matrícula',
             'linhaPesquisa' => 'Linha de Pesquisa',
-            'dataSolicitacao' => 'Data Solicitação',
-            'dataInicio' => 'Início',
-            'dataInicio0' => 'Início',
+            'dataSolicitacao' => 'Data de Solicitação',
+            'dataSolicitacao0' => 'Data de Solicitação',
+            'dataInicio' => 'Data de Início',
+            'dataInicio0' => 'Data de Início',
             'orientador' => 'Orientador',
-            'prevTermino' => 'Prev. Término',
-            'dataTermino' => 'Data Término',
+            'prevTermino' => 'Previsão de Término',
+            'prevTermino0' => 'Previsão de Término',
+            'dataTermino' => 'Data de Término',
             'justificativa' => 'Justificativa',
             'documento' => 'Documento',
             'tipo' => 'Tipo',

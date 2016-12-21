@@ -2,9 +2,13 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+<<<<<<< HEAD
 use kartik\widgets\DatePicker;
 use kartik\mpdf\Pdf;
 
+=======
+use \yii\helpers\ArrayHelper;
+>>>>>>> origin/master
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Cautela */
@@ -50,7 +54,9 @@ use kartik\mpdf\Pdf;
 
     <?= $form->field($model, 'ImagemCautela')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Equipamento')->textInput(['maxlength' => true]) ?>
+    
+
+    <?= $form->field($model, 'Equipamento')->dropDownList([ArrayHelper::map(app\models\Equipamento::find()->all(),'idEquipamento','NomeEquipamento')]) ?>
 
     <?= $form->field($model, 'StatusCautela')->dropDownList(['Em aberto' => 'Em aberto','Concluída'=> 'Concluída','Em atraso'=>'Em atraso']) ?>
 

@@ -29,6 +29,9 @@ class PortariaController extends Controller
                         'actions' => ['index', 'view', 'create', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                               return Yii::$app->user->identity->checarAcesso('administrador') || Yii::$app->user->identity->checarAcesso('secretaria');
+                        }
                     ],
                 ],
             ],
@@ -89,6 +92,11 @@ class PortariaController extends Controller
     public function actionCreate()
     {
         $model = new Portaria();
+
+        $model->id = $model->novoID;
+        $model->ano= date('Y');
+
+        $model->responsavel= '';
 
         $model->data = date("Y-m-d");
         $model->data0 = date('d/m/Y', strtotime($model->data));
@@ -192,58 +200,51 @@ class PortariaController extends Controller
             'filename' => $filename,
             // your html content input
             'content' => '
-                            <table style="width: 647px;" cellspacing="1" cellpadding="5">
-                            <tbody>
-                            <tr>
-                            <td style="width: 104px;" valign="top" height="89">
-                            <p><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: large;"><strong><img src='.getcwd().'/img/ufam.jpg alt="" width="82" height="106" /></strong></span></span></p>
-                            </td>
-                            <td style="width: 542px;" valign="top" height="89">
-                            <p><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: large;"><strong>UNIVERSIDADE FEDERAL DO AMAZONAS</strong></span></span></p>
-                            <p><span style="font-size: small;"><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: large;">Instituto de Computa&ccedil;&atilde;o</span></span></span></p>
-                            <p><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: large;">Programa de P&oacute;s-Gradua&ccedil;&atilde;o em Inform&aacute;tica</span></span></p>
-                            </td>
-                            </tr>
-                            </tbody>
-                            </table>
-                            <p class="western" align="center">&nbsp;</p>
-                            <p class="western" align="center">&nbsp;</p>
-                            <p class="western" align="center"><span style="font-family: Arial, sans-serif;"><span style="font-size: small;"><strong>Solicita&ccedil;&atilde;o de Prorroga&ccedil;&atilde;o</strong></span></span></p>
-                            <p class="western">&nbsp;</p>
-                            <p class="western">&nbsp;</p>
-                            <p class="western">&nbsp;</p>
-                            <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;"><b>De</b>:</span></span></p>
-                            <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;"><b>Matr&iacute;cula</b>:</span></span></p>
-                            <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;"><b>Para</b>: Coordena&ccedil;&atilde;o do Programa de P&oacute;s-Gradua&ccedil;&atilde;o Em Inform&aacute;tica &ndash; PPGI/UFAM</span></span></p>
-                            <p class="western">&nbsp;</p>
-                            <p class="western"><span style="font-size: small;"><span style="font-family: Arial, sans-serif;">Solicito a PRORROGA&Ccedil;&Atilde;O do prazo para minhaDefesa de Disserta&ccedil;&atilde;o</span><span style="font-family: Arial, sans-serif;">por <b></b> dias à partir do dia <b></b></span><span style="font-family: Arial, sans-serif;">.</span></span></p>
-                            <p class="western">&nbsp;</p>
-                            <p class="western"><span style="font-family: Arial, sans-serif;"><span style="font-size: small;"><b>Justificativa</b>:<br>&nbsp;</span></span></p>
-                            <p class="western">&nbsp;</p>
-                            <p class="western">Anexo (Vers&atilde;o atual da Disserta&ccedil;&atilde;o/Tese/Artigos com o novo cronograma detalhado considerando o per&iacute;odo de prorroga&ccedil;&atilde;o ou trancamento):&nbsp;</p>
-                            <p class="western">&nbsp;</p>
-                            <p style="text-align: right;">&nbsp;</p>
-                            <p style="text-align: right;">&nbsp;</p>
-                            <p style="text-align: right;"><span style="font-family: Arial, sans-serif;"><span style="font-size: small;">Data:</span></span></p>
-                            <p class="western">&nbsp;</p>
-                            <p class="western">&nbsp;</p>
-                            <p class="western">&nbsp;</p>
-                            <table style="margin-left: auto; margin-right: auto; width: 518.5px;">
-                            <tbody>
-                            <tr style="height: 21px;">
-                            <td style="height: 21px; width: 207px;">--------------------------------------------</td>
-                            <td style="height: 21px; width: 100px;">&nbsp;</td>
-                            <td style="height: 21px; width: 209.5px; text-align: right;">--------------------------------------------</td>
-                            </tr>
-                            <tr style="height: 21px;">
-                            <td style="height: 21px; width: 207px;">Orientador</td>
-                            <td style="height: 21px; width: 100px;">&nbsp;</td>
-                            <td style="text-align: right; height: 21px; width: 209.5px;">Discente</td>
-                            </tr>
-                            </tbody>
-                            </table>
-                            <p class="western" align="center">&nbsp;</p>
-                            <p class="western" align="center">&nbsp;</p>
+                        <table style="width: 647px;" cellspacing="1" cellpadding="5">
+                        <tbody>
+                        <tr>
+                        <td style="width: 104px;" valign="top" height="89">
+                        <p><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: large;"><strong><img src='.getcwd().'/img/ufam.jpg alt="" width="82" height="106" /></strong></span></span></p>
+                        </td>
+                        <td style="width: 542px;" valign="top" height="89">
+                        <p><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: large;"><strong>UNIVERSIDADE FEDERAL DO AMAZONAS</strong></span></span></p>
+                        <p><span style="font-size: small;"><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: large;">Instituto de Computa&ccedil;&atilde;o</span></span></span></p>
+                        <p><span style="font-family: \'Arial Narrow\', sans-serif;"><span style="font-size: large;">Programa de P&oacute;s-Gradua&ccedil;&atilde;o em Inform&aacute;tica</span></span></p>
+                        </td>
+                        </tr>
+                        </tbody>
+                        </table>
+                        <h3><p align="center">Portaria Nº '.$model->id.'/'.$model->ano.'</p></h3>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        '.$model->descricao.'
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        Data: '.$model->data.'
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <p align="center">----------------------------------------------------------</p>
+                        <p align="center">Diretor do Instituto de Computação</p>
+
                          '
             ,  
             //'cssInline' => '', 
@@ -263,4 +264,5 @@ class PortariaController extends Controller
 
         return $pdf->render();
     }
+
 }

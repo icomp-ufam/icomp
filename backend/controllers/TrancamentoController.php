@@ -30,6 +30,9 @@ class TrancamentoController extends Controller
                         'actions' => ['index', 'view', 'create', 'update', 'delete', 'ativar', 'encerrar'],
                         'allow' => true,
                         'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                               return Yii::$app->user->identity->checarAcesso('administrador') || Yii::$app->user->identity->checarAcesso('secretaria');
+                        }
                     ],
                 ],
             ],
