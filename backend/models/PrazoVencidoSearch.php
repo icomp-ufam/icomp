@@ -56,10 +56,9 @@ class PrazoVencidoSearch extends Aluno
 
         $dMestrado= 720;
         $dDoutorado= 1440;
-        $dAno= 360;
+        $dSem= 180;
 
-        $sql2= "select aluno.*,j17_linhaspesquisa.sigla as siglaLinhaPesquisa, 
-        j17_linhaspesquisa.icone as icone, j17_linhaspesquisa.cor as corLinhaPesquisa, j17_user.nome as nomeOrientador from j17_aluno as aluno,j17_linhaspesquisa,j17_user,pv where aluno.area = j17_linhaspesquisa.id and aluno.orientador = j17_user.id and aluno.id = pv.id and (pv.curso=1 and dNormal > ".$dMestrado." and qProrrogacao is NULL and qTrancamento is NULL) or (pv.curso=1 and dNormal > ".$dMestrado." and qProrrogacao is NULL and not(qTrancamento is NULL) and dTrancamento > ".$dAno."/(if(qTrancamento = 1,2,1))) or (pv.curso=1 and dNormal > ".$dMestrado." and not(qProrrogacao is NULL) and qTrancamento is NULL and dProrrogacao > ".$dAno."/(if(qProrrogacao = 1,2,1))) or (pv.curso=1 and dNormal > ".$dMestrado." and not(qProrrogacao is NULL) and not(qTrancamento is NULL) and dProrrogacao > ".$dAno."/(if(qProrrogacao = 1,2,1)) and dTrancamento > ".$dAno."/(if(qTrancamento = 1,2,1))) or (pv.curso=2 and dNormal > ".$dDoutorado." and qProrrogacao is NULL and qTrancamento is NULL) or (pv.curso=2 and dNormal > ".$dDoutorado." and qProrrogacao is NULL and not(qTrancamento is NULL) and dTrancamento > ".$dAno."/(if(qTrancamento = 1,2,1))) or (pv.curso=2 and dNormal > ".$dDoutorado." and not(qProrrogacao is NULL) and qTrancamento is NULL and dProrrogacao > ".$dAno."/(if(qProrrogacao = 1,2,1))) or (pv.curso=2 and dNormal > ".$dDoutorado." and not(qProrrogacao is NULL) and not(qTrancamento is NULL) and dProrrogacao > ".$dAno."/(if(qProrrogacao = 1,2,1)) and dTrancamento > ".$dAno."/(if(qTrancamento = 1,2,1)))";
+        $sql2= "select a.* from pv join j17_aluno as a on a.id = pv.id where pv.curso = 1 and pv.dNormal + if(pv.dProrrogacao is NULL,0,pv.dProrrogacao) + if(pv.dTrancamento is NULL,0,pv.dTrancamento) > ".$dMestrado."+if(pv.dProrrogacao is NULL,0,if(pv.qProrrogacao = 1,".$dSem.",2*".$dSem."))"." or pv.curso = 2 and pv.dNormal + if(pv.dProrrogacao is NULL,0,pv.dProrrogacao) + if(pv.dTrancamento is NULL,0,pv.dTrancamento) > ".$dDoutorado."+if(pv.dProrrogacao is NULL,0,if(pv.qProrrogacao = 1,".$dSem.",2*".$dSem."))";
 
         $query = Aluno::findBySql($sql2);
 

@@ -1,4 +1,5 @@
 <?php
+/*
 include("mpdf60/mpdf.php");
 
 $html = "
@@ -13,4 +14,5 @@ $mpdf->WriteHTML($html);
 $mpdf->Output();
 
 exit;
+*/
 ?>

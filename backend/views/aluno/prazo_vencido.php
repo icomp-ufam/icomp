@@ -8,10 +8,10 @@ $this->params['breadcrumbs'][] = $this->title;
 BootboxAsset::register($this);
 BootboxAsset::registerWithOverride($this);
 ?>
-
+<!--
 <?=  Html::a('<span class="fa fa-cloud-download" aria-hidden="true">
 </span> Gerar PDF', ['aluno/prazo_vencido_pdf'], ['class' => 'btn btn-success']) ?>
-
+-->
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,

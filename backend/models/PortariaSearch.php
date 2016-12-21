@@ -18,13 +18,10 @@ class PortariaSearch extends Portaria
     public function rules()
     {
         return [
-<<<<<<< HEAD
             [['id','ano'], 'integer'],
             [['responsavel', 'descricao', 'data', 'data0', 'documento'], 'safe'],
-=======
             //[['id'], 'integer'],
             [['id', 'ano',/*'responsavel',*/ 'descricao', 'data', 'data0', 'documento'], 'safe'],
->>>>>>> a1bd604b15dd09b592db7ceefdd6423e74079a1e
         ];
     }
 

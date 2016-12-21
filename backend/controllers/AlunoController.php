@@ -18,6 +18,7 @@ use yii\base\Exception;
 use yii\db\Query;
 use yii\data\SqlDataProvider;
 use app\models\PrazoVencidoSearch;
+use app\models\PrazoVencido;
 
 /**
  * AlunoController implements the CRUD actions for Aluno model.
@@ -362,13 +363,9 @@ class AlunoController extends Controller
 
     public function actionPrazo_vencido_pdf()
     {
-        $searchModel = new PrazoVencidoSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        //$pv= new PrazoVencidoSearch();
 
-        return $this->render('prazo_vencido_pdf', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('prazo_vencido_pdf');
     }
 
     public function actionGerar_planilha() {
