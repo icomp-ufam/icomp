@@ -1385,7 +1385,7 @@ class DefesaController extends Controller
                             <p class="western" align="center" style="margin-top:6em; margin-bottom:4em;"><span style="font-family: Arial, sans-serif;"><span style="font-size: large;"><strong>DECLARA&Ccedil;&Atilde;O</strong></span></span></p>
                             
                             
-			    			<p class="western" style="padding-left:4em;"><span style="font-size: medium;"><span style="font-family: Arial, sans-serif;">DECLARAMOS para os devidos fins que '.((ereg ("^Profa", $mMembro->nome)?"a":"o")).' <b>'.$mMembro->nome.'</b> participou como membro'.(($ano!=null)?", no ano de ".$ano.",":"").' das seguintes bancas:</span></span></p>
+			    			<p class="western" style="padding-left:4em;"><span style="font-size: medium;"><span style="font-family: Arial, sans-serif;">DECLARAMOS para os devidos fins que '.((preg_match ("/^Profa/", $mMembro->nome)?"a":"o")).' <b>'.$mMembro->nome.'</b> participou como membro'.(($ano!=null)?", no ano de ".$ano.",":"").' das seguintes bancas:</span></span></p>
 							'.
 			    			(($cont[]=count($mMembro->getBancasbytipo("Q1", "Mestrado", $ano))>0 )? "<p class=\"western\" align=\"center\"><b><br></br>Qualificação de Mestrado Q1</b></p>":"")
 			    			.
