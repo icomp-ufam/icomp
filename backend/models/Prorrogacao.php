@@ -54,7 +54,7 @@ class Prorrogacao extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idAluno', 'dataSolicitacao', 'dataInicio', 'qtdDias', 'justificativa', 'status'], 'required'],
+            [['idAluno', 'dataSolicitacao', 'dataInicio', 'qtdDias', 'justificativa', 'status', 'dataInicio0'], 'required'],
             [['dataSolicitacao0'], 'required', 'on' => 'create'],
             [['id', 'idAluno', 'qtdDias', 'status'], 'integer'],
             [['matricula', 'orientador', 'dataSolicitacao', 'dataInicio', 'dataInicio0', 'dataSolicitacao0'], 'safe'],
@@ -75,10 +75,11 @@ class Prorrogacao extends \yii\db\ActiveRecord
             'idAluno' => 'Aluno',
             'matricula' => 'Matrícula',
             'linhaPesquisa' => 'Linha de Pesquisa',
-            'dataSolicitacao' => 'Data Solicitação',
-            'qtdDias' => 'Qtd. Dias',
-            'dataInicio' => 'Início',
-            'dataInicio0' => 'Início',
+            'dataSolicitacao' => 'Data de Solicitação',
+            'dataSolicitacao0' => 'Data de Solicitação',
+            'qtdDias' => 'Quantidade de Dias',
+            'dataInicio' => 'Data de Início',
+            'dataInicio0' => 'Data de Início',
             'orientador' => 'Orientador',
             'justificativa' => 'Justificativa',
             'documento' => 'Documento',
