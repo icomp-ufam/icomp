@@ -18,7 +18,7 @@ class PortariaSearch extends Portaria
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id','ano'], 'integer'],
             [['responsavel', 'descricao', 'data', 'data0', 'documento'], 'safe'],
         ];
     }
@@ -50,6 +50,7 @@ class PortariaSearch extends Portaria
             'sort' => array(
                 'attributes' => array(
                     'id',
+                    'ano',
                     'responsavel',
                     'data0' => array(
                         'asc' => array('data' => SORT_ASC),
@@ -76,6 +77,7 @@ class PortariaSearch extends Portaria
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'ano' => $this->ano,
             'data' => $searchedData,
         ]);
 
