@@ -47,6 +47,10 @@ else if( Yii::$app->user->identity->checarAcesso('secretaria') == 1){
 						//$("#defesa-anopesq").val("");
 					}
 				});
+			
+				$( document ).ready(function() {
+				  $("#defesa-anopesq").prop("disabled", true);
+				});
 		  '); ?>
     <p>
         <?php 
