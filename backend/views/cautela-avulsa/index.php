@@ -7,8 +7,16 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\CautelaAvulsaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Cautela Avulsas';
+$this->title = 'Cautelas Avulsas';
 $this->params['breadcrumbs'][] = $this->title;
+
+if( Yii::$app->user->identity->checarAcesso('professor') == 1){
+  $action = "{view} {update} {delete} {create}";
+}
+else if ( Yii::$app->user->identity->checarAcesso('secretaria') == 1){
+  $action = "{view}";
+}
+
 ?>
 <div class="cautela-avulsa-index">
 
@@ -16,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Cautela Avulsa', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Gerar Cautela Avulsa', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -25,14 +33,20 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'idCautelaAvulsa',
-            'id',
+            //'id',
             'NomeResponsavel',
             'Email:email',
             'ValidadeCautela',
             // 'TelefoneResponsavel',
             // 'ObservacoesDescarte',
             // 'ImagemCautela',
-            // 'StatusCautelaAvulsa',
+            [   'label' => 'Status da Cautela',
+                'attribute' => 'StatusCautelaAvulsa',
+                'filter'=>array ("Em aberto" => "Em aberto", "Concluída" => "Concluída", "Em atraso" => "Em atraso"),
+                'value' => 'StatusCautelaAvulsa'
+
+
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -57,11 +57,13 @@ class Trancamento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idAluno', 'dataSolicitacao', 'dataInicio', 'prevTermino', /*'dataTermino',*/ 'justificativa', /*'tipo', 'status'*/], 'required'],
+            [['idAluno', 'dataSolicitacao', 'dataInicio', 'dataInicio0', 'prevTermino', 'prevTermino0', /*'dataTermino',*/ 'justificativa', /*'tipo', 'status'*/], 'required'],
             [['documento', 'dataSolicitacao0'], 'required', 'on' => 'create'],
             [['idAluno', 'tipo', 'status'], 'integer'],
             [['matricula', 'orientador','dataSolicitacao', 'dataInicio', 'prevTermino', 'dataTermino', 'dataInicio0', 'dataSolicitacao0'], 'safe'],
-            [['dataInicio0', 'prevTermino0', 'dataSolicitacao0'], 'date', 'format' => 'php:d/m/Y'],
+            [['dataSolicitacao0', 'dataInicio0', 'prevTermino0'], 'date', 'format' => 'php:d/m/Y'],
+            [['dataInicio0'], 'validateDataInicio0'],
+            [['prevTermino0'], 'validatePrevTermino0'],
             [['documento'], 'string'],
             [['justificativa'], 'string', 'max' => 250],
             [['idAluno'], 'exist', 'skipOnError' => true, 'targetClass' => Aluno::className(), 'targetAttribute' => ['idAluno' => 'id']],
@@ -78,12 +80,14 @@ class Trancamento extends \yii\db\ActiveRecord
             'idAluno' => 'Aluno',
             'matricula' => 'Matrícula',
             'linhaPesquisa' => 'Linha de Pesquisa',
-            'dataSolicitacao' => 'Data Solicitação',
-            'dataInicio' => 'Início',
-            'dataInicio0' => 'Início',
+            'dataSolicitacao' => 'Data de Solicitação',
+            'dataSolicitacao0' => 'Data de Solicitação',
+            'dataInicio' => 'Data de Início',
+            'dataInicio0' => 'Data de Início',
             'orientador' => 'Orientador',
-            'prevTermino' => 'Prev. Término',
-            'dataTermino' => 'Data Término',
+            'prevTermino' => 'Previsão de Término',
+            'prevTermino0' => 'Previsão de Término',
+            'dataTermino' => 'Data de Término',
             'justificativa' => 'Justificativa',
             'documento' => 'Documento',
             'tipo' => 'Tipo',
@@ -124,10 +128,11 @@ class Trancamento extends \yii\db\ActiveRecord
      */
     public function canDoStopOut() {
         //Limit in Days
-        $limitMestrado =  365;
-        $limitDoutorado = 365;
+        $limitMestrado =  365; //1 Year
+        $limitDoutorado = 365; //1 Year
 
-        $stopOuts = $this->find()->where('idAluno = '.$this->idAluno)->all();
+        //Tipo: 0 - Trancamento | 1 - Suspensao
+        $stopOuts = $this->find()->where('`idAluno` = '.$this->idAluno.' AND `tipo` = 0')->all();
         $sum = 0;
 
         foreach ($stopOuts as $stopOut) {
@@ -141,7 +146,6 @@ class Trancamento extends \yii\db\ActiveRecord
             }
 
             $days = (int)floor( ($finalDate - $initialDate) / (60 * 60 * 24));
-            Yii::trace('Dias' . $days);
 
             $sum = $sum + $days;
         }
@@ -154,5 +158,77 @@ class Trancamento extends \yii\db\ActiveRecord
 
         }
         return true;
+    }
+
+    /**
+     * Validates the start date of a stop out. This cannot be less or equal than the request date.
+     * 
+     * @author Pedro Frota <pvmf@icomp.ufam.edu.br>
+     */
+
+    public function validateDataInicio0($attribute, $params){
+        //Number 1 at the end is required to avoid conflicts between variable names
+        //I know I could reference class variables using 'this', but I think by doing so, the code 
+        //becomes more readable. (Or at least 'less worse' than the other way)
+
+        //Symbolic "declarations" of variables
+        //$dataSolicitacao1;
+        //$dataInicio1;
+
+        //Required to adapt the date inserted in the view to the format that will be used here
+        $dataSolicitacao1 = explode("/", $this->dataSolicitacao0);
+        if (sizeof($dataSolicitacao1) == 3) {
+            $dataSolicitacao1 = $dataSolicitacao1[2]."-".$dataSolicitacao1[1]."-".$dataSolicitacao1[0];
+        }
+        else $dataSolicitacao1 = '';
+        
+        //Required to adapt the date inserted in the view to the format that will be used here
+        $dataInicio1 = explode("/", $this->dataInicio0);
+        if (sizeof($dataInicio1) == 3) {
+            $dataInicio1 = $dataInicio1[2]."-".$dataInicio1[1]."-".$dataInicio1[0];
+        }
+        else $dataInicio1 = '';
+
+        if (!$this->hasErrors()) {
+            if (date("Y-m-d", strtotime($dataInicio1)) < date("Y-m-d", strtotime($dataSolicitacao1))) {
+                $this->addError($attribute, 'Por favor, informe uma data posterior ou igual à data de solicitação');
+            }
+        }
+    }
+
+    /**
+     * Validates the expected completion of a stop out. This cannot be less than or equal to the start date
+     * 
+     * @author Pedro Frota <pvmf@icomp.ufam.edu.br>
+     */
+
+    public function validatePrevTermino0($attribute, $params) {
+        //Number 1 at the end is required to avoid conflicts between variable names
+        //I know I could reference class variables using 'this', but I think by doing so, the code 
+        //becomes more readable. (Or at least 'less worse' than the other way)
+
+        //Symbolic "declarations" of variables
+        //$dataInicio1;
+        //$prevTermino1;
+
+        //Required to adapt the date inserted in the view to the format that will be used here
+        $dataInicio1 = explode("/", $this->dataInicio0);
+        if (sizeof($dataInicio1) == 3) {
+            $dataInicio1 = $dataInicio1[2]."-".$dataInicio1[1]."-".$dataInicio1[0];
+        }
+        else $dataInicio1 = '';
+
+        //Required to adapt the date inserted in the view to the format that will be used here
+        $prevTermino1 = explode("/", $this->prevTermino0);
+        if (sizeof($prevTermino1) == 3) {
+            $prevTermino1 = $prevTermino1[2]."-".$prevTermino1[1]."-".$prevTermino1[0];
+        }
+        else $prevTermino1 = '';
+        
+        if (!$this->hasErrors()) {
+            if (date("Y-m-d", strtotime($prevTermino1)) < date("Y-m-d", strtotime($dataInicio1))) {
+                $this->addError($attribute, 'Por favor, informe uma data posterior ou igual à data de início');
+            }
+        }
     }
 }

@@ -1,13 +1,18 @@
 <?php
-ob_start();
-$html= ob_get_clean();
-$html= utf8_encode($html);
-$html.= '';
-include("vendor/mpdf/mpdf.php");
-$mpdf= new mPDF();
-$mpdf->allow_charset_conversion= true;
-$mpdf->charset_in= 'UTF-8';
-$mpdf->writeHTML($html);
-$mpdf->Output('meu-pdf','I');
-exit();
+/*
+include("mpdf60/mpdf.php");
+
+$html = "
+<fieldset>
+	<h1>Alunos com prazo vencido</h1>
+	
+</fieldset>";
+
+$mpdf=new mPDF(); 
+$mpdf->SetDisplayMode('fullpage');
+$mpdf->WriteHTML($html);
+$mpdf->Output();
+
+exit;
+*/
 ?>

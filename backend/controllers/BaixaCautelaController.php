@@ -64,19 +64,22 @@ class BaixaCautelaController extends Controller
      */
     public function actionCreate($id)
     {
+        
         $cautela = Cautela::findOne($id);
 
         $model = new BaixaCautela();
+        
         $model->idCautela = $id;
-
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $cautela->StatusCautela = "Concluída";
             $cautela->save();
+
             return $this->redirect(['view', 'id' => $model->idBaixaCautela]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'item' => $cautela
+                'item' => $cautela,
             ]);
         }
     }

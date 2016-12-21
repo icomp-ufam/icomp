@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 
-//teste
 
 /* @var $this yii\web\View */
 /* @var $model app\models\DescarteEquipamento */

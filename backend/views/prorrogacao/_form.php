@@ -41,7 +41,7 @@ use kartik\widgets\Select2;
             ?>
         </div>
         <div class="row">
-            <?= $form->field($model, 'qtdDias', ['options' => ['class' => 'col-md-3']])->textInput() ?>
+            <?= $form->field($model, 'qtdDias', ['options' => ['class' => 'col-md-3']])->textInput()->label("<font color='#FF0000'>*</font> <b>Quantidade de Dias:</b>") ?>
         </div>
         <div class="row">
             <?= $form->field($model, 'justificativa' , ['options' => ['class' => 'col-md-3']] )->textArea(['rows' => '6'])->label("<font color='#FF0000'>*</font> <b>Justificativa:</b>") ?>

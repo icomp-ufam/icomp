@@ -54,11 +54,12 @@ class Prorrogacao extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idAluno', 'dataSolicitacao', 'dataInicio', 'qtdDias', 'justificativa', 'status'], 'required'],
+            [['idAluno', 'dataSolicitacao', 'dataInicio', 'qtdDias', 'justificativa', 'status', 'dataInicio0'], 'required'],
             [['dataSolicitacao0'], 'required', 'on' => 'create'],
             [['id', 'idAluno', 'qtdDias', 'status'], 'integer'],
             [['matricula', 'orientador', 'dataSolicitacao', 'dataInicio', 'dataInicio0', 'dataSolicitacao0'], 'safe'],
-            [['dataInicio0', 'dataSolicitacao0'], 'date', 'format' => 'php:d/m/Y'],
+            [['dataSolicitacao0', 'dataInicio0'], 'date', 'format' => 'php:d/m/Y'],
+            [['dataInicio0'], 'validateDataInicio0'],
             [['justificativa', 'documento'], 'string'],
             [['idAluno'], 'exist', 'skipOnError' => true, 'targetClass' => Aluno::className(), 'targetAttribute' => ['idAluno' => 'id']],
         ];
@@ -74,10 +75,11 @@ class Prorrogacao extends \yii\db\ActiveRecord
             'idAluno' => 'Aluno',
             'matricula' => 'Matrícula',
             'linhaPesquisa' => 'Linha de Pesquisa',
-            'dataSolicitacao' => 'Data Solicitação',
-            'qtdDias' => 'Qtd. Dias',
-            'dataInicio' => 'Início',
-            'dataInicio0' => 'Início',
+            'dataSolicitacao' => 'Data de Solicitação',
+            'dataSolicitacao0' => 'Data de Solicitação',
+            'qtdDias' => 'Quantidade de Dias',
+            'dataInicio' => 'Data de Início',
+            'dataInicio0' => 'Data de Início',
             'orientador' => 'Orientador',
             'justificativa' => 'Justificativa',
             'documento' => 'Documento',
@@ -111,8 +113,8 @@ class Prorrogacao extends \yii\db\ActiveRecord
 
     public function canDoProrogation() {
         //Limit in Days
-        $limitMestrado =  360;
-        $limitDoutorado = 720;
+        $limitMestrado =  360; //2 times, 180 days each
+        $limitDoutorado = 720; //4 times, 180 days each
 
         $prorogations = $this->find()->where('idAluno = '.$this->idAluno)->all();
         $sum = 0;
@@ -129,5 +131,41 @@ class Prorrogacao extends \yii\db\ActiveRecord
 
         }
         return true;
+    }
+
+    /**
+     * Validates the start date of a prorogation. This cannot be less or equal than the request date.
+     * 
+     * @author Pedro Frota <pvmf@icomp.ufam.edu.br>
+     */
+
+    public function validateDataInicio0($attribute, $params){
+        //Number 1 at the end is required to avoid conflicts between variable names
+        //I know I could reference class variables using 'this', but I think by doing so, the code 
+        //becomes more readable. (Or at least 'less worse' than the other way)
+
+        //Symbolic "declarations" of variables
+        //$dataSolicitacao1;
+        //$dataInicio1;
+
+        //Required to adapt the date inserted in the view to the format that will be used here
+        $dataSolicitacao1 = explode("/", $this->dataSolicitacao0);
+        if (sizeof($dataSolicitacao1) == 3) {
+            $dataSolicitacao1 = $dataSolicitacao1[2]."-".$dataSolicitacao1[1]."-".$dataSolicitacao1[0];
+        }
+        else $dataSolicitacao1 = '';
+        
+        //Required to adapt the date inserted in the view to the format that will be used here
+        $dataInicio1 = explode("/", $this->dataInicio0);
+        if (sizeof($dataInicio1) == 3) {
+            $dataInicio1 = $dataInicio1[2]."-".$dataInicio1[1]."-".$dataInicio1[0];
+        }
+        else $dataInicio1 = '';
+
+        if (!$this->hasErrors()) {
+            if (date("Y-m-d", strtotime($dataInicio1)) < date("Y-m-d", strtotime($dataSolicitacao1))) {
+                $this->addError($attribute, 'Por favor, informe uma data posterior ou igual à data de solicitação');
+            }
+        }
     }
 }

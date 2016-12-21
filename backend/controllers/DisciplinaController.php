@@ -20,7 +20,6 @@ class DisciplinaController extends Controller
     public function behaviors()
     {
         return [
-        	/*
             'access' => [
         		'class' => \yii\filters\AccessControl::className(),
         		'rules' => [
@@ -28,12 +27,11 @@ class DisciplinaController extends Controller
         				'allow' => true,
         				'roles' => ['@'],
         				'matchCallback' => function ($rule, $action) {
-        					return Yii::$app->user->identity->checarAcesso('secretaria');
+        					return Yii::$app->user->identity->checarAcesso('secretaria') || Yii::$app->user->identity->checarAcesso('administrador');
         				}
         			],
         		],
-        	],
-            */
+        	],            
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

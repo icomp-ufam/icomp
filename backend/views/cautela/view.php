@@ -23,12 +23,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+<<<<<<< HEAD
+
+        <?= Html::a('<span class="glyphicon glyphicon-print"></span>  Convite', ['convitepdf', 'idDefesa' => $model->idDefesa, 'aluno_id' => $model->aluno_id], ['class' => 'btn btn-success', 'target' => '_blank']);?>
+=======
+>>>>>>> origin/master
 
         <?= Html::a('Dar Baixa Cautela', ['baixa-cautela/create', 'id' => $model->idCautela], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Você tem certeza que deseja dar baixa nesta Cautela?',
                 'method' => 'post',
+                //$model->flagCautela = 1,
                // $this->redirect(array('descarte-equipamento/create', 'id' => $model->idEquipamento)),
             ], 
         ]) ?>

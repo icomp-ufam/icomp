@@ -10,6 +10,13 @@ use yii\grid\GridView;
 $this->title = 'Equipamentos';
 $this->params['breadcrumbs'][] = $this->title;
 
+if( Yii::$app->user->identity->checarAcesso('professor') == 1){
+  $action = "{view} {update} {delete} {create}";
+}
+else if ( Yii::$app->user->identity->checarAcesso('secretaria') == 1){
+  $action = "{view} {create} {update}";
+}
+
 
 ?>
 <div class="equipamento-index">

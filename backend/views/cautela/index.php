@@ -9,6 +9,13 @@ use yii\grid\GridView;
 
 $this->title = 'Cautelas';
 $this->params['breadcrumbs'][] = $this->title;
+
+if( Yii::$app->user->identity->checarAcesso('secretariar') == 1){
+  $action = " {view} {create} {update} {delete}";
+}
+else if ( Yii::$app->user->identity->checarAcesso('professor') == 1){
+  $action = "{view}";
+}
 ?>
 <div class="cautela-index">
 
@@ -16,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Cautela', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Gerar Cautela', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -28,11 +35,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'NomeResponsavel',
             'OrigemCautela',
             'DataDevolucao',
-            //'Email:email',
-            // 'ValidadeCautela',
-            // 'TelefoneResponsavel',
-            // 'ImagemCautela',
-            // 'Equipamento',
+            'Email:email',
+            'ValidadeCautela',
+            'TelefoneResponsavel',
+            'ImagemCautela',
+            'Equipamento',
             [   'label' => 'Status da Cautela',
                 'attribute' => 'StatusCautela',
                 'filter'=>array ("Em aberto" => "Em aberto", "Concluída" => "Concluída", "Em atraso" => "Em atraso"),

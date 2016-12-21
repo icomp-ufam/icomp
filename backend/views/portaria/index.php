@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('<span class="fa fa-plus"></span> Nova Portaria', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+
     <?php Pjax::begin(); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -26,7 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'responsavel',
+            'ano',
+            //'responsavel',
             //'descricao:ntext',
             [
                 'attribute' => 'data0',
@@ -34,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return date('d/m/Y', strtotime($model->data));
                 }
             ],
+            
             //'documento:ntext',
 
             ['class' => 'yii\grid\ActionColumn',

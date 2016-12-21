@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
+//teste
+
 /* @var $this yii\web\View */
 /* @var $model app\models\DescarteEquipamento */
 
@@ -28,10 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idEquipamento',
             'idDescarte',
             'NomeResponsavel',
-            'email:email',
+            'Email:email',
             'TelefoneResponsavel',
             'ObservacoesDescarte',
         ],

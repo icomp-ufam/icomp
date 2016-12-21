@@ -23,6 +23,7 @@ class Cautela extends \yii\db\ActiveRecord
 {
 
      public $tipoCautela;
+     public $flagCautela=0;
 
     /**
      * @inheritdoc
@@ -50,21 +51,21 @@ class Cautela extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idCautela' => 'Id Cautela',
-            'NomeResponsavel' => 'Nome Responsavel',
-            'OrigemCautela' => 'Origem Cautela',
+            'idCautela' => 'N° Cautela',
+            'NomeResponsavel' => 'Responsavel',
+            'OrigemCautela' => 'Origem',
             'DataDevolucao' => 'Data Devolucao',
             'Email' => 'Email',
-            'ValidadeCautela' => 'Validade Cautela',
-            'TelefoneResponsavel' => 'Telefone Responsavel',
-            'ImagemCautela' => 'Imagem Cautela',
+            'ValidadeCautela' => 'Validadea',
+            'TelefoneResponsavel' => 'Telefone',
+            'ImagemCautela' => 'Local',
             'Equipamento' => 'Equipamento',
             'StatusCautela' => 'Status',
         ];
     }
 
 
-    public function getTipoEquipamento(){
+    public function getTipoCautela(){
 
         if ($this->StatusCautela == "Em aberto"){
             $tipoCautela = "Em aberto";
