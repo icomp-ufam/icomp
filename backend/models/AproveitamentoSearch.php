@@ -6,7 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Aproveitamento;
-
+use app\models\Aluno;
 /**
  * AproveitamentoSearch represents the model behind the search form of `app\models\Aproveitamento`.
  */
@@ -19,7 +19,7 @@ class AproveitamentoSearch extends Aproveitamento
     {
         return [
             [['id', 'idAluno'], 'integer'],
-            [['codDisciplinaOrigemFK', 'codDisciplinaDestinoFK', 'situacao'], 'safe'],
+            [['codDisciplinaOrigemFK', 'codDisciplinaDestinoFK', 'situacao', 'nomeAluno'], 'safe'],
             [['nota', 'frequencia'], 'number'],
         ];
     }
@@ -69,6 +69,19 @@ class AproveitamentoSearch extends Aproveitamento
         $query->andFilterWhere(['like', 'codDisciplinaOrigemFK', strtolower($this->codDisciplinaOrigemFK)])
             ->andFilterWhere(['like', 'codDisciplinaDestinoFK', strtolower($this->codDisciplinaDestinoFK)])
             ->andFilterWhere(['like', 'situacao', strtolower($this->situacao)]);
+        
+        //	->andFilterWhere(['like', 'lower(nomeAluno)', strtolower($this->nomeAluno)]);
+        if(!empty($this->nomeAluno)){
+        	$alunos = Aluno::find()->where(['like', 'lower(nome)',strtolower($this->nomeAluno)])->all();
+	        if(count($alunos) > 0){
+	        	$idAlunos;
+	        	foreach ($alunos as $aluno){
+	        		$idAlunos[] = $aluno->id;
+	        	}
+	        	$query->andFilterWhere(['idAluno'=> $idAlunos]);
+	        }
+        }
+        	
 
         return $dataProvider;
     }

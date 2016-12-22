@@ -35,7 +35,7 @@ class AlunoController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'exame', 'create', 'view_orientado', 'update', 'delete', 'trancamento', 'prorrogacao', 'prazo_vencido', 'prazo_vencido_pdf', 'gerar_planilha'],
+                        'actions' => ['index', 'view', 'exame', 'create', 'view_orientado', 'update', 'delete', 'trancamento', 'prorrogacao', 'prazo_vencido', 'prazo_vencido_pdf', 'gerar_planilha', 'autocompletealuno'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -419,6 +419,21 @@ class AlunoController extends Controller
         
         // Sends file content to browser
         echo $html;
+    }
+    
+    public function actionAutocompletealuno($term){
+    	$listaAlunos = Aluno::find()->where(["like","upper(nome)",strtoupper($term)])->all();
+    	 
+    	$codigos = [];
+    	 
+    	foreach ($listaAlunos as $aluno)
+    	{
+    		$codigos[] = ['label'=>$aluno['nome'],'value'=>$aluno['nome'],'nome'=>$aluno['nome'],
+    				'id'=>$aluno['id']
+    		]; //build an array
+    	}
+    	 
+    	echo json_encode($codigos);    	
     }
 
 }

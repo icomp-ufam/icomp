@@ -3,6 +3,10 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use app\models\Aproveitamento;
+use yii\jui\AutoComplete;
+use yii\helpers\Url;
+use yii\web\JsExpression;
+use app\models\Aluno;
 /* @var $this yii\bckend\View */
 /* @var $searchModel backend\models\AproveitamentoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -25,8 +29,11 @@ $this->params['breadcrumbs'][] = 'Aproveitamentos';
         	echo Html::a('Novo Aproveitamento', ['createbyaluno','idAluno'=>$idAluno], ['class' => 'btn btn-success']);
         	
         	
-    	}else
-        	echo Html::a('Novo Aproveitamento', ['create'], ['class' => 'btn btn-success']);
+    	}else{
+    		//Escolha de projeto, não criar aproveitamento a partir do grid gera. Pode vir a ser alterado.
+        	//echo Html::a('Novo Aproveitamento', ['create'], ['class' => 'btn btn-success']);
+    		echo Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['site/index'], ['class' => 'btn btn-warning']);
+    	}
         ?>
     </p>
 
@@ -36,13 +43,25 @@ $this->params['breadcrumbs'][] = 'Aproveitamentos';
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+        	[
+        		//'label'=>'Aluno',
+        		'attribute'=>'nomeAluno',//situacao',//
+        		'value'=>'idAlunoFK0.nome',
+        		'visible'=>!isset($idAluno),
+        		'filter'=> AutoComplete::widget([
+						        'model' => $searchModel,
+						        'attribute' => 'nomeAluno',
+						        'clientOptions' => [
+						            'source' => URL::to(['aluno/autocompletealuno']),
+						        ],
+						    ]),
+        	],
             'id',
             'codDisciplinaOrigemFK',
             'codDisciplinaDestinoFK',
-            'nota',
-            'frequencia',
+            'nota:decimal',
+            'frequencia:decimal',
             'situacao',
-            // 'idAluno',
 
             ['class' => 'yii\grid\ActionColumn',
             'template'=>'{view} {delete} {update}',

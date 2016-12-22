@@ -109,6 +109,12 @@ use app\models\MembrosBanca;
             		'url' => ['disciplina/index'],
             		'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),
             		],
+            		[
+            		'label' => 'Gerenciar Aproveitamentos.',
+            		'icon' => 'glyphicon glyphicon-duplicate',
+            		'url' => ['aproveitamento/index'],
+            		'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),
+            		],
                 [
                     'label' => 'Gerenciar Prorrogações',
                     'icon' => 'fa fa-clock-o',

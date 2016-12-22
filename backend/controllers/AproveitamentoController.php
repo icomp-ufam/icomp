@@ -55,7 +55,7 @@ class AproveitamentoController extends Controller
     {
         $searchModel = new AproveitamentoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-		print_r(Yii::$app->request->queryParams);
+		//print_r(Yii::$app->request->queryParams);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
