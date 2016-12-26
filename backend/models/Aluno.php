@@ -8,6 +8,8 @@ use yiibr\brvalidator\CpfValidator;
 use yii\db\Query;
 use yii\data\SqlDataProvider;
 use app\models\Trancamento;
+use yii\db\ActiveQuery;
+use yii\db\Connection;
 
 class Aluno extends \yii\db\ActiveRecord
 {
@@ -143,24 +145,105 @@ class Aluno extends \yii\db\ActiveRecord
     }
 
     public function getDiasParaFormar() {
-        $prorrogacaoAluno= Prorrogacao::find()->where('idAluno =' . $this->id);
-        $trancamentoAluno= Trancamento::find()->where('idAluno =' . $this->id);
 
-        if($this->curso == 1){//Mestrado
-            $diasParaFormar= 720;
-        }else{ //Doutorado
-            $diasParaFormar= 1440;
+        if($this->curso == 1){  //Mestrado
+            $diasParaFormar= 730;
+        }else{                  //Doutorado
+            $diasParaFormar= 1460;
         }
         $dataIngresso= strtotime($this->dataingresso);
+        $dataConclusao= strtotime($this->anoconclusao);
         $dataAtual= strtotime(date("Y-m-d"));
-        $diasPassados= (int)floor( ($dataAtual - $dataIngresso) / (60 * 60 * 24));
-        $diasParaFormar= $diasParaFormar - $diasPassados;
 
-        if($diasParaFormar < 0){
-            $diasParaFormar= $diasParaFormar*-1;
+        if($dataConclusao == null){
+            $diasPassados= (int)floor(($dataAtual - $dataIngresso) / (60 * 60 * 24));
+        }else{
+            $diasPassados= (int)floor(($dataConclusao - $dataIngresso) / (60 * 60 * 24));            
         }
 
-        return $diasParaFormar;
+        $diasPassados= $diasPassados -1;
+        $dMestrado= 730;
+        $dDoutorado= 1460;
+        $dSem= 180;
+        
+        if($this->curso == 1){
+            //Prorrogação
+            $prorrogacaoAluno= Prorrogacao::find()->where('idAluno =' . $this->id)->all();
+            $tDiasProrrogacaoM= 0;
+            foreach($prorrogacaoAluno as $pM) {
+                if($this->id == $pM->idAluno){
+                    $tDiasProrrogacaoM= $tDiasProrrogacaoM + $pM->qtdDias;
+                }
+            }
+
+            if($diasPassados > $dMestrado+$tDiasProrrogacaoM){
+                $diasPassados= $diasPassados - $dMestrado;
+            }
+
+            //Trancamento
+            $trancamentoAluno= Trancamento::find()->where('idAluno =' . $this->id)->all();
+            $tDiasTrancamentoM= 0;
+            $flagM= false;
+            foreach($trancamentoAluno as $tM) {
+                if($this->id == $tM->idAluno){
+                    $datIni= strtotime($tM->dataInicio);
+                    $datTer= strtotime($tM->dataTermino);
+                    if($datTer == null){
+                        $tDiasTrancamentoM= (int)floor(($dataAtual - $datIni) / (60 * 60 * 24)) + $tDiasTrancamentoM;
+                    }else{
+                        $tDiasTrancamentoM= (int)floor(($datTer - $datIni) / (60 * 60 * 24)) + $tDiasTrancamentoM;
+                    }
+                    $flagM= true;
+                }
+            }
+
+            if($tDiasTrancamentoM > 2*$dSem){
+                $diasPassados= $tDiasTrancamentoM - 2*$dSem;
+            }else if($flagM == true){
+                $diasPassados= -1;
+            }
+        }
+
+        if($this->curso == 2){
+            //Prorrogação
+            $prorrogacaoAluno= Prorrogacao::find()->where('idAluno =' . $this->id)->all();
+            $tDiasProrrogacaoD= 0;
+            foreach($prorrogacaoAluno as $pD) {
+                if($this->id == $pD->idAluno){
+                    $tDiasProrrogacaoD= $tDiasProrrogacaoD + $pD->qtdDias;
+                }
+            }
+
+            if($diasPassados > $dDoutorado+$tDiasProrrogacaoD){
+                $diasPassados= $diasPassados - $dDoutorado;
+            }
+
+            //Trancamento
+            $trancamentoAluno= Trancamento::find()->where('idAluno =' . $this->id)->all();
+            $tDiasTrancamentoD= 0;
+            $flagD= false;
+            foreach($trancamentoAluno as $tD) {
+                if($this->id == $tD->idAluno){
+                    $datIni= strtotime($tM->dataInicio);
+                    $datTer= strtotime($tM->dataTermino);
+                    if($datTer == null){
+                        $tDiasTrancamentoD= (int)floor(($dataAtual - $datIni) / (60 * 60 * 24)) + $tDiasTrancamentoD;
+                    }else{
+                        $tDiasTrancamentoM= (int)floor(($datTer - $datIni) / (60 * 60 * 24)) + $tDiasTrancamentoD;
+                    }
+                    $flagD= true;
+                }
+            }
+
+            if($tDiasTrancamentoD > 2*$dSem){
+                $diasPassados= $tDiasTrancamentoD - 2*$dSem;
+            }else if($flagD == true){
+                $diasPassados= -1;
+            }
+            
+        } 
+
+        return $diasPassados;
     }
     
 }

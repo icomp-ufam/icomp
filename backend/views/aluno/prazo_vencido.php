@@ -55,7 +55,7 @@ BootboxAsset::registerWithOverride($this);
         [
             'label' => 'Dias Passados',
             'attribute' => 'diasParaFormar',
-            'value' => 'diasParaFormar'
+            'value' => 'diasParaFormar',
         ],
         /*
         ['class' => 'yii\grid\ActionColumn',

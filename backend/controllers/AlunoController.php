@@ -358,13 +358,10 @@ class AlunoController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-       
     }
 
     public function actionPrazo_vencido_pdf()
     {
-        //$pv= new PrazoVencidoSearch();
-
         return $this->render('prazo_vencido_pdf');
     }
 

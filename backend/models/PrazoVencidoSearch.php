@@ -17,6 +17,7 @@ use yii\base\Component;
  */
 class PrazoVencidoSearch extends Aluno
 {
+
     /**
      * @inheritdoc
      */
@@ -48,7 +49,7 @@ class PrazoVencidoSearch extends Aluno
     public function search($params)
     {
         $idUsuario = Yii::$app->user->identity->id;
-
+        /*
         $sql1= "CALL prazoVencido()";
         $connection = Yii::$app->db;
 		$command = $connection->createCommand($sql1);     
@@ -58,9 +59,23 @@ class PrazoVencidoSearch extends Aluno
         $dDoutorado= 1440;
         $dSem= 180;
 
-        $sql2= "select a.*,lp.sigla as siglaLinhaPesquisa,lp.icone as icone,lp.cor as corLinhaPesquisa, u.nome as nomeOrientador from pv join j17_aluno as a on a.id = pv.id left join j17_linhaspesquisa as lp on a.area = lp.id left join j17_user as u on a.orientador = u.id where pv.curso = 1 and pv.dNormal > ".$dMestrado." and (pv.dTrancamento > if(pv.qTrancamento = 1,".$dSem.",".$dSem."*2) or if(pv.qTrancamento is null,true,false)) and (pv.dProrrogacao > if(pv.qProrrogacao = 1,".$dSem.",".$dSem."*2) or if(pv.qProrrogacao is null,true,false)) or pv.curso = 2 and pv.dNormal > ".$dDoutorado." and (pv.dTrancamento > if(pv.qTrancamento = 1,".$dSem.",".$dSem."*2) or if(pv.qTrancamento is null,true,false)) and (pv.dProrrogacao > if(pv.qProrrogacao = 1,".$dSem.",".$dSem."*2) or if(pv.qProrrogacao is null,true,false))";
+        $sql2= "select a.*,lp.sigla as siglaLinhaPesquisa,lp.icone as icone,lp.cor as corLinhaPesquisa, u.nome as nomeOrientador from pv join j17_aluno as a on a.id = pv.id left join j17_linhaspesquisa as lp on a.area = lp.id left join j17_user as u on a.orientador = u.id where pv.curso = 1 and pv.dNormal > ".$dMestrado." and (pv.dTrancamento > if(pv.qTrancamento = 1,".$dSem.",".$dSem."*2) or if(pv.qTrancamento is null,true,false)) and (pv.dNormal > ".$dMestrado."+pv.dProrrogacao or if(pv.qProrrogacao is null,true,false)) or pv.curso = 2 and pv.dNormal > ".$dDoutorado." and (pv.dTrancamento > if(pv.qTrancamento = 1,".$dSem.",".$dSem."*2) or if(pv.qTrancamento is null,true,false)) and (pv.dNormal > ".$dDoutorado."+pv.dProrrogacao or if(pv.qProrrogacao is null,true,false))";
+		*/
+        //$query = Aluno::findBySql($sql2);
 
-        $query = Aluno::findBySql($sql2);
+        $aluno= Aluno::find()->all();
+        $idPV= array();
+        foreach($aluno as $aln){
+        	if($aln->diasParaFormar > 0){
+        		array_push($idPV, $aln->id);
+        	}
+        }
+
+        if(count($idPV) == 0){
+       		array_push($idPV, 0);
+        }
+
+        $query = Aluno::find()->select("j17_linhaspesquisa.sigla as siglaLinhaPesquisa,        j17_linhaspesquisa.icone as icone, j17_linhaspesquisa.cor as corLinhaPesquisa, j17_user.nome as nomeOrientador, j17_aluno.*")->leftJoin("j17_linhaspesquisa","j17_aluno.area = j17_linhaspesquisa.id")->leftJoin("j17_user","j17_aluno.orientador = j17_user.id")->where("j17_aluno.id IN (".implode($idPV,',').")");
 
 		if(!isset ($params['sort'])){
             $query = $query->orderBy('nome');
@@ -93,7 +108,6 @@ class PrazoVencidoSearch extends Aluno
             'asc' => ['nomeOrientador' => SORT_ASC],
             'desc' => ['nomeOrientador' => SORT_DESC],
         ];
-
 
         // grid filtering conditions
         $query->andFilterWhere([
@@ -247,4 +261,5 @@ class PrazoVencidoSearch extends Aluno
 
         return $dataProvider;
     }
+
 }
