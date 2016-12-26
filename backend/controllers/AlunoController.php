@@ -19,6 +19,8 @@ use yii\db\Query;
 use yii\data\SqlDataProvider;
 use app\models\PrazoVencidoSearch;
 use app\models\PrazoVencido;
+use kartik\mpdf\Pdf;
+use mPDF;
 
 /**
  * AlunoController implements the CRUD actions for Aluno model.
@@ -362,7 +364,55 @@ class AlunoController extends Controller
 
     public function actionPrazo_vencido_pdf()
     {
-        return $this->render('prazo_vencido_pdf');
+        $mpdf=new mPDF();
+        $aluno= Aluno::find()->all();
+        $idPV= array();
+        foreach($aluno as $aln){
+            if($aln->diasParaFormar > 0){
+                array_push($idPV, $aln->id);
+            }
+        }
+
+        if(count($idPV) == 0){
+            array_push($idPV, 0);
+        }
+
+        $query = Aluno::find()->where("j17_aluno.id IN (".implode($idPV,',').")")->all();
+
+        $html= "
+        
+        ";
+
+        $html.= "<h2>Lista de alunos com prazo vencido<h2><br>";
+
+        $html.= 
+        "
+        <table border='1'>
+        <tr>
+        <th>Matrícula</th>
+        <th>Nome</th>
+        <th>Data Ingresso</th>
+        <th>Dias Passados</th>
+        </tr>        
+        ";
+        foreach($query as $aln){
+            $html.= 
+            "
+            <tr>
+            <td>".$aln->matricula."</td>
+            <td>".$aln->nome."</td>
+            <td>".$aln->dataingresso."</td>
+            <td>".$aln->diasParaFormar."</td>
+            </tr>
+            ";
+        }
+        $html.= "
+        </table>
+        ";
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
+        exit;
+        //return $this->render('prazo_vencido_pdf');
     }
 
     public function actionGerar_planilha() {
