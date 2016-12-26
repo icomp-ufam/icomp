@@ -17,6 +17,9 @@ class Defesa extends \yii\db\ActiveRecord
     public $presidente;
     public $membrosBancaExternosPassagem = [];
     public $status_banca;
+    public $anoPesq;
+    public $tipoRelat;
+    public $idProfessor;
     /**
      * @inheritdoc
      */
@@ -52,7 +55,7 @@ class Defesa extends \yii\db\ActiveRecord
             }"],
 
 
-            [['membrosBancaExternos', 'membrosBancaInternos', 'examinador', 'emailExaminador', 'auxiliarTipoDefesa','presidente' ], 'safe'],
+            [['membrosBancaExternos', 'membrosBancaInternos', 'examinador', 'emailExaminador', 'auxiliarTipoDefesa','presidente','idProfessor' ], 'safe'],
             [['resumo', 'examinador', 'emailExaminador'], 'string'],
             [['emailExaminador'] , 'email'],
             [['numDefesa', 'reservas_id', 'banca_id', 'aluno_id', 'status_banca'], 'integer'],
@@ -62,6 +65,9 @@ class Defesa extends \yii\db\ActiveRecord
             [['conceito'], 'string', 'max' => 9],
             [['local'], 'string', 'max' => 100],
             [['previa'], 'string', 'max' => 45],
+            [['anoPesq'], 'integer'],
+            [['tipoRelat'], 'integer'],
+            [['idProfessor'], 'integer'],
         ];
     }
 
@@ -129,6 +135,14 @@ class Defesa extends \yii\db\ActiveRecord
         return $this->hasOne(BancaControleDefesas::className(), ['id' => 'banca_id']);
     }
 
+    public function getMembrosBanca(){
+    	return $this->hasMany(Banca::className(), ['banca_id'=>'banca_id']);	 
+    }
+    
+    public function getIdProfessor(){
+    	return $this->idProfessor;
+    }
+    
     public function getTipoDefesa(){
 
         if ($this->tipoDefesa == "Q1"){

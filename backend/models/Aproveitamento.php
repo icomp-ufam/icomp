@@ -21,6 +21,8 @@ use Yii;
  */
 class Aproveitamento extends \yii\db\ActiveRecord
 {
+	public $nomeAluno;
+	
     /**
      * @inheritdoc
      */
@@ -38,9 +40,11 @@ class Aproveitamento extends \yii\db\ActiveRecord
             [['codDisciplinaOrigemFK', 'codDisciplinaDestinoFK', 'nota', 'frequencia', 'situacao', 'idAluno'], 'required'],
             [['nota', 'frequencia'], 'number'],
             [['idAluno'], 'integer'],
+        	[['nomeAluno'], 'string', 'max'=>60],
             [['codDisciplinaOrigemFK', 'codDisciplinaDestinoFK', 'situacao'], 'string', 'max' => 10],
             [['codDisciplinaDestinoFK'], 'exist', 'skipOnError' => true, 'targetClass' => Disciplina::className(), 'targetAttribute' => ['codDisciplinaDestinoFK' => 'codDisciplina']],
             [['codDisciplinaOrigemFK'], 'exist', 'skipOnError' => true, 'targetClass' => Disciplina::className(), 'targetAttribute' => ['codDisciplinaOrigemFK' => 'codDisciplina']],
+        	[['nomeAluno'], 'safe'],
         ];
     }
 
@@ -50,13 +54,14 @@ class Aproveitamento extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id' => 'ID Aproveit.',
             'codDisciplinaOrigemFK' => 'Cód. Disciplina Origem',
             'codDisciplinaDestinoFK' => 'Cód. Disciplina Destino',
             'nota' => 'Nota',
             'frequencia' => 'Frequência',
             'situacao' => 'Situação',
             'idAluno' => 'ID Aluno',
+        	'nomeAluno'=>'Aluno',
         ];
     }
 
