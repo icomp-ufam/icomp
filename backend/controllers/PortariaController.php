@@ -219,32 +219,10 @@ class PortariaController extends Controller
                         <br>
                         <br>
                         <br>
-                        <br>
-                        <br>
                         '.$model->descricao.'
                         <br>
                         <br>
                         <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        Data: '.$model->data.'
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <p align="center">----------------------------------------------------------</p>
-                        <p align="center">Diretor do Instituto de Computação</p>
-
                          '
             ,  
             //'cssInline' => '', 
@@ -254,9 +232,15 @@ class PortariaController extends Controller
             'methods' => [ 
                 'SetFooter'=>[
                 '
-                   <p align="center"><span style="font-family: Arial, sans-serif;"><span style="font-size: xx-small;">Av. Gal. Rodrigo Oct&aacute;vio Jord&atilde;o Ramos, 6200 CEP.:69077-000 Manaus &ndash;AM</span></span></p>
-                    <p align="center"><span style="font-family: Arial, sans-serif;"><span style="font-size: xx-small;"> Fone: 3305 2809 / 2808 / 1193 e-mail: secretariappgi@icomp.ufam.edu.br</span></span></p>
-                    <p align="center">&nbsp;</p>
+                Data: '.$model->data.'
+                <br>
+                <p align="center">----------------------------------------------------------------------</p>
+                <h5><p align="center">Diretor do Instituto de Computação</p></h5>
+                <br>
+                <br>
+                <p align="center"><span style="font-family: Arial, sans-serif;"><span style="font-size: xx-small;">Av. Gal. Rodrigo Oct&aacute;vio Jord&atilde;o Ramos, 6200 CEP.:69077-000 Manaus &ndash;AM</span></span></p>
+                <p align="center"><span style="font-family: Arial, sans-serif;"><span style="font-size: xx-small;"> Fone: 3305 2809 / 2808 / 1193 e-mail: secretariappgi@icomp.ufam.edu.br</span></span></p>
+                <p align="center">&nbsp;</p>
                 '
                 ],
             ]
