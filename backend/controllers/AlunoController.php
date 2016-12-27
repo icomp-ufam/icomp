@@ -390,16 +390,25 @@ class AlunoController extends Controller
         <table border='1'>
         <tr>
         <th>Matrícula</th>
+        <th>Curso</th>
         <th>Nome</th>
         <th>Data Ingresso</th>
         <th>Dias Passados</th>
         </tr>        
         ";
         foreach($query as $aln){
+            $curso= 0;
+            if($aln->curso == 1){
+                $curso= 'Mestrado';
+            }else{
+                $curso= 'Doutorado';
+            }
             $html.= 
             "
             <tr>
             <td>".$aln->matricula."</td>
+
+            <td>".$curso."</td>
             <td>".$aln->nome."</td>
             <td>".$aln->dataingresso."</td>
             <td>".$aln->diasParaFormar."</td>

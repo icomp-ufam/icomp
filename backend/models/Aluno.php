@@ -178,7 +178,9 @@ class Aluno extends \yii\db\ActiveRecord
 
             if($diasPassados > $dMestrado+$tDiasProrrogacaoM){
                 $diasPassados= $diasPassados - $dMestrado;
-            }
+            }else{
+            	$diasPassados= -1;
+            }//Quando não está com prazo vencido----------------<
 
             //Trancamento
             $trancamentoAluno= Trancamento::find()->where('idAluno =' . $this->id)->all();
@@ -216,7 +218,9 @@ class Aluno extends \yii\db\ActiveRecord
 
             if($diasPassados > $dDoutorado+$tDiasProrrogacaoD){
                 $diasPassados= $diasPassados - $dDoutorado;
-            }
+            }else{
+            	$diasPassados= -1;
+            }//Quando não está com prazo vencido----------------<
 
             //Trancamento
             $trancamentoAluno= Trancamento::find()->where('idAluno =' . $this->id)->all();
