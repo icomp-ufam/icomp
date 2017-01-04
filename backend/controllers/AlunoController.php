@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use app\models\Aluno;
+use app\models\Defesa;
 use app\models\Trancamento;
 use yii\filters\AccessControl;
 use common\models\User;
@@ -446,6 +447,8 @@ class AlunoController extends Controller
                         $html.='</tr>';
 
                         foreach ($alunos as $aluno) {
+                            $defesa = Defesa::find()->where(['aluno_id' => $aluno->id])->orderBy('data')->one();
+
                             $html.='<tr>';
                                 $html.='<td><b>'.$aluno->matricula.'</b></td>';
                                 $html.='<td><b>'.$aluno->nome.'</b></td>';
@@ -454,6 +457,12 @@ class AlunoController extends Controller
                                 $html.='<td><b>'.date('d/m/Y', strtotime($aluno->dataingresso)).'</b></td>';
                                 $html.='<td><b>'.$aluno->orientador1->nome.'</b></td>';
                                 $html.='<td><b>'.$aluno->linhaPesquisa->nome.'</b></td>';
+                                
+                                if ($defesa != null) {
+                                    $html.='<td><b>'.$defesa->titulo.'</b></td>';
+                                    $html.='<td><b>'.$defesa->data.'</b></td>';
+                                }
+                               
                             $html.='</tr>';
                         }
 
