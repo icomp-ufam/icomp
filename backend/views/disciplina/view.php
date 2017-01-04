@@ -32,7 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'codDisciplina',
             'nome',
             'creditos',
+            'nomeCurso',
             'cargaHoraria',
+            'instituicao',
+            'preRequisito',
+            'obrigatoria',
         ],
     ]) ?>
 

@@ -28,9 +28,24 @@ use yii\widgets\MaskedInput;
 		<div class="row">
     <?= $form->field($model, 'creditos',['options'=>['class'=>'col-md-2']])->textInput()->widget(MaskedInput::className(), [
                     'mask' => '99', 'clientOptions'=>['alias'=>'numeric']]) ?>
+
+    <?= $form->field($model, 'nomeCurso', ['options'=>['class'=>'col-md-5']])->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'cargaHoraria',['options'=>['class'=>'col-md-3']])->textInput()->widget(MaskedInput::className(), [
                     'mask' => '999', 'clientOptions'=>['alias'=>'numeric']]) ?>
         </div>
+
+    <div class="row">
+    <?= $form->field($model, 'instituicao', ['options'=>['class'=>'col-md-5']])->textInput(['maxlength' => true]) ?>
+    </div>
+
+    <div class="row">
+    <?= $form->field($model, 'preRequisito', ['options'=>['class'=>'col-md-5']])->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'obrigatoria', ['options'=>['class'=>'col-md-5']])->textInput(['maxlength' => true]) ?>
+    </div>
+
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Salvar' : 'Alterar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

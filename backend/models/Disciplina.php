@@ -31,7 +31,8 @@ class Disciplina extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['codDisciplina', 'nome', 'creditos', 'cargaHoraria'], 'required'],
+            [['codDisciplina', 'nome', 'creditos', 'nomeCurso','cargaHoraria','instituicao',
+            'preRequisito','obrigatoria'], 'required'],
             [['creditos', 'cargaHoraria'], 'integer'],
             [['codDisciplina'], 'string', 'max' => 10],
             [['nome'], 'string', 'max' => 100],
@@ -47,7 +48,11 @@ class Disciplina extends \yii\db\ActiveRecord
             'codDisciplina' => 'Cod Disciplina',
             'nome' => 'Nome',
             'creditos' => 'Creditos',
+            'nomeCurso' => 'Nome Curso',
             'cargaHoraria' => 'Carga Horaria',
+            'instituicao' => 'Instituição',
+            'preRequisito' => 'Pre-Requisito',
+            'obrigatoria' => 'Obrigatória',
         ];
     }
 
