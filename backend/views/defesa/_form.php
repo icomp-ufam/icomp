@@ -93,6 +93,16 @@ else {
 
             ?>
 
+            <?= $form->field($model, 'membrosBancaSuplentes')->widget(Select2::classname(), [
+                'data' => $membrosBancaSuplentes,
+                'value' => $model->membrosBancaSuplentes,
+                'language' => 'pt-BR',
+                'options' => [
+                'placeholder' => 'Selecione os membros suplentes ...', 'multiple' => true,],
+            ]);
+
+            ?>
+
     <?php } ?>
 
 <br><br>

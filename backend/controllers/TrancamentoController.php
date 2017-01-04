@@ -141,7 +141,7 @@ class TrancamentoController extends Controller
             }
             else $model->prevTermino = '';
             
-            $pre_path = 'uploads/trancamento/';
+            $pre_path = 'generated/trancamento/';
             $filename = 'trancamento-'.Yii::$app->security->generateRandomString().'.pdf';
 
             $path = $pre_path.$filename;

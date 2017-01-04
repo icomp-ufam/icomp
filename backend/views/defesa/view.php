@@ -11,7 +11,7 @@ BootboxAsset::register($this);
 BootboxAsset::registerWithOverride($this);
 
 $this->title = "Detalhes da Defesa";
-$this->params['breadcrumbs'][] = ['label' => 'Defesas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Defesas', 'url' => ['index', 'idDefesa' => $model->idDefesa]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="defesa-view">
@@ -26,10 +26,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $model->banca->status_banca == null ? Html::a('<span class="glyphicon glyphicon-remove"></span> Excluir', ['delete', 'idDefesa' => $model->idDefesa, 'aluno_id' => $model->aluno_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Deseja remove defesa \''.$model->titulo.'\'?',
+                'confirm' => 'Deseja remover defesa \''.$model->titulo.'\'?',
                 'method' => 'post',
             ],
         ]) : "" ?>
+
+        <?= Html::a('<span class="fa fa-balance-scale"></span> Gerar Portaria', ['gerar_portaria', 'idDefesa' => $model->idDefesa, 'aluno_id' => $model->aluno_id], ['class' => 'btn btn-primary']) ?>
 
         <?php if(Yii::$app->user->identity->secretaria && $model->banca->status_banca == 1){
                 Modal::begin([

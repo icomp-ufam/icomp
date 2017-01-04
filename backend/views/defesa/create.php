@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'membrosBancaInternos' => $membrosBancaInternos,
         'membrosBancaExternos' => $membrosBancaExternos,
+        'membrosBancaSuplentes' => $membrosBancaSuplentes,
         'tipodefesa' => $tipodefesa,
     ]) ?>
 
