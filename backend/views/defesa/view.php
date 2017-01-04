@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) : "" ?>
 
-        <?= Html::a('<span class="fa fa-balance-scale"></span> Gerar Portaria', ['gerar_portaria', 'idDefesa' => $model->idDefesa, 'aluno_id' => $model->aluno_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('<span class="fa fa-balance-scale"></span> Gerar Portaria', ['gerar_portaria', 'idDefesa' => $model->idDefesa, 'aluno_id' => $model->aluno_id], ['class' => 'btn btn-success']) ?>
 
         <?php if(Yii::$app->user->identity->secretaria && $model->banca->status_banca == 1){
                 Modal::begin([

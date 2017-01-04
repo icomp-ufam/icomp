@@ -1,9 +1,8 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
-use yii\db\Expression;
 
 /**
  * This is the model class for table "j17_cautela".
@@ -18,13 +17,11 @@ use yii\db\Expression;
  * @property string $ImagemCautela
  * @property string $Equipamento
  * @property string $StatusCautela
+ * @property integer $idEquipamento
+ * @property integer $idProjeto
  */
 class Cautela extends \yii\db\ActiveRecord
 {
-
-     public $tipoCautela;
-     public $flagCautela=0;
-
     /**
      * @inheritdoc
      */
@@ -40,8 +37,10 @@ class Cautela extends \yii\db\ActiveRecord
     {
         return [
             [['NomeResponsavel', 'OrigemCautela', 'Email', 'TelefoneResponsavel', 'StatusCautela'], 'required'],
+            [['idEquipamento', 'idProjeto'], 'integer'],
             [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel', 'Equipamento', 'StatusCautela'], 'string', 'max' => 50],
             [['ImagemCautela'], 'string', 'max' => 100],
+            [['idEquipamento'], 'exist', 'skipOnError' => true, 'targetClass' => Equipamento::className(), 'targetAttribute' => ['idEquipamento' => 'idEquipamento']],
         ];
     }
 
@@ -51,33 +50,18 @@ class Cautela extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idCautela' => 'N° Cautela',
-            'NomeResponsavel' => 'Responsavel',
+            'idCautela' => 'Id',
+            'NomeResponsavel' => 'Responsável',
             'OrigemCautela' => 'Origem',
-            'DataDevolucao' => 'Data Devolucao',
+            'DataDevolucao' => 'Data de Devolucao',
             'Email' => 'Email',
-            'ValidadeCautela' => 'Validadea',
+            'ValidadeCautela' => 'Validade',
             'TelefoneResponsavel' => 'Telefone',
-            'ImagemCautela' => 'Local',
+            'ImagemCautela' => 'Imagem Cautela',
             'Equipamento' => 'Equipamento',
             'StatusCautela' => 'Status',
+            'idEquipamento' => 'Equipamento',
+            'idProjeto' => 'Projeto',
         ];
     }
-
-
-    public function getTipoCautela(){
-
-        if ($this->StatusCautela == "Em aberto"){
-            $tipoCautela = "Em aberto";
-        }
-        else if ($this->StatusCautela == "Concluída"){
-            $tipoCautela = "Concluída";
-        }
-        else if ($this->StatusCautela == "Em atraso"){
-            $tipoCautela = "Em atraso";
-        }
-
-        return $tipoCautela;
-    }
-
 }

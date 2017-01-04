@@ -3,15 +3,16 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Cautela */
+/* @var $model backend\models\Cautela */
 
-$this->title = 'Update Cautela: ' . $model->NomeResponsavel;
+$this->title = 'Atualizar Cautela: ' . $model->NomeResponsavel;
 $this->params['breadcrumbs'][] = ['label' => 'Cautelas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->NomeResponsavel, 'url' => ['view', 'id' => $model->NomeResponsavel]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Atualizar';
 ?>
 <div class="cautela-update">
 
+    
 
     <?= $this->render('_form', [
         'model' => $model,

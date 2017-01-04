@@ -24,8 +24,8 @@ $coordenador = User::find()->select("*")->where("id=$modelProjeto->coordenador_i
                     'attribute' => 'coordenador_id',
                     'value' => $coordenador->nome,
                 ],
-                'orcamento:currency',
-                'saldo:currency',
+                //'orcamento:currency',
+                //'saldo:currency',
                 [
                     'attribute' => 'data_inicio',
                     'value' => date("d/m/Y", strtotime($modelProjeto->data_inicio)),

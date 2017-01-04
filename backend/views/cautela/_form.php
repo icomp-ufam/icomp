@@ -2,16 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-<<<<<<< HEAD
+use yii\widgets\MaskedInput;
 use kartik\widgets\DatePicker;
-use kartik\mpdf\Pdf;
-
-=======
 use \yii\helpers\ArrayHelper;
->>>>>>> origin/master
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Cautela */
+/* @var $model backend\models\Cautela */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -37,8 +33,7 @@ use \yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'Email')->textInput(['maxlength' => true]) ?>
 
-
-    <div class="row">
+     <div class="row">
                 <?= $form->field($model, 'ValidadeCautela', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
                     'language' => 'pt-BR',
                     'options' => ['placeholder' => 'Selecione a Validade ...',],
@@ -50,19 +45,24 @@ use \yii\helpers\ArrayHelper;
                 ?>
     </div>
 
-    <?= $form->field($model, 'TelefoneResponsavel')->textInput(['maxlength' => true]) ?>
+    <div class="row">
+    <?= $form->field($model, 'TelefoneResponsavel', ['options' => ['class' => 'col-md-3']])->widget(MaskedInput::className(), [
+                            'mask' => '(99) 99999-9999'])->label("<b>Telefone:</b>") ?>
+    </div>
 
-    <?= $form->field($model, 'ImagemCautela')->textInput(['maxlength' => true]) ?>
+   
 
-    
-
-    <?= $form->field($model, 'Equipamento')->dropDownList([ArrayHelper::map(app\models\Equipamento::find()->all(),'idEquipamento','NomeEquipamento')]) ?>
+   <?= $form->field($model, 'Equipamento')->dropDownList([ArrayHelper::map(backend\models\Equipamento::find()->all(),'idEquipamento','NomeEquipamento')]) ?>
 
     <?= $form->field($model, 'StatusCautela')->dropDownList(['Em aberto' => 'Em aberto','Concluída'=> 'Concluída','Em atraso'=>'Em atraso']) ?>
 
+    
+
+    <?= $form->field($model, 'idProjeto')->dropDownList([ArrayHelper::map(backend\models\ContProjProjetos::find()->all(),'id','nomeprojeto')]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Salvar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::a('Cancelar', ['index'], ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

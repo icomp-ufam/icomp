@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use backend\models\Cautela;
+
 
 /**
  * This is the model class for table "j17_baixa_cautela".

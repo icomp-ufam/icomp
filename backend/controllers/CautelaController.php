@@ -1,9 +1,20 @@
 <?php
 
+
+
+
+
+//use app\models\CautelaSearch;
+//use yii\web\Controller;
+//use yii\web\NotFoundHttpException;
+//use yii\filters\VerbFilter;
+
+
 namespace backend\controllers;
 
 use Yii;
-use app\models\Cautela;
+use backend\models\Cautela;
+//use app\models\Cautela;
 use common\models\User;
 use app\models\AfastamentosSearch;
 use backend\models\SignupForm;
@@ -75,6 +86,7 @@ class CautelaController extends Controller
     {
         $model = new Cautela();
 
+
         if($model->StatusCautela == "Em aberto"){
             $StatusCautela = 1;
         }
@@ -94,6 +106,7 @@ class CautelaController extends Controller
             ]);
         }
     }
+
 
     function actionProdutos($id) {
 
@@ -270,18 +283,6 @@ class CautelaController extends Controller
         $pdf->Output('');
 
         $pdfcode = $pdf->output();
-    }
-
-
-    public function actionSamplePdf()
-    {
-        $mpdf = new mPDF;
-        //$css = file_get_contents('css/style.css');
-        //$mpdf ->WriteHTML($css, 1);
-        $mpdf->WriteHTML('Texto de Test PDF');
-        $mpdf->Output();
-        exit;
-        //$mpdf->charset_in='windows-1252';
     }
 
     /**

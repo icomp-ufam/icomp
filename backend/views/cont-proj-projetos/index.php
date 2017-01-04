@@ -25,8 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             'coordenador',
 			'nomeprojeto',
-            'orcamento:currency',
-            'saldo:currency',
+            //'orcamento:currency',
+            //'saldo:currency',
             [
                 'attribute'=>'data_inicio',
                 'format' => ['date', 'php:d/m/Y'],
