@@ -18,13 +18,13 @@ else if ($model->StatusCautela == 3){
 	$titulo = "Em atraso";
 }
 
-$this->title = 'Create Cautela';
+$this->title = 'Gerar Cautela';
 $this->params['breadcrumbs'][] = ['label' => 'Cautelas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cautela-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    
 
     <?= $this->render('_form', [
         'model' => $model,
