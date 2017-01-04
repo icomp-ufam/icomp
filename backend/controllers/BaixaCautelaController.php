@@ -4,11 +4,12 @@ namespace backend\controllers;
 
 use Yii;
 use app\models\BaixaCautela;
-use app\models\Cautela;
+use backend\models\Cautela;
 use app\models\BaixaCautelaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
 
 /**
  * BaixaCautelaController implements the CRUD actions for BaixaCautela model.

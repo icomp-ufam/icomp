@@ -5,10 +5,10 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Cautela;
+use backend\models\Cautela;
 
 /**
- * CautelaSearch represents the model behind the search form of `app\models\Cautela`.
+ * CautelaSearch represents the model behind the search form of `backend\models\Cautela`.
  */
 class CautelaSearch extends Cautela
 {
@@ -18,7 +18,7 @@ class CautelaSearch extends Cautela
     public function rules()
     {
         return [
-            [['idCautela'], 'integer'],
+            [['idCautela', 'idEquipamento', 'idProjeto'], 'integer'],
             [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel', 'ImagemCautela', 'Equipamento', 'StatusCautela'], 'safe'],
         ];
     }
@@ -60,6 +60,8 @@ class CautelaSearch extends Cautela
         // grid filtering conditions
         $query->andFilterWhere([
             'idCautela' => $this->idCautela,
+            'idEquipamento' => $this->idEquipamento,
+            'idProjeto' => $this->idProjeto,
         ]);
 
         $query->andFilterWhere(['like', 'NomeResponsavel', $this->NomeResponsavel])

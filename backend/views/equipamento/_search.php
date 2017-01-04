@@ -23,13 +23,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'NotaFiscal') ?>
 
-    <?= $form->field($model, 'StatusEquipamento') ?>
+    <?= $form->field($model, 'Localizacao') ?>
 
     <?php // echo $form->field($model, 'StatusEquipamento') ?>
 
     <?php // echo $form->field($model, 'OrigemEquipamento') ?>
 
     <?php // echo $form->field($model, 'ImagemEquipamento') ?>
+
+    <?php // echo $form->field($model, 'idProjeto') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

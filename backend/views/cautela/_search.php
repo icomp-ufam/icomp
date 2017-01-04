@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'DataDevolucao') ?>
 
-    <?=// $form->field($model, 'Email') ?>
+    <?= $form->field($model, 'Email') ?>
 
     <?php // echo $form->field($model, 'ValidadeCautela') ?>
 
@@ -33,7 +33,11 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'Equipamento') ?>
 
-    <?php  echo $form->field($model, 'StatusCautela') ?>
+    <?php // echo $form->field($model, 'StatusCautela') ?>
+
+    <?php // echo $form->field($model, 'idEquipamento') ?>
+
+    <?php // echo $form->field($model, 'idProjeto') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

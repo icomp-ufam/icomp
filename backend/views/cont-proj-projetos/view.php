@@ -51,6 +51,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['cont-proj-projetos/relatorio', 'idProjeto' => $model->id], ['class' => 'btn btn-primary']) ?>
 		<?= Html::a('<span class="glyphicon glyphicon-list-alt" aria-hidden=true></span> <span class=glyphicon-class>Relatório Detalhado</span>',
             ['cont-proj-projetos/detalhado', 'idProjeto' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-edit" aria-hidden=true></span> <span class=glyphicon-class>Gerenciar Equipamento</span>',
+            ['equipamento/index', 'EquipamentoSearch[idProjeto]'=>$model->id,'idProjeto' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-list-alt" aria-hidden=true></span> <span class=glyphicon-class>Gerenciar Cautela</span>',
+            ['cautela/index', ' CautelaSearch[idProjeto] ' => $model->id], ['class' => 'btn btn-primary']) ?>
 	</div> 
 
     <p>
@@ -88,8 +92,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'coordenador_id',
                 'value' => $coordenador->nome,
             ],
-            'orcamento:currency',
-            'saldo:currency',
+           // 'orcamento:currency',
+           // 'saldo:currency',
             [
                 'attribute' => 'data_inicio',
                 'value' => date("d/m/Y", strtotime($model->data_inicio)),
