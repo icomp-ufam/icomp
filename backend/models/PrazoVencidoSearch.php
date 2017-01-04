@@ -114,7 +114,7 @@ class PrazoVencidoSearch extends Aluno
             'id' => $this->id,
             'curso' => $this->curso,
             'regime' => $this->regime,
-            'j17_aluno.status' => $this->status,
+            'j17_aluno.status' => '0',
             'area' => $this->siglaLinhaPesquisa,
             'egressograd' => $this->egressograd,
             'idUser' => $this->idUser,

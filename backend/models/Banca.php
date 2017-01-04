@@ -59,7 +59,7 @@ class Banca extends \yii\db\ActiveRecord
     
     public function getMembrosBanca()
     {
-    	return $this->hasOne(Membrosbanca::className(), ['id'=>'membrosbanca_id']);
+    	return $this->hasOne(MembrosBanca::className(), ['id'=>'membrosbanca_id']);
     }
 
     public function getFuncaoMembro(){

@@ -1289,7 +1289,7 @@ class DefesaController extends Controller
                             <table style="width: 608px; margin-left: auto; margin-right: auto;">
                             <tbody>
                             <tr style="height: 144px;">
-                            <td style="text-align: center; width: 10px; height: 144px;"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Coat_of_arms_of_Brazil.svg/1021px-Coat_of_arms_of_Brazil.svg.png" alt="" width="90" height="90" /></td>
+                            <td style="text-align: center; width: 10px; height: 144px;"><img src="'.getcwd().'/img/republica.png" alt="" width="90" height="90" /></td>
                             <td style="text-align: center; width: 573.5px; height: 144px;">
                             <p><strong>PODER</strong> <strong>EXECUTIVO</strong></p>
                             <p><strong>MINIST&Eacute;RIO</strong> <strong>DA</strong> <strong>EDUCA&Ccedil;&Atilde;O</strong></p>

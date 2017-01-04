@@ -26,14 +26,6 @@ BootboxAsset::registerWithOverride($this);
                 return $model->curso == 1 ? 'Mestrado' : 'Doutorado';
             },
         ],
-        [   'label' => 'Status',
-            'attribute' => 'status',
-            'filter'=>array (0 => "Corrente",1 => "Egresso",2 => "Desistente",3 => "Desligado",4 => "Jubilado",5 => "Matrícula Trancada"),
-            'value' => function ($model) {
-                $statusAluno = array (0 => "Corrente",1 => "Egresso",2 => "Desistente",3 => "Desligado",4 => "Jubilado",5 => "Matrícula Trancada");
-                return $statusAluno[$model->status];
-            },
-        ],
         [   'label' => 'Ingresso',
             'attribute' => 'dataingresso',
             'value' => function ($model) {
