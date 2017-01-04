@@ -71,6 +71,10 @@ class Banca extends \yii\db\ActiveRecord
 
             return "Membro Interno";
         }
+        else if($this->funcao == "S"){
+
+            return "Suplente";
+        }
         else{
             return "Membro Externo";
         }

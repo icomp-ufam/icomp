@@ -232,6 +232,8 @@ class DefesaController extends Controller
         $membrosBancaInternos = ArrayHelper::map(MembrosBanca::find()->where("filiacao = 'PPGI/UFAM'")->orderBy('nome')->all(), 'id', 'nome','filiacao');
 
         $membrosBancaExternos = ArrayHelper::map(MembrosBanca::find()->where("filiacao <> 'PPGI/UFAM'")->orderBy('nome')->all(), 'id', 'nome','filiacao');
+
+        $membrosBancaSuplentes = ArrayHelper::map(MembrosBanca::find()->orderBy('nome')->all(), 'id', 'nome','filiacao');
         
         $membrosExternos = ArrayHelper::map(MembrosBanca::find()->where("filiacao <> 'PPGI/UFAM'")->orderBy('nome')->all(), 'id', 'nome');
         
@@ -340,6 +342,7 @@ class DefesaController extends Controller
             'tipodefesa' => $tipodefesa,
             'membrosBancaInternos' => $membrosBancaInternos,
             'membrosBancaExternos' => $membrosBancaExternos,
+            'membrosBancaSuplentes' => $membrosBancaSuplentes,
         ]);
     }
     
@@ -1254,6 +1257,120 @@ class DefesaController extends Controller
     fwrite($arqPDF,$pdfcode);
     fclose($arqPDF);
 }
+
+    public function actionGerar_portaria($idDefesa, $aluno_id) {
+        $model = $model = $this->findModel($idDefesa, $aluno_id);        
+
+        $model->scenario = 'gerar_portaria';
+
+        if ($model->load(Yii::$app->request->post())) {
+            $presidente = '';
+            $membros = [];
+            $suplentes = [];
+
+
+            foreach ($model->membrosBanca as $membrobanca) {
+                if($membrobanca->funcao == "P"){
+                    $presidente = $membrobanca->membrosBanca->nome;
+                }
+                else if($membrobanca->funcao == "I"){
+                    array_push($membros, $membrobanca->membrosBanca->nome);
+                }
+                else if($membrobanca->funcao == "S"){
+                    array_push($suplentes, $membrobanca->membrosBanca->nome);
+                }
+                else{
+                    array_push($membros, $membrobanca->membrosBanca->nome);
+                }
+            }
+
+            $doc = '
+                    <p style="text-align: center;">&nbsp;</p>
+                            <table style="width: 608px; margin-left: auto; margin-right: auto;">
+                            <tbody>
+                            <tr style="height: 144px;">
+                            <td style="text-align: center; width: 10px; height: 144px;"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Coat_of_arms_of_Brazil.svg/1021px-Coat_of_arms_of_Brazil.svg.png" alt="" width="90" height="90" /></td>
+                            <td style="text-align: center; width: 573.5px; height: 144px;">
+                            <p><strong>PODER</strong> <strong>EXECUTIVO</strong></p>
+                            <p><strong>MINIST&Eacute;RIO</strong> <strong>DA</strong> <strong>EDUCA&Ccedil;&Atilde;O</strong></p>
+                            <p style="text-align: center;"><strong>UNIVERSIDADE</strong> <strong>FEDERAL</strong> <strong>DO</strong> <strong>AMAZONAS</strong></p>
+                            <p><strong>INSTITUTO</strong> <strong>DE</strong> <strong>COMPUTA&Ccedil;&Atilde;O </strong></p>
+                            <p><strong>PROGRAMA DE P&Oacute;S-GRADUA&Ccedil;&Atilde;O EM INFORM&Aacute;TICA</strong></p>
+                            </td>
+                            <td style="width: 101.5px; height: 144px;"><img style="display: block; margin-left: auto; margin-right: auto;" src="'.getcwd().'/img/ufam.jpg" alt="" width="74" height="95" /></td>
+                            </tr>
+                            </tbody>
+                            </table>
+                            <p style="text-align: center;"><strong><u>PORTARIA N&ordm;. '.$model->portariaID.'/'.$model->portariaAno.' &ndash; PPGI</u></strong><strong>&nbsp; &nbsp;&nbsp;</strong></p>
+                            <p><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </strong></p>
+                            <p><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; O COORDENADOR DO PROGRAMA DE P&Oacute;S-GRADUA&Ccedil;&Atilde;O EM INFORM&Aacute;TICA DA UNIVERSIDADE FEDERAL DO AMAZONAS </strong>usando de suas atribui&ccedil;&otilde;es estatut&aacute;rias e regimentais, e</p>
+                            <p><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; CONSIDERANDO</strong> o disposto no artigo 10, &sect; 1&ordm;, do Anexo &agrave; Resolu&ccedil;&atilde;o 033/2014, que regulamenta o exame de qualifica&ccedil;&atilde;o e a defesa de teses e disserta&ccedil;&otilde;es na P&oacute;s-Gradua&ccedil;&atilde;o <em>Stricto Sensu</em> da Universidade Federal do Amazonas,</p>
+                            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong>R E S O L V E :</strong></p>
+                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>DESIGNAR</strong> BANCA EXAMINADORA de defesa de mestrado/doutorado do Programa de P&oacute;s-Gradua&ccedil;&atilde;o em Inform&aacute;tica, composta pelos seguintes membros:</p>
+                            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <u>Presidente:</u></p>
+                            <p><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '.$presidente.'</strong></p>
+                            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <u>Membros Titulares:</u></p>
+                   ';
+
+            foreach ($membros as $membro) {
+                $doc .= '<p><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '.$membro.'</strong></p>';
+            }
+
+            $doc .= '<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <u>Membros Suplentes:</u></p>';
+
+            foreach ($suplentes as $suplente) {
+                $doc .= '<p><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '.$membro.'</strong></p>';
+            }
+
+            $doc .= '
+                            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; D&ecirc;-se ci&ecirc;ncia e cumpra-se.</p>
+                            <p>&nbsp;</p>
+                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>PROGRAMA DE P&Oacute;S-GRADUA&Ccedil;&Atilde;O EM INFORM&Aacute;TICA</strong> <strong>DA</strong> <strong>UNIVERSIDADE</strong><strong> FEDERAL </strong><strong>DO</strong> <strong>AMAZONAS</strong>, em Manaus, 19 de agosto de 2016.</p>
+                            <p>&nbsp;</p>
+                            <p style="text-align: center;"><strong>EDUARDO LUZEIRO FEITOSA</strong></p>
+                            <p style="text-align: center;">Coordenador do PPGI</p>
+                    ';
+
+            $pdf = new Pdf([
+            // set to use core fonts only
+            'mode' => Pdf::MODE_CORE, 
+            // A4 paper format
+            'format' => Pdf::FORMAT_A4, 
+            // portrait orientation
+            'orientation' => Pdf::ORIENT_PORTRAIT, 
+            // stream to browser inline
+            'destination' => Pdf::DEST_BROWSER,
+            //'filename' => $filename,
+            // your html content input
+            'content' => $doc
+            ,  
+            //'cssInline' => '', 
+             // set mPDF properties on the fly
+            'options' => ['title' => 'ppgi_portaria'.$model->portariaID.'_'.$model->portariaAno],
+             // call mPDF methods on the fly
+            'methods' => [ 
+                'SetFooter'=>[
+                '
+                    <p style="text-align: center;">&nbsp;</p>
+                    <p style="text-align: center;">Av.&nbsp; Rodrigo Ot&aacute;vio Jord&atilde;o Ramos,6.200 &bull; Coroado &bull;&nbsp; CEP.:69077-000&nbsp; Manaus -AM</p>
+                    <p style="text-align: center;">Fone/fax: 3305- 193&nbsp; e-mail: secretaria@icomp.ufam.edu.br</p>
+                    <p>&nbsp;</p>
+                '
+                ],
+            ]
+        ]);
+
+        return $pdf->render();
+        }
+        else {
+            $model->portariaAno = date('Y'); 
+
+            return $this->render('_gerarPortaria', [
+                'model' => $model,
+            ]);
+        }
+    }
 
 
     public function actionAprovar($idDefesa, $aluno_id)

@@ -13,6 +13,7 @@ class Defesa extends \yii\db\ActiveRecord
     public $curso_aluno;
     public $membrosBancaInternos = [];
     public $membrosBancaExternos = [];
+    public $membrosBancaSuplentes = [];
     public $auxiliarTipoDefesa;
     public $presidente;
     public $membrosBancaExternosPassagem = [];
@@ -20,6 +21,9 @@ class Defesa extends \yii\db\ActiveRecord
     public $anoPesq;
     public $tipoRelat;
     public $idProfessor;
+    public $portariaID;
+    public $portariaAno;
+
     /**
      * @inheritdoc
      */
@@ -35,7 +39,9 @@ class Defesa extends \yii\db\ActiveRecord
     {
         return [
             [['resumo', 'banca_id', 'aluno_id', 'titulo', 'data', 'horario','resumo', 'local', 'previa'], 'required'],
-           [ ['membrosBancaInternos', 'membrosBancaExternos','presidente'] , 'required', 
+            [['portariaID', 'portariaAno'], 'required', 'on' => 'gerar_portaria'],
+           [['membrosBancaInternos', 'membrosBancaExternos', 'membrosBancaSuplentes', 'presidente'] , 'required',
+           
             
             'when' => function ($model) {
                      return $model->auxiliarTipoDefesa != 2;
@@ -55,10 +61,10 @@ class Defesa extends \yii\db\ActiveRecord
             }"],
 
 
-            [['membrosBancaExternos', 'membrosBancaInternos', 'examinador', 'emailExaminador', 'auxiliarTipoDefesa','presidente','idProfessor' ], 'safe'],
+            [['membrosBancaExternos', 'membrosBancaInternos', 'membrosBancaSuplentes', 'examinador', 'emailExaminador', 'auxiliarTipoDefesa','presidente','idProfessor' ], 'safe'],
             [['resumo', 'examinador', 'emailExaminador'], 'string'],
             [['emailExaminador'] , 'email'],
-            [['numDefesa', 'reservas_id', 'banca_id', 'aluno_id', 'status_banca'], 'integer'],
+            [['numDefesa', 'reservas_id', 'banca_id', 'aluno_id', 'status_banca', 'portariaID', 'portariaAno'], 'integer'],
             [['titulo'], 'string', 'max' => 180],
             [['tipoDefesa'], 'string', 'max' => 2],
             [['data', 'horario'], 'string', 'max' => 10],
@@ -93,6 +99,8 @@ class Defesa extends \yii\db\ActiveRecord
             'banca_id' => 'Banca ID',
             'aluno_id' => 'Aluno ID',
             'previa' => 'Previa',
+            'portariaID' => 'Nº da Portaria',
+            'portariaAno' => 'Ano da Portaria'
         ];
     }
 
@@ -166,6 +174,7 @@ class Defesa extends \yii\db\ActiveRecord
 
         $this->membrosBancaExternos = $this->membrosBancaExternos == "" ? array() : $this->membrosBancaExternos;
         $this->membrosBancaInternos = $this->membrosBancaInternos == "" ? array() : $this->membrosBancaInternos;
+        $this->membrosBancaSuplentes = $this->membrosBancaSuplentes == "" ? array() : $this->membrosBancaSuplentes;
 
         $sql = "INSERT INTO j17_banca_has_membrosbanca (banca_id, membrosbanca_id, funcao) VALUES ('$this->banca_id', '".$this->presidente."', 'P');";
         Yii::$app->db->createCommand($sql)->execute();
@@ -177,6 +186,11 @@ class Defesa extends \yii\db\ActiveRecord
 
         for ($i = 0; $i < count($this->membrosBancaInternos); $i++) {
             $sql = "INSERT INTO j17_banca_has_membrosbanca (banca_id, membrosbanca_id, funcao) VALUES ('$this->banca_id', '".$this->membrosBancaInternos[$i]."', 'I');";
+            Yii::$app->db->createCommand($sql)->execute();
+        }
+
+        for ($i = 0; $i < count($this->membrosBancaSuplentes); $i++) {
+            $sql = "INSERT INTO j17_banca_has_membrosbanca (banca_id, membrosbanca_id, funcao) VALUES ('$this->banca_id', '".$this->membrosBancaSuplentes[$i]."', 'S');";
             Yii::$app->db->createCommand($sql)->execute();
         }
 
