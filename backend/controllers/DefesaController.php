@@ -1377,7 +1377,7 @@ class DefesaController extends Controller
     			'orientation' => Pdf::ORIENT_PORTRAIT,
     			// stream to browser inline
     			'destination' => Pdf::DEST_BROWSER,
-    			'filename' => "relatorioBancas".( ($ano!=null)?$ano:"" ).explode(" ",$mMembro->nome)[1].explode(" ",$mMembro->nome)[count(explode(" ",$mMembro->nome))-1].".pdf",
+    			'filename' => "relatorioBancas".( ($ano!=null)?$ano:"" ).explode(" ",$mMembro->nome)[0].explode(" ",$mMembro->nome)[count(explode(" ",$mMembro->nome))-1].".pdf",
     			// your html content input
     			'content' => '
                             <p class="western" align="center">&nbsp;</p>

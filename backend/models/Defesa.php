@@ -98,7 +98,6 @@ class Defesa extends \yii\db\ActiveRecord
 
     public function uploadDocumento($previa)
     {
-
         if (isset($previa)) {
             $this->previa = "previa-".date('dmYHisu') . '.' . $previa->extension;
             $previa->saveAs('previa/' . $this->previa);
@@ -111,24 +110,30 @@ class Defesa extends \yii\db\ActiveRecord
     }
 
     public function getModelAluno(){
-
         return Aluno::find()->where("id =".$this->aluno_id)->one();
-
     }
 
     public function getNome(){
-
-        $aluno = $this->getModelAluno();
-
-        return $aluno->nome;
+        #$aluno = $this->getModelAluno();
+        $aluno= Aluno::find()->where("id =".$this->aluno_id)->all();
+        $nome= null;
+        foreach($aluno as $key => $a){
+            $nome= $a->nome;
+        }
+        #$aluno= Aluno::find()->one();
+        return $nome;
     }
 
 
     public function getCurso(){
-
-        $aluno = $this->getModelAluno();
-
-        return $aluno->curso == 1 ? "Mestrado" : "Doutorado" ;
+        #$aluno = $this->getModelAluno();
+        $aluno= Aluno::find()->where("id =".$this->aluno_id)->all();
+        $curso= null;
+        foreach($aluno as $key => $a){
+            $curso= $a->curso;
+        }
+        #$aluno= Aluno::find()->one();
+        return $curso == 1 ? "Mestrado" : "Doutorado" ;
     }
 
     public function getBanca(){

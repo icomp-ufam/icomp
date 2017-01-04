@@ -53,7 +53,7 @@ else if( Yii::$app->user->identity->checarAcesso('secretaria') == 1){
         <?php 
         $form = ActiveForm::begin();
 		$form->action=["defesa/gerarrelatoriobanca"];
-//        echo Html::a('<span class="glyphicon glyphicon-ok"></span> Gerar Relarório', ['gerarrelatoriobanca',], ['class' => 'btn btn-warning']);
+//        echo Html::a('<span class="glyphicon glyphicon-ok"></span> Gerar Relatório', ['gerarrelatoriobanca',], ['class' => 'btn btn-warning']);
         
         
         ?>
@@ -76,7 +76,7 @@ else if( Yii::$app->user->identity->checarAcesso('secretaria') == 1){
         </div>
         <?php echo Html::hiddenInput("idProfessor", $idProfessor)?>
         
-        <?php echo Html::submitButton('Gerar Relarório', ['class' => 'btn btn-warning']) ?>
+        <?php echo Html::submitButton('Gerar Relatório', ['class' => 'btn btn-warning']) ?>
         <?php ActiveForm::end();?>
         
     </p>
