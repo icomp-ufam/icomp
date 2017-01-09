@@ -34,7 +34,7 @@ class SiteController extends Controller
                 'only' => ['signup'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
+                        'actions' => ['signup', 'cadastroppgi'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -102,9 +102,9 @@ class SiteController extends Controller
             $model->status = 10;
 
             try{
+
                 if(!$model->save()){
                     $this->mensagens('warning', 'Candidato Já Inscrito', 'Candidato Informado Já se Encontra cadastrado para este edital, Efetue o seu Login.');
-
                     return $this->redirect(['site/login']);
                 }else{
                     //setando o id do candidato via sessão
@@ -119,6 +119,7 @@ class SiteController extends Controller
                 $this->mensagens('danger', 'Erro ao salvar candidato', 'Verifique os campos e tente novamente');
                 throw new \yii\web\HttpException(405, 'Erro com relação ao identificador do edital'); 
             }
+
         }
 
         $edital = new Edital();
@@ -128,6 +129,7 @@ class SiteController extends Controller
             'model' => $model,
             'edital' => $edital,
         ]);
+
     }
 
     public function actionLogin()

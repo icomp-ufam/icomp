@@ -118,9 +118,10 @@ if($model->instituicaoacademica3 == ""){
     <div style="clear: both;"><legend>Publicações</legend></div>
 
     <div class="row">
-        <?= $form->field($model, 'publicacoesFile', ['options' => ['class' => 'col-md-6']])->FileInput(['accept' => '.xml'])->label("<div><font color='#FF0000'>*</font> <b>Curriculum Vittae XML (no formato Lattes - http://lattes.cnpq.br):</b></div>") ?>
+        <?= $form->field($model, 'publicacoesFile', ['options' => ['class' => 'col-md-6']])->FileInput(['accept' => '.xml'])->label("<div><b>Curriculum Vittae XML no formato Lattes - http://lattes.cnpq.br</b> (Não incluir significa não ter publicações a serem contadas na seleção) :</div>") ?>
 
         <?= Html::submitButton('Enviar', ['onclick' =>  'tirarRequired()' , 'class' => 'btn btn-primary col-md-2', 'name' => 'enviar']) ?>
+
     </div>
 
     <div id="divPublicacoes" style="display: <?= $hidePublicacoes ?>;">

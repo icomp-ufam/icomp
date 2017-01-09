@@ -18,11 +18,6 @@ return [
 
 
     'modules' => [
-	'gii' => [
-            'class' => 'yii\gii\Module',
-            'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.101'],
-            //'password' => '123456'
-        ],
        'datecontrol' =>  [
           'class' => '\kartik\datecontrol\Module',
 
@@ -44,16 +39,9 @@ return [
 
 
     'components' => [
-        'session' => [
-            'name' => 'PHPBACKENDSESSID',
-            'savePath' => sys_get_temp_dir(),
-        ],
-		'user' => [
+        'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
-			'identityCookie' => [
-                'name' => '_backendUser', // unique for backend
-            ]
         ],
 
 

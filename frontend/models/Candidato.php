@@ -103,10 +103,10 @@ class Candidato extends \yii\db\ActiveRecord
                 'whenClient' => "function (attribute, value) {
                     return $('#form_hidden').val() == 'passo_form_2' && $('#ignorarRequired').val() == '0' && ($('#form_upload').val() == 0);
                 }"],
-            [['publicacoesFile'], 'required', 'when' => function($model){ return !isset($model->publicacoesFile) && $model->passoatual == 3;},
-            'whenClient' => "function (attribute, value) {
-                return $('#form_hidden').val() == 'passo_form_2' && ($('#form_uploadxml').val() == 0);
-            }"],
+         //   [['publicacoesFile'], 'required', 'when' => function($model){ return !isset($model->publicacoesFile) && $model->passoatual == 3;},
+           // 'whenClient' => "function (attribute, value) {
+             //   return $('#form_hidden').val() == 'passo_form_2' && ($('#form_uploadxml').val() == 0);
+            //}"],
 
 /*FIM Validações para passo 2*/
 /*Inicio Validações para passo 3*/
@@ -476,50 +476,55 @@ class Candidato extends \yii\db\ActiveRecord
 
                     CandidatoPublicacoes::deleteAll('idCandidato = \''.$this->id.'\' AND tipo = 1');
                     CandidatoPublicacoes::deleteAll('idCandidato = \''.$this->id.'\' AND tipo = 2');
+					
+					if($xml->{'PRODUCAO-BIBLIOGRAFICA'}->{'ARTIGOS-PUBLICADOS'}){
 
-                    foreach ($xml->{'PRODUCAO-BIBLIOGRAFICA'}->{'ARTIGOS-PUBLICADOS'} as $publicacao) {
-                        
-                        for ($i=0; $i < count($publicacao); $i++) {
-                            
-                            $candidatoPublicacoes = new CandidatoPublicacoes();
-                            $candidatoPublicacoes->idCandidato = $this->id;
-                            
-                            $candidatoPublicacoes->titulo = Html::encode($publicacao->{'ARTIGO-PUBLICADO'}[$i]->{'DADOS-BASICOS-DO-ARTIGO'}['TITULO-DO-ARTIGO']);
-                            $candidatoPublicacoes->local = Html::encode($publicacao->{'ARTIGO-PUBLICADO'}[$i]->{'DETALHAMENTO-DO-ARTIGO'}['TITULO-DO-PERIODICO-OU-REVISTA']);
-                            $candidatoPublicacoes->ano = Html::encode($publicacao->{'ARTIGO-PUBLICADO'}[$i]->{'DADOS-BASICOS-DO-ARTIGO'}['ANO-DO-ARTIGO']);
-                            $candidatoPublicacoes->natureza = ucwords(strtolower(Html::encode($publicacao->{'ARTIGO-PUBLICADO'}[$i]->{'DADOS-BASICOS-DO-ARTIGO'}['NATUREZA'])));
-                            $candidatoPublicacoes->tipo = 2;
-                            $candidatoPublicacoes->autores = "";
-                            foreach ($publicacao->{'ARTIGO-PUBLICADO'}[$i]->{'AUTORES'} as $autor) {
-                                $candidatoPublicacoes->autores .= ucwords(strtolower(Html::encode($autor['NOME-COMPLETO-DO-AUTOR'])))."; ";
-                            }
-                            
-                            if(!$candidatoPublicacoes->save())
-                                return false;
-                        }
-                    }
-                    
-                    foreach ($xml->{'PRODUCAO-BIBLIOGRAFICA'}->{'TRABALHOS-EM-EVENTOS'} as $publicacao) {
-                        
-                        for ($i=0; $i < count($publicacao); $i++) {
+						foreach ($xml->{'PRODUCAO-BIBLIOGRAFICA'}->{'ARTIGOS-PUBLICADOS'} as $publicacao) {
+							
+							for ($i=0; $i < count($publicacao); $i++) {
+								
+								$candidatoPublicacoes = new CandidatoPublicacoes();
+								$candidatoPublicacoes->idCandidato = $this->id;
+								
+								$candidatoPublicacoes->titulo = Html::encode($publicacao->{'ARTIGO-PUBLICADO'}[$i]->{'DADOS-BASICOS-DO-ARTIGO'}['TITULO-DO-ARTIGO']);
+								$candidatoPublicacoes->local = Html::encode($publicacao->{'ARTIGO-PUBLICADO'}[$i]->{'DETALHAMENTO-DO-ARTIGO'}['TITULO-DO-PERIODICO-OU-REVISTA']);
+								$candidatoPublicacoes->ano = Html::encode($publicacao->{'ARTIGO-PUBLICADO'}[$i]->{'DADOS-BASICOS-DO-ARTIGO'}['ANO-DO-ARTIGO']);
+								$candidatoPublicacoes->natureza = ucwords(strtolower(Html::encode($publicacao->{'ARTIGO-PUBLICADO'}[$i]->{'DADOS-BASICOS-DO-ARTIGO'}['NATUREZA'])));
+								$candidatoPublicacoes->tipo = 2;
+								$candidatoPublicacoes->autores = "";
+								foreach ($publicacao->{'ARTIGO-PUBLICADO'}[$i]->{'AUTORES'} as $autor) {
+									$candidatoPublicacoes->autores .= ucwords(strtolower(Html::encode($autor['NOME-COMPLETO-DO-AUTOR'])))."; ";
+								}
+								
+								if(!$candidatoPublicacoes->save())
+									return false;
+							}
+						}
+					}
+					if($xml->{'PRODUCAO-BIBLIOGRAFICA'}->{'TRABALHOS-EM-EVENTOS'}){
+						
+						foreach ($xml->{'PRODUCAO-BIBLIOGRAFICA'}->{'TRABALHOS-EM-EVENTOS'} as $publicacao) {
+							
+							for ($i=0; $i < count($publicacao); $i++) {
 
-                            $candidatoPublicacoes = new CandidatoPublicacoes();
-                            $candidatoPublicacoes->idCandidato = $this->id;
-                            
-                            $candidatoPublicacoes->titulo = Html::encode($publicacao->{'TRABALHO-EM-EVENTOS'}[$i]->{'DADOS-BASICOS-DO-TRABALHO'}['TITULO-DO-TRABALHO']);
-                            $candidatoPublicacoes->local = Html::encode($publicacao->{'TRABALHO-EM-EVENTOS'}[$i]->{'DETALHAMENTO-DO-TRABALHO'}['NOME-DO-EVENTO']);
-                            $candidatoPublicacoes->ano = Html::encode($publicacao->{'TRABALHO-EM-EVENTOS'}[$i]->{'DADOS-BASICOS-DO-TRABALHO'}['ANO-DO-TRABALHO']); 
-                            $candidatoPublicacoes->tipo = 1;
-                            $candidatoPublicacoes->natureza = ucwords(strtolower(Html::encode($publicacao->{'TRABALHO-EM-EVENTOS'}[$i]->{'DADOS-BASICOS-DO-TRABALHO'}['NATUREZA']))); 
-                            $candidatoPublicacoes->autores = "";
-                            foreach ($publicacao->{'TRABALHO-EM-EVENTOS'}[$i]->{'AUTORES'} as $autor) {
-                                $candidatoPublicacoes->autores .= ucwords(strtolower(Html::encode($autor['NOME-COMPLETO-DO-AUTOR'])))."; ";
-                            }
-                            
-                            if(!$candidatoPublicacoes->save())
-                                return false;
-                        }
-                    }
+								$candidatoPublicacoes = new CandidatoPublicacoes();
+								$candidatoPublicacoes->idCandidato = $this->id;
+								
+								$candidatoPublicacoes->titulo = Html::encode($publicacao->{'TRABALHO-EM-EVENTOS'}[$i]->{'DADOS-BASICOS-DO-TRABALHO'}['TITULO-DO-TRABALHO']);
+								$candidatoPublicacoes->local = Html::encode($publicacao->{'TRABALHO-EM-EVENTOS'}[$i]->{'DETALHAMENTO-DO-TRABALHO'}['NOME-DO-EVENTO']);
+								$candidatoPublicacoes->ano = Html::encode($publicacao->{'TRABALHO-EM-EVENTOS'}[$i]->{'DADOS-BASICOS-DO-TRABALHO'}['ANO-DO-TRABALHO']); 
+								$candidatoPublicacoes->tipo = 1;
+								$candidatoPublicacoes->natureza = ucwords(strtolower(Html::encode($publicacao->{'TRABALHO-EM-EVENTOS'}[$i]->{'DADOS-BASICOS-DO-TRABALHO'}['NATUREZA']))); 
+								$candidatoPublicacoes->autores = "";
+								foreach ($publicacao->{'TRABALHO-EM-EVENTOS'}[$i]->{'AUTORES'} as $autor) {
+									$candidatoPublicacoes->autores .= ucwords(strtolower(Html::encode($autor['NOME-COMPLETO-DO-AUTOR'])))."; ";
+								}
+								
+								if(!$candidatoPublicacoes->save())
+									return false;
+							}
+						}
+					}
                     return true;
                 }
             }
