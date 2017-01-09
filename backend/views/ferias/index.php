@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar  ', ['site/index'], ['class' => 'btn btn-warning']) ?>   
-        <?= Html::a('Registrar Novas Férias', ['create', "ano" => $_GET["ano"]], ['class' => 'btn btn-success']) ?>
+        <?php //Html::a('Registrar Novas Férias', ['create', "ano" => $_GET["ano"]], ['class' => 'btn btn-success']) ?>
     </p>
 
 

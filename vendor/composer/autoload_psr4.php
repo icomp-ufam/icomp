@@ -20,7 +20,6 @@ return array(
     'xj\\bootbox\\' => array($vendorDir . '/xj/yii2-bootbox-widget'),
     'rmrevin\\yii\\fontawesome\\' => array($vendorDir . '/rmrevin/yii2-fontawesome'),
     'moonland\\phpexcel\\' => array($vendorDir . '/moonlandsoft/yii2-phpexcel'),
-    'marqu3s\\behaviors\\' => array($vendorDir . '/marqu3s/yii2-behaviors'),
     'kartik\\widgets\\' => array($vendorDir . '/kartik-v/yii2-widgets'),
     'kartik\\typeahead\\' => array($vendorDir . '/kartik-v/yii2-widget-typeahead'),
     'kartik\\touchspin\\' => array($vendorDir . '/kartik-v/yii2-widget-touchspin'),
