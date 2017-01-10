@@ -120,7 +120,7 @@ $this->params['breadcrumbs'][] = $this->title;
             },
 
             ],
-            ['class' => 'yii\grid\ActionColumn',
+            /*['class' => 'yii\grid\ActionColumn',
               'template'=>'{update} {delete}',
                 'buttons'=>[
                   'update' => function ($url, $model) {
@@ -140,7 +140,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]);   
                   }
               ]                            
-                ],
+                ],*/
         ],
     ]); ?>
 </div>
