@@ -126,7 +126,7 @@ class ProrrogacaoController extends Controller
             }
             else $model->dataInicio = '';
 
-            $pre_path = 'generated/prorrogacao/';
+            $pre_path = 'uploads/prorrogacao/';
             $filename = 'prorrogacao-'.Yii::$app->security->generateRandomString().'.pdf';
 
             $path = $pre_path.$filename;
