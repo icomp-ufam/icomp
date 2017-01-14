@@ -37,7 +37,6 @@ class ComposerStaticInit461fc12a24fabae1aa50301d1b4ff503
         'm' => 
         array (
             'moonland\\phpexcel\\' => 18,
-            'marqu3s\\behaviors\\' => 18,
         ),
         'k' => 
         array (
@@ -149,10 +148,6 @@ class ComposerStaticInit461fc12a24fabae1aa50301d1b4ff503
         'moonland\\phpexcel\\' => 
         array (
             0 => __DIR__ . '/..' . '/moonlandsoft/yii2-phpexcel',
-        ),
-        'marqu3s\\behaviors\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/marqu3s/yii2-behaviors',
         ),
         'kartik\\widgets\\' => 
         array (

@@ -30,7 +30,7 @@ return [
             'displaySettings' => [
                 \kartik\datecontrol\Module::FORMAT_DATE => 'dd-MM-yyyy',
                 \kartik\datecontrol\Module::FORMAT_TIME => 'HH:mm a',
-                \kartik\datecontrol\Module::FORMAT_DATETIME => 'dd-MM-yyyy HH:mm a', 
+                \kartik\datecontrol\Module::FORMAT_DATETIME => 'dd-MM-yyyy HH:mm a',
             ],
 
             // format settings for saving each date attribute (PHP format example)
@@ -48,10 +48,10 @@ return [
             'name' => 'PHPBACKENDSESSID',
             'savePath' => sys_get_temp_dir(),
         ],
-		'user' => [
+		    'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
-			'identityCookie' => [
+			      'identityCookie' => [
                 'name' => '_backendUser', // unique for backend
             ]
         ],
@@ -65,7 +65,7 @@ return [
                  ],
              ],
         ],
-        
+
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -77,6 +77,9 @@ return [
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
+        ],
+        'request' => [
+            'enableCsrfValidation' => false
         ],
     ],
     'params' => $params,

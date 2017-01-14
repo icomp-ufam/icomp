@@ -126,7 +126,7 @@ if(!isset($model->cartaNome[2]) || $model->cartaNome[2] == ""){
             else{
 
                 echo $form->field($model, 'cartaOrientadorFile')->FileInput(['accept' => '.pdf'])->label("<font color='#FF0000'>*</font> <b>Carta de Aceite do Orientador:</b>");
-				echo "Download do modelo de carta de orientador: <a target='_blank' href='documentos/carta_aceite_orientador.docx'><img src='img/doc-icon.gif' border='0' height='16' width='16'></a>";
+		echo "Download do modelo de carta de orientador: <a target='_blank' href='documentos/carta_aceite_orientador.docx'><img src='img/doc-icon.gif' border='0' height='16' width='16'></a>";
             }
         }
         else{
@@ -157,8 +157,7 @@ if(!isset($model->cartaNome[2]) || $model->cartaNome[2] == ""){
                     ]])->label("<font color='#FF0000'>*</font> Deseja mudar o arquivo?");
             }else{
                 echo $form->field($model, 'propostaFile')->FileInput(['accept' => '.pdf'])->label("<font color='#FF0000'>*</font> Proposta de Trabalho:");
-				echo "Download do modelo de proposta de projeto: <a target='_blank' href='documentos/ppgi_form_proposta.docx'><img src='img/doc-icon.gif' border='0' height='16' width='16'></a>";
-
+		echo "Download do modelo de proposta de projeto: <a target='_blank' href='documentos/ppgi_form_proposta.docx'><img src='img/doc-icon.gif' border='0' height='16' width='16'></a>";
             }
         ?>
     </div>

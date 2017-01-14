@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar  ', ['site/index'], ['class' => 'btn btn-warning']) ?>   
-        <?= Html::a('Registrar Novas Férias', ['create', "ano" => $_GET["ano"]], ['class' => 'btn btn-success']) ?>
+        <?php //Html::a('Registrar Novas Férias', ['create', "ano" => $_GET["ano"]], ['class' => 'btn btn-success']) ?>
     </p>
 
 
@@ -120,7 +120,7 @@ $this->params['breadcrumbs'][] = $this->title;
             },
 
             ],
-            ['class' => 'yii\grid\ActionColumn',
+            /*['class' => 'yii\grid\ActionColumn',
               'template'=>'{update} {delete}',
                 'buttons'=>[
                   'update' => function ($url, $model) {
@@ -140,7 +140,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]);   
                   }
               ]                            
-                ],
+                ],*/
         ],
     ]); ?>
 </div>

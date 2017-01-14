@@ -4,7 +4,6 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
-use yii\widgets\MaskedInput;
 use yii\data\ActiveDataProvider;
 use app\models\Candidato;
 

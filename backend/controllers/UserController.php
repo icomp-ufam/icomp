@@ -203,6 +203,34 @@ class UserController extends Controller
 
 		return $this->render('cvsalunos', ['model' => $model]);
     }
+	
+	
+	// Método que atualiza o banco com os formandos do período
+    public function actionPit()
+    {
+
+		$token = "108FEF2DC23A626489596417D31C7729-".date("Y-m-d");
+		$tokenMD5 = MD5($token);
+		$link = 'http://200.129.163.42:8080/viper/listaFormados?cod_curso=IE08&ano_evasao=2016&periodo_evasao=1&sistema=PPGI&tkn='.$tokenMD5;
+		var_dump($link);
+
+        $webservice = @file_get_contents($link);
+
+        // Verifica se o WS está disponivel
+        //Caso negativo ele exibe o formulario em branco
+        if($webservice == null)
+        {
+            echo "ERRO NO WEBSERVICE";
+
+        }
+            
+        $dados = json_decode($webservice, true);
+		
+		var_dump($dados);
+
+    }	
+	
+
 
     /**
      * Finds the User model based on its primary key value.
