@@ -72,7 +72,12 @@ class Disciplina extends \yii\db\ActiveRecord
         return $this->hasMany(Aproveitamento::className(), ['codDisciplinaOrigemFK' => 'codDisciplina']);
     }
     
-    public function beforeSave()
+    public function getObrigatoriaLabel()
+    {
+    	return ($this->obrigatoria === 1)?"SIM":"NÃO";
+    }
+    
+    public function beforeSave($insert)
     {	
     	$this->nome = strtolower($this->nome);
     	$this->codDisciplina = strtolower($this->codDisciplina);
