@@ -29,10 +29,10 @@ use yii\widgets\MaskedInput;
     <?= $form->field($model, 'creditos',['options'=>['class'=>'col-md-2']])->textInput()->widget(MaskedInput::className(), [
                     'mask' => '99', 'clientOptions'=>['alias'=>'numeric']]) ?>
 
-    <?= $form->field($model, 'nomeCurso', ['options'=>['class'=>'col-md-5']])->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'cargaHoraria',['options'=>['class'=>'col-md-3']])->textInput()->widget(MaskedInput::className(), [
                     'mask' => '999', 'clientOptions'=>['alias'=>'numeric']]) ?>
+                    
+	<?= $form->field($model, 'nomeCurso', ['options'=>['class'=>'col-md-5']])->textInput(['maxlength' => true]) ?>
         </div>
 
     <div class="row">
