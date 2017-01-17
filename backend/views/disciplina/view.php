@@ -36,7 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'cargaHoraria',
             'instituicao',
             'preRequisito',
-            'obrigatoria',
+            [
+            	'attribute'=>'obrigatoria',
+            	'value'=>"$model->obrigatoriaLabel"
+    		]
         ],
     ]) ?>
 

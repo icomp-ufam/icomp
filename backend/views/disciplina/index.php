@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\bootstrap\ButtonDropdown;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\DisciplinaSearch */
@@ -29,7 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'nome',
             'creditos',
             'cargaHoraria',
-
+        	'nomeCurso',
+        	'instituicao',
+        	[
+        		'attribute'=>'obrigatoria',
+        		'value'=>'obrigatoriaLabel',
+        		'filter'=> Html::dropDownList('DisciplinaSearch[obrigatoria]', $searchModel->obrigatoria, [''=>'',1=>'SIM', 0=>'NAO'],
+        				['class'=>"form-control", 'options'=>['width'=>'50%']]),
+    		],
+			'preRequisito',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

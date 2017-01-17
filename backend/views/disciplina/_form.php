@@ -31,18 +31,20 @@ use yii\widgets\MaskedInput;
 
     <?= $form->field($model, 'cargaHoraria',['options'=>['class'=>'col-md-3']])->textInput()->widget(MaskedInput::className(), [
                     'mask' => '999', 'clientOptions'=>['alias'=>'numeric']]) ?>
-                    
-	<?= $form->field($model, 'nomeCurso', ['options'=>['class'=>'col-md-5']])->textInput(['maxlength' => true]) ?>
         </div>
 
     <div class="row">
     <?= $form->field($model, 'instituicao', ['options'=>['class'=>'col-md-5']])->textInput(['maxlength' => true]) ?>
     </div>
+    
+    <div class="row">
+    <?= $form->field($model, 'nomeCurso', ['options'=>['class'=>'col-md-5']])->textInput(['maxlength' => true]) ?>
+    </div>
 
     <div class="row">
-    <?= $form->field($model, 'preRequisito', ['options'=>['class'=>'col-md-5']])->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'obrigatoria', ['options'=>['class'=>'col-md-5']])->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'obrigatoria', ['options'=>['class'=>'col-md-2']])->dropDownList( [1=>"SIM", 0=>"NÃO"]) ?>
+    
+    <?= $form->field($model, 'preRequisito', ['options'=>['class'=>'col-md-3']])->textInput(['maxlength' => true]) ?>
     </div>
 
 
