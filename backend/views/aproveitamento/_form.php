@@ -48,6 +48,10 @@ use yii\widgets\MaskedInput;
 								        $('#disciplina-1-nome').val(ui.item.nome);
 								        $('#disciplina-1-creditos').val(ui.item.creditos);
 		    							$('#disciplina-1-cargahoraria').val(ui.item.cargaHoraria);
+		    							$('#disciplina-1-instituicao').val(ui.item.instituicao);
+		    							$('#disciplina-1-nomecurso').val(ui.item.nomeCurso);
+		    							$('#disciplina-1-prerequisito').val(ui.item.preRequisito);
+		    							$('#disciplina-1-obrigatoria').val(ui.item.obrigatoria);
 								      }")
 		    				],
 		    				'options'=>[
@@ -68,6 +72,20 @@ use yii\widgets\MaskedInput;
 	<?=	$form->field($discOrigem, '[1]cargaHoraria',['options'=>['class'=>'col-md-3']])->widget(MaskedInput::className(), [
                     'mask' => '999', 'clientOptions'=>['alias'=>'numeric']])->textInput(['maxlength'=>true])->label("<font color='#FF0000'>*</font> <b>Carga Horária (H):</b>"); ?>
 	</div>
+	<div class="row">
+	 <?= $form->field($discOrigem, '[1]instituicao', ['options'=>['class'=>'col-md-5']])->textInput(['maxlength' => true])->label("<font color='#FF0000'>*</font> <b>Instituição:</b>"); ?>
+	</div>
+	
+	<div class="row">
+	 <?= $form->field($discOrigem, '[1]nomeCurso', ['options'=>['class'=>'col-md-5']])->textInput(['maxlength' => true])->label("<font color='#FF0000'>*</font> <b>Nome Curso:</b>"); ?>
+	</div>
+
+    <div class="row">
+    <?= $form->field($discOrigem, '[1]obrigatoria', ['options'=>['class'=>'col-md-2']])->dropDownList( [1=>"SIM", 0=>"NÃO"])->label("<font color='#FF0000'>*</font> <b>Obrigatória:</b>"); ?>
+    
+    <?= $form->field($discOrigem, '[1]preRequisito', ['options'=>['class'=>'col-md-3']])->textInput(['maxlength' => true])->label("<font color='#FF0000'>*</font> <b>Pre-Requisito:</b>"); ?>
+    </div>
+	
    </div>
   </div>
   <div class="panel panel-default" style="width:80%">
@@ -86,6 +104,10 @@ use yii\widgets\MaskedInput;
 								        $('#disciplina-2-nome').val(ui.item.nome);
 								        $('#disciplina-2-creditos').val(ui.item.creditos);
 		    							$('#disciplina-2-cargahoraria').val(ui.item.cargaHoraria);
+    									$('#disciplina-2-instituicao').val(ui.item.instituicao);
+		    							$('#disciplina-2-nomecurso').val(ui.item.nomeCurso);
+		    							$('#disciplina-2-prerequisito').val(ui.item.preRequisito);
+		    							$('#disciplina-2-obrigatoria').val(ui.item.obrigatoria);
 								      }")
     				],
     				'options'=>[
@@ -105,6 +127,21 @@ use yii\widgets\MaskedInput;
 	<?= $form->field($discDestino, '[2]cargaHoraria', ['options'=>['class'=>'col-md-3']])->textInput()->widget(MaskedInput::className(), [
                     'mask' => '999', 'clientOptions'=>['alias'=>'numeric']])->label("<font color='#FF0000'>*</font> <b>Carga Horária (H):</b>") ?>
 	</div>
+	
+	<div class="row">
+	 <?= $form->field($discOrigem, '[2]instituicao', ['options'=>['class'=>'col-md-5']])->textInput(['maxlength' => true])->label("<font color='#FF0000'>*</font> <b>Instituição:</b>"); ?>
+	</div>
+	
+	<div class="row">
+	 <?= $form->field($discOrigem, '[2]nomeCurso', ['options'=>['class'=>'col-md-5']])->textInput(['maxlength' => true])->label("<font color='#FF0000'>*</font> <b>Nome Curso:</b>"); ?>
+	</div>	
+	
+	<div class="row">
+    <?= $form->field($discOrigem, '[2]obrigatoria', ['options'=>['class'=>'col-md-2']])->dropDownList( [1=>"SIM", 0=>"NÃO"])->label("<font color='#FF0000'>*</font> <b>Obrigatória:</b>"); ?>
+    
+    <?= $form->field($discOrigem, '[2]preRequisito', ['options'=>['class'=>'col-md-3']])->textInput(['maxlength' => true])->label("<font color='#FF0000'>*</font> <b>Pre-Requisito:</b>"); ?>
+    </div>
+	
 	</div>
 	</div>
 	<div class="panel panel-default" style="width:80%">

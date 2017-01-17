@@ -168,6 +168,10 @@ class AproveitamentoController extends Controller
     			$mDisciplina->cargaHoraria = $discOrigem->cargaHoraria;//$dados["disciplinaOrigemCargaHoraria"];
     			$mDisciplina->creditos = $discOrigem->creditos;//$dados["disciplinaOrigemCreditos"];
     			$mDisciplina->nome = $discOrigem->nome;//$dados["disciplinaOrigemNome"];
+    			$mDisciplina->nomeCurso = $discOrigem->nomeCurso;
+    			$mDisciplina->instituicao = $discOrigem->instituicao;
+    			$mDisciplina->preRequisito = $discOrigem->preRequisito;
+    			$mDisciplina->obrigatoria = $discOrigem->obrigatoria;
     			
     			if(!$mDisciplina->save()){
     				throw new NotFoundHttpException("Erro ao cadastrar disciplina $mDisciplina->codDisciplina : $mDisciplina->nome.");
@@ -181,6 +185,10 @@ class AproveitamentoController extends Controller
     			$mDisciplina->cargaHoraria = $discDestino->cargaHoraria;//$dados["disciplinaDestinoCargaHoraria"];
     			$mDisciplina->creditos = $discDestino->creditos;//$dados["disciplinaDestinoCreditos"];
     			$mDisciplina->nome = $discDestino->nome;//$dados["disciplinaDestinoNome"];
+    			$mDisciplina->nomeCurso = $discDestino->nomeCurso;
+    			$mDisciplina->instituicao = $discDestino->instituicao;
+    			$mDisciplina->preRequisito = $discDestino->preRequisito;
+    			$mDisciplina->obrigatoria = $discDestino->obrigatoria;
     			 
     			if(!$mDisciplina->save()){
     				throw new NotFoundHttpException("Erro ao cadastrar disciplina $mDisciplina->codDisciplina : $mDisciplina->nome.");

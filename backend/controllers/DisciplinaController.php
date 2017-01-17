@@ -142,7 +142,7 @@ class DisciplinaController extends Controller
     	foreach ($listaDisc as $disc)
     	{	
     		$codigos[] = ['label'=>$disc['codDisciplina'],'value'=>$disc['codDisciplina'],'nome'=>$disc['nome'],
-    					  'creditos'=>$disc['creditos'], 'cargaHoraria'=>$disc['cargaHoraria']
+    					  'creditos'=>$disc['creditos'], 'cargaHoraria'=>$disc['cargaHoraria'], 'nomeCurso'=>$disc['nomeCurso'], 'instituicao'=>$disc['instituicao'], 'preRequisito'=>$disc['preRequisito'],'obrigatoria'=>$disc['obrigatoria'] 
     		]; //build an array
     	}
     	

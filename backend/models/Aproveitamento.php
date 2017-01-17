@@ -93,7 +93,7 @@ class Aproveitamento extends \yii\db\ActiveRecord
      *
      * @return Null or Integer: models\Aproveitamento->codAproveitamento
      */
-    public function getAproveitamentoOrigemDestinoExiste($codOrigem, $codDestino, $idAluno)
+    public static function getAproveitamentoOrigemDestinoExiste($codOrigem, $codDestino, $idAluno)
     {	
     	$idAproveitamento = Aproveitamento::findOne(['codDisciplinaOrigemFK'=>strtolower($codOrigem),
     			'codDisciplinaDestinoFK'=>strtolower($codDestino),
@@ -111,7 +111,7 @@ class Aproveitamento extends \yii\db\ActiveRecord
      *
      * @return Null or Integer: models\Aproveitamento->codAproveitamento
      */
-    public function getAproveitamentoDisciplinaUsada($codDisciplina, $idAluno)
+    public static function getAproveitamentoDisciplinaUsada($codDisciplina, $idAluno)
     {
     	$idAproveitamento = Aproveitamento::findOne(['codDisciplinaOrigemFK'=>strtolower($codDisciplina),
     			'idAluno'=>$idAluno]);

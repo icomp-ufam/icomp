@@ -53,6 +53,13 @@ $this->params['breadcrumbs'][] = strtoupper($model->codDisciplinaOrigemFK)." com
         	'nome',
         	'creditos',
         	'cargaHoraria',
+        	'instituicao',
+        	'nomeCurso',
+        	'preRequisito',
+        	[
+            	'attribute'=>'obrigatoria',
+            	'value'=>$model->codDisciplinaOrigemFK0->obrigatoriaLabel
+    		]
         ],
     ]) ?>
         </div>
@@ -70,6 +77,13 @@ $this->params['breadcrumbs'][] = strtoupper($model->codDisciplinaOrigemFK)." com
         	'nome',
         	'creditos',
         	'cargaHoraria',
+        	'instituicao',
+        	'nomeCurso',
+        	'preRequisito',
+        	[
+        		'attribute'=>'obrigatoria',
+        		'value'=>$model->codDisciplinaDestinoFK0->obrigatoriaLabel
+        	]
         ],
     ]) ?>
         </div>
