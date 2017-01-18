@@ -22,6 +22,7 @@ use Yii;
 class Aproveitamento extends \yii\db\ActiveRecord
 {
 	public $nomeAluno;
+	public $flagFromAluno;
 	
     /**
      * @inheritdoc

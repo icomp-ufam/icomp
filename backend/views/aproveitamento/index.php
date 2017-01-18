@@ -22,14 +22,16 @@ $this->params['breadcrumbs'][] = 'Aproveitamentos';
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-    	<?php 
+    	<?php
     	if(isset($idAluno)){
+    		$searchModel->flagFromAluno = true;
     		echo Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['aluno/view','id'=>$idAluno], ['class' => 'btn btn-warning']);
     		echo '&nbsp';
         	echo Html::a('Novo Aproveitamento', ['createbyaluno','idAluno'=>$idAluno], ['class' => 'btn btn-success']);
         	
         	
     	}else{
+    		$searchModel->flagFromAluno = false;
     		//Escolha de projeto, não criar aproveitamento a partir do grid gera. Pode vir a ser alterado.
         	//echo Html::a('Novo Aproveitamento', ['create'], ['class' => 'btn btn-success']);
     		echo Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['site/index'], ['class' => 'btn btn-warning']);
@@ -67,7 +69,7 @@ $this->params['breadcrumbs'][] = 'Aproveitamentos';
             'template'=>'{view} {delete} {update}',
             	'buttons'=>[
             			'delete' => function ($url, $model) {
-            			return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['deletebyaluno', 'id' => $model->id, 'idAluno' => $model->idAluno], [
+            			return Html::a('<span class="glyphicon glyphicon-trash"></span>', [(($model->flagFromAluno)?'deletebyaluno':'deletebyalunov2'), 'id' => $model->id, 'idAluno' => $model->idAluno], [
             					'data' => [
             							'confirm' => 'Remover o aproveitamento \''.$model->id.'\'?',
             							'method' => 'post',
@@ -76,12 +78,12 @@ $this->params['breadcrumbs'][] = 'Aproveitamentos';
             			]);
             			},
             			'view' => function ($url, $model){
-            			return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['view', 'id' => $model->id, 'idAluno' => $model->idAluno], [
+            			return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['view', 'id' => $model->id, ((isset($idAluno))?'idAluno':'numb') => $model->idAluno], [
             					'title' => Yii::t('yii', 'Visualizar Aproveitamento'),
             			]);
             			},
             			'update' => function ($url, $model){
-            			return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['updatebyaluno', 'id' => $model->id, 'idAluno' => $model->idAluno], [
+            			return Html::a('<span class="glyphicon glyphicon-pencil"></span>', [((isset($idAluno))?'updatebyaluno':'updatebyalunov2'), 'id' => $model->id, 'idAluno' => $model->idAluno], [
             					'title' => Yii::t('yii', 'Editar Aproveitamento'),
             			]);
             			},

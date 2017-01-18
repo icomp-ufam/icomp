@@ -341,6 +341,113 @@ if ($aproveitamento->load(Yii::$app->request->post()) &&
     	}
     }
 
+    
+    public function actionUpdatebyalunov2($id)
+    {
+    
+    	//$model = new Aproveitamento();
+    
+    	$aproveitamento = new Aproveitamento();
+    	$discOrigem = new Disciplina();
+    	$discDestino = new Disciplina();
+    
+    	$idAluno;
+    	$aproveitamento = Aproveitamento::findOne($id);
+    	if($aproveitamento !== Null){
+    		$idAluno = Aproveitamento::findOne($id)->idAluno;
+    	}else{
+    		throw new NotFoundHttpException('Aluno não existente.');
+    	}
+    	 
+    	if ($aproveitamento->load(Yii::$app->request->post()) &&
+    			$discOrigem->load(['Disciplina'=>Yii::$app->request->post()['Disciplina'][1]]) &&
+    			$discDestino->load(['Disciplina'=>Yii::$app->request->post()['Disciplina'][2]])) {
+    				 
+    				$dados = Yii::$app->request->post();
+    				$idAluno = $dados['Aproveitamento']['idAluno'];
+    				//$aproveitamento->id = $dados['Aproveitamento']['id'];
+    				//Verifica se Aproveitamento(Origem, Destino) é válido.
+    				//Caso contrário, direciona para a actionView e apresenta o Aproveitamento existente.
+    				$codAproveitamentoExistente = Null;
+    				$codAprov = Aproveitamento::getAproveitamentoOrigemDestinoExiste($aproveitamento->codDisciplinaOrigemFK, $aproveitamento->codDisciplinaDestinoFK, $idAluno);
+    				if($codAprov !== Null && $codAprov != $id){
+    					$this->mensagens('warning', 'Aproveitamento Já Existente.', 'Este aluno já possui este aproveitamento.'.$codAprov."---".$id);
+    					$codAproveitamentoExistente[] = Aproveitamento::getAproveitamentoOrigemDestinoExiste($aproveitamento->codDisciplinaOrigemFK, $aproveitamento->codDisciplinaDestinoFK, $idAluno);
+    				}else{
+    					$headMsg; $bodyMsg;
+    					$codAprov = Aproveitamento::getAproveitamentoDisciplinaUsada($aproveitamento->codDisciplinaOrigemFK, $idAluno);
+    					if($codAprov !== Null && $codAprov != $id){
+    						$headMsg[] = 'Disciplina Origem';
+    						$bodyMsgX[] = 'um aproveitamento com a disciplina origem';
+    						$codAproveitamentoExistente[] = $codAprov;
+    					}
+    					$codAprov = Aproveitamento::getAproveitamentoDisciplinaUsada($aproveitamento->codDisciplinaDestinoFK, $idAluno);
+    					if($codAprov !== Null && $codAprov != $id){
+    						$headMsg[] = 'Disciplina Destino';
+    						$bodyMsgX[] = 'um aproveitamento com a disciplina destino.';
+    						$codAproveitamentoExistente[] = $codAprov;
+    					}
+    					if($codAproveitamentoExistente !== Null){
+    						$head = implode(' & ',$headMsg);
+    						$msgX = 'Este Aluno já possui '.implode(' & ', $bodyMsgX).'.';
+    							
+    						 
+    						$this->mensagens('warning', $head, $msgX);
+    					}
+    
+    				}
+    				if($codAproveitamentoExistente !== Null)
+    				{
+    					$queryParams=['AproveitamentoSearch'=>['idAluno'=>$idAluno]];
+    					//Redireciona para o GridView listando os Aproveitamentos em que as Disciplinas Impedidas Aparecem.
+    					return $this->goToIndexAndSearchV2($idAluno, $codAproveitamentoExistente);
+    				}
+    				 
+    				//Verifica Existencia da Disciplina Origem
+    				if(Disciplina::findOne($aproveitamento->codDisciplinaOrigemFK)===Null){
+    					$mDisciplina = new Disciplina();
+    					$mDisciplina->codDisciplina = strtolower($aproveitamento->codDisciplinaOrigemFK);
+    					$mDisciplina->cargaHoraria = $discOrigem->cargaHoraria;//$dados["disciplinaOrigemCargaHoraria"];
+    					$mDisciplina->creditos = $discOrigem->creditos;//$dados["disciplinaOrigemCreditos"];
+    					$mDisciplina->nome = $discOrigem->nome;//$dados["disciplinaOrigemNome"];
+    
+    					if(!$mDisciplina->save()){
+    						throw new NotFoundHttpException("Erro ao cadastrar disciplina $mDisciplina->codDisciplina : $mDisciplina->nome.");
+    					}
+    				}
+    				 
+    				//Verifica Existencia da Disciplina Destino
+    				if(Disciplina::findOne($aproveitamento->codDisciplinaDestinoFK)===Null){
+    					$mDisciplina = new Disciplina();
+    					$mDisciplina->codDisciplina = strtolower($aproveitamento->codDisciplinaDestinoFK);
+    					$mDisciplina->cargaHoraria = $discDestino->cargaHoraria;//$dados["disciplinaDestinoCargaHoraria"];
+    					$mDisciplina->creditos = $discDestino->creditos;//$dados["disciplinaDestinoCreditos"];
+    					$mDisciplina->nome = $discDestino->nome;//$dados["disciplinaDestinoNome"];
+    					 
+    					if(!$mDisciplina->save()){
+    						throw new NotFoundHttpException("Erro ao cadastrar disciplina $mDisciplina->codDisciplina : $mDisciplina->nome.");
+    					}
+    				}
+    				//$aproveitamento->isNewRecord = false;
+    				if($aproveitamento->save()!==false){
+    					return $this->redirect(['view', 'id' => $id]);
+    				} else {
+    					/*return $this->render('create', [
+    					 'model' => $model,
+    					 ]);*/
+    					throw new NotFoundHttpException('Erro ao atualizar Aproveitamento. Contate o administrador do sistema.');
+    				}
+    				 
+    			}else{
+    				$aproveitamento = Aproveitamento::findOne($id);
+    				//$model->idAluno = $apro;
+    				return $this->render('update', [
+    						'model' => $aproveitamento,
+    						'fromAluno'=>false,
+    				]);
+    			}
+    }    
+    
     /**
      * Deletes an existing Aproveitamento model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -358,6 +465,12 @@ if ($aproveitamento->load(Yii::$app->request->post()) &&
     	$this->findModel($id)->delete();
     	
     	return $this->redirect(['indexbyaluno','idAluno'=>$idAluno]);
+    }
+    
+    public function actionDeletebyalunov2($id, $idAluno){
+    	$this->findModel($id)->delete();
+    	 
+    	return $this->redirect(['indexbyaluno']);
     }
 
     /**
@@ -403,5 +516,18 @@ if ($aproveitamento->load(Yii::$app->request->post()) &&
     			'idAluno'=>$idAluno,
     	]);
     	
-    } 
+    }
+    
+    public function goToIndexAndSearchV2($idAluno, $ids){
+    	$searchModel = new AproveitamentoSearch();
+    	$searchModel->idAluno = $idAluno;
+    	 
+    	$dataProvider = $searchModel->searchIds($ids);
+    
+    	return $this->render('index', [
+    			'searchModel' => $searchModel,
+    			'dataProvider' => $dataProvider,
+    	]);
+    	 
+    }
 }
