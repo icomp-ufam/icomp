@@ -134,7 +134,7 @@ class CautelaController extends Controller
 
                 <table width="100%" style="vertical-align: bottom; font-family: serif; font-size: 8pt; color: #000000; font-weight: bold; font-style: italic;">
                     <tr>
-                        <td  colspan = "3" align="center" ><span style="font-weight: bold"> Av. Rodrigo OtÃ¡vio, 6.200 - Campus UniversitÃ¡rio Senador Arthur VirgÃ­lio Filho - CEP 69077-000 - Manaus, AM, Brasil </span></td>
+                        <td  colspan = "3" align="center" ><span style="font-weight: bold"> Av. Rodrigo Otávio, 6.200 - Campus Universitário Senador Arthur VirgÃ­lio Filho - CEP 69077-000 - Manaus, AM, Brasil </span></td>
                     </tr>
                     <tr>
                         <td width="33%" align="center" style="font-weight: bold; font-style: italic;">  Tel. (092) 3305-1193/2808/2809</td>
@@ -144,7 +144,7 @@ class CautelaController extends Controller
                 </table>
         ');
 
-    $pdf->WriteHTML (' <br>
+        $pdf->WriteHTML (' <br>
                     <table style= "margin-top:0px;" width="100%;">
                     <tr>
                         <td style="text-align:center;">
@@ -198,64 +198,67 @@ class CautelaController extends Controller
                     <p>&nbsp;</p>
 
                     <table style="margin-left: auto; margin-right: auto; width: 600px;" border="2">
-                    <tbody>
-                    <tr>
-                    <td style="width: 147.5px;">
-                    <p>Origem:</p>
-                    </td>
-                    <td style="width: 179.5px;">
-                    <p>Nota Fiscal:</p>
-                    </td>
-                    <td style="width: 225px;">
-                    <p>Equipamento:</p>
-                    </td>
-                    <td style="width: 152px;">
-                    <p>N&ordm;. de S&eacute;rie:</p>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td style="width: 147.5px;">
-                    <p>'.$model->OrigemCautela.'</p>
-                    </td>
-                    <td style="width: 179.5px;">
-                    <p>'.$j17_equipamento['NotaFiscal'].'</p>
-                    </td>
-                    <td style="width: 225px;">
-                    <p>&nbsp;</p>
-                    </td>
-                    <td style="width: 152px;">
-                    <p>&nbsp;</p>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td style="width: 147.5px;">
-                    <p>Origem:</p>
-                    </td>
-                    <td style="width: 179.5px;">
-                    <p>Nota Fiscal:</p>
-                    </td>
-                    <td style="width: 225px;">
-                    <p>Equipamento:</p>
-                    </td>
-                    <td style="width: 152px;">
-                    <p>N&ordm;. de S&eacute;rie:</p>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td style="width: 147.5px;">
-                    <p>&nbsp;</p>
-                    </td>
-                    <td style="width: 179.5px;">
-                    <p>&nbsp;</p>
-                    </td>
-                    <td style="width: 225px;">
-                    <p>&nbsp;</p>
-                    </td>
-                    <td style="width: 152px;">
-                    <p>&nbsp;</p>
-                    </td>
-                    </tr>
-                    </tbody>
+                        <tbody>
+                            <tr>
+                                <td style="width: 147.5px;">
+                                    <p>Origem:</p>
+                                </td>
+                                <td style="width: 179.5px;">
+                                    <p>Nota Fiscal:</p>
+                                </td>
+                                <td style="width: 225px;">
+                                    <p>Equipamento:</p>
+                                </td>
+                                <td style="width: 152px;">
+                                    <p>N&ordm;. de S&eacute;rie:</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="width: 147.5px;">
+                                    <p>'.$model->OrigemCautela.'</p>
+                                </td>
+                                <td style="width: 179.5px;">
+                                    <p></p>
+                                </td>
+                                <td style="width: 225px;">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td style="width: 152px;">
+                                    <p>&nbsp;</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="width: 147.5px;">
+                                    <p>Origem:</p>
+                                </td>
+                                <td style="width: 179.5px;">
+                                    <p>Nota Fiscal:</p>
+                                </td>
+                                <td style="width: 225px;">
+                                    <p>Equipamento:</p>
+                                </td>
+                                <td style="width: 152px;">
+                                    <p>N&ordm;. de S&eacute;rie:</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="width: 147.5px;">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td style="width: 179.5px;">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td style="width: 225px;">
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td style="width: 152px;">
+                                    <p>&nbsp;</p>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
 
 
