@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="equipamento-index">
 
-    
+
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            
+
 
             //'idEquipamento',
             'NomeEquipamento',
@@ -34,7 +34,30 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'ImagemEquipamento',
              'idProjeto',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+            'template'=>'{view} {delete} {update}',
+            	'buttons'=>[
+            			'delete' => function ($url, $model) {
+            			return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->idEquipamento], [
+            					'data' => [
+            							'confirm' => 'Remover o equipamento \''.$model->idEquipamento.'\'?',
+            							'method' => 'post',
+            					],
+            					'title' => Yii::t('yii', 'Remover equipamento'),
+            			]);
+            			},
+            			'view' => function ($url, $model){
+            			return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['view', 'id' => $model->idEquipamento], [
+            					'title' => Yii::t('yii', 'Visualizar equipamento'),
+            			]);
+            			},
+            			'update' => function ($url, $model){
+            			return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['update', 'id' => $model->idEquipamento], [
+            					'title' => Yii::t('yii', 'Editar equipamento'),
+            			]);
+            			},
+            	]
+            ],
         ],
     ]); ?>
 </div>

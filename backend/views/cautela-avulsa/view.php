@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\CautelaAvulsa */
 
-$this->title = $model->idCautelaAvulsa;
+$this->title = $model->NomeResponsavel;
 $this->params['breadcrumbs'][] = ['label' => 'Cautela Avulsas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+        <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['cautela-avulsa/index'], ['class' => 'btn btn-warning']) ?>
         <?= Html::a('Update', ['update', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -29,9 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'confirm' => 'Você tem certeza que deseja dar baixa nesta Cautela?',
                 'method' => 'post',
                 //$flagCautelaAvulsa = 1,
-                
+
                 //return ('BaixaCautelaController', [ 'flag' => $flagCautelaAvulsa]),
-                
+
                // $this->redirect(array('descarte-equipamento/create', 'id' => $model->idEquipamento)),
             ],
         ]) ?>

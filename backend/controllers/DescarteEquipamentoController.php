@@ -6,7 +6,7 @@ namespace backend\controllers;
 
 use Yii;
 use app\models\DescarteEquipamento;
-use app\models\Equipamento;
+use backend\models\Equipamento;
 use app\models\DescarteEquipamentoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -64,14 +64,16 @@ class DescarteEquipamentoController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id)
+    public function actionCreate()
     {
-        $equipamento = Equipamento::findOne($id);
+        //$equipamento = Equipamento::findOne($id);
 
         $model = new DescarteEquipamento();
-        $model->idEquipamento = $id;
+        //$model->idEquipamento = $id;
+        $equipamento = new Equipamento();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $equipamento = Equipamento::findOne($model->idEquipamento);
             $equipamento->StatusEquipamento = "Descartado";
             $equipamento->save();
             return $this->redirect(['view', 'id' => $model->idDescarte]);

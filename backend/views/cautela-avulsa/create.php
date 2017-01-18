@@ -16,7 +16,7 @@ else if ($model->StatusCautelaAvulsa == 3){
 	$titulo = "Em atraso";
 }
 
-$this->title = 'Create Cautela Avulsa';
+$this->title = 'Cautela Avulsa';
 $this->params['breadcrumbs'][] = ['label' => 'Cautela Avulsas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

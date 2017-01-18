@@ -12,10 +12,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cautela-index">
 
-   
+
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-  
+
     <p>
         <?= Html::a('Gerar Cautela', ['create'], ['class' => 'btn btn-success']) ?>
 
@@ -50,7 +50,30 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'idEquipamento',
             'idProjeto',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+            'template'=>'{view} {delete} {update}',
+            	'buttons'=>[
+        			'delete' => function ($url, $model) {
+        			return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->idCautela], [
+        					'data' => [
+        							'confirm' => 'Remover a cautela \''.$model->idCautela.'\'?',
+        							'method' => 'post',
+        					],
+        					'title' => Yii::t('yii', 'Remover cautela'),
+        			]);
+        			},
+        			'view' => function ($url, $model){
+        			return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['view', 'id' => $model->idCautela], [
+        					'title' => Yii::t('yii', 'Visualizar cautela'),
+        			]);
+        			},
+        			'update' => function ($url, $model){
+        			return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['update', 'id' => $model->idCautela], [
+        					'title' => Yii::t('yii', 'Editar cautela'),
+        			]);
+        			},
+            	]
+            ]
         ],
     ]); ?>
 </div>
