@@ -66,7 +66,7 @@ label{
         <?= $form->field($model, 'aprendizado', ['options' =>['class' => 'col-md-4']])->dropDownList($atributos, ['prompt' => 'Selecione um Nível'])->label(false) ?>
 
         <div class="col-md-8">
-            <font color='#FF0000'>*</font> <b>Assiduidade, perceverança</b>
+            <font color='#FF0000'>*</font> <b>Assiduidade, perseverança</b>
         </div>
         <?= $form->field($model, 'assiduidade', ['options' =>['class' => 'col-md-4']])->dropDownList($atributos, ['prompt' => 'Selecione um Nível'])->label(false) ?>
 
