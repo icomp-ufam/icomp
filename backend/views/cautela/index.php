@@ -2,7 +2,10 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use yii\widgets\ActiveForm;
+use backend\models\Cautela;
+use yii\web\JsExpression;
+use yii\web\View;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CautelaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -14,21 +17,60 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php
+		$this->registerJs(
+		    "				
+			$('#multi-cautela-form').on('submit',function (e) {		
+				var ids = $('#cautela-idsmulticautela').val().split(',');
+				
+				//Ao separar uma string vazia a funcao split usada acima cria uma posicao vazia no vetor. entao..
+				if(ids[0].trim() == '')
+					ids.shift();
+				
+				var idschecked = $('[name=\"selection[]\"]').filter(':checked');
+				var i, ckd;
+				
+				//Aqui checamos se nao ha elemento repetido, pois o evento submit, nao sei porque, eh disparado duas vezes ao clicar no botao Gerar PDF.
+				for(i = 0; i<idschecked.length; i++){
+					ckd = $(idschecked[i]).val();
+					if(ids.indexOf(ckd) < 0)
+						ids.push(ckd);
+				}
+				
+				$('#cautela-idsmulticautela').val(ids.toString());
+								
+		        return true;
+		    });	
+			",
+		    View::POS_READY,
+		    'check-all-handler'
+		);
 
-
+	?>
     <p>
-        <?= Html::a('Gerar Cautela', ['create'], ['class' => 'btn btn-success']) ?>
 
-        <?=Html::beginForm(['controller/produtos'],'post');?>
-        <?=Html::dropDownList('action','',[''=>'Marque uma opção: ','c'=>'Confirmado','nc'=>'Não Confirmado'],['class'=>'dropdown',])?>
+    	<?= Html::a('Gerar Cautela', ['create'], ['class' => 'btn btn-success']) ?>
+		<?php $modelCautela = new Cautela(); ?>
+    	<?php $form = ActiveForm::begin(['action' => ['cautela/teste'],'options' => ['method' => 'post'], 'id'=>'multi-cautela-form']); ?>
+		
+		<?= $form->field($modelCautela, 'idsmulticautela')->hiddenInput(['value'=>$modelCautela->idsmulticautela])->label(false);?>
+		
+        <?php // =Html::beginForm(['controller/produtos'],'post');?>
+        <?php //=Html::dropDownList('action','',[''=>'Marque uma opção: ','c'=>'Confirmado','nc'=>'Não Confirmado'],['class'=>'dropdown',])?>
         <?=Html::submitButton('Gerar PDF', ['class' => 'btn btn-info',]);?>
+        
+        <?php ActiveForm::end(); ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\CheckboxColumn'],
+            ['class' => 'yii\grid\CheckboxColumn',
+			 'checkboxOptions' => function ($model, $key, $index, $column) {
+            		return ['value' => $model->idCautela];
+           	 },
+            ],
 
             //'idCautela',
             'NomeResponsavel',
@@ -44,8 +86,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'StatusCautela',
                 'filter'=>array ("Em aberto" => "Em aberto", "Concluída" => "Concluída", "Em atraso" => "Em atraso"),
                 'value' => 'StatusCautela'
-
-
             ],
             // 'idEquipamento',
             'idProjeto',

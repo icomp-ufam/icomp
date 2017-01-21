@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idCautela')->textInput() ?>
 
-    <?= $form->field($model, 'idCautelaAvulsa')->textInput() ?>
+    <!--<?php //= $form->field($model, 'idCautelaAvulsa')->textInput() ?>-->
 
     <?= $form->field($model, 'Recebedor')->textInput(['maxlength' => true]) ?>
 

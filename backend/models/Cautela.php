@@ -22,6 +22,8 @@ use Yii;
  */
 class Cautela extends \yii\db\ActiveRecord
 {
+	public $idsmulticautela;
+	
     /**
      * @inheritdoc
      */
@@ -41,6 +43,7 @@ class Cautela extends \yii\db\ActiveRecord
             [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel', 'Equipamento', 'StatusCautela'], 'string', 'max' => 50],
             [['ImagemCautela'], 'string', 'max' => 100],
             [['idEquipamento'], 'exist', 'skipOnError' => true, 'targetClass' => Equipamento::className(), 'targetAttribute' => ['idEquipamento' => 'idEquipamento']],
+        	[['idsmulticautela'], 'safe'],	
         ];
     }
 
@@ -50,7 +53,7 @@ class Cautela extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idCautela' => 'Id',
+            'idCautela' => 'Cod.',
             'NomeResponsavel' => 'Responsável',
             'OrigemCautela' => 'Origem',
             'DataDevolucao' => 'Data de Devolucao',
@@ -62,6 +65,7 @@ class Cautela extends \yii\db\ActiveRecord
             'StatusCautela' => 'Status',
             'idEquipamento' => 'Equipamento',
             'idProjeto' => 'Projeto',
+        	'idsmulticautela' => 'Cautelas',
         ];
     }
 }

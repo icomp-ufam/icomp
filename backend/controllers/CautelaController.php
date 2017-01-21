@@ -19,7 +19,7 @@ use common\models\User;
 use app\models\AfastamentosSearch;
 use backend\models\SignupForm;
 use app\models\Afastamentos;
-use app\models\Equipamento;
+use backend\models\Equipamento;
 use app\models\CautelaSearch;
 use app\models\EquipamentoSearch;
 use yii\web\Controller;
@@ -50,6 +50,21 @@ class CautelaController extends Controller
         ];
     }
 
+    public function actionTeste(){
+    	
+    	$modelCautela = new Cautela();
+    	$modelCautela->load(Yii::$app->request->post());
+    	ECHO $modelCautela->idsmulticautela."<br></br>";
+    	foreach (explode(",",$modelCautela->idsmulticautela) as $id){
+    		$modelCautela2 = Cautela::findOne($id);
+    		$modelEquipamento = Equipamento::findOne($modelCautela2->idEquipamento);
+    		echo $modelCautela2->NomeResponsavel."<br>----Equipamento: $modelEquipamento->NomeEquipamento..........Nota Fiscal: $modelEquipamento->NotaFiscal</br></br>";
+    		
+    		
+    	}
+    	
+    }
+    
     /**
      * Lists all Cautela models.
      * @return mixed

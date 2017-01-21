@@ -33,7 +33,7 @@ class BaixaCautelaAvulsa extends \yii\db\ActiveRecord
             [['idCautelaAvulsa'], 'integer'],
             [['Recebedor', 'ObservacaoBaixaCautela'], 'required'],
             [['Recebedor', 'DataDevolucao', 'Equipamento', 'ObservacaoBaixaCautela'], 'string', 'max' => 50],
-            [['idCautelaAvulsa'], 'exist', 'skipOnError' => true, 'targetClass' => CautelaAvulsa::className(), 'targetAttribute' => ['idCautelaAvulsa' => 'idCautelaAvulsa']],
+            //[['idCautelaAvulsa'], 'exist', 'skipOnError' => true, 'targetClass' => CautelaAvulsa::className(), 'targetAttribute' => ['idCautelaAvulsa' => 'idCautelaAvulsa']],
         ];
     }
 
@@ -44,7 +44,7 @@ class BaixaCautelaAvulsa extends \yii\db\ActiveRecord
     {
         return [
             'idBaixaCautelaAvulsa' => 'Id Baixa Cautela Avulsa',
-            'idCautelaAvulsa' => 'Id Cautela Avulsa',
+            //'idCautelaAvulsa' => 'Id Cautela Avulsa',
             'Recebedor' => 'Recebedor',
             'DataDevolucao' => 'Data Devolucao',
             'Equipamento' => 'Equipamento',

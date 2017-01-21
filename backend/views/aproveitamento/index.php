@@ -68,15 +68,27 @@ $this->params['breadcrumbs'][] = 'Aproveitamentos';
             ['class' => 'yii\grid\ActionColumn',
             'template'=>'{view} {delete} {update}',
             	'buttons'=>[
-            			'delete' => function ($url, $model) {
-            			return Html::a('<span class="glyphicon glyphicon-trash"></span>', [(($model->flagFromAluno)?'deletebyaluno':'deletebyalunov2'), 'id' => $model->id, 'idAluno' => $model->idAluno], [
+            			'delete' =>(isset($idAluno))? 
+            			function ($url, $model, $flagFromAluno=true) {
+            			return Html::a('<span class="glyphicon glyphicon-trash"></span>', [(($flagFromAluno)?'deletebyaluno':'deletebyalunov2'), 'id' => $model->id, 'idAluno' => $model->idAluno], [
             					'data' => [
             							'confirm' => 'Remover o aproveitamento \''.$model->id.'\'?',
             							'method' => 'post',
             					],
             					'title' => Yii::t('yii', 'Remover Aproveitamento'),
             			]);
-            			},
+            			} 
+            			:
+            			function ($url, $model, $flagFromAluno=false) {
+            				return Html::a('<span class="glyphicon glyphicon-trash"></span>', [(($flagFromAluno)?'deletebyaluno':'deletebyalunov2'), 'id' => $model->id, 'idAluno' => $model->idAluno], [
+            						'data' => [
+            								'confirm' => 'Remover o aproveitamento \''.$model->id.'\'?',
+            								'method' => 'post',
+            						],
+            						'title' => Yii::t('yii', 'Remover Aproveitamento'),
+            				]);
+            			}
+            			,
             			'view' => function ($url, $model){
             			return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['view', 'id' => $model->id, ((isset($idAluno))?'idAluno':'numb') => $model->idAluno], [
             					'title' => Yii::t('yii', 'Visualizar Aproveitamento'),
