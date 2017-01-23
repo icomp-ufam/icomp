@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     	<?= Html::a('Gerar Cautela', ['create'], ['class' => 'btn btn-success']) ?>
 		<?php $modelCautela = new Cautela(); ?>
-    	<?php $form = ActiveForm::begin(['action' => ['cautela/teste'],'options' => ['method' => 'post'], 'id'=>'multi-cautela-form']); ?>
+    	<?php $form = ActiveForm::begin(['action' => ['cautela/produtos2'],'options' => ['method' => 'post'], 'id'=>'multi-cautela-form']); ?>
 		
 		<?= $form->field($modelCautela, 'idsmulticautela')->hiddenInput(['value'=>$modelCautela->idsmulticautela])->label(false);?>
 		
