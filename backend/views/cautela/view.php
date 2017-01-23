@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cautela-view">
 
-    
+
 
      <p>
         <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['cautela/index'], ['class' => 'btn btn-warning']) ?>
@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
                 //$model->flagCautela = 1,
                // $this->redirect(array('descarte-equipamento/create', 'id' => $model->idEquipamento)),
-            ], 
+            ],
         ]) ?>
     </p>
 

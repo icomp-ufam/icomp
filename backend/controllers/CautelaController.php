@@ -129,6 +129,7 @@ class CautelaController extends Controller
         $idUsuario = Yii::$app->user->identity->id;
 
 
+        $modelEquipamento2 = Equipamento::findOne($model->idEquipamento);
 
 
         $pdf = new mPDF('utf-8','A4','','','15','15','42','30');
@@ -212,7 +213,7 @@ class CautelaController extends Controller
                         </tbody>
                     </table>
 
-                    <p>&nbsp;</p>
+                    
 
                     <table style="margin-left: auto; margin-right: auto; width: 600px;" border="2">
                         <tbody>
@@ -236,47 +237,19 @@ class CautelaController extends Controller
                                     <p>'.$model->OrigemCautela.'</p>
                                 </td>
                                 <td style="width: 179.5px;">
-                                    <p></p>
+                                    <p>'.$modelEquipamento2->NotaFiscal.'</p>
                                 </td>
                                 <td style="width: 225px;">
-                                    <p>&nbsp;</p>
+                                    <p>'.$modelEquipamento2->NomeEquipamento.'</p>
                                 </td>
                                 <td style="width: 152px;">
-                                    <p>&nbsp;</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td style="width: 147.5px;">
-                                    <p>Origem:</p>
-                                </td>
-                                <td style="width: 179.5px;">
-                                    <p>Nota Fiscal:</p>
-                                </td>
-                                <td style="width: 225px;">
-                                    <p>Equipamento:</p>
-                                </td>
-                                <td style="width: 152px;">
-                                    <p>N&ordm;. de S&eacute;rie:</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td style="width: 147.5px;">
-                                    <p>&nbsp;</p>
-                                </td>
-                                <td style="width: 179.5px;">
-                                    <p>&nbsp;</p>
-                                </td>
-                                <td style="width: 225px;">
-                                    <p>&nbsp;</p>
-                                </td>
-                                <td style="width: 152px;">
-                                    <p>&nbsp;</p>
+                                    <p>'.$modelEquipamento2->Nserie.'</p>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+
+                    <br>
 
 
 
@@ -317,6 +290,7 @@ class CautelaController extends Controller
             $modelCautela2 = Cautela::findOne($id);
             $modelEquipamento = Equipamento::findOne($modelCautela2->idEquipamento);
             
+
             $dados = $dados
                     .
                     '<table style="margin-left: auto; margin-right: auto;" border="2">
@@ -326,7 +300,7 @@ class CautelaController extends Controller
                                     <p>Respons&aacute;vel:</p>
                                 </td>
                                 <td colspan="3" width="612">
-                                <p>'.$model->NomeResponsavel.'</p>
+                                    <p>'.$modelCautela2->NomeResponsavel.'</p>
                                 </td>
                             </tr>
 
@@ -335,19 +309,19 @@ class CautelaController extends Controller
                                     <p>Contato:</p>
                                 </td>
                                 <td width="214">
-                                    <p>'.$model->TelefoneResponsavel.'.</p>
+                                    <p>'.$modelCautela2->TelefoneResponsavel.'</p>
                                 </td>
                                 <td width="66">
                                     <p>Email:</p>
                                 </td>
                                 <td width="331">
-                                    <p>'.$model->Email.'</p>
+                                    <p>'.$modelCautela2->Email.'</p>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <p>&nbsp;</p>
+                    
 
                     <table style="margin-left: auto; margin-right: auto; width: 600px;" border="2">
                         <tbody>
@@ -368,20 +342,22 @@ class CautelaController extends Controller
 
                             <tr>
                                 <td style="width: 147.5px;">
-                                    <p>'.$model->OrigemCautela.'</p>
+                                    <p>'.$modelCautela2->OrigemCautela.'</p>
                                 </td>
                                 <td style="width: 179.5px;">
-                                    <p></p>
+                                    <p>'.$modelEquipamento->NotaFiscal.'</p>
                                 </td>
                                 <td style="width: 225px;">
-                                    <p>&nbsp;</p>
+                                    <p>'.$modelEquipamento->NomeEquipamento.'</p>
                                 </td>
                                 <td style="width: 152px;">
-                                    <p>&nbsp;</p>
+                                    <p>'.$modelEquipamento->Nserie.'</p>
                                 </td>
                             </tr>
                         </tbody>
-                    </table>';
+                    </table>
+                    <br>
+                    ';
 
             //echo $modelCautela2->NomeResponsavel."<br>----Equipamento: $modelEquipamento->NomeEquipamento..........Nota Fiscal: $modelEquipamento->NotaFiscal</br></br>";
         }
