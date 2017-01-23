@@ -82,10 +82,12 @@ class EquipamentoController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $arq = UploadedFile::getInstance($model, 'ImagemEquipamento');
+            if($arq!==null){
             $arquivo = $model->idEquipamento.'-'.$model->NomeEquipamento;
             $arquivo = 'repositorio/'.$arquivo.'.'.$arq->extension;
             $model -> ImagemEquipamento = $arquivo;
             $arq->saveAs($arquivo);
+            }
             //$model->url = 'repositorio/'.$arquivo.'.'.$model->ImagemEquipamento->extension;
 
 

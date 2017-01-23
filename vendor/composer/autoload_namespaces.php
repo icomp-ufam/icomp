@@ -10,4 +10,5 @@ return array(
     'PHPExcel' => array($vendorDir . '/phpoffice/phpexcel/Classes'),
     'HTMLPurifier' => array($vendorDir . '/ezyang/htmlpurifier/library'),
     'Diff' => array($vendorDir . '/phpspec/php-diff/lib'),
+    'mPDF' => array($vendorDir . '/mpdf/mpdf'), 
 );

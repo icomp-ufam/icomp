@@ -5,10 +5,10 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Equipamento;
+use app\models\Equipamento;
 
 /**
- * EquipamentoSearch represents the model behind the search form of `backend\models\Equipamento`.
+ * EquipamentoSearch represents the model behind the search form of `app\models\Equipamento`.
  */
 class EquipamentoSearch extends Equipamento
 {
@@ -18,7 +18,7 @@ class EquipamentoSearch extends Equipamento
     public function rules()
     {
         return [
-            [['idEquipamento', 'idProjeto'], 'integer'],
+            [['idEquipamento'], 'integer'],
             [['NomeEquipamento', 'Nserie', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento', 'ImagemEquipamento'], 'safe'],
         ];
     }
@@ -43,10 +43,6 @@ class EquipamentoSearch extends Equipamento
     {
         $query = Equipamento::find();
 
-        if(!isset ($params['sort'])){
-            $query = $query->orderBy('idProjeto');
-        }
-
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -64,7 +60,6 @@ class EquipamentoSearch extends Equipamento
         // grid filtering conditions
         $query->andFilterWhere([
             'idEquipamento' => $this->idEquipamento,
-            'idProjeto' => $this->idProjeto,
         ]);
 
         $query->andFilterWhere(['like', 'NomeEquipamento', $this->NomeEquipamento])

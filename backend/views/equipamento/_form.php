@@ -1,14 +1,10 @@
 <?php
 
-
-
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
-
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Equipamento */
+/* @var $model app\models\Equipamento */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -26,17 +22,13 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'StatusEquipamento')->dropDownList(['Disponível' => 'Disponível','Em uso'=> 'Em uso','Descartado'=>'Descartado']) ?>
 
-    <?= $form->field($model, 'idProjeto')->dropDownList([ArrayHelper::map(backend\models\ContProjProjetos::find()->all(),'id','nomeprojeto')]) ?>
-
     <?= $form->field($model, 'OrigemEquipamento')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'ImagemEquipamento')->fileInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Cadastrar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        <?= Html::a('Cancelar', ['index'], ['class' => 'btn btn-danger']) ?>
     </div>
-
 
     <?php ActiveForm::end(); ?>
 

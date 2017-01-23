@@ -1,9 +1,10 @@
 <?php
 
-namespace backend\models;
+namespace app\models;
 
 use Yii;
-
+use yii\web\UploadedFile;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "j17_equipamento".
@@ -16,10 +17,13 @@ use Yii;
  * @property string $StatusEquipamento
  * @property string $OrigemEquipamento
  * @property string $ImagemEquipamento
- * @property integer $idProjeto
  */
 class Equipamento extends \yii\db\ActiveRecord
 {
+
+    public $file;
+    public $tipoEquipamento;
+
     /**
      * @inheritdoc
      */
@@ -28,6 +32,8 @@ class Equipamento extends \yii\db\ActiveRecord
         return 'j17_equipamento';
     }
 
+
+
     /**
      * @inheritdoc
      */
@@ -35,9 +41,8 @@ class Equipamento extends \yii\db\ActiveRecord
     {
         return [
             [['NomeEquipamento', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento'], 'required'],
-            [['idProjeto'], 'integer'],
             [['NomeEquipamento', 'Nserie', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento', 'ImagemEquipamento'], 'string', 'max' => 50],
-            [['idProjeto'], 'exist', 'skipOnError' => true, 'targetClass' => ContProjProjetos::className(), 'targetAttribute' => ['idProjeto' => 'id']],
+
         ];
     }
 
@@ -47,15 +52,41 @@ class Equipamento extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idEquipamento' => 'Equipamento',
-            'NomeEquipamento' => 'Equipamento',
-            'Nserie' => 'N° serie',
+            'idEquipamento' => 'Id Equipamento',
+            'NomeEquipamento' => 'Nome do Equipamento',
+            'Nserie' => 'Nº de Série',
             'NotaFiscal' => 'Nota Fiscal',
-            'Localizacao' => 'Localizacao',
+            'Localizacao' => 'Localização',
             'StatusEquipamento' => 'Status',
             'OrigemEquipamento' => 'Origem',
-            'ImagemEquipamento' => 'Imagem',
-            'idProjeto' => 'Projeto',
+            'file' => 'Imagem Equipamento',
         ];
+    }
+
+
+     public function getTipoEquipamento(){
+
+        if ($this->StatusEquipamento == "Disponível"){
+            $tipoEquipamento = "Disponível";
+        }
+        else if ($this->StatusEquipamento == "Em uso"){
+            $tipoEquipamento= "Em uso";
+        }
+        else if ($this->StatusEquipamento == "Descartado"){
+            $tipoEquipamento = "Descartado";
+        }
+
+        return $tipoEquipamento;
+    }
+
+
+   public function upload()
+    {
+        if ($this->validate()) {
+            $this->file->saveAs('uploads/' . $this->file->baseName . '.' . $this->file->extension);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
