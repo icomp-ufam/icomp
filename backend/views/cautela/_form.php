@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\widgets\MaskedInput;
 use kartik\widgets\DatePicker;
 use \yii\helpers\ArrayHelper;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Cautela */
@@ -13,6 +14,20 @@ use \yii\helpers\ArrayHelper;
 
 <div class="cautela-form">
 
+cautela-idequipamento
+<?php
+$this->registerJs(
+		    "	
+			$('#cautela-equipamento').on('change', function (e) {
+				var optionSelected = $('option:selected', this);
+				var valueSelected = this.value;
+				$('#cautela-idequipamento').val(valueSelected);
+			});	
+			",
+		    View::POS_READY,
+		    'garante-idequipamento-handler'
+		);
+?>
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'NomeResponsavel')->textInput(['maxlength' => true]) ?>
@@ -53,6 +68,8 @@ use \yii\helpers\ArrayHelper;
    
 
    <?= $form->field($model, 'Equipamento')->dropDownList([ArrayHelper::map(backend\models\Equipamento::find()->all(),'idEquipamento','NomeEquipamento')]) ?>
+
+	<?= $form->field($model, 'idEquipamento')->hiddenInput(['value'=>$model->Equipamento])->label(false) ?>
 
     <?= $form->field($model, 'StatusCautela')->dropDownList(['Em aberto' => 'Em aberto','Concluída'=> 'Concluída','Em atraso'=>'Em atraso']) ?>
 
