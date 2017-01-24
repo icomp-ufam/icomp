@@ -14,7 +14,6 @@ use yii\web\View;
 
 <div class="cautela-form">
 
-cautela-idequipamento
 <?php
 $this->registerJs(
 		    "	
