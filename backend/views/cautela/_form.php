@@ -16,7 +16,9 @@ use yii\web\View;
 
 <?php
 $this->registerJs(
-		    "	
+		    "
+			$('#cautela-idequipamento').val($('#cautela-equipamento').val());
+			
 			$('#cautela-equipamento').on('change', function (e) {
 				var optionSelected = $('option:selected', this);
 				var valueSelected = this.value;
@@ -66,7 +68,7 @@ $this->registerJs(
 
    
 
-   <?= $form->field($model, 'Equipamento')->dropDownList([ArrayHelper::map(backend\models\Equipamento::find()->all(),'idEquipamento','NomeEquipamento')]) ?>
+   <?= $form->field($model, 'Equipamento')->dropDownList(ArrayHelper::map(backend\models\Equipamento::find()->all(),'idEquipamento','NomeEquipamento')) ?>
 
 	<?= $form->field($model, 'idEquipamento')->hiddenInput(['value'=>$model->Equipamento])->label(false) ?>
 
