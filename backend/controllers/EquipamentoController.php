@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
-use app\models\Equipamento;
+use backend\models\Equipamento;
 use app\models\EquipamentoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
