@@ -118,7 +118,7 @@ class CautelaAvulsaController extends Controller
     public function actionUpdate($idCautelaAvulsa, $id)
     {
         $model = $this->findModel($idCautelaAvulsa, $id);
-
+		$arquivoAntigo = $model->ImagemCautela;
         if ($model->load(Yii::$app->request->post())) {
         		$model->id = Yii::$app->user->id;
             	$arq = UploadedFile::getInstance($model, 'ImagemCautela');
@@ -127,6 +127,8 @@ class CautelaAvulsaController extends Controller
             		$arquivo = 'repositorio/cautelasavulsas/'.$arquivo.'.'.$arq->extension;
             		$model ->ImagemCautela = $arquivo;
             		$arq->saveAs($arquivo);
+            	}else{
+            		$model->ImagemCautela = $arquivoAntigo;
             	}
             	//$model->url = 'repositorio/'.$arquivo.'.'.$model->ImagemEquipamento->extension;
             
