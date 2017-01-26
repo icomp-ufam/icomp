@@ -84,7 +84,7 @@ class EquipamentoController extends Controller
             $arq = UploadedFile::getInstance($model, 'ImagemEquipamento');
             if($arq!==null){
             $arquivo = $model->idEquipamento.'-'.$model->NomeEquipamento;
-            $arquivo = 'repositorio/'.$arquivo.'.'.$arq->extension;
+            $arquivo = 'repositorio/equipamentos/'.$arquivo.'.'.$arq->extension;
             $model -> ImagemEquipamento = $arquivo;
             $arq->saveAs($arquivo);
             }
@@ -127,7 +127,7 @@ class EquipamentoController extends Controller
 
             $arq = UploadedFile::getInstance($model, 'ImagemEquipamento');
             $arquivo = $model->idEquipamento.'-'.$model->NomeEquipamento;
-            $arquivo = 'repositorio/'.$arquivo.'.'.$arq->extension;
+            $arquivo = 'repositorio/equipamentos/'.$arquivo.'.'.$arq->extension;
             if($arq !== null){
                 $model -> ImagemEquipamento = $arquivo;
                 $arq->saveAs($arquivo);

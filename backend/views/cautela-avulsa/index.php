@@ -36,7 +36,10 @@ else if ( Yii::$app->user->identity->checarAcesso('secretaria') == 1){
             //'id',
             'NomeResponsavel',
             'Email:email',
-            'ValidadeCautela',
+        	[
+        		'attribute'=>'ValidadeCautela',
+            	'format'=>['date', 'php:d/m/Y'],
+        	],
             // 'TelefoneResponsavel',
             // 'ObservacoesDescarte',
             // 'ImagemCautela',

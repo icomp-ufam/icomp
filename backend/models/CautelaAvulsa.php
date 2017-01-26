@@ -38,7 +38,7 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'NomeResponsavel', 'Email', 'TelefoneResponsavel', 'ObservacoesDescarte'], 'required'],
+            [['NomeResponsavel', 'Email', 'TelefoneResponsavel', 'ValidadeCautela'], 'required'],
             [['id', 'TelefoneResponsavel'], 'integer'],
             [['NomeResponsavel', 'Email', 'ValidadeCautela', 'ObservacoesDescarte', 'StatusCautelaAvulsa'], 'string', 'max' => 50],
             [['ImagemCautela'], 'string', 'max' => 100],
@@ -52,15 +52,15 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idCautelaAvulsa' => 'Id Cautela Avulsa',
+            'idCautelaAvulsa' => 'Cod. Cautela Avulsa',
             'id' => 'ID',
             'NomeResponsavel' => 'Nome Responsavel',
             'Email' => 'Email',
             'ValidadeCautela' => 'Validade Cautela',
-            'TelefoneResponsavel' => 'Telefone Responsavel',
-            'ObservacoesDescarte' => 'Observacoes Descarte',
+            'TelefoneResponsavel' => 'Telefone',
+            'ObservacoesDescarte' => 'Observacoes',
             'ImagemCautela' => 'Imagem Cautela',
-            'StatusCautelaAvulsa' => 'Status Cautela Avulsa',
+            'StatusCautelaAvulsa' => 'Status',
         ];
     }
 

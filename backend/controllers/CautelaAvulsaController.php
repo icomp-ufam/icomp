@@ -8,6 +8,7 @@ use app\models\CautelaAvulsaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * CautelaAvulsaController implements the CRUD actions for CautelaAvulsa model.
@@ -76,8 +77,30 @@ class CautelaAvulsaController extends Controller
             $StatusCautelaAvulsa = 3;
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id]);
+        //if ($model->load(Yii::$app->request->post()) && $model->save()) 
+            
+            if ($model->load(Yii::$app->request->post())) {
+            	$model->id = Yii::$app->user->id;
+            	$arq = UploadedFile::getInstance($model, 'ImagemCautela');
+            	if($arq!==null){
+            		$arquivo = $model->idCautelaAvulsa.'-'.$arq->baseName;
+            		$arquivo = 'repositorio/cautelasavulsas/'.$arquivo.'.'.$arq->extension;
+            		$model ->ImagemCautela = $arquivo;
+            		$arq->saveAs($arquivo);
+            	}
+            	//$model->url = 'repositorio/'.$arquivo.'.'.$model->ImagemEquipamento->extension;
+            
+            
+            	if (!$model->save()) {
+            		print_r($model->getErrors());
+            		echo Yii::$app->user->id;
+            		return;
+            	}
+            	
+            	return $this->redirect(['view', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id]);
+            
+            
+            
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -96,8 +119,27 @@ class CautelaAvulsaController extends Controller
     {
         $model = $this->findModel($idCautelaAvulsa, $id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+        		$model->id = Yii::$app->user->id;
+            	$arq = UploadedFile::getInstance($model, 'ImagemCautela');
+            	if($arq!==null){
+            		$arquivo = $model->idCautelaAvulsa.'-'.$arq->baseName;
+            		$arquivo = 'repositorio/cautelasavulsas/'.$arquivo.'.'.$arq->extension;
+            		$model ->ImagemCautela = $arquivo;
+            		$arq->saveAs($arquivo);
+            	}
+            	//$model->url = 'repositorio/'.$arquivo.'.'.$model->ImagemEquipamento->extension;
+            
+            
+            	if (!$model->save()) {
+            		print_r($model->getErrors());
+            		return;
+            	}
+
+            	return $this->redirect(['view', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id]);
+            
+            
+            
         } else {
             return $this->render('update', [
                 'model' => $model,

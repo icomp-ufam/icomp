@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idCautelaAvulsa') ?>
 
-    <?= //$form->field($model, 'id') ?>
+    <?php // //$form->field($model, 'id') ?>
 
     <?= $form->field($model, 'NomeResponsavel') ?>
 

@@ -48,7 +48,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'ValidadeCautela',
             'TelefoneResponsavel',
             'ObservacoesDescarte',
-            'ImagemCautela',
+        	[
+        	'attribute' => 'ImagemCautela',
+        		//'value' => "<a href=localhost/novoppgi/backend/web/".$model->edital."' target = '_blank'> Baixar </a>",
+    	    	'format'=>['image', ['width'=>100, 'height'=>100]],
+	        	//'value' => "<a href='".$model->ImagemCautela."' target = '_blank'> Foto  </a>"
+        		'visible'=>((trim($model->ImagemCautela)!='')?true:false)
+        	],
             'StatusCautelaAvulsa',
         ],
     ]) ?>
