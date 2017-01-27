@@ -19,7 +19,7 @@ $this->title = "Responsável: ".$this->title;
         <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['cautela-avulsa/index'], ['class' => 'btn btn-warning']) ?>
         <?= Html::a('Atualizar', ['update', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Dar Baixa Cautela', ['baixa-cautela-avulsa/create', 'id' => $model->idCautelaAvulsa], [
-            'class' => 'btn btn-info',
+            'class' => 'btn btn-success',
             'data' => [
                 'confirm' => 'Você tem certeza que deseja dar baixa nesta Cautela?',
                 'method' => 'post',
