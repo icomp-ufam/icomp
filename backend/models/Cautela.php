@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use backend\models\Equipamento;
 
 /**
  * This is the model class for table "j17_cautela".
@@ -67,5 +68,9 @@ class Cautela extends \yii\db\ActiveRecord
             'idProjeto' => 'Projeto',
         	'idsmulticautela' => 'Cautelas',
         ];
+    }
+    
+    public function getCautelatemequipamento(){
+    	return $this->hasOne(Equipamento::className(),['idEquipamento'=>'idEquipamento']);
     }
 }
