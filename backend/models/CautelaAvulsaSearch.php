@@ -18,8 +18,9 @@ class CautelaAvulsaSearch extends CautelaAvulsa
     public function rules()
     {
         return [
-            [['idCautelaAvulsa', 'id', 'TelefoneResponsavel'], 'integer'],
-            [['NomeResponsavel', 'Email', 'ValidadeCautela', 'ObservacoesDescarte', 'ImagemCautela', 'StatusCautelaAvulsa'], 'safe'],
+            [['idCautelaAvulsa', 'id',], 'integer'],
+        	[['TelefoneResponsavel'], 'string', 'max'=>15],
+            [['NomeResponsavel', 'Email', 'ValidadeCautela', 'ObservacoesDescarte', 'ImagemCautela', 'StatusCautelaAvulsa', 'TelefoneResponsavel'], 'safe'],
         ];
     }
 
@@ -61,7 +62,6 @@ class CautelaAvulsaSearch extends CautelaAvulsa
         $query->andFilterWhere([
             'idCautelaAvulsa' => $this->idCautelaAvulsa,
             'id' => $this->id,
-            'TelefoneResponsavel' => $this->TelefoneResponsavel,
         ]);
 
         $query->andFilterWhere(['like', 'NomeResponsavel', $this->NomeResponsavel])
@@ -69,7 +69,8 @@ class CautelaAvulsaSearch extends CautelaAvulsa
             ->andFilterWhere(['like', 'ValidadeCautela', $this->ValidadeCautela])
             ->andFilterWhere(['like', 'ObservacoesDescarte', $this->ObservacoesDescarte])
             ->andFilterWhere(['like', 'ImagemCautela', $this->ImagemCautela])
-            ->andFilterWhere(['like', 'StatusCautelaAvulsa', $this->StatusCautelaAvulsa]);
+            ->andFilterWhere(['like', 'StatusCautelaAvulsa', $this->StatusCautelaAvulsa])
+            ->andFilterWhere(['like', 'TelefoneResponsavel', $this->TelefoneResponsavel]);
 
         return $dataProvider;
     }

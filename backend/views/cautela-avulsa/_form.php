@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use \yii\jui\DatePicker;
 use \kartik\widgets\FileInput;
+use yii\widgets\MaskedInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\CautelaAvulsa */
@@ -11,6 +12,8 @@ use \kartik\widgets\FileInput;
 ?>
 
 <div class="cautela-avulsa-form">
+
+	<?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['cautela-avulsa/index'], ['class' => 'btn btn-warning']) ?>
 
     <?php $form = ActiveForm::begin(); ?>
 	
@@ -30,7 +33,10 @@ use \kartik\widgets\FileInput;
 	
 	</div>
 	<div class="row">
-    <?= $form->field($model, 'TelefoneResponsavel',['options'=>['class'=>'col-md-3']])->textInput() ?>
+    <?= $form->field($model, 'TelefoneResponsavel',['options'=>['class'=>'col-md-3']])->widget(MaskedInput::className(),[
+    'name' => 'phone',
+    'mask' => '(99)-99999-9999',
+]); ?>
 	</div>
 	</div>
 	
@@ -57,7 +63,7 @@ use \kartik\widgets\FileInput;
 	</div>
 	</div>
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Salvar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

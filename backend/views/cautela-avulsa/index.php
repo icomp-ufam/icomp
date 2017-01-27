@@ -40,15 +40,16 @@ else if ( Yii::$app->user->identity->checarAcesso('secretaria') == 1){
         		'attribute'=>'ValidadeCautela',
             	'format'=>['date', 'php:d/m/Y'],
         	],
-            // 'TelefoneResponsavel',
+            [
+            	'attribute'=>'TelefoneResponsavel',
+            	'value'=>"telefoneFormatado",
+            ],
             // 'ObservacoesDescarte',
             // 'ImagemCautela',
             [   'label' => 'Status da Cautela',
                 'attribute' => 'StatusCautelaAvulsa',
                 'filter'=>array ("Em aberto" => "Em aberto", "Concluída" => "Concluída", "Em atraso" => "Em atraso"),
                 'value' => 'StatusCautelaAvulsa'
-
-
             ],
 
             ['class' => 'yii\grid\ActionColumn',

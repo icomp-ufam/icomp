@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\db\Expression;
+use app\models\User;
 
 /**
  * This is the model class for table "j17_cautela_avulsa".
@@ -39,7 +40,8 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
     {
         return [
             [['NomeResponsavel', 'Email', 'TelefoneResponsavel', 'ValidadeCautela'], 'required'],
-            [['id', 'TelefoneResponsavel'], 'integer'],
+            [['id',], 'integer'],
+        	[['TelefoneResponsavel'], 'string', 'max'=>15, 'min'=>11],
             [['NomeResponsavel', 'Email', 'ValidadeCautela', 'ObservacoesDescarte', 'StatusCautelaAvulsa'], 'string', 'max' => 50],
             [['ImagemCautela'], 'string', 'max' => 100],
             [['id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id' => 'id']],
@@ -53,7 +55,7 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
     {
         return [
             'idCautelaAvulsa' => 'Cod. Cautela Avulsa',
-            'id' => 'ID',
+            'id' => 'Usuário do Sistema',
             'NomeResponsavel' => 'Nome Responsavel',
             'Email' => 'Email',
             'ValidadeCautela' => 'Validade Cautela',
@@ -77,5 +79,22 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
         }
 
         return $tipoCautelaAvulsa;
+    }
+    
+    public function getCautelaAvulsaTemUsuario(){
+    	
+    	return $this->hasOne(User::className(), ["id" => "id"]);
+    }
+    
+    public function getTelefoneFormatado(){
+    	
+    	return preg_replace('/(\d{2})(\d{5})(\d{3})/i', '(${1}) ${2}-${3}', $this->TelefoneResponsavel);
+    }
+    
+    public function beforeSave($insert){
+    	
+    	$this->TelefoneResponsavel = str_replace(["(",")","-"," "],"",$this->TelefoneResponsavel);
+    	
+    	return true;
     }
 }

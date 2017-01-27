@@ -2,13 +2,14 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
+use yii\widgets\MaskedInput;
 /* @var $this yii\web\View */
 /* @var $model app\models\CautelaAvulsa */
 
 $this->title = $model->NomeResponsavel;
 $this->params['breadcrumbs'][] = ['label' => 'Cautela Avulsas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+$this->title = "Responsável: ".$this->title;
 ?>
 <div class="cautela-avulsa-view">
 
@@ -16,16 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['cautela-avulsa/index'], ['class' => 'btn btn-warning']) ?>
-        <?= Html::a('Update', ['update', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Você tem certeza que deseja apagar este item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a('Atualizar', ['update', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Dar Baixa Cautela', ['baixa-cautela-avulsa/create', 'id' => $model->idCautelaAvulsa], [
-            'class' => 'btn btn-danger',
+            'class' => 'btn btn-info',
             'data' => [
                 'confirm' => 'Você tem certeza que deseja dar baixa nesta Cautela?',
                 'method' => 'post',
@@ -35,6 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
                // $this->redirect(array('descarte-equipamento/create', 'id' => $model->idEquipamento)),
             ],
+        ]) ?>        
+        <?= Html::a('Remover', ['delete', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Você tem certeza que deseja apagar este item?',
+                'method' => 'post',
+            ],
         ]) ?>
     </p>
 
@@ -42,11 +43,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'idCautelaAvulsa',
-            'id',
+            [
+            	'attribute'=>'id',
+            	'value'=>(($model->cautelaAvulsaTemUsuario != null)? $model->cautelaAvulsaTemUsuario->nome : "Usuário Não Encontrado"),
+            ],
             'NomeResponsavel',
             'Email:email',
             'ValidadeCautela',
-            'TelefoneResponsavel',
+            [
+            	'attribute'=>'TelefoneResponsavel',
+            	'format'=>'text',
+            	'value' =>$model->telefoneFormatado,
+            ],
             'ObservacoesDescarte',
         	[
         	'attribute' => 'ImagemCautela',
