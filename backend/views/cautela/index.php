@@ -80,7 +80,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'ValidadeCautela',
             // 'TelefoneResponsavel',
             // 'ImagemCautela',
+            [
            	'attribute'=>'Equipamento',
+            'value'=>'cautelatemequipamento.NomeEquipamento',
+            ],
             // 'StatusCautela',
             [   'label' => 'Status da Cautela',
                 'attribute' => 'StatusCautela',

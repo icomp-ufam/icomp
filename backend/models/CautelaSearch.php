@@ -6,6 +6,8 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use backend\models\Cautela;
+use yii\base\Object;
+use backend\models\Equipamento;
 
 /**
  * CautelaSearch represents the model behind the search form of `backend\models\Cautela`.
@@ -60,7 +62,7 @@ class CautelaSearch extends Cautela
         // grid filtering conditions
         $query->andFilterWhere([
             'idCautela' => $this->idCautela,
-            'idEquipamento' => $this->idEquipamento,
+            //'idEquipamento' => $this->idEquipamento,
             'idProjeto' => $this->idProjeto,
         ]);
 
@@ -71,9 +73,19 @@ class CautelaSearch extends Cautela
             ->andFilterWhere(['like', 'ValidadeCautela', $this->ValidadeCautela])
             ->andFilterWhere(['like', 'TelefoneResponsavel', $this->TelefoneResponsavel])
             ->andFilterWhere(['like', 'ImagemCautela', $this->ImagemCautela])
-            ->andFilterWhere(['like', 'Equipamento', $this->Equipamento])
+            //->andFilterWhere(['like', 'Equipamento', $this->Equipamento])
             ->andFilterWhere(['like', 'StatusCautela', $this->StatusCautela]);
+        	//->andFilterWhere(['like', 'nomeEquipamento', $this->nomeEquipamento])
 
+        if(trim($this->Equipamento)!==''){
+        	$equips = Equipamento::find()->where(['like', 'NomeEquipamento',$this->Equipamento])->all();
+        	$idsEquip;
+	        foreach($equips as $eq){
+	        	$idsEquip[] = $eq->idEquipamento;
+	        }
+	    	$query->andFilterWhere(['idEquipamento' => $idsEquip]);
+		    	
+        }
         return $dataProvider;
     }
 }

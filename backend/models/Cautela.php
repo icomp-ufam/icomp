@@ -24,6 +24,7 @@ use backend\models\Equipamento;
 class Cautela extends \yii\db\ActiveRecord
 {
 	public $idsmulticautela;
+	public $nomeEquipamento;
 	
     /**
      * @inheritdoc
@@ -41,10 +42,10 @@ class Cautela extends \yii\db\ActiveRecord
         return [
             [['NomeResponsavel', 'OrigemCautela', 'Email', 'TelefoneResponsavel', 'StatusCautela'], 'required'],
             [['idEquipamento', 'idProjeto'], 'integer'],
-            [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel', 'Equipamento', 'StatusCautela'], 'string', 'max' => 50],
+            [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel', 'Equipamento','nomeEquipamento', 'StatusCautela'], 'string', 'max' => 50],
             [['ImagemCautela'], 'string', 'max' => 100],
             [['idEquipamento'], 'exist', 'skipOnError' => true, 'targetClass' => Equipamento::className(), 'targetAttribute' => ['idEquipamento' => 'idEquipamento']],
-        	[['idsmulticautela'], 'safe'],	
+        	[['idsmulticautela', 'nomeEquipamento'], 'safe'],	
         ];
     }
 
@@ -67,6 +68,7 @@ class Cautela extends \yii\db\ActiveRecord
             'idEquipamento' => 'Equipamento',
             'idProjeto' => 'Projeto',
         	'idsmulticautela' => 'Cautelas',
+        	'nomeEquipamento'=>'Nome Equip.',
         ];
     }
     
