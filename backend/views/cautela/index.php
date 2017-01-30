@@ -91,8 +91,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'StatusCautela'
             ],
             // 'idEquipamento',
-            'idProjeto',
-
+            [
+            	'attribute'=>'nomeProjeto',
+            	'value'=>'cautelatemprojeto.nomeprojeto',
+            ],
             ['class' => 'yii\grid\ActionColumn',
             'template'=>'{view} {delete} {update}',
             	'buttons'=>[

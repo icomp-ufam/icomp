@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use backend\models\Cautela;
 use yii\base\Object;
 use backend\models\Equipamento;
+use backend\models\ContProjProjetos;
 
 /**
  * CautelaSearch represents the model behind the search form of `backend\models\Cautela`.
@@ -21,7 +22,7 @@ class CautelaSearch extends Cautela
     {
         return [
             [['idCautela', 'idEquipamento', 'idProjeto'], 'integer'],
-            [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel', 'ImagemCautela', 'Equipamento', 'StatusCautela'], 'safe'],
+            [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel', 'ImagemCautela', 'Equipamento', 'StatusCautela', 'nomeProjeto'], 'safe'],
         ];
     }
 
@@ -50,7 +51,7 @@ class CautelaSearch extends Cautela
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
+        
         $this->load($params);
 
         if (!$this->validate()) {
@@ -77,6 +78,7 @@ class CautelaSearch extends Cautela
             ->andFilterWhere(['like', 'StatusCautela', $this->StatusCautela]);
         	//->andFilterWhere(['like', 'nomeEquipamento', $this->nomeEquipamento])
 
+         //Filtro de Equipamentos pelo Nome
         if(trim($this->Equipamento)!==''){
         	$equips = Equipamento::find()->where(['like', 'NomeEquipamento',$this->Equipamento])->all();
         	$idsEquip = [];
@@ -85,6 +87,17 @@ class CautelaSearch extends Cautela
 	        }
 	    	$query->andFilterWhere(['idEquipamento' => $idsEquip]);
         }
+        
+        //Filtro de Projetos pelo Nome
+        if(trim($this->nomeProjeto)!==''){
+        	$projs = ContProjProjetos::find()->where(['like', 'nomeprojeto',$this->nomeProjeto])->all();
+        	$idsProj = [];
+        	foreach($projs as $proj){
+        		$idsProj[] = $proj->id;
+        	}
+        	$query->andFilterWhere(['idProjeto' => $idsProj]);
+        }
+        
         return $dataProvider;
     }
 }

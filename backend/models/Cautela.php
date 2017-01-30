@@ -4,7 +4,7 @@ namespace backend\models;
 
 use Yii;
 use backend\models\Equipamento;
-
+use backend\models\ContProjProjetos;
 /**
  * This is the model class for table "j17_cautela".
  *
@@ -25,6 +25,7 @@ class Cautela extends \yii\db\ActiveRecord
 {
 	public $idsmulticautela;
 	public $nomeEquipamento;
+	public $nomeProjeto;
 	
     /**
      * @inheritdoc
@@ -44,8 +45,9 @@ class Cautela extends \yii\db\ActiveRecord
             [['idEquipamento', 'idProjeto'], 'integer'],
             [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel', 'Equipamento','nomeEquipamento', 'StatusCautela'], 'string', 'max' => 50],
             [['ImagemCautela'], 'string', 'max' => 100],
+        	[['nomeProjeto'], 'string', 'max'=>200],
             [['idEquipamento'], 'exist', 'skipOnError' => true, 'targetClass' => Equipamento::className(), 'targetAttribute' => ['idEquipamento' => 'idEquipamento']],
-        	[['idsmulticautela', 'nomeEquipamento'], 'safe'],	
+        	[['idsmulticautela', 'nomeEquipamento', 'nomeProjeto'], 'safe'],	
         ];
     }
 
@@ -69,10 +71,15 @@ class Cautela extends \yii\db\ActiveRecord
             'idProjeto' => 'Projeto',
         	'idsmulticautela' => 'Cautelas',
         	'nomeEquipamento'=>'Nome Equip.',
+        	'nomeProjeto'=>'Projeto',
         ];
     }
     
     public function getCautelatemequipamento(){
     	return $this->hasOne(Equipamento::className(),['idEquipamento'=>'idEquipamento']);
+    }
+    
+    public function getCautelatemprojeto(){
+    	return $this->hasOne(ContProjProjetos::className(),['id'=>'idProjeto']);
     }
 }
