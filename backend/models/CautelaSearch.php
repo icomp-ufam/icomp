@@ -79,12 +79,11 @@ class CautelaSearch extends Cautela
 
         if(trim($this->Equipamento)!==''){
         	$equips = Equipamento::find()->where(['like', 'NomeEquipamento',$this->Equipamento])->all();
-        	$idsEquip;
+        	$idsEquip = [];
 	        foreach($equips as $eq){
 	        	$idsEquip[] = $eq->idEquipamento;
 	        }
 	    	$query->andFilterWhere(['idEquipamento' => $idsEquip]);
-		    	
         }
         return $dataProvider;
     }
