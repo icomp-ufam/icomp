@@ -51,7 +51,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'Email:email',
             'ValidadeCautela',
             'TelefoneResponsavel',
-            'ImagemCautela',
             'StatusCautela',
             [
             	'attribute'=>'NomeEquipamento',
