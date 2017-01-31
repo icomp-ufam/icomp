@@ -112,8 +112,31 @@ class CautelaController extends Controller
         }
 
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->idCautela]);
+        } */
+        if ($model->load(Yii::$app->request->post())) {
+        	//$model->id = Yii::$app->user->id;
+        	$arq = UploadedFile::getInstance($model, 'ImagemCautela');
+        	if($arq!==null){
+        		$arquivo = $model->idCautela.'-'.$arq->baseName;
+        		$arquivo = 'repositorio/cautelas/'.$arquivo.'.'.$arq->extension;
+        		$model ->ImagemCautela = $arquivo;
+        		$arq->saveAs($arquivo);
+        	}
+        	//$model->url = 'repositorio/'.$arquivo.'.'.$model->ImagemEquipamento->extension;
+        
+        
+        	if (!$model->save()) {
+        		print_r($model->getErrors());
+        		echo Yii::$app->user->id;
+        		return;
+        	}
+        	return $this->redirect(['view', 'id' => $model->idCautela]);
+        	//return $this->redirect(['view', 'idCautela' => $model->idCautela, 'id' => $model->id]);
+        
+        
+        
         } else {
             return $this->render('create', [
                 'model' => $model,
