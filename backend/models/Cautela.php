@@ -67,7 +67,7 @@ class Cautela extends \yii\db\ActiveRecord
             'ImagemCautela' => 'Imagem Cautela',
             'Equipamento' => 'Equipamento',
             'StatusCautela' => 'Status',
-            'idEquipamento' => 'Equipamento',
+            'idEquipamento' => 'Cod. Equipamento',
             'idProjeto' => 'Projeto',
         	'idsmulticautela' => 'Cautelas',
         	'nomeEquipamento'=>'Nome Equip.',
@@ -77,6 +77,10 @@ class Cautela extends \yii\db\ActiveRecord
     
     public function getCautelatemequipamento(){
     	return $this->hasOne(Equipamento::className(),['idEquipamento'=>'idEquipamento']);
+    }
+    
+    public function getNomeEquipamento(){
+    	return $this->cautelatemequipamento->NomeEquipamento;
     }
     
     public function getCautelatemprojeto(){
