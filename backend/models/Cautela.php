@@ -41,7 +41,7 @@ class Cautela extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['NomeResponsavel', 'OrigemCautela', 'Email', 'TelefoneResponsavel', 'StatusCautela'], 'required'],
+            [['NomeResponsavel', 'OrigemCautela', 'Email', 'TelefoneResponsavel', 'StatusCautela', 'idEquipamento', 'idProjeto'], 'required'],
             [['idEquipamento', 'idProjeto'], 'integer'],
             [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel', 'Equipamento','nomeEquipamento', 'StatusCautela'], 'string', 'max' => 50],
             [['ImagemCautela'], 'string', 'max' => 100],

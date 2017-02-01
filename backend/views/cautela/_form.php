@@ -56,7 +56,7 @@ $this->registerJs(
     </div>
     <div class="row">
     <?= $form->field($model, 'OrigemCautela', ['options' => ['class' => 'col-md-3']])->textInput(['maxlength' => true]) ?>    
-    <?= $form->field($model, 'idProjeto', ['options' => ['class' => 'col-md-3']])->dropDownList([ArrayHelper::map(backend\models\ContProjProjetos::find()->all(),'id','nomeprojeto')]) ?>
+    <?= $form->field($model, 'idProjeto', ['options' => ['class' => 'col-md-3']])->dropDownList(ArrayHelper::map(backend\models\ContProjProjetos::find()->all(),'id','nomeprojeto')) ?>
 	</div>
    </div>
      <div class="panel-heading">
