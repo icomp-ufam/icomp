@@ -212,7 +212,7 @@ class CautelaController extends Controller
                         <tbody>
                             <tr>
                                 <td>
-                                    <p>Respons&aacute;vel:</p>
+                                    <p><b>Respons&aacute;vel:</b></p>
                                 </td>
                                 <td colspan="3" width="612">
                                 <p>'.$model->NomeResponsavel.'</p>
@@ -221,13 +221,13 @@ class CautelaController extends Controller
 
                             <tr>
                                 <td width="95">
-                                    <p>Contato:</p>
+                                    <p><b>Contato:</b></p>
                                 </td>
                                 <td width="214">
                                     <p>'.$model->TelefoneResponsavel.'.</p>
                                 </td>
                                 <td width="66">
-                                    <p>Email:</p>
+                                    <p><b>Email:</b></p>
                                 </td>
                                 <td width="331">
                                     <p>'.$model->Email.'</p>
@@ -242,16 +242,16 @@ class CautelaController extends Controller
                         <tbody>
                             <tr>
                                 <td style="width: 147.5px;">
-                                    <p>Origem:</p>
+                                    <p><b>Origem:</b></p>
                                 </td>
                                 <td style="width: 179.5px;">
-                                    <p>Nota Fiscal:</p>
+                                    <p><b>Nota Fiscal:</b></p>
                                 </td>
                                 <td style="width: 225px;">
-                                    <p>Equipamento:</p>
+                                    <p><b>Equipamento:</b></p>
                                 </td>
                                 <td style="width: 152px;">
-                                    <p>N&ordm;. de S&eacute;rie:</p>
+                                    <p><b>N&ordm;. de S&eacute;rie:</b></p>
                                 </td>
                             </tr>
 

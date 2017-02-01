@@ -30,6 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
 				var idschecked = $('[name=\"selection[]\"]').filter(':checked');
 				var i, ckd;
 				
+				//Se o usuario clicou em gerar pdf mas nao selecionou nenhuma cautela, nao submetemos..
+				if(idschecked.length == 0){
+					alert('Para gerar pdf de cautelas, selecione as cautelas desejadas na grade abaixo.');
+					return false;
+				}
+				
 				//Aqui checamos se nao ha elemento repetido, pois o evento submit, nao sei porque, eh disparado duas vezes ao clicar no botao Gerar PDF.
 				for(i = 0; i<idschecked.length; i++){
 					ckd = $(idschecked[i]).val();
@@ -38,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				}
 				
 				$('#cautela-idsmulticautela').val(ids.toString());
-								
+				
 		        return true;
 		    });	
 			",
