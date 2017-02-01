@@ -61,10 +61,11 @@ class BaixaCautelaAvulsaSearch extends BaixaCautelaAvulsa
         $query->andFilterWhere([
             'idBaixaCautelaAvulsa' => $this->idBaixaCautelaAvulsa,
             'idCautelaAvulsa' => $this->idCautelaAvulsa,
+        	'DataDevolucao' => $this->DataDevolucao,
         ]);
 
         $query->andFilterWhere(['like', 'Recebedor', $this->Recebedor])
-            ->andFilterWhere(['like', 'DataDevolucao', $this->DataDevolucao])
+            //->andFilterWhere(['like', )
             ->andFilterWhere(['like', 'Equipamento', $this->Equipamento])
             ->andFilterWhere(['like', 'ObservacaoBaixaCautela', $this->ObservacaoBaixaCautela]);
 

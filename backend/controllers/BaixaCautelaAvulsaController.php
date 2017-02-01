@@ -95,6 +95,7 @@ class BaixaCautelaAvulsaController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        	print_r($model->DataDevolucao);
             return $this->redirect(['view', 'id' => $model->idBaixaCautelaAvulsa]);
         } else {
             return $this->render('update', [

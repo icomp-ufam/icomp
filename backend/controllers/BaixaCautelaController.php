@@ -75,7 +75,7 @@ class BaixaCautelaController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $cautela->StatusCautela = "Concluída";
             $cautela->save();
-
+			//print_r($model->DataDevolucao);
             return $this->redirect(['view', 'id' => $model->idBaixaCautela]);
         } else {
             return $this->render('create', [
@@ -96,6 +96,7 @@ class BaixaCautelaController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        	//print_r($model->DataDevolucao);
             return $this->redirect(['view', 'id' => $model->idBaixaCautela]);
         } else {
             return $this->render('update', [
