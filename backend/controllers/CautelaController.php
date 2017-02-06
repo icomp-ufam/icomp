@@ -117,6 +117,13 @@ class CautelaController extends Controller
         } */
         if ($model->load(Yii::$app->request->post())) {
         	//$model->id = Yii::$app->user->id;
+        	
+        	$equipamento = Equipamento::findOne($model->idEquipamento);
+        	//if($equipamento !== null){
+        		$equipamento->StatusEquipamento = 'Descartado';
+        		$equipamento->save();
+        	//}
+        	
         	$arq = UploadedFile::getInstance($model, 'ImagemCautela');
         	if($arq!==null){
         		$arquivo = $model->idCautela.'-'.$arq->baseName;
