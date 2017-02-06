@@ -15,7 +15,9 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'NomeResponsavel')->textInput(['maxlength' => true]) ?>
-
+    
+    <?php //hidden input do equipamento ?>
+	
     <?= $form->field($model, 'Email')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'TelefoneResponsavel')->textInput(['maxlength' => true]) ?>

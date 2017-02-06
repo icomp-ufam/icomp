@@ -115,8 +115,8 @@ class EquipamentoController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-
+        
+		$model = new Equipamento();
         if ($model->load(Yii::$app->request->post())) {
 
             //$model->file = UploadedFile::getInstance($model, 'file');
@@ -126,13 +126,15 @@ class EquipamentoController extends Controller
             //}
 
             $arq = UploadedFile::getInstance($model, 'ImagemEquipamento');
-            $arquivo = $model->idEquipamento.'-'.$model->NomeEquipamento;
-            $arquivo = 'repositorio/equipamentos/'.$arquivo.'.'.$arq->extension;
+            $oldName = Equipamento::findOne($id);
+            $newName = $model->ImagemEquipamento;
             if($arq !== null){
+            	$arquivo = $model->idEquipamento.'-'.$model->NomeEquipamento;
+            	$arquivo = 'repositorio/equipamentos/'.$arquivo.'.'.$arq->extension;
                 $model -> ImagemEquipamento = $arquivo;
                 $arq->saveAs($arquivo);
             }
-
+			
             if ($model->save()) {
                 if($model->file){
                     $model->file->saveAs($model->ImagemEquipamento);
@@ -146,6 +148,7 @@ class EquipamentoController extends Controller
             //return $this->redirect(['view', 'id' => $model->idEquipamento]);
 
         } else {
+        	$model = $this->findModel($id);
             return $this->render('update', [
                 'model' => $model,
             ]);

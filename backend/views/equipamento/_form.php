@@ -10,6 +10,8 @@ use yii\widgets\ActiveForm;
 
 <div class="equipamento-form">
 
+	
+
     <?php $form = ActiveForm::begin(); ?>
     
 	<div class="panel panel-default" style="width:80%">

@@ -42,6 +42,7 @@ class Equipamento extends \yii\db\ActiveRecord
         return [
             [['NomeEquipamento', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento'], 'required'],
             [['NomeEquipamento', 'Nserie', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento', 'ImagemEquipamento'], 'string', 'max' => 50],
+        	[['ImagemEquipamento'], 'safe'],
 
         ];
     }
