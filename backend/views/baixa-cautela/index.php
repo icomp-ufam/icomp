@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'idBaixaCautela',
             'idCautela',
-            'idCautelaAvulsa',
+            //'idCautelaAvulsa',
             'Recebedor',
             'DataDevolucao',
             // 'Equipamento',

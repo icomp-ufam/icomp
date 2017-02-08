@@ -71,18 +71,30 @@ class DescarteEquipamentoController extends Controller
         $model = new DescarteEquipamento();
         //$model->idEquipamento = $id;
         $equipamento = new Equipamento();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $equipamento = Equipamento::findOne($model->idEquipamento);
-            $equipamento->StatusEquipamento = "Descartado";
-            $equipamento->save();
-            return $this->redirect(['view', 'id' => $model->idDescarte]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-                'item' => $equipamento
-            ]);
+        
+        if(isset(Yii::$app->request->get()['idEquipamento'])){
+        	$model->idEquipamento = Yii::$app->request->get()['idEquipamento'];
         }
+		//print_r(Yii::$app->request->post());
+        //print_r(Yii::$app->request->get()['idEquipamento']);
+		//return;
+		$equipamento = Equipamento::findOne($model->idEquipamento);
+		if($equipamento->StatusEquipamento == Equipamento::getStatusDisponivel()){
+	        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+	            $equipamento->StatusEquipamento = Equipamento::getStatusDescartado();
+	            $equipamento->save();
+	            return $this->redirect(['view', 'id' => $model->idDescarte]);
+	        } else {
+	            return $this->render('create', [
+	                'model' => $model,
+	            	'item'=>$equipamento,
+	            ]);
+	        }
+		}else{
+			$this->mensagens('warning', "Equipamento Indisponível", "Para descartar o equipamento ele precisa estar disponível.");
+			
+			return $this->redirect(['equipamento/index']);
+		}
     }
 
     /**
@@ -132,4 +144,20 @@ class DescarteEquipamentoController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    
+    /* Envio de mensagens para views
+     Tipo: success, danger, warning*/
+    protected function mensagens($tipo, $titulo, $mensagem){
+    	Yii::$app->session->setFlash($tipo, [
+    			'type' => $tipo,
+    			'icon' => 'home',
+    			'duration' => 5000,
+    			'message' => $mensagem,
+    			'title' => $titulo,
+    			'positonY' => 'top',
+    			'positonX' => 'center',
+    			'showProgressbar' => true,
+    	]);
+    }
+    
 }

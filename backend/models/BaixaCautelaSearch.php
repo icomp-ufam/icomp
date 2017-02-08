@@ -18,7 +18,7 @@ class BaixaCautelaSearch extends BaixaCautela
     public function rules()
     {
         return [
-            [['idBaixaCautela', 'idCautela', 'idCautelaAvulsa'], 'integer'],
+            [['idBaixaCautela', 'idCautela'], 'integer'],
             [['Recebedor', 'DataDevolucao', 'Equipamento', 'ObservacaoBaixaCautela'], 'safe'],
         ];
     }
@@ -61,7 +61,7 @@ class BaixaCautelaSearch extends BaixaCautela
         $query->andFilterWhere([
             'idBaixaCautela' => $this->idBaixaCautela,
             'idCautela' => $this->idCautela,
-            'idCautelaAvulsa' => $this->idCautelaAvulsa,
+           // 'idCautelaAvulsa' => $this->idCautelaAvulsa,
         ]);
 
         $query->andFilterWhere(['like', 'Recebedor', $this->Recebedor])

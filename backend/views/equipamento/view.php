@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('Descartar Equipamento', ['descarte-equipamento/create', 'id' => $model->idEquipamento], [
+        <?= Html::a('Descartar Equipamento', ['descarte-equipamento/create', 'idEquipamento' => $model->idEquipamento], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Você tem certeza que deseja dar baixa neste Equipamento?',

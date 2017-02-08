@@ -90,4 +90,20 @@ class Equipamento extends \yii\db\ActiveRecord
             return false;
         }
     }
+   
+   public static function getEquipamentosDisponiveisAll(){
+   	return Equipamento::find()->where("StatusEquipamento = \"".Equipamento::getStatusDisponivel()."\"")->all();
+   }
+   
+   public static function getStatusDisponivel(){
+   	return "Disponível";
+   }
+   
+   public static function getStatusDescartado(){
+   	return "Descartado";
+   }
+   
+   public static function getStatusEmUso(){
+   	return "Em uso";
+   }
 }

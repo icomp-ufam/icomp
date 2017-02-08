@@ -9,7 +9,7 @@ use app\models\BaixaCautelaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use backend\models\Equipamento;
 
 /**
  * BaixaCautelaController implements the CRUD actions for BaixaCautela model.
@@ -67,14 +67,17 @@ class BaixaCautelaController extends Controller
     {
         
         $cautela = Cautela::findOne($id);
-
+		$equipamento = Equipamento::findOne($cautela->idEquipamento);
         $model = new BaixaCautela();
         
         $model->idCautela = $id;
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $cautela->StatusCautela = "Concluída";
+            $cautela->StatusCautela = Cautela::getStatusConcluida();
             $cautela->save();
+            
+            $equipamento->StatusEquipamento = Equipamento::getStatusDisponivel();
+            $equipamento->save();
 			//print_r($model->DataDevolucao);
             return $this->redirect(['view', 'id' => $model->idBaixaCautela]);
         } else {

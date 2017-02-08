@@ -6,6 +6,7 @@ use yii\widgets\MaskedInput;
 use kartik\widgets\DatePicker;
 use \yii\helpers\ArrayHelper;
 use yii\web\View;
+use backend\models\Cautela;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Cautela */
@@ -52,7 +53,7 @@ $this->registerJs(
     </div>
     <div class="panel-body"> 
     <div class="row">
-    <?= $form->field($model, 'Equipamento', ['options' => ['class' => 'col-md-3']])->dropDownList(ArrayHelper::map(backend\models\Equipamento::find()->all(),'idEquipamento','NomeEquipamento')) ?>
+    <?= $form->field($model, 'Equipamento', ['options' => ['class' => 'col-md-3']])->dropDownList(ArrayHelper::map(backend\models\Equipamento::getEquipamentosDisponiveisAll(),'idEquipamento','NomeEquipamento')) ?>
     </div>
     <div class="row">
     <?= $form->field($model, 'OrigemCautela', ['options' => ['class' => 'col-md-3']])->textInput(['maxlength' => true]) ?>    
@@ -64,7 +65,7 @@ $this->registerJs(
     </div>
     <div class="panel-body">
 	<div class="row">
-    <?= $form->field($model, 'StatusCautela', ['options' => ['class' => 'col-md-3']])->dropDownList(['Em aberto' => 'Em aberto','Concluída'=> 'Concluída','Em atraso'=>'Em atraso']) ?>
+    <?= $form->field($model, 'StatusCautela', ['options' => ['class' => 'col-md-3']])->dropDownList([Cautela::getStatusAberto() => Cautela::getStatusAberto(),Cautela::getStatusConcluida()=> Cautela::getStatusConcluida(),Cautela::getStatusAtraso()=>Cautela::getStatusAtraso()]) ?>
    	</div>
 	
 

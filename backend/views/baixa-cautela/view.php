@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'idBaixaCautela',
             'idCautela',
-            'idCautelaAvulsa',
+            //'idCautelaAvulsa',
             'Recebedor',
             'DataDevolucao',
             'Equipamento',

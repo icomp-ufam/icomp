@@ -120,7 +120,7 @@ class CautelaController extends Controller
         	
         	$equipamento = Equipamento::findOne($model->idEquipamento);
         	//if($equipamento !== null){
-        		$equipamento->StatusEquipamento = 'Descartado';
+        		$equipamento->StatusEquipamento = Equipamento::getStatusEmUso();
         		$equipamento->save();
         	//}
         	

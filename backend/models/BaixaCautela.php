@@ -33,7 +33,7 @@ class BaixaCautela extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idCautela', 'idCautelaAvulsa'], 'integer'],
+            [['idCautela',], 'integer'],
             [['Recebedor', 'ObservacaoBaixaCautela'], 'required'],
             [['Recebedor', 'DataDevolucao', 'Equipamento', 'ObservacaoBaixaCautela'], 'string', 'max' => 50],
             [['idCautela'], 'exist', 'skipOnError' => true, 'targetClass' => Cautela::className(), 'targetAttribute' => ['idCautela' => 'idCautela']],

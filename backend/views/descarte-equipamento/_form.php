@@ -15,14 +15,14 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'NomeResponsavel')->textInput(['maxlength' => true]) ?>
-    
-    <?php //hidden input do equipamento ?>
 	
     <?= $form->field($model, 'Email')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'TelefoneResponsavel')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'ObservacoesDescarte')->textInput(['maxlength' => true]) ?>
+
+	<?php $form->field($model, 'idEquipamento')->hiddenInput()->label(false); ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

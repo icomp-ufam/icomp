@@ -86,4 +86,16 @@ class Cautela extends \yii\db\ActiveRecord
     public function getCautelatemprojeto(){
     	return $this->hasOne(ContProjProjetos::className(),['id'=>'idProjeto']);
     }
+    
+    public static function getStatusAtraso(){
+    	return "Em atraso";
+    }
+    
+    public static function getStatusConcluida(){
+    	return "Concluída";
+    }
+    
+    public static function getStatusAberto(){
+    	return "Em aberto";
+    }
 }
