@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\UploadForm;
 use yii\web\UploadedFile;
+use yii\db\Exception;
 
 
 /**
@@ -164,9 +165,16 @@ class EquipamentoController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+    	
+    	try {
+        	$this->findModel($id)->delete();
+    	}catch (yii\db\IntegrityException $e){
+        	//Adiciona flash do erro
+    		$this->mensagens('warning', "Equipamento Não pode ser Deletado", "Este equipamento é referenciado em outro documento.");
+    		return $this->redirect(['view', 'id'=>$id]);
+    	}
+    	
+    	return $this->redirect(['index']);
     }
 
     /**
@@ -185,6 +193,19 @@ class EquipamentoController extends Controller
         }
     }
 
-
+    /* Envio de mensagens para views
+     Tipo: success, danger, warning*/
+    protected function mensagens($tipo, $titulo, $mensagem){
+    	Yii::$app->session->setFlash($tipo, [
+    			'type' => $tipo,
+    			'icon' => 'home',
+    			'duration' => 5000,
+    			'message' => $mensagem,
+    			'title' => $titulo,
+    			'positonY' => 'top',
+    			'positonX' => 'center',
+    			'showProgressbar' => true,
+    	]);
+    }
 
 }
