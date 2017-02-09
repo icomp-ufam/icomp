@@ -106,4 +106,31 @@ class Equipamento extends \yii\db\ActiveRecord
    public static function getStatusEmUso(){
    	return "Em uso";
    }
+   
+   public static function getStatusIndisponivel(){
+   	return "Indisponível";
+   }
+   
+   public static function getStatusManuais(){
+   	return [Equipamento::getStatusDisponivel() => Equipamento::getStatusDisponivel(), Equipamento::getStatusIndisponivel() => Equipamento::getStatusIndisponivel()];
+   }
+   
+   /*
+    * Retorna a lista label=>valor de status permitidos.
+    * Retorna null se não permitir mudança manual de status.  
+    */
+   
+   public function getStatusPermitidos(){
+   		if($this->isNewRecord
+   			|| 
+   		   $this->StatusEquipamento == Equipamento::getStatusDisponivel()
+   			||
+   			$this->StatusEquipamento == Equipamento::getStatusIndisponivel()
+   		  )
+   		{
+   			return Equipamento::getStatusManuais(); 
+   		}
+   		
+   		return [$this->StatusEquipamento => $this->StatusEquipamento];
+   }
 }

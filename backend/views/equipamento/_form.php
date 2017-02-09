@@ -33,7 +33,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'OrigemEquipamento', ['options' => ['class' => 'col-md-3']])->textInput(['maxlength' => true]) ?>
 	</div>
 	<div class="row">
-	<?= $form->field($model, 'StatusEquipamento', ['options' => ['class' => 'col-md-3']])->dropDownList(['Disponível' => 'Disponível','Em uso'=> 'Em uso','Descartado'=>'Descartado']) ?>
+	<?= $form->field($model, 'StatusEquipamento', ['options' => ['class' => 'col-md-3']])->dropDownList($model->statusPermitidos) ?>
 	
     <?= $form->field($model, 'ImagemEquipamento', ['options' => ['class' => 'col-md-3']])->fileInput() ?>
     </div>
