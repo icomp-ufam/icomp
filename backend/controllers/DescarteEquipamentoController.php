@@ -75,9 +75,7 @@ class DescarteEquipamentoController extends Controller
         if(isset(Yii::$app->request->get()['idEquipamento'])){
         	$model->idEquipamento = Yii::$app->request->get()['idEquipamento'];
         }
-		//print_r(Yii::$app->request->post());
-        //print_r(Yii::$app->request->get()['idEquipamento']);
-		//return;
+
 		$equipamento = Equipamento::findOne($model->idEquipamento);
 		if($equipamento->StatusEquipamento == Equipamento::getStatusDisponivel()){
 	        if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -91,7 +89,7 @@ class DescarteEquipamentoController extends Controller
 	            ]);
 	        }
 		}else{
-			$this->mensagens('warning', "Equipamento Indisponível", "Para descartar o equipamento ele precisa estar disponível.");
+			$this->mensagens('warning', "Equipamento $equipamento->StatusEquipamento", "Para descartar o equipamento ele precisa estar Disponível.");
 			
 			return $this->redirect(['equipamento/index']);
 		}

@@ -98,18 +98,19 @@ class Equipamento extends \yii\db\ActiveRecord
    public static function getStatusDisponivel(){
    	return "Disponível";
    }
-   
-   public static function getStatusDescartado(){
-   	return "Descartado";
+
+   public static function getStatusIndisponivel(){
+   	return "Indisponível";
    }
    
    public static function getStatusEmUso(){
    	return "Em uso";
    }
    
-   public static function getStatusIndisponivel(){
-   	return "Indisponível";
+   public static function getStatusDescartado(){
+   	return "Descartado";
    }
+   
    
    public static function getStatusManuais(){
    	return [Equipamento::getStatusDisponivel() => Equipamento::getStatusDisponivel(), Equipamento::getStatusIndisponivel() => Equipamento::getStatusIndisponivel()];

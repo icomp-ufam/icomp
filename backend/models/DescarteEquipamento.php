@@ -42,10 +42,10 @@ class DescarteEquipamento extends \yii\db\ActiveRecord
     {
         return [
             'idDescarte' => 'Id Descarte',
-            'NomeResponsavel' => 'Nome Responsavel',
+            'NomeResponsavel' => 'Responsável',
             'Email' => 'Email',
-            'TelefoneResponsavel' => 'Telefone Responsavel',
-            'ObservacoesDescarte' => 'Observacoes Descarte',
+            'TelefoneResponsavel' => 'Telefone',
+            'ObservacoesDescarte' => 'Observacões do Descarte',
         ];
     }
 }

@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="equipamento-form">
 
-	
+	<?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['equipamento/index'], ['class' => 'btn btn-warning']) ?>
 
     <?php $form = ActiveForm::begin(); ?>
     
