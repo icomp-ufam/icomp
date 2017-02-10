@@ -59,7 +59,7 @@ class EquipamentoController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
-
+    
     /**
      * Creates a new Equipamento model.
      * If creation is successful, the browser will be redirected to the 'view' page.

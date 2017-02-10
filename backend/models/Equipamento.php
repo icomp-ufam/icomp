@@ -5,6 +5,7 @@ namespace backend\models;
 use Yii;
 use yii\web\UploadedFile;
 use yii\db\Expression;
+use app\models\DescarteEquipamento;
 
 /**
  * This is the model class for table "j17_equipamento".
@@ -133,5 +134,12 @@ class Equipamento extends \yii\db\ActiveRecord
    		}
    		
    		return [$this->StatusEquipamento => $this->StatusEquipamento];
+   }
+   
+   public function getEquipamentoTemDescarte(){
+   	if($this->StatusEquipamento === Equipamento::getStatusDescartado())
+		return $this->hasOne(DescarteEquipamento::className(), ['idEquipamento'=>'idEquipamento']);
+   	
+	return false;
    }
 }

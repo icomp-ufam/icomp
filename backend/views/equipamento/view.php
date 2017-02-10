@@ -32,6 +32,14 @@ $this->params['breadcrumbs'][] = $this->title;
                // $this->redirect(array('descarte-equipamento/create', 'id' => $model->idEquipamento)),
             ], 
         ]) ?>
+        <?= Html::a('Reverter Descarte', ['descarte-equipamento/revert', 'idEquipamento' => $model->idEquipamento], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Você tem certeza que deseja reverter este descarte?',
+                'method' => 'post',
+               // $this->redirect(array('descarte-equipamento/create', 'id' => $model->idEquipamento)),
+            ], 
+        ]) ?>
     </p>
 
     <?= DetailView::widget([

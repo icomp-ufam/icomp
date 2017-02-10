@@ -77,7 +77,7 @@ class DescarteEquipamentoController extends Controller
         }
 
 		$equipamento = Equipamento::findOne($model->idEquipamento);
-		if($equipamento->StatusEquipamento == Equipamento::getStatusDisponivel()){
+		if($equipamento->StatusEquipamento === Equipamento::getStatusDisponivel()){
 	        if ($model->load(Yii::$app->request->post()) && $model->save()) {
 	            $equipamento->StatusEquipamento = Equipamento::getStatusDescartado();
 	            $equipamento->save();
@@ -125,6 +125,27 @@ class DescarteEquipamentoController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+    
+    public function actionRevert($idEquipamento)
+    {
+    	$equipamento = Equipamento::findOne($idEquipamento);
+    	
+    	//Em caso de inconsistência durante migrações do banco, melhor avisar o administrador..
+    	if($equipamento->equipamentoTemDescarte === false){
+    		$this->mensagens('warning', "Descarte Não Existe", "Contate o administrador.");
+    		return $this->redirect(['equipamento/view', 'id'=>$idEquipamento]);
+    	}
+    	
+    	//Deletar o descarte e marca o equipamento como Disponível
+    	if($this->findModel( $equipamento->equipamentoTemDescarte->idDescarte)->delete() !== false){
+    		$equipamento->StatusEquipamento = Equipamento::getStatusDisponivel();
+    		$equipamento->save();
+    		
+    		$this->mensagens('success', "Revertido", "O equipamento já está disponível.");
+    	}
+    
+    	return $this->redirect(['equipamento/view', 'id'=>$idEquipamento]);
     }
 
     /**
