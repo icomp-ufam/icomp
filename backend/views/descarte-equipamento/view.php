@@ -33,7 +33,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'idDescarte',
             'NomeResponsavel',
             'Email:email',
-            'TelefoneResponsavel',
+            [
+            	'attribute'=>'TelefoneResponsavel',
+            	'format'=>'text',
+            	'value' =>$model->telefoneFormatado,
+            ],
             'ObservacoesDescarte',
         ],
     ]) ?>

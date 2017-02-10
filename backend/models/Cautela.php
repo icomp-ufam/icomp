@@ -46,6 +46,7 @@ class Cautela extends \yii\db\ActiveRecord
             [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel', 'Equipamento','nomeEquipamento', 'StatusCautela'], 'string', 'max' => 50],
             [['ImagemCautela'], 'string', 'max' => 100],
         	[['nomeProjeto'], 'string', 'max'=>200],
+        	[['Email'], 'email'],
             [['idEquipamento'], 'exist', 'skipOnError' => true, 'targetClass' => Equipamento::className(), 'targetAttribute' => ['idEquipamento' => 'idEquipamento']],
         	[['idsmulticautela', 'nomeEquipamento', 'nomeProjeto'], 'safe'],	
         ];

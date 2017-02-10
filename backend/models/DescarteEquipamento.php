@@ -31,6 +31,7 @@ class DescarteEquipamento extends \yii\db\ActiveRecord
         return [
             [['NomeResponsavel', 'Email', 'TelefoneResponsavel'], 'required'],
             [['NomeResponsavel', 'Email', 'TelefoneResponsavel'], 'string', 'max' => 50],
+        	[['Email'], 'email'],
             [['ObservacoesDescarte'], 'string', 'max' => 100],
         ];
     }
@@ -47,5 +48,17 @@ class DescarteEquipamento extends \yii\db\ActiveRecord
             'TelefoneResponsavel' => 'Telefone',
             'ObservacoesDescarte' => 'Observacões do Descarte',
         ];
+    }
+    
+    public function getTelefoneFormatado(){
+    	 
+    	return preg_replace('/(\d{2})(\d{5})(\d{3})/i', '(${1}) ${2}-${3}', $this->TelefoneResponsavel);
+    }
+    
+    public function beforeSave($insert){
+    	 
+    	$this->TelefoneResponsavel = str_replace(["(",")","-"," "],"",$this->TelefoneResponsavel);
+    	 
+    	return true;
     }
 }

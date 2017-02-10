@@ -34,7 +34,10 @@ if( Yii::$app->user->identity->checarAcesso('secretariar') == 1){
             'idDescarte',
             'NomeResponsavel',
             'Email:email',
-            'TelefoneResponsavel',
+            [
+            	'attribute'=>'TelefoneResponsavel',
+            	'value' =>'telefoneFormatado',
+            ],
             'ObservacoesDescarte',
 
             ['class' => 'yii\grid\ActionColumn'],

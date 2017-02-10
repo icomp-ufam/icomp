@@ -44,6 +44,7 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
         	[['TelefoneResponsavel'], 'string', 'max'=>15, 'min'=>11],
             [['NomeResponsavel', 'Email', 'ValidadeCautela', 'ObservacoesDescarte', 'StatusCautelaAvulsa'], 'string', 'max' => 50],
             [['ImagemCautela'], 'string', 'max' => 100],
+        	[['Email'], 'email'],
             [['id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id' => 'id']],
         ];
     }
