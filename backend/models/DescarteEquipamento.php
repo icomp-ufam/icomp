@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use backend\models\Equipamento;
 
 /**
  * This is the model class for table "j17_descarte_equipamento".
@@ -53,6 +54,10 @@ class DescarteEquipamento extends \yii\db\ActiveRecord
     public function getTelefoneFormatado(){
     	 
     	return preg_replace('/(\d{2})(\d{5})(\d{3})/i', '(${1}) ${2}-${3}', $this->TelefoneResponsavel);
+    }
+    
+    public function getDescarteTemEquipamento(){
+    	return $this->hasOne(Equipamento::className(), ['idEquipamento'=>'idEquipamento']);
     }
     
     public function beforeSave($insert){

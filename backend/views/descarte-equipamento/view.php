@@ -8,8 +8,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\DescarteEquipamento */
 
-$this->title = $model->idDescarte;
-$this->params['breadcrumbs'][] = ['label' => 'Descarte Equipamentos', 'url' => ['index']];
+$this->title = $model->descarteTemEquipamento->NomeEquipamento; //$model->idDescarte;
+$this->params['breadcrumbs'][] = ['label' => 'Descarte Equipamentos', 'url' => ['equipamento/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="descarte-equipamento-view">
