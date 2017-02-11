@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use \yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Equipamento */
@@ -28,9 +29,11 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'NotaFiscal', ['options' => ['class' => 'col-md-3']])->textInput(['maxlength' => true]) ?>
     </div>
 	<div class="row">
-    <?= $form->field($model, 'Localizacao', ['options' => ['class' => 'col-md-3']])->textInput(['maxlength' => true]) ?>    
-	
     <?= $form->field($model, 'OrigemEquipamento', ['options' => ['class' => 'col-md-3']])->textInput(['maxlength' => true]) ?>
+    
+    <?php //$form->field($model, 'idProjeto', ['options' => ['class' => 'col-md-3']])->dropDownList(ArrayHelper::map(backend\models\ContProjProjetos::find()->all(),'id','nomeprojeto')) ?>
+    
+    <?= $form->field($model, 'Localizacao', ['options' => ['class' => 'col-md-3']])->textInput(['maxlength' => true]) ?>
 	</div>
 	<div class="row">
 	<?= $form->field($model, 'StatusEquipamento', ['options' => ['class' => 'col-md-3']])->dropDownList($model->statusPermitidos) ?>

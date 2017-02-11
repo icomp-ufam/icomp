@@ -18,6 +18,7 @@ use app\models\DescarteEquipamento;
  * @property string $StatusEquipamento
  * @property string $OrigemEquipamento
  * @property string $ImagemEquipamento
+ * @property string $idProjeto
  */
 class Equipamento extends \yii\db\ActiveRecord
 {
@@ -41,8 +42,9 @@ class Equipamento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['NomeEquipamento', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento'], 'required'],
+            [['NomeEquipamento', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento', 'idProjeto'], 'required'],
             [['NomeEquipamento', 'Nserie', 'NotaFiscal', 'Localizacao', 'StatusEquipamento', 'OrigemEquipamento', 'ImagemEquipamento'], 'string', 'max' => 50],
+        	[['idProjeto'], 'integer'],
         	[['ImagemEquipamento'], 'safe'],
 
         ];
@@ -62,6 +64,7 @@ class Equipamento extends \yii\db\ActiveRecord
             'StatusEquipamento' => 'Status',
             'OrigemEquipamento' => 'Origem',
             'file' => 'Imagem Equipamento',
+        	'idProjeto'=> 'Projeto',
         ];
     }
 
