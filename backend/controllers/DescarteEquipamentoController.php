@@ -89,9 +89,9 @@ class DescarteEquipamentoController extends Controller
 	            ]);
 	        }
 		}else{
-			$this->mensagens('warning', "Equipamento $equipamento->StatusEquipamento", "Para descartar o equipamento ele precisa estar Disponível.");
+			$this->mensagens('warning', "Equipamento continua $equipamento->StatusEquipamento", "Para descartar o equipamento ele precisa estar Disponível.");
 			
-			return $this->redirect(['equipamento/index']);
+			return $this->redirect(['equipamento/view', 'id'=>$model->idEquipamento]);
 		}
     }
 

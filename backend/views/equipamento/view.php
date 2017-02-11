@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use backend\models\Equipamento;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Equipamento */
@@ -32,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                // $this->redirect(array('descarte-equipamento/create', 'id' => $model->idEquipamento)),
             ], 
         ]) ?>
+        <?php if($model->StatusEquipamento === Equipamento::getStatusDescartado()){?>
         <?= Html::a('Reverter Descarte', ['descarte-equipamento/revert', 'idEquipamento' => $model->idEquipamento], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -40,6 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                // $this->redirect(array('descarte-equipamento/create', 'id' => $model->idEquipamento)),
             ], 
         ]) ?>
+        <?php }?>
     </p>
 
     <?= DetailView::widget([
