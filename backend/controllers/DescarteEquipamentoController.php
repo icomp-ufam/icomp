@@ -140,9 +140,13 @@ class DescarteEquipamentoController extends Controller
     	//Deletar o descarte e marca o equipamento como Disponível
     	if($this->findModel( $equipamento->equipamentoTemDescarte->idDescarte)->delete() !== false){
     		$equipamento->StatusEquipamento = Equipamento::getStatusDisponivel();
-    		$equipamento->save();
     		
-    		$this->mensagens('success', "Revertido", "O equipamento já está disponível.");
+    		if($equipamento->save())
+    			$this->mensagens('success', "Revertido", "O equipamento já está disponível.");
+    		else{
+    			//Caso haja problemas resultantes de migração de bancos..
+    			$this->mensagens('danger', "Erro na Reversão", "Contate o administrador. Há uma inconsistêcia nos dados.");
+    		}
     	}
     
     	return $this->redirect(['equipamento/view', 'id'=>$idEquipamento]);

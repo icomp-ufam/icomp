@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\DescarteEquipamento */
 
-$this->title = 'Create Descarte Equipamento';
+$this->title = 'Descarte Equipamento';
 $this->params['breadcrumbs'][] = ['label' => 'Descarte Equipamentos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

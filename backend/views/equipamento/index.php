@@ -34,8 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'StatusEquipamento',
                 'filter'=>array ("Disponível" => "Disponível", "Em uso" => "Em uso", "Descartado" => "Descartado"),
                 'value' => 'StatusEquipamento'
-
-
             ],
             // 'OrigemEquipamento',
             // 'ImagemEquipamento',

@@ -31,7 +31,7 @@ use \yii\helpers\ArrayHelper;
 	<div class="row">
     <?= $form->field($model, 'OrigemEquipamento', ['options' => ['class' => 'col-md-3']])->textInput(['maxlength' => true]) ?>
     
-    <?php //$form->field($model, 'idProjeto', ['options' => ['class' => 'col-md-3']])->dropDownList(ArrayHelper::map(backend\models\ContProjProjetos::find()->all(),'id','nomeprojeto')) ?>
+    <?= $form->field($model, 'idProjeto', ['options' => ['class' => 'col-md-3']])->dropDownList(ArrayHelper::map(backend\models\ContProjProjetos::find()->all(),'id','nomeprojeto')) ?>
     
     <?= $form->field($model, 'Localizacao', ['options' => ['class' => 'col-md-3']])->textInput(['maxlength' => true]) ?>
 	</div>

@@ -55,6 +55,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'Localizacao',
             'StatusEquipamento',
             'OrigemEquipamento',
+        	[
+        		'attribute'=>'idProjeto',
+        		'value'=>$model->equipamentoTemProjeto->nomeprojeto,
+    		],
             //'ImagemEquipamento',
             [
                 'attribute' => 'ImagemEquipamento',
