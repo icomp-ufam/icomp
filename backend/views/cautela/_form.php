@@ -24,7 +24,22 @@ $this->registerJs(
 				var optionSelected = $('option:selected', this);
 				var valueSelected = this.value;
 				$('#cautela-idequipamento').val(valueSelected);
-			});	
+			});
+		
+			$('#cautela-datadevolucao').on('change', function (e){
+				var agora = new Date();
+				var datas = this.value.split('-');
+				var devol = new Date(datas[2], datas[1]-1, datas[0], agora.getHours(), agora.getMinutes(), agora.getSeconds(),agora.getMilliseconds());
+
+				if(devol.getTime()>=agora.getTime()){
+					//Status Cautela: Em Aberto
+					$('#cautela-statuscautela').val('Em aberto');
+				}else
+				if(devol.getTime()<agora.getTime()){
+					//Status Cautela: Em Atraso
+					$('#cautela-statuscautela').val('Em atraso');
+				}
+			});
 			",
 		    View::POS_READY,
 		    'garante-idequipamento-handler'
