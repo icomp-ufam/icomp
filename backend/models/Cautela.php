@@ -41,7 +41,7 @@ class Cautela extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['NomeResponsavel', 'OrigemCautela', 'Email', 'TelefoneResponsavel', 'StatusCautela', 'idEquipamento', 'idProjeto', 'DataDevolucao', 'ValidadeCautela'], 'required'],
+            [['NomeResponsavel', 'OrigemCautela', 'Email', 'TelefoneResponsavel', 'StatusCautela', 'idEquipamento', 'idProjeto', 'DataDevolucao'], 'required'],
             [['idEquipamento', 'idProjeto'], 'integer'],
             [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel', 'Equipamento','nomeEquipamento', 'StatusCautela'], 'string', 'max' => 50],
             [['ImagemCautela'], 'string', 'max' => 100],
@@ -61,7 +61,7 @@ class Cautela extends \yii\db\ActiveRecord
             'idCautela' => 'Cod.',
             'NomeResponsavel' => 'Responsável',
             'OrigemCautela' => 'Origem',
-            'DataDevolucao' => 'Data de Devolucao',
+            'DataDevolucao' => 'Devolucao Prevista',
             'Email' => 'Email',
             'ValidadeCautela' => 'Validade',
             'TelefoneResponsavel' => 'Telefone',
@@ -99,4 +99,6 @@ class Cautela extends \yii\db\ActiveRecord
     public static function getStatusAberto(){
     	return "Em aberto";
     }
+    
+    
 }

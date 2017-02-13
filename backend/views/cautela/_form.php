@@ -65,7 +65,7 @@ $this->registerJs(
     </div>
     <div class="panel-body">
 	<div class="row">
-    <?= $form->field($model, 'StatusCautela', ['options' => ['class' => 'col-md-3']])->dropDownList([Cautela::getStatusAberto() => Cautela::getStatusAberto(),Cautela::getStatusConcluida()=> Cautela::getStatusConcluida(),Cautela::getStatusAtraso()=>Cautela::getStatusAtraso()]) ?>
+    <?= $form->field($model, 'StatusCautela', ['options' => ['class' => 'col-md-4']])->textInput(['readOnly'=>true]) ?>
    	</div>
 	
 
@@ -78,21 +78,21 @@ $this->registerJs(
                         'format' => 'dd-mm-yyyy',
                         'todayHighlight' => true
                     ]
-                ])->label("<font color='#FF0000'>*</font> <b>Data de Devolução:</b>")
+                ])->label("<font color='#FF0000'>*</font> <b>Devolução Prevista:</b>")
                 ?>
     </div>
 
-     <div class="row">
-                <?= $form->field($model, 'ValidadeCautela', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
+     <!-- <div class="row">
+                <?php /*echo $form->field($model, 'ValidadeCautela', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
                     'language' => 'pt-BR',
                     'options' => ['placeholder' => 'Selecione a Validade ...',],
                     'pluginOptions' => [
                         'format' => 'dd-mm-yyyy',
                         'todayHighlight' => true
                     ]
-                ])->label("<font color='#FF0000'>*</font> <b>Data da Validade:</b>")
+                ])->label("<font color='#FF0000'>*</font> <b>Data da Validade:</b>"); */
                 ?>
-    </div>
+    </div> -->
 
 	<div class="row">    
     <?= $form->field($model, 'ImagemCautela',['options'=>['class'=>'col-md-3']])->fileInput(['maxlength' => true]) ?>
