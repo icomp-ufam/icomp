@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
+use backend\models\Cautela;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Cautela */
 
@@ -29,8 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
        <?= Html::a('<span class="glyphicon glyphicon-file"></span> Gerar Pdf', ['cautela/produtos', 'id' => $model->idCautela], [
                             'target' => '_blank', 'class' => 'btn btn-info']) ?>
 
-
-        <?= Html::a('Dar Baixa Cautela', ['baixa-cautela/create', 'id' => $model->idCautela], [
+		<?php if($model->StatusCautela !== Cautela::getStatusConcluida()){ ?>
+        <?php echo Html::a('Dar Baixa Cautela', ['baixa-cautela/create', 'id' => $model->idCautela], [
             'class' => 'btn btn-success',
             'data' => [
                 'confirm' => 'Você tem certeza que deseja dar baixa nesta Cautela?',
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 //$model->flagCautela = 1,
                // $this->redirect(array('descarte-equipamento/create', 'id' => $model->idEquipamento)),
             ],
-        ]) ?>
+        ]); }?>
     </p>
 
     <?= DetailView::widget([
