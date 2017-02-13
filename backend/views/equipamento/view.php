@@ -44,7 +44,10 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
         <?php }?>
     </p>
-
+<div class="panel panel-default" style="width:60%">
+<div class="panel-heading">
+                <h3 class="panel-title"><b>Dados Equipamento:</b></h3>
+</div>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -69,8 +72,27 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]) ?>
+</div>
+<?php if($model->equipamentoTemDescarte !== false){
+	echo '
+<div class="panel panel-default" style="width:60%">
+<div class="panel-heading">
+                <h3 class="panel-title"><b>Dados Descarte:</b></h3>
+</div>';
+}?>
+<?php if($model->equipamentoTemDescarte !== false){?>
+<?php echo
+	DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'equipamentoTemDescarte.NomeResponsavel',
+            'equipamentoTemDescarte.Email',
+            'equipamentoTemDescarte.TelefoneResponsavel',
+            'equipamentoTemDescarte.ObservacoesDescarte',
+        ],
+    ]); 
+  }?>
 
-
-
+</div>
 
 </div>
