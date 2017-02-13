@@ -25,7 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
 
-
        <?= Html::a('<span class="glyphicon glyphicon-file"></span> Gerar Pdf', ['cautela/produtos', 'id' => $model->idCautela], [
                             'target' => '_blank', 'class' => 'btn btn-info']) ?>
 
@@ -38,7 +37,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 //$model->flagCautela = 1,
                // $this->redirect(array('descarte-equipamento/create', 'id' => $model->idEquipamento)),
             ],
-        ]); }?>
+        ]); 
+	       //Cautela Concluida pode ter sua Baixa Revertida..
+       	}elseif($model->baixaReversivel){
+       		echo Html::a('Reverter Baixa', ['baixa-cautela/revert', 'idCautela' => $model->idCautela], [
+       				'class' => 'btn btn-success',
+       				'data' => [
+       						'confirm' => 'Você tem certeza que deseja Reverter esta Baixa?',
+       						'method' => 'post',
+       						//$model->flagCautela = 1,
+       						// $this->redirect(array('descarte-equipamento/create', 'id' => $model->idEquipamento)),
+       				],
+       		]);
+        }?>
     </p>
 
     <?= DetailView::widget([

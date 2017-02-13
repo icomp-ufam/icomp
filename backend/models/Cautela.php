@@ -5,6 +5,7 @@ namespace backend\models;
 use Yii;
 use backend\models\Equipamento;
 use backend\models\ContProjProjetos;
+use app\models\BaixaCautela;
 /**
  * This is the model class for table "j17_cautela".
  *
@@ -100,5 +101,27 @@ class Cautela extends \yii\db\ActiveRecord
     	return "Em aberto";
     }
     
+    public function getCautelaTemBaixa(){
+    	return $this->hasOne(BaixaCautela::className(), ['idCautela'=>'idCautela']);
+    }
+    
+    public function getBaixaReversivel(){
+    	//Se somente se (possui baixa) & (equipamento disponivel)
+    	if( isset($this->cautelaTemBaixa->idBaixaCautela) )
+    		if($this->cautelatemequipamento->StatusEquipamento == Equipamento::getStatusDisponivel())
+    			return true;
+    		
+    	return false;
+    }
+    /* Retorna o Status adequado, com base na Data de Devolucao Prevista e a data atual do sistema. 
+     */
+    public function getAjustaStatus(){
+    	//Status permitidos: 'Em atraso' e 'Em uso'
+    	if(strtotime($this->DataDevolucao)<(strtotime(date('d-m-Y')))){
+    		return Cautela::getStatusAtraso();
+    	}elseif(strtotime($this->DataDevolucao)>=(strtotime(date('d-m-Y')))){
+    		return Cautela::getStatusAberto();
+    	}
+    }
     
 }

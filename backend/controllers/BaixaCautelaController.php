@@ -136,4 +136,51 @@ class BaixaCautelaController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    
+    public function actionRevert($idCautela){
+    	
+    	$cautela = Cautela::findOne($idCautela);
+    	//2.1.1 atribuir ao equipamento o estado ‘Em uso’
+    	//2.1.2 reverter a baixa implica Deletar o registro da baixa
+    	//2.1.3 atribuir status ‘Em aberto’ ou ‘Em atraso’ da cautela referenciada, de acordo
+    	
+    	//Aqui, caso o usuário não dê F5 no browser no dia seguinte.. ou inconsistencias de migracao de banco..
+    	if(!$cautela->baixaReversivel){
+    		$this->mensagens('warning', 'Reversão NÃO realizada', 'Esta cautela não pode ser revertida. Contate o admnistrador.');
+    		return $this->redirect(['cautela/view', 'id'=>$idCautela]);
+    	}else{
+    		if($cautela->cautelaTemBaixa->delete() !== false){
+    			//Atribui o Status adequado..
+    			$cautela->StatusCautela = $cautela->ajustaStatus;
+    			$cautela->cautelatemequipamento->StatusEquipamento = Equipamento::getStatusEmUso();
+    			if($cautela->cautelatemequipamento->save() && $cautela->save()){
+    				$this->mensagens('success', 'Revertido', 'A cautela agora está '.$cautela->StatusCautela);
+    			}else{
+    				$this->mensagens('danger', "Erro na Reversão", "Contate o administrador. Há uma inconsistêcia nos dados.");	
+    				return $this->redirect(['cautela/view', 'id'=>$idCautela]);
+    			}
+    		}else{
+    			$this->mensagens('danger', 'Reversão NÃO realizada', 'Há um problema para reverter deletar esta baixa. Contate o admnistrador.');
+    			return $this->redirect(['cautela/view', 'id'=>$idCautela]);
+    		}
+    		
+    	}
+    	
+    	return $this->redirect(['cautela/view', 'id'=>$idCautela]);
+    }
+    
+    /* Envio de mensagens para views
+     Tipo: success, danger, warning*/
+    protected function mensagens($tipo, $titulo, $mensagem){
+    	Yii::$app->session->setFlash($tipo, [
+    			'type' => $tipo,
+    			'icon' => 'home',
+    			'duration' => 5000,
+    			'message' => $mensagem,
+    			'title' => $titulo,
+    			'positonY' => 'top',
+    			'positonX' => 'center',
+    			'showProgressbar' => true,
+    	]);
+    }
 }
