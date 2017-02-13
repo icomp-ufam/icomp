@@ -89,6 +89,13 @@ class Cautela extends \yii\db\ActiveRecord
     	return $this->hasOne(ContProjProjetos::className(),['id'=>'idProjeto']);
     }
     
+    public function getCautelaTemBaixa(){
+    	if($this->StatusCautela === Cautela::getStatusConcluida())
+    		return $this->hasOne(BaixaCautela::className(), ['idCautela'=>'idCautela']);
+    	
+    	return false; 
+    }
+    
     public static function getStatusAtraso(){
     	return "Em atraso";
     }
@@ -99,10 +106,6 @@ class Cautela extends \yii\db\ActiveRecord
     
     public static function getStatusAberto(){
     	return "Em aberto";
-    }
-    
-    public function getCautelaTemBaixa(){
-    	return $this->hasOne(BaixaCautela::className(), ['idCautela'=>'idCautela']);
     }
     
     public function getBaixaReversivel(){

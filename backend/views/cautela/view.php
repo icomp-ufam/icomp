@@ -51,7 +51,10 @@ $this->params['breadcrumbs'][] = $this->title;
        		]);
         }?>
     </p>
-
+<div class="panel panel-default" style="width:60%">
+<div class="panel-heading">
+                <h3 class="panel-title"><b>Dados Equipamento:</b></h3>
+</div>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -80,5 +83,21 @@ $this->params['breadcrumbs'][] = $this->title;
         	],
         ],
     ]) ?>
+</div>
+<?php if($model->cautelaTemBaixa !== false){
+	echo '
+<div class="panel panel-default" style="width:60%">
+<div class="panel-heading">
+                <h3 class="panel-title"><b>Dados Baixa:</b></h3>
+</div>';
 
+ echo DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'cautelaTemBaixa.Recebedor',
+            'cautelaTemBaixa.DataDevolucao',
+            'cautelaTemBaixa.ObservacaoBaixaCautela',
+        ],
+    ]);
+echo "</div>";} ?>
 </div>
