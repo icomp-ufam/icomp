@@ -29,7 +29,7 @@ use \yii\jui\DatePicker;
 			    'dateFormat' => 'dd-MM-yyyy',
 	]) ?>
 	
-    <?= $form->field($model, 'Equipamento',['options'=>['class'=>'col-md-3']])->textInput(['maxlength' => true]) ?>
+    <!--<?php //echo $form->field($model, 'Equipamento',['options'=>['class'=>'col-md-3']])->textInput(['maxlength' => true]); ?>-->
 	</div>
 	<div class="row">
     <?= $form->field($model, 'ObservacaoBaixaCautela',['options'=>['class'=>'col-md-6']])->textInput(['maxlength' => true]) ?>

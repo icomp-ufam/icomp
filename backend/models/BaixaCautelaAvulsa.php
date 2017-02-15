@@ -48,7 +48,7 @@ class BaixaCautelaAvulsa extends \yii\db\ActiveRecord
             //'idCautelaAvulsa' => 'Id Cautela Avulsa',
             'Recebedor' => 'Recebedor',
             'DataDevolucao' => 'Data Devolucao',
-            'Equipamento' => 'Equipamento',
+            //'Equipamento' => 'Equipamento',
             'ObservacaoBaixaCautela' => 'Observacao',
         ];
     }

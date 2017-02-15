@@ -57,6 +57,12 @@ class CautelaAvulsaController extends Controller
             'model' => $this->findModel($idCautelaAvulsa, $id),
         ]);
     }
+    
+    public function actionView2($id){
+    	return $this->render('view', [
+    			'model' => $this->findModel2($id),
+    	]);
+    }
 
     /**
      * Creates a new CautelaAvulsa model.
@@ -178,5 +184,9 @@ class CautelaAvulsaController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    
+    protected function findModel2($id){
+    	return CautelaAvulsa::findOne($id);
     }
 }
