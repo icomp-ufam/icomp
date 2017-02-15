@@ -59,7 +59,7 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
             'id' => 'Usuário do Sistema',
             'NomeResponsavel' => 'Nome Responsavel',
             'Email' => 'Email',
-            'ValidadeCautela' => 'Validade Cautela',
+            'ValidadeCautela' => 'Devolução Prevista',
             'TelefoneResponsavel' => 'Telefone',
             'ObservacoesDescarte' => 'Observacoes',
             'ImagemCautela' => 'Imagem Cautela',
@@ -99,5 +99,17 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
     	$this->TelefoneResponsavel = str_replace(["(",")","-"," "],"",$this->TelefoneResponsavel);
     	
     	return true;
+    }
+    
+    public static function getStatusAtraso(){
+    	return "Em atraso";
+    }
+    
+    public static function getStatusConcluida(){
+    	return "Concluída";
+    }
+    
+    public static function getStatusAberto(){
+    	return "Em aberto";
     }
 }
