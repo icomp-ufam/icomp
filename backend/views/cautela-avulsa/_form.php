@@ -49,10 +49,14 @@ use yii\widgets\MaskedInput;
 			    //'language' => 'pt-BR',
 			    'dateFormat' => 'dd-MM-yyyy',
 	]) ?>
-	
 	</div>
 	<div class="row">
-	<?= $form->field($model, 'StatusCautelaAvulsa',['options'=>['class'=>'col-md-2']])->dropDownList(['Em aberto' => 'Em aberto','Concluída'=> 'Concluída','Em atraso'=>'Em atraso']) ?>
+	<?= $form->field($model, 'NomeEquipamento',	['options'=>['class'=>'col-md-3']])->textInput(['maxlength'=>true]) ?>
+	</div>
+	<div class="row">
+	<?= $form->field($model, 'origem',				['options'=>['class'=>'col-md-3']])->textInput(['maxlength'=>true]) ?>
+	
+	<?= $form->field($model, 'StatusCautelaAvulsa', ['options'=>['class'=>'col-md-2']])->dropDownList(['Em aberto' => 'Em aberto','Concluída'=> 'Concluída','Em atraso'=>'Em atraso']) ?>
 	</div>
 	<div class="row">
     <?= $form->field($model, 'ObservacoesDescarte',['options'=>['class'=>'col-md-5']])->textarea(['maxlength' => true]) ?>    

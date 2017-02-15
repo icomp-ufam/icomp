@@ -39,10 +39,10 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['NomeResponsavel', 'Email', 'TelefoneResponsavel', 'ValidadeCautela'], 'required'],
+            [['NomeResponsavel', 'Email', 'TelefoneResponsavel', 'ValidadeCautela', 'NomeEquipamento'], 'required'],
             [['id',], 'integer'],
         	[['TelefoneResponsavel'], 'string', 'max'=>15, 'min'=>11],
-            [['NomeResponsavel', 'Email', 'ValidadeCautela', 'ObservacoesDescarte', 'StatusCautelaAvulsa'], 'string', 'max' => 50],
+            [['NomeResponsavel', 'Email', 'ValidadeCautela', 'ObservacoesDescarte', 'StatusCautelaAvulsa', 'origem', 'NomeEquipamento'], 'string', 'max' => 50],
             [['ImagemCautela'], 'string', 'max' => 100],
         	[['Email'], 'email'],
             [['id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id' => 'id']],
@@ -64,6 +64,8 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
             'ObservacoesDescarte' => 'Observacoes',
             'ImagemCautela' => 'Imagem Cautela',
             'StatusCautelaAvulsa' => 'Status',
+        	'origem' => 'Origem',
+        	'NomeEquipamento'=>'Equipamento',
         ];
     }
 

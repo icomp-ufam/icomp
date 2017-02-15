@@ -20,7 +20,7 @@ class CautelaAvulsaSearch extends CautelaAvulsa
         return [
             [['idCautelaAvulsa', 'id',], 'integer'],
         	[['TelefoneResponsavel'], 'string', 'max'=>15],
-            [['NomeResponsavel', 'Email', 'ValidadeCautela', 'ObservacoesDescarte', 'ImagemCautela', 'StatusCautelaAvulsa', 'TelefoneResponsavel'], 'safe'],
+            [['NomeResponsavel', 'Email', 'ValidadeCautela', 'ObservacoesDescarte', 'ImagemCautela', 'StatusCautelaAvulsa', 'TelefoneResponsavel', 'origem', 'NomeEquipamento'], 'safe'],
         ];
     }
 
@@ -70,7 +70,9 @@ class CautelaAvulsaSearch extends CautelaAvulsa
             ->andFilterWhere(['like', 'ObservacoesDescarte', $this->ObservacoesDescarte])
             ->andFilterWhere(['like', 'ImagemCautela', $this->ImagemCautela])
             ->andFilterWhere(['like', 'StatusCautelaAvulsa', $this->StatusCautelaAvulsa])
-            ->andFilterWhere(['like', 'TelefoneResponsavel', $this->TelefoneResponsavel]);
+            ->andFilterWhere(['like', 'TelefoneResponsavel', $this->TelefoneResponsavel])
+        	->andFilterWhere(['like', 'NomeEquipamento', $this->NomeEquipamento])
+        	->andFilterWhere(['like', 'origem', $this->origem]);
 
         return $dataProvider;
     }
