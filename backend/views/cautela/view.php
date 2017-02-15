@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'target' => '_blank', 'class' => 'btn btn-info']) ?>
 
 		<?php if($model->StatusCautela !== Cautela::getStatusConcluida()){ ?>
-        <?php echo Html::a('Dar Baixa Cautela', ['baixa-cautela/create', 'id' => $model->idCautela], [
+        <?php echo Html::a('Dar Baixa Cautela', ['baixa-cautela/create', 'idCautela' => $model->idCautela], [
             'class' => 'btn btn-success',
             'data' => [
                 'confirm' => 'Você tem certeza que deseja dar baixa nesta Cautela?',

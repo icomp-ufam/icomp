@@ -63,21 +63,41 @@ class BaixaCautelaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id)
+    public function actionCreate($idCautela)
     {
-        
-        $cautela = Cautela::findOne($id);
+        $cautela = Cautela::findOne($idCautela);
 		$equipamento = Equipamento::findOne($cautela->idEquipamento);
         $model = new BaixaCautela();
         
-        $model->idCautela = $id;
+        $model->idCautela = $idCautela;
         
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $cautela->StatusCautela = Cautela::getStatusConcluida();
-            $cautela->save();
+        if ($model->load(Yii::$app->request->post())) {
+        	$cautela = Cautela::findOne($model->idCautela);
+        	$equipamento = Equipamento::findOne($cautela->idEquipamento);
+        	
+        	if($model->save()){
+        	
+	            $cautela->StatusCautela = Cautela::getStatusConcluida();
+	            if($cautela->save()){
+	            }else{
+	            	$this->mensagens('danger', 'Cautela Inconistente', 'Contate o administrador.');
+	            	return $this->redirect(['view', 'id' => $model->idBaixaCautela]);
+	            }
+	            
+	            $equipamento->StatusEquipamento = Equipamento::getStatusDisponivel();
+	            if($equipamento->save()){
+	            }else{
+	            	$this->mensagens('danger', 'Equipamento Inconsistente', 'Contate o administrador.');
+	            	return $this->redirect(['view', 'id' => $model->idBaixaCautela]);
+	            }
+	            
+	            //Salvou tudo que tinha de salvar...
+	            $this->mensagens('success', 'Baixa Realizada', 'Baixa Realizada com Sucesso.');
             
-            $equipamento->StatusEquipamento = Equipamento::getStatusDisponivel();
-            $equipamento->save();
+        	}else{
+        		$this->mensagens('warning', 'Erro ao dar baixa', 'Contate o administrador.');
+        		return $this->redirect(['view', 'id' => $model->idBaixaCautela]);
+        	}
 			//print_r($model->DataDevolucao);
             return $this->redirect(['view', 'id' => $model->idBaixaCautela]);
         } else {
