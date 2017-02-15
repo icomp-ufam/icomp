@@ -16,14 +16,14 @@ $this->params['breadcrumbs'][] =  $model->idBaixaCautelaAvulsa;
 
     <p>
     	<?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['cautela-avulsa/view2', 'id'=>$model->idCautelaAvulsa], ['class' => 'btn btn-warning']) ?>
-        <?= Html::a('Atualizar', ['update', 'id' => $model->idBaixaCautelaAvulsa], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Remover', ['delete', 'id' => $model->idBaixaCautelaAvulsa], [
+        <!--<?php //echo Html::a('Atualizar', ['update', 'id' => $model->idBaixaCautelaAvulsa], ['class' => 'btn btn-primary']); ?>-->
+        <!-- <?php /* echo Html::a('Remover', ['delete', 'id' => $model->idBaixaCautelaAvulsa], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
-        ]) ?>
+        ]);*/ ?>-->
     </p>
 
     <?= DetailView::widget([
