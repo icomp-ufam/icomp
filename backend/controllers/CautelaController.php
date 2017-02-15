@@ -503,9 +503,28 @@ class CautelaController extends Controller
      * @return mixed
      */
     public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
+    {	
+    	$cautela = $this->findModel($id);
+    	//Quando cautela possui apenas a Baixa
+    	if($cautela->StatusCautela === Cautela::getStatusConcluida()){
+    		if($cautela->cautelaTemBaixa->delete()===false  || $cautela->delete()===false)
+    			$this->mensagens('danger', 'Erro na deleção', 'Contate o administrador.');
+    		else 
+    			$this->mensagens('success', 'Cautela Deletada', 'Cautela deletada com sucesso.');
+    	}else{
+    		//Quando a cautela não tem baixa ('Em uso' ou 'Em atraso'), mas tá prendendo um equipamento.
+    		$cautela->cautelatemequipamento->StatusEquipamento = Equipamento::getStatusDisponivel();
+    		$cautela->cautelatemequipamento->save();
+    		if($cautela->delete()===false){
+    			$this->mensagens('danger', 'Erro na deleção', 'Contate o administrador.');
+    			//Reverte a liberação do equipamento.
+    			$cautela->cautelatemequipamento->StatusEquipamento = Equipamento::getStatusEmUso();
+    			$cautela->cautelatemequipamento->save();
+    		}else 
+    			$this->mensagens('success', 'Cautela Deletada', 'Cautela deletada com sucesso.');
+    			
+    	}
+    	
         return $this->redirect(['index']);
     }
 
@@ -523,5 +542,20 @@ class CautelaController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    
+    /* Envio de mensagens para views
+     Tipo: success, danger, warning*/
+    protected function mensagens($tipo, $titulo, $mensagem){
+    	Yii::$app->session->setFlash($tipo, [
+    			'type' => $tipo,
+    			'icon' => 'home',
+    			'duration' => 5000,
+    			'message' => $mensagem,
+    			'title' => $titulo,
+    			'positonY' => 'top',
+    			'positonX' => 'center',
+    			'showProgressbar' => true,
+    	]);
     }
 }
