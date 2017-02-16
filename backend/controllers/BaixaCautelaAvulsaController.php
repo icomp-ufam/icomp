@@ -123,6 +123,34 @@ class BaixaCautelaAvulsaController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionRevert($idCautelaAvulsa){
+    	
+    	$cautela = CautelaAvulsa::findOne($idCautelaAvulsa);
+    	
+    	if(!$cautela->baixaReversivel){
+    		//Double-Check para Reversão da Cautela..
+    		$this->mensagens('warning', 'Reversão NÃO realizada', 'Esta baixa não pode ser revertida. Contate o admnistrador.');
+    		return $this->redirect(['cautela-avulsa/view2', 'id'=>$idCautelaAvulsa]);
+    	}else{
+    		if($cautela->cautelaAvulsaTemBaixa->delete() !== false){
+    			//Atribui o Status adequado..
+    			$cautela->StatusCautelaAvulsa = $cautela->ajustaStatus;
+    			
+    			if($cautela->save()){
+    				$this->mensagens('success', 'Revertido', 'A cautela agora está '.$cautela->StatusCautelaAvulsa);
+    			}else{
+    				$this->mensagens('danger', "Erro na Reversão", "Não foi possível reverter a baixa desta cautela. Contate o administrador.");	
+    				return $this->redirect(['cautela-avulsa/view2', 'id'=>$idCautelaAvulsa]);
+    			}
+    		}else{
+    			$this->mensagens('danger', 'Reversão NÃO realizada', 'Há um problema para reverter deletar esta baixa. Contate o admnistrador.');
+    			return $this->redirect(['cautela/view', 'id'=>$idCautela]);
+    		}
+    		
+    	}
+    	
+    	return $this->redirect(['cautela-avulsa/view2', 'id'=>$idCautelaAvulsa]);
+    }
     /**
      * Finds the BaixaCautelaAvulsa model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

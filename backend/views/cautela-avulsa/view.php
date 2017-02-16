@@ -33,7 +33,15 @@ $this->title = "Responsável: ".$this->title;
 
                // $this->redirect(array('descarte-equipamento/create', 'id' => $model->idEquipamento)),
             ],
-        ]); }?>        
+        ]); }elseif($model->baixaReversivel){
+       		echo Html::a('Reverter Baixa', ['baixa-cautela-avulsa/revert', 'idCautelaAvulsa' => $model->idCautelaAvulsa], [
+       				'class' => 'btn btn-success',
+       				'data' => [
+       						'confirm' => 'Você tem certeza que deseja Reverter esta Baixa?',
+       						'method' => 'post',
+       				],
+       		]);
+        }?>        
         <?= Html::a('Remover', ['delete', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -87,7 +95,7 @@ $this->title = "Responsável: ".$this->title;
 	        'model' => $model->cautelaAvulsaTemBaixa,
 	        'attributes' => [
 	            //'idBaixaCautelaAvulsa',
-	            'idCautelaAvulsa',
+	            //'idCautelaAvulsa',
 	            'Recebedor',
 	            'DataDevolucao',
 	           // 'Equipamento',

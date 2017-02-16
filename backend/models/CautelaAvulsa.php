@@ -96,6 +96,13 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
     	return false;
     }
     
+    public function getBaixaReversivel(){
+    	if( $this->StatusCautelaAvulsa === CautelaAvulsa::getStatusConcluida() )
+    		return true;
+    
+    	return false;
+    }
+    
     public function getTelefoneFormatado(){
     	
     	return preg_replace('/(\d{2})(\d{5})(\d{3})/i', '(${1}) ${2}-${3}', $this->TelefoneResponsavel);
