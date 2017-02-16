@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\widgets\MaskedInput;
+use app\models\CautelaAvulsa;
 /* @var $this yii\web\View */
 /* @var $model app\models\CautelaAvulsa */
 
@@ -18,7 +19,10 @@ $this->title = "Responsável: ".$this->title;
     <p>
         <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['cautela-avulsa/index'], ['class' => 'btn btn-warning']) ?>
         <?= Html::a('Atualizar', ['update', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Dar Baixa Cautela', ['baixa-cautela-avulsa/create', 'id' => $model->idCautelaAvulsa], [
+        
+        <?php
+        	if($model->StatusCautelaAvulsa !== CautelaAvulsa::getStatusConcluida()){
+        	echo  Html::a('Dar Baixa Cautela', ['baixa-cautela-avulsa/create', 'id' => $model->idCautelaAvulsa], [
             'class' => 'btn btn-success',
             'data' => [
                 'confirm' => 'Você tem certeza que deseja dar baixa nesta Cautela?',
@@ -29,7 +33,7 @@ $this->title = "Responsável: ".$this->title;
 
                // $this->redirect(array('descarte-equipamento/create', 'id' => $model->idEquipamento)),
             ],
-        ]) ?>        
+        ]); }?>        
         <?= Html::a('Remover', ['delete', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [

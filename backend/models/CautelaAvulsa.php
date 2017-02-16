@@ -112,4 +112,15 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
     public static function getStatusAberto(){
     	return "Em aberto";
     }
+    
+    /* Retorna o Status adequado, com base na Data de Devolucao Prevista e a data atual do sistema.
+     */
+    public function getAjustaStatus(){
+    	//Status permitidos: 'Em atraso' e 'Em uso'
+    	if(strtotime($this->ValidadeCautela)<(strtotime(date('d-m-Y')))){
+    		return CautelaAvulsa::getStatusAtraso();
+    	}elseif(strtotime($this->ValidadeCautela)>=(strtotime(date('d-m-Y')))){
+    		return CautelaAvulsa::getStatusAberto();
+    	}
+    }
 }

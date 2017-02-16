@@ -70,13 +70,19 @@ class BaixaCautelaAvulsaController extends Controller
         $model = new BaixaCautelaAvulsa();
 
         $model->idCautelaAvulsa = $id;
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
-            $cautelaAvulsa->StatusCautelaAvulsa = "Concluída";
-            $cautelaAvulsa->save();
-
-            return $this->redirect(['view', 'id' => $model->idBaixaCautelaAvulsa]);
+        
+        if ($model->load(Yii::$app->request->post())){
+        	try{
+        	 if($model->save()){
+	            $cautelaAvulsa->StatusCautelaAvulsa = CautelaAvulsa::getStatusConcluida();
+	            $cautelaAvulsa->save();
+	            return $this->redirect(['view', 'id' => $model->idBaixaCautelaAvulsa]);
+        	 }
+        	}catch (yii\db\Exception $Erro){
+        		//Esperado ser violação de chave unique (idCautelaAvulsa)
+        		$this->mensagens('warning', 'Cautela Inativa', 'Já foi dado baixa para esta cautela anteriormente.');
+        		return $this->redirect(['cautela-avulsa/view2', 'id' => $id]);        		
+        	}        		
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -131,5 +137,20 @@ class BaixaCautelaAvulsaController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    
+    /* Envio de mensagens para views
+     Tipo: success, danger, warning*/
+    protected function mensagens($tipo, $titulo, $mensagem){
+    	Yii::$app->session->setFlash($tipo, [
+    			'type' => $tipo,
+    			'icon' => 'home',
+    			'duration' => 5000,
+    			'message' => $mensagem,
+    			'title' => $titulo,
+    			'positonY' => 'top',
+    			'positonX' => 'center',
+    			'showProgressbar' => true,
+    	]);
     }
 }
