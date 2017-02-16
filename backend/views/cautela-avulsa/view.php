@@ -43,6 +43,10 @@ $this->title = "Responsável: ".$this->title;
         ]) ?>
     </p>
 
+<div class="panel panel-default" style="width:60%">
+<div class="panel-heading">
+                <h3 class="panel-title"><b>Dados Cautela Avulsa:</b></h3>
+</div>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -70,5 +74,28 @@ $this->title = "Responsável: ".$this->title;
             'StatusCautelaAvulsa',
         ],
     ]) ?>
+</div>
+
+    <?php
+    	if($model->StatusCautelaAvulsa === CautelaAvulsa::getStatusConcluida()){
+    		echo '<div class="panel panel-default" style="width:60%">
+    		<div class="panel-heading">
+    		<h3 class="panel-title"><b>Dados Baixa:</b></h3>
+    		</div>';    		
+    		
+	    	echo DetailView::widget([
+	        'model' => $model->cautelaAvulsaTemBaixa,
+	        'attributes' => [
+	            //'idBaixaCautelaAvulsa',
+	            'idCautelaAvulsa',
+	            'Recebedor',
+	            'DataDevolucao',
+	           // 'Equipamento',
+	            'ObservacaoBaixaCautela',
+	        ],
+	    ]);
+	    	echo "</div>";
+    	} ?>
+
 
 </div>

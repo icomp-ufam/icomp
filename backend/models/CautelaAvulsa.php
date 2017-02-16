@@ -89,6 +89,13 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
     	return $this->hasOne(User::className(), ["id" => "id"]);
     }
     
+    public function getCautelaAvulsaTemBaixa(){
+    	if($this->StatusCautelaAvulsa === CautelaAvulsa::getStatusConcluida())
+    		return $this->hasOne(BaixaCautelaAvulsa::className(), ['idCautelaAvulsa'=>'idCautelaAvulsa']);
+    	
+    	return false;
+    }
+    
     public function getTelefoneFormatado(){
     	
     	return preg_replace('/(\d{2})(\d{5})(\d{3})/i', '(${1}) ${2}-${3}', $this->TelefoneResponsavel);
