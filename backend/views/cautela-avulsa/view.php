@@ -42,7 +42,7 @@ $this->title = "Responsável: ".$this->title;
        				],
        		]);
         }?>        
-        <?= Html::a('Remover', ['delete', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id], [
+        <?= Html::a('Remover', ['delete', 'idCautelaAvulsa' => $model->idCautelaAvulsa], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Você tem certeza que deseja apagar este item?',
@@ -55,6 +55,7 @@ $this->title = "Responsável: ".$this->title;
 <div class="panel-heading">
                 <h3 class="panel-title"><b>Dados Cautela Avulsa:</b></h3>
 </div>
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [

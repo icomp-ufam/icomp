@@ -162,9 +162,21 @@ class CautelaAvulsaController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($idCautelaAvulsa, $id)
-    {
-        $this->findModel($idCautelaAvulsa, $id)->delete();
+    public function actionDelete($idCautelaAvulsa)
+    {	
+    	$cautelaAvulsa = $this->findModel2($idCautelaAvulsa);
+    	
+    	if($cautelaAvulsa->cautelaAvulsaTemBaixa === false){
+        	if($this->findModel2($idCautelaAvulsa)->delete() !== false)
+        		$this->mensagens('success', 'Deleção Realizada', 'A cautela foi deletada.');
+        	else
+        		$this->mensagens('danger', 'Deleção NÃO Realizada', 'Contate o administrador.');
+    	}else{
+    		if(($cautelaAvulsa->cautelaAvulsaTemBaixa->delete() !== false) && ($cautelaAvulsa->delete() !== false))
+    			$this->mensagens('success', 'Deleção Realizada', 'A cautela e sua baixa foram deletadas.');
+    		else
+    			$this->mensagens('danger', 'Deleção NÃO Realizada', 'Contate o administrador. Pode haver inconsistência nos dados.');
+    	}
 
         return $this->redirect(['index']);
     }
@@ -188,5 +200,20 @@ class CautelaAvulsaController extends Controller
     
     protected function findModel2($id){
     	return CautelaAvulsa::findOne($id);
+    }
+    
+    /* Envio de mensagens para views
+     Tipo: success, danger, warning*/
+    protected function mensagens($tipo, $titulo, $mensagem){
+    	Yii::$app->session->setFlash($tipo, [
+    			'type' => $tipo,
+    			'icon' => 'home',
+    			'duration' => 5000,
+    			'message' => $mensagem,
+    			'title' => $titulo,
+    			'positonY' => 'top',
+    			'positonX' => 'center',
+    			'showProgressbar' => true,
+    	]);
     }
 }
