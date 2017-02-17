@@ -86,15 +86,19 @@ $this->registerJs(
 
 
     <div class="row">
-                <?= $form->field($model, 'DataDevolucao', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
-                    'language' => 'pt-BR',
-                    'options' => ['placeholder' => 'Selecione a Data de Devolução ...',],
-                    'pluginOptions' => [
-                        'format' => 'dd-mm-yyyy',
-                        'todayHighlight' => true
-                    ]
-                ])->label("<font color='#FF0000'>*</font> <b>Devolução Prevista:</b>")
-                ?>
+                <?php
+                if($model->cautelaTemBaixa === false  || $model->isNewRecord){
+	                echo $form->field($model, 'DataDevolucao', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
+	                    'language' => 'pt-BR',
+	                    'options' => ['placeholder' => 'Selecione a Data de Devolução ...',],
+	                    'pluginOptions' => [
+	                        'format' => 'dd-mm-yyyy',
+	                        'todayHighlight' => true
+	                    ]
+	                ])->label("<font color='#FF0000'>*</font> <b>Devolução Prevista:</b>");
+				}else{
+					echo $form->field($model, 'DataDevolucao', ['options' => ['class' => 'col-md-4']])->textInput(['readOnly'=>true])->label("<font color='#FF0000'>*</font> <b>Devolução Prevista:</b>");
+				}?>
     </div>
 
      <!-- <div class="row">
