@@ -53,10 +53,10 @@ else if ( Yii::$app->user->identity->checarAcesso('secretaria') == 1){
             ],
 
             ['class' => 'yii\grid\ActionColumn',
-            'template'=>'{view} {delete} {update}',
+            'template'=>'{view} {update} {delete}',
             	'buttons'=>[
         			'delete' => function ($url, $model) {
-        			return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id], [
+        			return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'idCautelaAvulsa' => $model->idCautelaAvulsa], [
         					'data' => [
         							'confirm' => 'Remover a cautela avulsa \''.$model->idCautelaAvulsa.'\'?',
         							'method' => 'post',
