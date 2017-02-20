@@ -135,6 +135,8 @@ class EquipamentoController extends Controller
             	$arquivo = 'repositorio/equipamentos/'.$arquivo.'.'.$arq->extension;
                 $model -> ImagemEquipamento = $arquivo;
                 $arq->saveAs($arquivo);
+            }else{
+            	$model -> ImagemEquipamento = $oldName->ImagemEquipamento;
             }
 			
             if ($model->save()) {

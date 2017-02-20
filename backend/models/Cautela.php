@@ -59,7 +59,7 @@ class Cautela extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idCautela' => 'Cod.',
+            'idCautela' => 'Cod. Cautela',
             'NomeResponsavel' => 'Responsável',
             'OrigemCautela' => 'Origem',
             'DataDevolucao' => 'Devolucao Prevista',

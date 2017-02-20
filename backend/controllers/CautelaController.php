@@ -120,11 +120,12 @@ class CautelaController extends Controller
         	
         	$equipamento = Equipamento::findOne($model->idEquipamento);
         	//if($equipamento !== null){
-        		$equipamento->StatusEquipamento = Equipamento::getStatusEmUso();
+      		$equipamento->StatusEquipamento = Equipamento::getStatusEmUso();
         		$equipamento->save();
         	//}
         	
         	$arq = UploadedFile::getInstance($model, 'ImagemCautela');
+
         	if($arq!==null){
         		$arquivo = $model->idCautela.'-'.$arq->baseName;
         		$arquivo = 'repositorio/cautelas/'.$arquivo.'.'.$arq->extension;
