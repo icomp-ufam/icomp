@@ -116,13 +116,10 @@ class CautelaController extends Controller
             return $this->redirect(['view', 'id' => $model->idCautela]);
         } */
         if ($model->load(Yii::$app->request->post())) {
-        	//$model->id = Yii::$app->user->id;
         	
         	$equipamento = Equipamento::findOne($model->idEquipamento);
-        	//if($equipamento !== null){
       		$equipamento->StatusEquipamento = Equipamento::getStatusEmUso();
-        		$equipamento->save();
-        	//}
+        	$equipamento->save();
         	
         	$arq = UploadedFile::getInstance($model, 'ImagemCautela');
 
@@ -132,18 +129,13 @@ class CautelaController extends Controller
         		$model ->ImagemCautela = $arquivo;
         		$arq->saveAs($arquivo);
         	}
-        	//$model->url = 'repositorio/'.$arquivo.'.'.$model->ImagemEquipamento->extension;
-        
         
         	if (!$model->save()) {
         		print_r($model->getErrors());
         		echo Yii::$app->user->id;
         		return;
         	}
-        	return $this->redirect(['view', 'id' => $model->idCautela]);
-        	//return $this->redirect(['view', 'idCautela' => $model->idCautela, 'id' => $model->id]);
-        
-        
+        	return $this->redirect(['view', 'id' => $model->idCautela]);        
         
         } else {
             return $this->render('create', [
@@ -152,6 +144,46 @@ class CautelaController extends Controller
         }
     }
 
+    /**
+     * Updates an existing Cautela model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdate($id)
+    {
+    	$model = $this->findModel($id);
+    	$oldImage = $model->ImagemCautela;
+    	if ($model->load(Yii::$app->request->post())) {
+    		
+    		$equipamento = Equipamento::findOne($model->idEquipamento);
+    		$equipamento->StatusEquipamento = Equipamento::getStatusEmUso();
+    		$equipamento->save();
+    		 
+    		$arq = UploadedFile::getInstance($model, 'ImagemCautela');
+    		
+    		if($arq!==null){
+    			$arquivo = $model->idCautela.'-'.$arq->baseName;
+    			$arquivo = 'repositorio/cautelas/'.$arquivo.'.'.$arq->extension;
+    			$model ->ImagemCautela = $arquivo;
+    			$arq->saveAs($arquivo);
+    		}else{
+        		$model ->ImagemCautela = $oldImage;
+        	}
+    		
+    		if (!$model->save()) {
+    			print_r($model->getErrors());
+    			echo Yii::$app->user->id;
+    			return;
+    		}
+    		
+    		return $this->redirect(['view', 'id' => $model->idCautela]);
+    	} else {
+    		return $this->render('update', [
+    				'model' => $model,
+    		]);
+    	}
+    }
 
     function actionProdutos($id) {
 
@@ -476,25 +508,6 @@ class CautelaController extends Controller
         $pdf->Output('');
 
         $pdfcode = $pdf->output();
-    }
-
-    /**
-     * Updates an existing Cautela model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idCautela]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
     }
 
     /**
