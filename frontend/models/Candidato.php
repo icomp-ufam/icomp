@@ -114,9 +114,10 @@ class Candidato extends \yii\db\ActiveRecord
             'whenClient' => "function (attribute, value) {
                 return $('#form_hidden').val() == 'passo_form_3';
             }"],
-            [['cartaOrientadorFile'], 'required', 'when' => function($model){ return !isset($model->cartaorientador) && $model->passoatual == 3 && $model->cartaorientador($model->idEdital) ;}, 
+            [['cartaOrientadorFile'], 'required', 'when' => function($model){ return (!isset($model->cartaorientador) && $model->passoatual == 3 && $model->cursodesejado == 2 && $model->cartaorientador($model->idEdital)) ;}, 
                 'whenClient' => "function (attribute, value) {
-                    return $('#form_hidden').val() == 'passo_form_3' && ($('#form_upload').val() == 2 || $('#form_upload').val() == 1 || $('#form_upload').val() == 3 || $('#form_upload').val() == 0);
+				    return $('#form_hidden').val() == 'passo_form_3' && $('#form_ignorarRequiredCartaOrientador').val() == 0;
+				  
             }"],
             [['propostaFile'], 'required', 'when' => function($model){ return !isset($model->proposta) && $model->passoatual == 3;},
             'whenClient' => "function (attribute, value) {
@@ -338,7 +339,7 @@ class Candidato extends \yii\db\ActiveRecord
             $comprovanteFile->saveAs($caminho.$this->comprovantepagamento);
         }
 
-        if((($this->edital->cartaorientador == 1 && isset($this->cartaorientador)) || $this->edital->cartaorientador == 0) && isset($this->proposta) && isset($this->comprovantepagamento)){
+        if((($this->edital->cartaorientador == 1 && ((isset($this->cartaorientador) && $this->cursodesejado == 2) || $this->cursodesejado == 1)) || $this->edital->cartaorientador == 0) && isset($this->proposta) && isset($this->comprovantepagamento)){
             return true;
         } else {
             return false;
