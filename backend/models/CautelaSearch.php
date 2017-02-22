@@ -44,7 +44,7 @@ class CautelaSearch extends Cautela
      */
     public function search($params)
     {
-        $query = Cautela::find();
+        $query = Cautela::find();//->with(['cautelatemprojeto']);
 
         // add conditions that should always apply here
 
@@ -76,8 +76,12 @@ class CautelaSearch extends Cautela
             ->andFilterWhere(['like', 'ImagemCautela', $this->ImagemCautela])
             //->andFilterWhere(['like', 'Equipamento', $this->Equipamento])
             ->andFilterWhere(['like', 'StatusCautela', $this->StatusCautela]);
+        	
         	//->andFilterWhere(['like', 'nomeEquipamento', $this->nomeEquipamento])
-
+        	if(trim($this->nomeProjeto)!=='')
+        	$query->joinWith('cautelatemprojeto', true, 'INNER JOIN')->andFilterWhere(['like', 'nomeProjeto', $this->Equipamento])->all();
+        	
+        	//(['like', 'ContProjProjetos.nomeProjeto', $this->nomeProjeto]);
          //Filtro de Equipamentos pelo Nome
         if(trim($this->Equipamento)!==''){
         	$equips = Equipamento::find()->where(['like', 'NomeEquipamento',$this->Equipamento])->all();
@@ -87,7 +91,7 @@ class CautelaSearch extends Cautela
 	        }
 	    	$query->andFilterWhere(['idEquipamento' => $idsEquip]);
         }
-        
+        /*
         //Filtro de Projetos pelo Nome
         if(trim($this->nomeProjeto)!==''){
         	$projs = ContProjProjetos::find()->where(['like', 'nomeprojeto',$this->nomeProjeto])->all();
@@ -96,7 +100,7 @@ class CautelaSearch extends Cautela
         		$idsProj[] = $proj->id;
         	}
         	$query->andFilterWhere(['idProjeto' => $idsProj]);
-        }
+        }*/
         
         return $dataProvider;
     }
