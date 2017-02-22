@@ -51,7 +51,6 @@ if(!isset($model->cartaNome[2]) || $model->cartaNome[2] == ""){
         <input type='hidden' id = 'form_carta' value ='<?= $model->edital->cartarecomendacao ?>'/>
         <input type='hidden' id = 'form_upload' value ='<?= $uploadRealizados ?>'/>
 
-
     <div style="clear: both;"><legend>Proposta do Candidato</legend></div>
 
    <div class="row">
@@ -111,8 +110,13 @@ if(!isset($model->cartaNome[2]) || $model->cartaNome[2] == ""){
         <?php 
 
         if($model->cartaOrientador($model->idEdital) ){
+			
+			if($model->cursodesejado == 2 )
+				echo "<input type='hidden' id = 'form_ignorarRequiredCartaOrientador' value ='0'/>";
+			else
+				echo "<input type='hidden' id = 'form_ignorarRequiredCartaOrientador' value ='1'/>";
 
-            if(isset($model->cartaorientador)){
+			if(isset($model->cartaorientador)){
                 echo "<div style= padding: 3px 3px 3px 3px' class='col-md-8'> <b>Carta de Aceite do Orientador:<br> 
                     Você já fez o upload da Carta do Orientador, <a href=index.php?r=candidato/pdf&documento=".$model->cartaorientador.">clique aqui </a>para visualizá-la.</b><br></div>";
                 
@@ -125,13 +129,13 @@ if(!isset($model->cartaNome[2]) || $model->cartaNome[2] == ""){
             }
             else{
 
-                echo $form->field($model, 'cartaOrientadorFile')->FileInput(['accept' => '.pdf'])->label("<font color='#FF0000'>*</font> <b>Carta de Aceite do Orientador:</b>");
+                echo $form->field($model, 'cartaOrientadorFile')->FileInput(['accept' => '.pdf'])->label("<b>Carta de Aceite do Orientador (obrigatório para doutorado):</b>");
 		echo "Download do modelo de carta de orientador: <a target='_blank' href='documentos/carta_aceite_orientador.docx'><img src='img/doc-icon.gif' border='0' height='16' width='16'></a>";
             }
         }
         else{
 
-            echo "<input type='hidden' id = 'ignorarRequiredCartaOrientador' value = '0' />";
+            echo "<input type='hidden' id = 'form_ignorarRequiredCartaOrientador' value = '1' />";
 
         }
 
