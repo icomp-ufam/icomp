@@ -390,7 +390,37 @@ class CautelaController extends Controller
             $modelCautela2 = Cautela::findOne($id);
             $flagTemBaixa = $flagTemBaixa || ($modelCautela2->cautelaTemBaixa!==false);
             $modelEquipamento = Equipamento::findOne($modelCautela2->idEquipamento);
-            
+            $baixaLocal = "";
+            if($modelCautela2->cautelaTemBaixa!==false){
+            	$baixaLocal = '<b>Dados da Baixa:</b>
+                    <table style=" margin-right: auto; width: 200px;" border="2">
+                        <tbody>
+                            <tr>
+                                <td style="width: 145px;">
+                                    <p><b>Recebedor:</b></p>
+                                </td>
+                                <td style="width: 175.5px;">
+                                    <p><b>Devolução:</b></p>
+                                </td>
+                                <td style="width: 180px;">
+                                    <p><b>Observação:</b></p>
+                                </td>
+                            </tr>
+                            <tr>
+        		                <td style="width: 145px;">
+                                    <p>'.$modelCautela2->cautelaTemBaixa->Recebedor.'</p>
+                                </td>
+        		                <td style="width: 175.5px;">
+                                    <p>'.$modelCautela2->cautelaTemBaixa->DataDevolucao.'</p>
+                                </td>
+        		                <td style="width: 180px;">
+                                    <p>'.$modelCautela2->cautelaTemBaixa->ObservacaoBaixaCautela.'</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>';
+            }
+            	
             $dados = $dados
                     .
                     '<table style="margin-left: auto; margin-right: auto;" border="2">
@@ -484,6 +514,7 @@ class CautelaController extends Controller
                             </tr>
                         </tbody>
                     </table>
+                    '.$baixaLocal.'
                     <hr>
                     <br>
                     ';

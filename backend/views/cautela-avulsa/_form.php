@@ -2,8 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use \yii\jui\DatePicker;
+//use \yii\jui\DatePicker;
 use \kartik\widgets\FileInput;
+use kartik\widgets\DatePicker;
 use yii\widgets\MaskedInput;
 use yii\web\View;
 
@@ -27,7 +28,20 @@ $this->registerJs("
 					//Status Cautela: Em Atraso
 					$('#cautelaavulsa-statuscautelaavulsa').val('Em atraso');
 				}
-			});		
+		
+				//Calcula Validade
+				var  ini = $('#cautelaavulsa-datainicial').val().split('-');
+				var dini = new Date(ini[2], ini[1]-1, ini[0], agora.getHours(), agora.getMinutes(), agora.getSeconds(),agora.getMilliseconds());
+				$('#cautelaavulsa-validade').val((devol-dini)/(1000*60*60*24));
+			});	
+		
+			$('#cautelaavulsa-datainicial').on('change', function (e){
+				var dataFim = $('#cautelaavulsa-validadecautela').val().split('-');
+				var dataIni = this.value.split('-');
+				var dFim = new Date(dataFim[2], dataFim[1]-1, dataFim[0]);
+				var dIni = new Date(dataIni[2], dataIni[1]-1, dataIni[0]);
+				$('#cautelaavulsa-validade').val((dFim-dIni)/(1000*60*60*24));
+			});
 			",
 		    View::POS_READY,
 		    'status-automatico-handler'
@@ -68,10 +82,35 @@ $this->registerJs("
     </div>
 	<div class="panel-body">
 	<div class="row">
-	<?= $form->field($model, 'ValidadeCautela',['options'=>['class'=>'col-md-2']])->widget(DatePicker::classname(), [
+	<?php 
+	if($model->isNewRecord){
+                	$model->dataInicial = date('d-m-Y');
+                }
+     ?>
+	<?= $form->field($model, 'dataInicial', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
+	                		'language' => 'pt-BR',
+	                		'options' => ['placeholder' => 'Selecione a Data Inicial ...',  ],
+	                		'pluginOptions' => [
+	                				'format' => 'dd-mm-yyyy',
+	                				'todayHighlight' => true
+	                		]
+	                ]) ?>
+	</div>         
+	<div class="row">                
+	<?= $form->field($model, 'ValidadeCautela', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
+	                		'language' => 'pt-BR',
+	                		'options' => ['placeholder' => 'Selecione a Data de Devolução ...',],
+	                		'pluginOptions' => [
+	                				'format' => 'dd-mm-yyyy',
+	                				'todayHighlight' => true
+	                		]
+	                ])?>	                
+	                       
+	<?php /* echo $form->field($model, 'ValidadeCautela',['options'=>['class'=>'col-md-2']])->widget(DatePicker::classname(), [
 			    //'language' => 'pt-BR',
 			    'dateFormat' => 'dd-MM-yyyy',
-	]) ?>
+	]);*/ ?>
+	<?= $form->field($model, 'validade', ['options' => ['class' => 'col-md-2']])->textInput(['value'=>$model->validadeCalculada, 'readOnly'=>true]) ?>
 	</div>
 	<div class="row">
 	<?= $form->field($model, 'NomeEquipamento',	['options'=>['class'=>'col-md-3']])->textInput(['maxlength'=>true]) ?>
