@@ -405,13 +405,13 @@ class CautelaController extends Controller
                             </tr>
 
                             <tr>
-                                <td width="95">
+                                <td width="160px">
                                     <p><b>Contato:</b></p>
                                 </td>
-                                <td width="214">
+                                <td width="190px">
                                     <p>'.$modelCautela2->TelefoneResponsavel.'</p>
                                 </td>
-                                <td width="66">
+                                <td width="66px">
                                     <p><b>Email:</b></p>
                                 </td>
                                 <td width="331">
@@ -466,7 +466,7 @@ class CautelaController extends Controller
                                 <td style="width: 179.5px;">
                                     <p><b>Data Prevista:</b></p>
                                 </td>
-                                <td style="width: 225px;">
+                                <td style="width: 230px;">
                                     <p><b>Validade:</b></p>
                                 </td>
                             </tr>
@@ -475,15 +475,16 @@ class CautelaController extends Controller
                                 <td style="width: 147.5px;">
                                     <p>'.$modelCautela2->dataInicial.'</p>
                                 </td>
-                                <td style="width: 179.5px;">
+                                <td style="width: 163px;">
                                     <p>'.$modelCautela2->DataDevolucao.'</p>
                                 </td>
-                                <td style="width: 225px;">
+                                <td style="width: 373px;">
                                     <p>'.$modelCautela2->Validade.' dias</p>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                    <hr>
                     <br>
                     ';
 
