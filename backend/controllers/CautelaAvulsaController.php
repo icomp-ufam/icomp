@@ -85,7 +85,7 @@ class CautelaAvulsaController extends Controller
 
         //if ($model->load(Yii::$app->request->post()) && $model->save()) 
             
-            if ($model->load(Yii::$app->request->post())) {
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
             	$model->id = Yii::$app->user->id;
             	$arq = UploadedFile::getInstance($model, 'ImagemCautela');
             	if($arq!==null){
@@ -93,15 +93,17 @@ class CautelaAvulsaController extends Controller
             		$arquivo = 'repositorio/cautelasavulsas/'.$arquivo.'.'.$arq->extension;
             		$model ->ImagemCautela = $arquivo;
             		$arq->saveAs($arquivo);
+            		
+            		$model->save();
             	}
             	//$model->url = 'repositorio/'.$arquivo.'.'.$model->ImagemEquipamento->extension;
             
             
-            	if (!$model->save()) {
+            	/*if (!$model->save()) {
             		print_r($model->getErrors());
             		echo Yii::$app->user->id;
             		return;
-            	}
+            	}*/
             	
             	return $this->redirect(['view', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id]);
             
@@ -166,14 +168,30 @@ class CautelaAvulsaController extends Controller
     {	
     	$cautelaAvulsa = $this->findModel2($idCautelaAvulsa);
     	
+    	$imagemPath = $cautelaAvulsa->ImagemCautela;
+    	
     	if($cautelaAvulsa->cautelaAvulsaTemBaixa === false){
-        	if($this->findModel2($idCautelaAvulsa)->delete() !== false)
+        	if($this->findModel2($idCautelaAvulsa)->delete() !== false){
         		$this->mensagens('success', 'Deleção Realizada', 'A cautela foi deletada.');
+        		
+        		if(trim($imagemPath)!=='' && file_exists($imagemPath)){
+        			if(unlink($imagemPath) === false){
+        				$this->mensagens('warning', 'Imagem da autela Não pode ser deletada', 'Informe o administrador.');
+        			}
+        		}
+        	}
         	else
         		$this->mensagens('danger', 'Deleção NÃO Realizada', 'Contate o administrador.');
     	}else{
+    		
     		if(($cautelaAvulsa->cautelaAvulsaTemBaixa->delete() !== false) && ($cautelaAvulsa->delete() !== false))
     			$this->mensagens('success', 'Deleção Realizada', 'A cautela e sua baixa foram deletadas.');
+    		
+    			if(trim($imagemPath)!=='' && file_exists($imagemPath)){
+    				if(unlink($imagemPath) === false){
+    					$this->mensagens('warning', 'Imagem da autela Não pode ser deletada', 'Informe o administrador.');
+    				}
+    			}
     		else
     			$this->mensagens('danger', 'Deleção NÃO Realizada', 'Contate o administrador. Pode haver inconsistência nos dados.');
     	}

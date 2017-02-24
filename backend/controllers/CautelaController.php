@@ -115,7 +115,7 @@ class CautelaController extends Controller
         /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->idCautela]);
         } */
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
         	
         	$equipamento = Equipamento::findOne($model->idEquipamento);
       		$equipamento->StatusEquipamento = Equipamento::getStatusEmUso();
@@ -128,13 +128,16 @@ class CautelaController extends Controller
         		$arquivo = 'repositorio/cautelas/'.$arquivo.'.'.$arq->extension;
         		$model ->ImagemCautela = $arquivo;
         		$arq->saveAs($arquivo);
+        		
+        		$model->save();
         	}
         
-        	if (!$model->save()) {
+        /*	if (!$model->save()) {
         		print_r($model->getErrors());
         		//echo Yii::$app->user->id;
         		return;
         	}
+        */
         	return $this->redirect(['view', 'id' => $model->idCautela]);        
         
         } else {
@@ -529,13 +532,21 @@ class CautelaController extends Controller
     		//Quando a cautela não tem baixa ('Em uso' ou 'Em atraso'), mas tá prendendo um equipamento.
     		$cautela->cautelatemequipamento->StatusEquipamento = Equipamento::getStatusDisponivel();
     		$cautela->cautelatemequipamento->save();
+    		$imagemPath = $cautela->ImagemCautela;
     		if($cautela->delete()===false){
     			$this->mensagens('danger', 'Erro na deleção', 'Contate o administrador.');
     			//Reverte a liberação do equipamento.
     			$cautela->cautelatemequipamento->StatusEquipamento = Equipamento::getStatusEmUso();
     			$cautela->cautelatemequipamento->save();
-    		}else 
+    		}else{
     			$this->mensagens('success', 'Cautela Deletada', 'Cautela deletada com sucesso.');
+    			
+    			if(trim($imagemPath)!=='' && file_exists($imagemPath)){
+    				if(unlink($imagemPath) === false){
+    					$this->mensagens('waning', 'Imagem da cautela Não foi deletada', 'Informe o administrador.');
+    				}
+    			}
+    		}
     			
     	}
     	

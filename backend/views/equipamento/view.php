@@ -18,13 +18,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
     	<?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['equipamento/index'], ['class' => 'btn btn-warning']) ?>
         <?= Html::a('Atualizar', ['update', 'id' => $model->idEquipamento], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Deletar', ['delete', 'id' => $model->idEquipamento], [
+        <!--<?php /* echo Html::a('Deletar', ['delete', 'id' => $model->idEquipamento], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Você tem certeza que deseja deletar este item?',
                 'method' => 'post',
             ],
-        ]) ?>
+        ]); */ ?>-->
         <?= Html::a('Descartar Equipamento', ['descarte-equipamento/create', 'idEquipamento' => $model->idEquipamento], [
             'class' => 'btn btn-danger',
             'data' => [

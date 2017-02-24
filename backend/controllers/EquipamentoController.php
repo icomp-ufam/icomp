@@ -81,22 +81,24 @@ class EquipamentoController extends Controller
         }
 
 
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $arq = UploadedFile::getInstance($model, 'ImagemEquipamento');
             if($arq!==null){
             $arquivo = $model->idEquipamento.'-'.$model->NomeEquipamento;
             $arquivo = 'repositorio/equipamentos/'.$arquivo.'.'.$arq->extension;
             $model -> ImagemEquipamento = $arquivo;
             $arq->saveAs($arquivo);
+            
+            $model->save();
             }
             //$model->url = 'repositorio/'.$arquivo.'.'.$model->ImagemEquipamento->extension;
 
-
+/*
             if (!$model->save()) {
                 print_r($model->getErrors());
                 return;
             }
-
+*/
             return $this->redirect(['view', 'id' => $model->idEquipamento]);
             
 

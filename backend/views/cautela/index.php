@@ -102,7 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
             	'value'=>'cautelatemprojeto.nomeprojeto',
             ],
             ['class' => 'yii\grid\ActionColumn',
-            'template'=>'{view} {delete} {update}',
+            'template'=>'{view} {update} {delete}',
             	'buttons'=>[
         			'delete' => function ($url, $model) {
         			return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->idCautela], [

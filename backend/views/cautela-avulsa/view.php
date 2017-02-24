@@ -73,6 +73,7 @@ $this->title = "Responsável: ".$this->title;
             	'value' =>$model->telefoneFormatado,
             ],
             'ObservacoesDescarte',
+        	'StatusCautelaAvulsa',
         	[
         	'attribute' => 'ImagemCautela',
         		//'value' => "<a href=localhost/novoppgi/backend/web/".$model->edital."' target = '_blank'> Baixar </a>",
@@ -80,7 +81,6 @@ $this->title = "Responsável: ".$this->title;
 	        	//'value' => "<a href='".$model->ImagemCautela."' target = '_blank'> Foto  </a>"
         		'visible'=>((trim($model->ImagemCautela)!='')?true:false)
         	],
-            'StatusCautelaAvulsa',
         ],
     ]) ?>
 </div>
