@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\MaskedInput;
+use kartik\widgets\DatePicker;
 
 //teste
 
@@ -48,6 +49,16 @@ use yii\widgets\MaskedInput;
     	<h3 class="panel-title"><b>Dados Descarte:</b></h3>
     </div>
 	<div class="panel-body">
+	<div class="row">
+	<?= $form->field($model, 'dataDescarte', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
+	                    'language' => 'pt-BR',
+	                    'options' => ['placeholder' => 'Selecione a Data do Descarte ...', 'value'=>date('d-m-Y')],
+	                    'pluginOptions' => [
+	                        'format' => 'dd-mm-yyyy',
+	                        'todayHighlight' => true
+	                    ]
+	                ]) ?>
+	</div>
 	<div class="row">
 	<?= $form->field($model, 'documento', ['options' => ['class' => 'col-md-6']])->textInput(['maxlength' => true]) ?>
 	</div>

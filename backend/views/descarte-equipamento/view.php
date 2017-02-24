@@ -57,6 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'idDescarte',
         	'documento',
+        	'dataDescarte',
             'ObservacoesDescarte',
         ],
     ]) ?>

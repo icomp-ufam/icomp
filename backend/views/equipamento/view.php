@@ -89,6 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'equipamentoTemDescarte.TelefoneResponsavel',
         	'equipamentoTemDescarte.Email',
         	'equipamentoTemDescarte.documento',
+        	'equipamentoTemDescarte.dataDescarte',
             'equipamentoTemDescarte.ObservacoesDescarte',
         ],
     ]); 

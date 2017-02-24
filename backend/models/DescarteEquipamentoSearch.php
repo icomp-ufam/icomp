@@ -21,7 +21,7 @@ class DescarteEquipamentoSearch extends DescarteEquipamento
     {
         return [
             [['idDescarte'], 'integer'],
-            [['NomeResponsavel', 'Email', 'TelefoneResponsavel', 'ObservacoesDescarte', 'documento'], 'safe'],
+            [['NomeResponsavel', 'Email', 'TelefoneResponsavel', 'ObservacoesDescarte', 'documento', 'dataDescarte'], 'safe'],
         ];
     }
 
@@ -68,7 +68,8 @@ class DescarteEquipamentoSearch extends DescarteEquipamento
             ->andFilterWhere(['like', 'Email', $this->Email])
             ->andFilterWhere(['like', 'TelefoneResponsavel', $this->TelefoneResponsavel])
             ->andFilterWhere(['like', 'ObservacoesDescarte', $this->ObservacoesDescarte])
-        	->andFilterWhere(['like', 'documento', $this->documento]);
+        	->andFilterWhere(['like', 'documento', $this->documento])
+        	->andFilterWhere(['like', 'dataDescarte', $this->dataDescarte]);
 
         return $dataProvider;
     }
