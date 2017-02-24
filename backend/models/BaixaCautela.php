@@ -34,7 +34,7 @@ class BaixaCautela extends \yii\db\ActiveRecord
     {
         return [
             [['idCautela',], 'integer'],
-            [['Recebedor', 'ObservacaoBaixaCautela'], 'required'],
+            [['Recebedor',], 'required'],
             [['Recebedor', 'DataDevolucao', 'ObservacaoBaixaCautela'], 'string', 'max' => 50],
             [['idCautela'], 'exist', 'skipOnError' => true, 'targetClass' => Cautela::className(), 'targetAttribute' => ['idCautela' => 'idCautela']],
 //            [['idCautelaAvulsa'], 'exist', 'skipOnError' => true, 'targetClass' => CautelaAvulsa::className(), 'targetAttribute' => ['idCautelaAvulsa' => 'idCautelaAvulsa']],
