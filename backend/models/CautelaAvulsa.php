@@ -21,7 +21,7 @@ use app\models\User;
  */
 class CautelaAvulsa extends \yii\db\ActiveRecord
 {
-
+	public $idsmulticautela;
     public $tipoCautelaAvulsa;
     public $flagCautelaAvulsa=0;
     public $validade;
@@ -48,7 +48,7 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
         	[['dataInicial'], 'string', 'max'=>20],
         	[['Email'], 'email'],
             [['id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id' => 'id']],
-        	[['validade'], 'safe'],
+        	[['idsmulticautela','validade'], 'safe'],
         ];
     }
 
@@ -71,6 +71,7 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
         	'NomeEquipamento'=>'Equipamento',
         	'dataInicial'=> 'Data Inicial',
         	'validade' => 'Validade (dias)',
+        	'idsmulticautela' => 'Cautelas',
         ];
     }
 
