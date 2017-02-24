@@ -28,19 +28,40 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) */?>
     </p>
 
+	<div class="panel panel-default" style="width:80%">
+	<div class="panel-heading">
+    	<h3 class="panel-title"><b>Dados Respons&aacute;vel:</b></h3>
+    </div>
+    <div class="panel-body">
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'NomeResponsavel',
+        	[
+        		'attribute'=>'TelefoneResponsavel',
+        		'format'=>'text',
+        		'value' =>$model->telefoneFormatado,
+        	],
+            'Email:email',
+        ],
+    ]) ?>
+    </div>
+    </div>
+    <div class="panel panel-default" style="width:80%">
+    <div class="panel-heading">
+    	<h3 class="panel-title"><b>Dados Descarte:</b></h3>
+    </div>
+    <div class="panel-body">
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'idDescarte',
-            'NomeResponsavel',
-            'Email:email',
-            [
-            	'attribute'=>'TelefoneResponsavel',
-            	'format'=>'text',
-            	'value' =>$model->telefoneFormatado,
-            ],
+        	'documento',
             'ObservacoesDescarte',
         ],
     ]) ?>
+    
+    </div>    
+    </div>
 
 </div>

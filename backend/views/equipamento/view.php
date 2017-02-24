@@ -86,8 +86,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'equipamentoTemDescarte.NomeResponsavel',
-            'equipamentoTemDescarte.Email',
             'equipamentoTemDescarte.TelefoneResponsavel',
+        	'equipamentoTemDescarte.Email',
+        	'equipamentoTemDescarte.documento',
             'equipamentoTemDescarte.ObservacoesDescarte',
         ],
     ]); 

@@ -49,7 +49,10 @@ use yii\widgets\MaskedInput;
     </div>
 	<div class="panel-body">
 	<div class="row">
-    <?= $form->field($model, 'ObservacoesDescarte', ['options' => ['class' => 'col-md-3']])->textarea(['maxlength' => true]) ?>
+	<?= $form->field($model, 'documento', ['options' => ['class' => 'col-md-6']])->textInput(['maxlength' => true]) ?>
+	</div>
+	<div class="row">
+    <?= $form->field($model, 'ObservacoesDescarte', ['options' => ['class' => 'col-md-6']])->textarea(['maxlength' => true]) ?>
 	</div>
 	</div>
 	</div>
