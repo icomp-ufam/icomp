@@ -82,9 +82,9 @@ class CautelaAvulsaController extends Controller
         else if ($model->StatusCautelaAvulsa = "Em atraso"){
             $StatusCautelaAvulsa = 3;
         }
-
+	
         //if ($model->load(Yii::$app->request->post()) && $model->save()) 
-            
+        	$model->id = Yii::$app->user->id;
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
             	$model->id = Yii::$app->user->id;
             	$arq = UploadedFile::getInstance($model, 'ImagemCautela');
@@ -104,7 +104,7 @@ class CautelaAvulsaController extends Controller
             		echo Yii::$app->user->id;
             		return;
             	}*/
-            	
+
             	return $this->redirect(['view', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id]);
             
             

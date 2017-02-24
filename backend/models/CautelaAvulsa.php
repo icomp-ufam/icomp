@@ -24,7 +24,8 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
 
     public $tipoCautelaAvulsa;
     public $flagCautelaAvulsa=0;
-
+    public $validade;
+    
     /**
      * @inheritdoc
      */
@@ -39,13 +40,15 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['NomeResponsavel', 'Email', 'TelefoneResponsavel', 'ValidadeCautela', 'NomeEquipamento'], 'required'],
+            [['NomeResponsavel', 'Email', 'TelefoneResponsavel', 'ValidadeCautela', 'NomeEquipamento','dataInicial'], 'required'],
             [['id',], 'integer'],
         	[['TelefoneResponsavel'], 'string', 'max'=>15, 'min'=>11],
             [['NomeResponsavel', 'Email', 'ValidadeCautela', 'ObservacoesDescarte', 'StatusCautelaAvulsa', 'origem', 'NomeEquipamento'], 'string', 'max' => 50],
             [['ImagemCautela'], 'string', 'max' => 100],
+        	[['dataInicial'], 'string', 'max'=>20],
         	[['Email'], 'email'],
             [['id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id' => 'id']],
+        	[['validade'], 'safe'],
         ];
     }
 
@@ -66,6 +69,8 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
             'StatusCautelaAvulsa' => 'Status',
         	'origem' => 'Origem',
         	'NomeEquipamento'=>'Equipamento',
+        	'dataInicial'=> 'Data Inicial',
+        	'validade' => 'Validade (dias)',
         ];
     }
 
@@ -95,6 +100,23 @@ class CautelaAvulsa extends \yii\db\ActiveRecord
     	
     	return false;
     }
+
+    public function getValidade(){
+    	return $this->validadeCalculada;
+    }
+    
+    public function getValidadeCalculada(){
+    	if(!$this->isNewRecord){
+    		$dataIni = date_create_from_format('d-m-Y', $this->dataInicial);
+    		$dataFim = date_create_from_format('d-m-Y', $this->ValidadeCautela);
+    
+    		$strIni = $dataIni->format('Y-m-d');
+    		$strFim = $dataFim->format('Y-m-d');
+    
+    		return floor( (strtotime($strFim)-strtotime($strIni))/86400 );
+    	}
+    	return 0;
+    }    
     
     public function getBaixaReversivel(){
     	if( $this->StatusCautelaAvulsa === CautelaAvulsa::getStatusConcluida() )
