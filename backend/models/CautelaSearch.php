@@ -22,7 +22,7 @@ class CautelaSearch extends Cautela
     {
         return [
             [['idCautela', 'idEquipamento', 'idProjeto'], 'integer'],
-            [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel', 'ImagemCautela', 'Equipamento', 'StatusCautela', 'nomeProjeto'], 'safe'],
+            [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel', 'ImagemCautela', 'Equipamento', 'StatusCautela', 'nomeProjeto', 'dataInicial'], 'safe'],
         ];
     }
 
@@ -75,7 +75,8 @@ class CautelaSearch extends Cautela
             ->andFilterWhere(['like', 'TelefoneResponsavel', $this->TelefoneResponsavel])
             ->andFilterWhere(['like', 'ImagemCautela', $this->ImagemCautela])
             //->andFilterWhere(['like', 'Equipamento', $this->Equipamento])
-            ->andFilterWhere(['like', 'StatusCautela', $this->StatusCautela]);
+            ->andFilterWhere(['like', 'StatusCautela', $this->StatusCautela])
+            ->andFilterWhere(['like', 'dataInicial', $this->dataInicial]);
         	
         	//->andFilterWhere(['like', 'nomeEquipamento', $this->nomeEquipamento])
         	if(trim($this->nomeProjeto)!=='')

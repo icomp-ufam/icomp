@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 <div class="panel panel-default" style="width:60%">
 <div class="panel-heading">
-                <h3 class="panel-title"><b>Dados Equipamento:</b></h3>
+                <h3 class="panel-title"><b>Dados Cautela:</b></h3>
 </div>
     <?= DetailView::widget([
         'model' => $model,
@@ -61,15 +61,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'idCautela',
             'NomeResponsavel',
             'OrigemCautela',
+        	'dataInicial',
             'DataDevolucao',
-            'Email:email',
+        	[
+        		'attribute'=>'validade',
+        		'value'=>$model->Validade,
+    		],
+        	'Email:email',
             //'ValidadeCautela',
             'TelefoneResponsavel',
             'StatusCautela',
-            [
-            	'attribute'=>'NomeEquipamento',
-            ],
-        	'idEquipamento',
             [
             	'attribute'=>'idProjeto',
             	'value'=>$model->cautelatemprojeto->nomeprojeto,
@@ -80,6 +81,29 @@ $this->params['breadcrumbs'][] = $this->title;
 	        	'format'=>['image', ['width'=>100, 'height'=>100]],
 	        	//'value' => "<a href='".$model->ImagemCautela."' target = '_blank'> Foto  </a>"
         		'visible'=>((trim($model->ImagemCautela)!='')?true:false)
+        	],
+        ],
+    ]) ?>
+</div>    
+   
+<div class="panel panel-default" style="width:60%">
+<div class="panel-heading">
+                <h3 class="panel-title"><b>Dados Equipamento:</b></h3>
+</div>
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+        	'idEquipamento',
+            [
+            	'attribute'=>'NomeEquipamento',
+            ],
+        	[
+        		'label'=>$model->cautelatemequipamento->getAttributeLabel('ImagemEquipamento'),
+        		'attribute' => 'cautelatemequipamento.ImagemEquipamento',
+        		//'value' => "<a href=localhost/novoppgi/backend/web/".$model->edital."' target = '_blank'> Baixar </a>",
+        		'format'=>['image', ['width'=>100, 'height'=>100]],
+        		//'value' => "<a href='".$model->ImagemEquipamento."' target = '_blank'> Foto  </a>"
+        		'visible'=>((trim($model->cautelatemequipamento->ImagemEquipamento)!='')?true:false)
         	],
         ],
     ]) ?>

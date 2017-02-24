@@ -27,6 +27,7 @@ class Cautela extends \yii\db\ActiveRecord
 	public $idsmulticautela;
 	public $nomeEquipamento;
 	public $nomeProjeto;
+	public $validade;
 	
     /**
      * @inheritdoc
@@ -42,14 +43,15 @@ class Cautela extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['NomeResponsavel', 'OrigemCautela', 'Email', 'TelefoneResponsavel', 'StatusCautela', 'idEquipamento', 'idProjeto', 'DataDevolucao'], 'required'],
+            [['NomeResponsavel', 'OrigemCautela', 'Email', 'TelefoneResponsavel', 'StatusCautela', 'idEquipamento', 'idProjeto', 'DataDevolucao', 'dataInicial'], 'required'],
             [['idEquipamento', 'idProjeto'], 'integer'],
             [['NomeResponsavel', 'OrigemCautela', 'DataDevolucao', 'Email', 'ValidadeCautela', 'TelefoneResponsavel', 'Equipamento','nomeEquipamento', 'StatusCautela'], 'string', 'max' => 50],
+        	[['dataInicial'], 'string', 'max'=>20],
             [['ImagemCautela'], 'string', 'max' => 100],
         	[['nomeProjeto'], 'string', 'max'=>200],
         	[['Email'], 'email'],
             [['idEquipamento'], 'exist', 'skipOnError' => true, 'targetClass' => Equipamento::className(), 'targetAttribute' => ['idEquipamento' => 'idEquipamento']],
-        	[['idsmulticautela', 'nomeEquipamento', 'nomeProjeto'], 'safe'],	
+        	[['idsmulticautela', 'nomeEquipamento', 'nomeProjeto', 'validade'], 'safe'],	
         ];
     }
 
@@ -74,6 +76,8 @@ class Cautela extends \yii\db\ActiveRecord
         	'idsmulticautela' => 'Cautelas',
         	'nomeEquipamento'=>'Nome Equip.',
         	'nomeProjeto'=>'Projeto',
+        	'dataInicial'=> 'Data Inicial',
+        	'validade' => 'Validade (dias)',
         ];
     }
     
@@ -94,6 +98,23 @@ class Cautela extends \yii\db\ActiveRecord
     		return $this->hasOne(BaixaCautela::className(), ['idCautela'=>'idCautela']);
     	
     	return false; 
+    }
+    
+    public function getValidade(){
+    	return $this->validadeCalculada;
+    }
+    
+    public function getValidadeCalculada(){
+    	if(!$this->isNewRecord){
+    		$dataIni = date_create_from_format('d-m-Y', $this->dataInicial);
+    		$dataFim = date_create_from_format('d-m-Y', $this->DataDevolucao);
+
+    		$strIni = $dataIni->format('Y-m-d');
+    		$strFim = $dataFim->format('Y-m-d');
+    		
+    		return floor( (strtotime($strFim)-strtotime($strIni))/86400 );
+    	}
+    	return 0;
     }
     
     public static function getStatusAtraso(){

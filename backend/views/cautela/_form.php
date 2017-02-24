@@ -39,7 +39,22 @@ $this->registerJs(
 					//Status Cautela: Em Atraso
 					$('#cautela-statuscautela').val('Em atraso');
 				}
+		
+				//Calcula Validade
+				var  ini = $('#cautela-datainicial').val().split('-');
+				var dini = new Date(ini[2], ini[1]-1, ini[0], agora.getHours(), agora.getMinutes(), agora.getSeconds(),agora.getMilliseconds());
+				$('#cautela-validade').val((devol-dini)/(1000*60*60*24));
 			});
+		
+			$('#cautela-datainicial').on('change', function (e){
+				var dataFim = $('#cautela-datadevolucao').val().split('-');
+				var dataIni = this.value.split('-');
+				var dFim = new Date(dataFim[2], dataFim[1]-1, dataFim[0]);
+				var dIni = new Date(dataIni[2], dataIni[1]-1, dataIni[0]);
+				$('#cautela-validade').val((dFim-dIni)/(1000*60*60*24));
+			});
+		
+			
 			",
 		    View::POS_READY,
 		    'garante-idequipamento-handler'
@@ -87,18 +102,35 @@ $this->registerJs(
 
     <div class="row">
                 <?php
+                if($model->isNewRecord){
+                	$model->dataInicial = date('d-m-Y');
+                }
                 if($model->cautelaTemBaixa === false  || $model->isNewRecord){
+	                echo $form->field($model, 'dataInicial', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
+	                		'language' => 'pt-BR',
+	                		'options' => ['placeholder' => 'Selecione a Data Inicial ...',  ],
+	                		'pluginOptions' => [
+	                				'format' => 'dd-mm-yyyy',
+	                				'todayHighlight' => true
+	                		]
+	                ])->label("<font color='#FF0000'>*</font> <b>Data Inicial:</b>");
+
+	                
 	                echo $form->field($model, 'DataDevolucao', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
-	                    'language' => 'pt-BR',
-	                    'options' => ['placeholder' => 'Selecione a Data de Devolução ...',],
-	                    'pluginOptions' => [
-	                        'format' => 'dd-mm-yyyy',
-	                        'todayHighlight' => true
-	                    ]
+	                		'language' => 'pt-BR',
+	                		'options' => ['placeholder' => 'Selecione a Data de Devolução ...',],
+	                		'pluginOptions' => [
+	                				'format' => 'dd-mm-yyyy',
+	                				'todayHighlight' => true
+	                		]
 	                ])->label("<font color='#FF0000'>*</font> <b>Devolução Prevista:</b>");
+
 				}else{
 					echo $form->field($model, 'DataDevolucao', ['options' => ['class' => 'col-md-4']])->textInput(['readOnly'=>true])->label("<font color='#FF0000'>*</font> <b>Devolução Prevista:</b>");
+					echo $form->field($model, 'dataInicial', ['options' => ['class' => 'col-md-4']])->textInput(['readOnly'=>true])->label("<font color='#FF0000'>*</font> <b>Data Inicial:</b>");
 				}?>
+				
+				<?= $form->field($model, 'validade', ['options' => ['class' => 'col-md-2']])->textInput(['value'=>$model->validadeCalculada, 'readOnly'=>true]) ?>
     </div>
 
      <!-- <div class="row">

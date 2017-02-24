@@ -30,7 +30,7 @@ class DescarteEquipamento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['NomeResponsavel', 'Email', 'TelefoneResponsavel'], 'required'],
+            [['NomeResponsavel', 'Email', 'TelefoneResponsavel', 'dataDescarte'], 'required'],
             [['NomeResponsavel', 'Email', 'TelefoneResponsavel'], 'string', 'max' => 50],
         	[['dataDescarte'], 'string', 'max' => 20],
         	[['Email'], 'email'],

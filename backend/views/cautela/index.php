@@ -81,9 +81,9 @@ $this->params['breadcrumbs'][] = $this->title;
             //'idCautela',
             'NomeResponsavel',
             'OrigemCautela',
+            'dataInicial',
             'DataDevolucao',
             // 'Email:email',
-            'ValidadeCautela',
             // 'TelefoneResponsavel',
             // 'ImagemCautela',
             [
