@@ -189,12 +189,44 @@ class CautelaController extends Controller
     }
 
     function actionProdutos($id) {
-
+    	setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
         $model = $this->findModel($id);
         $idUsuario = Yii::$app->user->identity->id;
-
-
+	
+		$dadosBaixa = "";
+		if($model->cautelaTemBaixa!==false){
+			$dadosBaixa = '<p><b>Dados da Baixa:</b></p>
+                    <table style=" margin-right: auto; width: 200px;" border="2">
+                        <tbody>
+                            <tr>
+                                <td style="width: 30px;">
+                                    <p><b>Recebedor:</b></p>
+                                </td>
+        		                <td style="width: 30px;">
+                                    <p>'.$model->cautelaTemBaixa->Recebedor.'</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 30px;">
+                                    <p><b>Devolução:</b></p>
+                                </td>
+        		                <td style="width: 30px;">
+                                    <p>'.$model->cautelaTemBaixa->DataDevolucao.'</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 30px;">
+                                    <p><b>Observação:</b></p>
+                                </td>
+        		                <td style="width: 30px;">
+                                    <p>'.$model->cautelaTemBaixa->ObservacaoBaixaCautela.'</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>';
+		}
+		
         $modelEquipamento2 = Equipamento::findOne($model->idEquipamento);
 
 
@@ -227,7 +259,7 @@ class CautelaController extends Controller
                     </tr>
                 </table>
         ');
-
+	
         $pdf->WriteHTML (' <br>
                     <table style= "margin-top:0px;" width="100%;">
                     <tr>
@@ -263,11 +295,11 @@ class CautelaController extends Controller
                             </tr>
 
                             <tr>
-                                <td width="95">
+                                <td width="165">
                                     <p><b>Contato:</b></p>
                                 </td>
-                                <td width="214">
-                                    <p>'.$model->TelefoneResponsavel.'.</p>
+                                <td width="185">
+                                    <p>'.$model->TelefoneResponsavel.'</p>
                                 </td>
                                 <td width="66">
                                     <p><b>Email:</b></p>
@@ -314,7 +346,6 @@ class CautelaController extends Controller
                             </tr>
                         </tbody>
                     </table>
-
                     <br>
 
 
@@ -324,15 +355,16 @@ class CautelaController extends Controller
                     <p>(&nbsp;&nbsp; ) com os seguintes problemas e/ou danos (descrev&ecirc;-los):</p>
                     <p>______________________________________________________________________________________________________</p>
                     <p>______________________________________________________________________________________________________</p>
-                    <p>Validade da cautela: '.$model->ValidadeCautela.'</p>
+                    <p>Validade da cautela: '.$model->Validade.' dias</p>
 
-                    <p style="text-align: center;">Local, Data: '.$model->ImagemCautela.'/'.$model->DataDevolucao.'</p>
+                    <p style="text-align: center;">Manaus, '.strftime('%d de %B de %Y', strtotime($model->dataInicial)).'</p>
 
                     <p style="text-align: center;">_________________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_________________________</p>
                     <p style="text-align: center;">Respons&aacute;vel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;Coordenador</p>
-
-                    <p style="text-align: center;">&nbsp; &nbsp; &nbsp;___/___/________ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _________________________</p>
-                    <p style="text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Recebedor</p>
+					
+        			'.$dadosBaixa.'
+        			<p style="text-align: center;">&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _________________________</p>
+                    <p style="text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Recebedor</p>
 
 
                     ');
@@ -422,13 +454,48 @@ class CautelaController extends Controller
                             </tr>
                         </tbody>
                     </table>
+                                    		
+                    <table style="margin-left: auto; margin-right: auto; width: 600px;" border="2">
+                        <tbody>
+                            <tr>
+                                <td style="width: 147.5px;">
+                                    <p><b>Data Inicial:</b></p>
+                                </td>
+                                <td style="width: 179.5px;">
+                                    <p><b>Data Prevista:</b></p>
+                                </td>
+                                <td style="width: 225px;">
+                                    <p><b>Validade:</b></p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="width: 147.5px;">
+                                    <p>'.$modelCautela2->dataInicial.'</p>
+                                </td>
+                                <td style="width: 179.5px;">
+                                    <p>'.$modelCautela2->DataDevolucao.'</p>
+                                </td>
+                                <td style="width: 225px;">
+                                    <p>'.$modelCautela2->Validade.' dias</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <br>
                     ';
 
             //echo $modelCautela2->NomeResponsavel."<br>----Equipamento: $modelEquipamento->NomeEquipamento..........Nota Fiscal: $modelEquipamento->NotaFiscal</br></br>";
+            $baixas = "";
+           if($modelCautela2->cautelaTemBaixa !== false){ 
+           	$baixas = $baixas
+           					.'
+           					 ';
+           }
         }
 
-
+		
+        
         $pdf = new mPDF('utf-8','A4','','','15','15','42','30');
 
 
@@ -438,7 +505,7 @@ class CautelaController extends Controller
                 <table style="vertical-align: bottom; font-family: serif; font-size: 8pt; color: #000000; font-weight: bold; font-style: italic;">
                     <tr>
                         <td width="20%" align="center" style="font-family: serif;font-weight: bold; font-size: 175%;"> <img src = "img/logo-brasil.jpg" height="90px" width="90px"> </td>
-                        <td width="60%" align="center" style="font-family: serif;font-weight: bold; font-size: 135%;">  PODER EXECUTIVO <br> MINISTÉRIO DA EDUCAÇÃO <br> INSTITUTO DE COMPUTAÇÃO <br> UNIVERSIDADE FEDERAL DO AMAZONAS </td>
+                        <td width="60%" align="center" style="font-family: serif;font-weight: bold; font-size: 135%;">  PODER EXECUTIVO <br> MINISTÉRIO DA EDUCAÇÃO <br> UNIVERSIDADE FEDERAL DO AMAZONAS <br> INSTITUTO DE COMPUTAÇÃO </td>
                         <td width="20%" align="center" style="font-family: serif;font-weight: bold; font-size: 175%;"> <img src = "img/ufam.jpg" height="90px" width="70px"> </td>
                     </tr>
                 </table>
