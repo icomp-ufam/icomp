@@ -65,6 +65,9 @@ use kartik\widgets\DatePicker;
 	<div class="row">
     <?= $form->field($model, 'ObservacoesDescarte', ['options' => ['class' => 'col-md-6']])->textarea(['maxlength' => true]) ?>
 	</div>
+	<div class="row">
+	<?= $form->field($model, 'documentoImagem',['options'=>['class'=>'col-md-3']])->fileInput(['maxlength' => true]) ?>
+	</div>
 	</div>
 	</div>
 	<?php $form->field($model, 'idEquipamento')->hiddenInput()->label(false); ?>

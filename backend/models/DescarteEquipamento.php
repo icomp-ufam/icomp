@@ -34,7 +34,7 @@ class DescarteEquipamento extends \yii\db\ActiveRecord
             [['NomeResponsavel', 'Email', 'TelefoneResponsavel'], 'string', 'max' => 50],
         	[['dataDescarte'], 'string', 'max' => 20],
         	[['Email'], 'email'],
-            [['ObservacoesDescarte', 'documento'], 'string', 'max' => 100],
+            [['ObservacoesDescarte', 'documento', 'documentoImagem'], 'string', 'max' => 100],
         ];
     }
 
@@ -51,6 +51,7 @@ class DescarteEquipamento extends \yii\db\ActiveRecord
             'ObservacoesDescarte' => 'Observacões do Descarte',
         	'documento' => 'Documento',
         	'dataDescarte'=> 'Data Descarte',
+        	'documentoImagem' => 'Imagem Documento',
         ];
     }
     

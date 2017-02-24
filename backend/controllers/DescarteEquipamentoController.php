@@ -11,6 +11,7 @@ use app\models\DescarteEquipamentoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * DescarteEquipamentoController implements the CRUD actions for DescarteEquipamento model.
@@ -81,6 +82,17 @@ class DescarteEquipamentoController extends Controller
 	        if ($model->load(Yii::$app->request->post()) && $model->save()) {
 	            $equipamento->StatusEquipamento = Equipamento::getStatusDescartado();
 	            $equipamento->save();
+	            
+	            $arq = UploadedFile::getInstance($model, 'documentoImagem');
+	            if($arq!==null){
+	            	$arquivo = $model->idDescarte.'-'.$arq->baseName;
+	            	$arquivo = 'repositorio/descartes/'.$arquivo.'.'.$arq->extension;
+	            	$model ->documentoImagem = $arquivo;
+	            	$arq->saveAs($arquivo);
+	            	
+	            	$model->save();
+	            }
+	            
 	            return $this->redirect(['view', 'id' => $model->idDescarte]);
 	        } else {
 	            return $this->render('create', [
@@ -138,6 +150,7 @@ class DescarteEquipamentoController extends Controller
     	}
     	
     	//Deletar o descarte e marca o equipamento como Disponível
+    	$imagemPath = $equipamento->equipamentoTemDescarte->documentoImagem;
     	if($this->findModel( $equipamento->equipamentoTemDescarte->idDescarte)->delete() !== false){
     		$equipamento->StatusEquipamento = Equipamento::getStatusDisponivel();
     		
@@ -146,6 +159,12 @@ class DescarteEquipamentoController extends Controller
     		else{
     			//Caso haja problemas resultantes de migração de bancos..
     			$this->mensagens('danger', "Erro na Reversão", "Contate o administrador. Há uma inconsistêcia nos dados.");
+    		}
+    		
+    		if( trim($imagemPath)!=='' && file_exists($imagemPath) ){
+    			if(unlink($imagemPath)===false){
+    				$this->mensagens('warnign', "Arquivo da Imagem Não foi Deletado", "Informe o administrador.");
+    			}
     		}
     	}
     

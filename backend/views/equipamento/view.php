@@ -91,6 +91,13 @@ $this->params['breadcrumbs'][] = $this->title;
         	'equipamentoTemDescarte.documento',
         	'equipamentoTemDescarte.dataDescarte',
             'equipamentoTemDescarte.ObservacoesDescarte',
+        	[
+        		'attribute' => 'equipamentoTemDescarte.documentoImagem',
+        		//'value' => "<a href=localhost/novoppgi/backend/web/".$model->edital."' target = '_blank'> Baixar </a>",
+        		'format'=>['image', ['width'=>100, 'height'=>100]],
+        		//'value' => "<a href='".$model->ImagemEquipamento."' target = '_blank'> Foto  </a>"
+        		'visible'=>((trim($model->equipamentoTemDescarte->documentoImagem)!='')?true:false)
+        	],
         ],
     ]); 
   }?>

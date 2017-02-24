@@ -132,7 +132,7 @@ class CautelaController extends Controller
         
         	if (!$model->save()) {
         		print_r($model->getErrors());
-        		echo Yii::$app->user->id;
+        		//echo Yii::$app->user->id;
         		return;
         	}
         	return $this->redirect(['view', 'id' => $model->idCautela]);        
