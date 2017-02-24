@@ -97,6 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
             	'attribute'=>'NomeEquipamento',
             ],
+        	'cautelatemequipamento.StatusEquipamento',
         	[
         		'label'=>$model->cautelatemequipamento->getAttributeLabel('ImagemEquipamento'),
         		'attribute' => 'cautelatemequipamento.ImagemEquipamento',
