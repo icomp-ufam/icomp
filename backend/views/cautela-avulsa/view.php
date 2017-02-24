@@ -20,6 +20,8 @@ $this->title = "Responsável: ".$this->title;
         <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['cautela-avulsa/index'], ['class' => 'btn btn-warning']) ?>
         <?= Html::a('Atualizar', ['update', 'idCautelaAvulsa' => $model->idCautelaAvulsa, 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         
+        <?= Html::a('<span class="glyphicon glyphicon-file"></span> Gerar Pdf', ['cautela-avulsa/gerapdfunico', 'id' => $model->idCautelaAvulsa], ['target' => '_blank', 'class' => 'btn btn-info']) ?>
+        
         <?php
         	if($model->StatusCautelaAvulsa !== CautelaAvulsa::getStatusConcluida()){
         	echo  Html::a('Dar Baixa Cautela', ['baixa-cautela-avulsa/create', 'id' => $model->idCautelaAvulsa], [

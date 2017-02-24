@@ -9,7 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
-
+use kartik\mpdf\Pdf;
+use mPDF;
 /**
  * CautelaAvulsaController implements the CRUD actions for CautelaAvulsa model.
  */
@@ -199,6 +200,183 @@ class CautelaAvulsaController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionGerapdfunico($id){
+
+    	setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+    	
+    	$model = $this->findModel2($id);
+    	$idUsuario = Yii::$app->user->identity->id;
+    	
+    	$dadosBaixa = "";
+    	if($model->cautelaAvulsaTemBaixa!==false){
+    		$dadosBaixa = '<p><b>Dados da Baixa:</b></p>
+                    <table style=" margin-right: auto; width: 200px;" border="2">
+                        <tbody>
+                            <tr>
+                                <td style="width: 30px;">
+                                    <p><b>Recebedor:</b></p>
+                                </td>
+        		                <td style="width: 30px;">
+                                    <p>'.$model->cautelaAvulsaTemBaixa->Recebedor.'</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 30px;">
+                                    <p><b>Devolução:</b></p>
+                                </td>
+        		                <td style="width: 30px;">
+                                    <p>'.$model->cautelaAvulsaTemBaixa->DataDevolucao.'</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 30px;">
+                                    <p><b>Observação:</b></p>
+                                </td>
+        		                <td style="width: 30px;">
+                                    <p>'.$model->cautelaAvulsaTemBaixa->ObservacaoBaixaCautela.'</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>';
+    	}
+    	
+    	//$modelEquipamento2 = Equipamento::findOne($model->idEquipamento);
+    	
+    	
+    	$pdf = new mPDF('utf-8','A4','','','15','15','42','30');
+    	
+    	
+    	
+    	
+    	$pdf->SetHTMLHeader('
+                <table style="vertical-align: bottom; font-family: serif; font-size: 8pt; color: #000000; font-weight: bold; font-style: italic;">
+                    <tr>
+                        <td width="20%" align="center" style="font-family: serif;font-weight: bold; font-size: 175%;"> <img src = "img/logo-brasil.jpg" height="90px" width="90px"> </td>
+                        <td width="60%" align="center" style="font-family: serif;font-weight: bold; font-size: 135%;">  PODER EXECUTIVO <br> MINISTÉRIO DA EDUCAÇÃO <br> UNIVERSIDADE FEDERAL DO AMAZONAS <br> INSTITUTO DE COMPUTAÇÃO </td>
+                        <td width="20%" align="center" style="font-family: serif;font-weight: bold; font-size: 175%;"> <img src = "img/ufam.jpg" height="90px" width="70px"> </td>
+                    </tr>
+                </table>
+                <hr>
+        ');
+    	
+    	$pdf->SetHTMLFooter('
+    	
+                <table width="100%" style="vertical-align: bottom; font-family: serif; font-size: 8pt; color: #000000; font-weight: bold; font-style: italic;">
+                    <tr>
+                        <td  colspan = "3" align="center" ><span style="font-weight: bold"> Av. Rodrigo Otávio, 6.200 - Campus Universitário Senador Arthur VirgÃ­lio Filho - CEP 69077-000 - Manaus, AM, Brasil </span></td>
+                    </tr>
+                    <tr>
+                        <td width="33%" align="center" style="font-weight: bold; font-style: italic;">  Tel. (092) 3305-1193/2808/2809</td>
+                        <td width="33%" align="center" style="font-weight: bold; font-style: italic;">  E-mail: secretaria@icomp.ufam.edu.br</td>
+                        <td width="33%" align="center" style="font-weight: bold; font-style: italic;">  http://www.icomp.ufam.edu.br </td>
+                    </tr>
+                </table>
+        ');
+    	
+    	$pdf->WriteHTML (' <br>
+                    <table style= "margin-top:0px;" width="100%;">
+                    <tr>
+                        <td style="text-align:center;">
+                            <b> CAUTELA DE SOLICITAÇÃO DE EQUIPAMENTO </b>
+                        </td>
+    	
+                    </tr>
+                    </table>
+    	
+                    <table width="100%" style="border-top: solid 1px; ">
+    	
+                    <tr><td colspan="2"><br></td><tr>
+    	
+                    <tr>
+                        <td>
+                            Os dados da cautela estão descritos a seguir:
+                        </td>
+    	
+                    </tr>
+                    <h1> <br></br></h1>
+                    </table>
+    	
+                    <table style="margin-right: auto;" border="2">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p><b>Respons&aacute;vel:</b></p>
+                                </td>
+                                <td colspan="3" width="612">
+                                <p>'.$model->NomeResponsavel.'</p>
+                                </td>
+                            </tr>
+    	
+                            <tr>
+                                <td width="165">
+                                    <p><b>Contato:</b></p>
+                                </td>
+                                <td width="185">
+                                    <p>'.$model->TelefoneResponsavel.'</p>
+                                </td>
+                                <td width="66">
+                                    <p><b>Email:</b></p>
+                                </td>
+                                <td width="331">
+                                    <p>'.$model->Email.'</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+    	
+    	
+    	
+                    <table style="margin-right: auto; width: 600px;" border="2">
+                        <tbody>
+                            <tr>
+                                <td style="width: 290px;">
+                                    <p><b>Origem:</b></p>
+                                </td>
+                                <td style="width: 225px;">
+                                    <p><b>Equipamento:</b></p>
+                                </td>
+                            </tr>
+    	
+                            <tr>
+                                <td style="width: 147.5px;">
+                                    <p>'.$model->origem.'</p>
+                                </td>
+                                <td style="width: 225px;">
+                                    <p>'.$model->NomeEquipamento.'</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+    	
+    	
+    	
+                    <p style="text-align: justify;">Declaro assumir total responsabilidade por extravio ou danos verificados ap&oacute;s a retirada do equipamento; neste caso, providenciarei o reparo ou a reposi&ccedil;&atilde;o do item emprestado em prazo de 30 dias a contar da data de devolu&ccedil;&atilde;o. Afirmo ter verificado, antes da retirada, que o equipamento encontrava-se:&nbsp;</p>
+                    <p style="text-align: left;">(&nbsp;&nbsp; ) em perfeitas condi&ccedil;&otilde;es de uso e bom estado de conserva&ccedil;&atilde;o&nbsp;</p>
+                    <p>(&nbsp;&nbsp; ) com os seguintes problemas e/ou danos (descrev&ecirc;-los):</p>
+                    <p>______________________________________________________________________________________________________</p>
+                    <p>______________________________________________________________________________________________________</p>
+                    <p>Validade da cautela: '.$model->Validade.' dias</p>
+    	
+                    <p style="text-align: center;">Manaus, '.strftime('%d de %B de %Y', strtotime($model->dataInicial)).'</p>
+					'.(($model->cautelaAvulsaTemBaixa !== false)?'':
+    								'<p style="text-align: center;">_________________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_________________________</p>
+                    <p style="text-align: center;">Respons&aacute;vel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;Coordenador</p>
+					').'
+        			'.$dadosBaixa.'
+        			<p style="text-align: center;">&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _________________________</p>
+                    <p style="text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Recebedor</p>
+    	
+    	
+                    ');
+    	
+    	
+    	
+    	$pdf->Output('');
+    	
+    	$pdfcode = $pdf->output();    	
+    }
+    
     /**
      * Finds the CautelaAvulsa model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
